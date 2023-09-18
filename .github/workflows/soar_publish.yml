@@ -31,7 +31,8 @@ jobs:
           SOAR_PROD_DEST_API_TOKEN: ${{ secrets.SOAR_PROD_DEST_API_TOKEN }}
           SOAR_PROD_DEST_SCM_NAME: ${{ vars.SOAR_PROD_DEST_SCM_NAME }}
         run: |
-          echo "Inspection git commit ${{ github.ref }}"
+          echo "Inspection git branch ${{ github.ref }}"
+          echo "Inspection git commit ${{ github.sha }}"
           DEST_API_URL=""
           DEST_API_TOKEN=""
           DEST_SCM_NAME=""
