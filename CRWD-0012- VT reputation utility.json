@@ -4,7 +4,7 @@
     "category": "Uncategorized",
     "coa": {
         "data": {
-            "description": "Version 1.0.5",
+            "description": "Version 1.0.6",
             "edges": [
                 {
                     "id": "port_0_to_port_2",
@@ -40,7 +40,7 @@
                     "targetPort": "1_in"
                 }
             ],
-            "hash": "fc19938b951367f0116430820a6223976e2efec0",
+            "hash": "9c00d49e82afa729fce017171dd78791be8c59a5",
             "nodes": {
                 "0": {
                     "data": {
@@ -56,7 +56,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 20,
-                    "y": -3.410605131648481e-13
+                    "y": -3.979039320256561e-13
                 },
                 "1": {
                     "data": {
@@ -239,7 +239,7 @@
         "schema": "5.0.10",
         "version": "6.0.2.127725"
     },
-    "create_time": "2023-09-18T08:31:12.988270+00:00",
+    "create_time": "2023-09-18T08:42:33.752464+00:00",
     "draft_mode": false,
     "labels": [
         "*"
