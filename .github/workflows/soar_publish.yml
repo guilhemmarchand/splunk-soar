@@ -24,6 +24,10 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
+      - name: Install Python requirements
+        run: |
+          pip install -r utils/requirements.txt
+
       - name: Loop through parent commits of the git merge commit and publish to the target SOAR
         env:
           SOAR_STAGING_DEST_API_URL: ${{ vars.SOAR_STAGING_DEST_API_URL }}
