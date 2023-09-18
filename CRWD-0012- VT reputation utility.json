@@ -26,21 +26,14 @@
                     "targetPort": "3_in"
                 },
                 {
-                    "id": "port_3_to_port_5",
+                    "id": "port_3_to_port_1",
                     "sourceNode": "3",
                     "sourcePort": "3_out",
-                    "targetNode": "5",
-                    "targetPort": "5_in"
-                },
-                {
-                    "id": "port_5_to_port_1",
-                    "sourceNode": "5",
-                    "sourcePort": "5_out",
                     "targetNode": "1",
                     "targetPort": "1_in"
                 }
             ],
-            "hash": "52763550c7df03c6a4889098a57e1f6e741ac7a9",
+            "hash": "db358b0986b48aa0fe44f086a6df43038a20807f",
             "nodes": {
                 "0": {
                     "data": {
@@ -145,68 +138,6 @@
                     "warnings": {},
                     "x": 0,
                     "y": 328
-                },
-                "5": {
-                    "data": {
-                        "advanced": {
-                            "join": []
-                        },
-                        "functionId": 1,
-                        "functionName": "add_comment_1",
-                        "id": "5",
-                        "selectMore": false,
-                        "tab": "apis",
-                        "type": "utility",
-                        "utilities": {
-                            "comment": {
-                                "description": "",
-                                "fields": [
-                                    {
-                                        "description": "",
-                                        "label": "comment",
-                                        "name": "comment",
-                                        "placeholder": "Enter a comment",
-                                        "renderType": "datapath",
-                                        "required": true
-                                    },
-                                    {
-                                        "hidden": true,
-                                        "name": "container",
-                                        "required": false
-                                    },
-                                    {
-                                        "hidden": true,
-                                        "name": "author",
-                                        "required": false
-                                    },
-                                    {
-                                        "hidden": true,
-                                        "name": "trace",
-                                        "required": false
-                                    }
-                                ],
-                                "label": "add comment",
-                                "name": "comment"
-                            }
-                        },
-                        "utilityType": "api",
-                        "values": {
-                            "comment": {
-                                "_internal": [
-                                    "container",
-                                    "author",
-                                    "trace"
-                                ],
-                                "comment": "Test VT"
-                            }
-                        }
-                    },
-                    "errors": {},
-                    "id": "5",
-                    "type": "utility",
-                    "warnings": {},
-                    "x": 0,
-                    "y": 476
                 }
             },
             "notes": ""
@@ -239,7 +170,7 @@
         "schema": "5.0.10",
         "version": "6.0.2.127725"
     },
-    "create_time": "2023-09-18T05:46:59.977521+00:00",
+    "create_time": "2023-09-18T05:50:26.571925+00:00",
     "draft_mode": false,
     "labels": [
         "*"
