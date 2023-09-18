@@ -17,6 +17,8 @@ jobs:
       - run: echo "job automatically triggered by a ${{ github.event_name }} event."
 
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-python@v4
         with:
