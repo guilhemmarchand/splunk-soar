@@ -3,7 +3,7 @@ name: Splunk SOAR publish
 on:
   push:
     branches:
-      - Staging
+      - staging
       - main
 
 jobs:
@@ -35,8 +35,8 @@ jobs:
           DEST_API_TOKEN=""
           DEST_SCM_NAME=""
 
-          # Check if we are on the 'Staging' branch
-          if [[ "${{ github.ref }}" == "refs/heads/Staging" ]]; then
+          # Check if we are on the 'staging' branch
+          if [[ "${{ github.ref }}" == "refs/heads/staging" ]]; then
               DEST_API_URL=$SOAR_STAGING_DEST_API_URL
               DEST_API_TOKEN=$SOAR_STAGING_DEST_API_TOKEN
               DEST_SCM_NAME=$SOAR_STAGING_DEST_SCM_NAME
@@ -45,7 +45,7 @@ jobs:
               DEST_API_TOKEN=$SOAR_PROD_DEST_API_TOKEN
               DEST_SCM_NAME=$SOAR_PROD_DEST_SCM_NAME
           else
-              echo "Invalid branch. This workflow is only for 'Staging' or 'main' branches."
+              echo "Invalid branch. This workflow is only for 'staging' or 'main' branches."
               exit 1
           fi
 
