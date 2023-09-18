@@ -70,6 +70,12 @@ jobs:
               # Fetch modified files in the commit
               files=$(git show --name-only --pretty="" $parent | grep -E '\.json$|\.py$')
 
+              # If no relevant files found, continue to next commit
+              if [ -z "$files" ]; then
+                  echo "No relevant files found for commit id: $parent"
+                  continue
+              fi
+
               # Determine the object type
               if echo "$files" | grep -q 'custom_functions/'; then
               OBJECT_TYPE="custom_functions"
