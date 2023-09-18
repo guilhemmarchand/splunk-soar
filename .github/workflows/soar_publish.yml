@@ -33,10 +33,15 @@ jobs:
         run: |
           echo "Inspection git branch ${{ github.ref }}"
           echo "Inspection git commit ${{ github.sha }}"
+          echo "running command: git branch -v"
           git branch -v
+          echo "running command: git status"
           git status
+          echo "running command git log"
           git log
+          echo "running command git log --pretty=%P -n 1 ${{ github.sha }}"
           git log --pretty=%P -n 1 ${{ github.sha }}
+          echo ""
           commit_details=$(git log --pretty=%P -n 1 ${{ github.sha }})
           echo "commit details: $commit_details"
           DEST_API_URL=""
