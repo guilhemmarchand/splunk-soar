@@ -65,10 +65,10 @@ jobs:
           for parent in $commit_details; do
               echo "Handling git commit id: $parent"
               echo "running command git show"
-              git show --name-only --pretty="" $parent
+              git show --no-pager --name-only --pretty="" $parent
 
               # Fetch modified files in the commit
-              files=$(git show --name-only --pretty="" $parent | grep -E '\.json$|\.py$')
+              files=$(git show --no-pager --name-only --pretty="" $parent | grep -E '\.json$|\.py$')
               echo "files: $files"
 
               # If no relevant files found, continue to next commit
