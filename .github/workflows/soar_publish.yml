@@ -3,7 +3,7 @@ name: Splunk SOAR publish
 on:
   push:
     branches:
-      - staging
+      - testing
       - main
 
 jobs:
@@ -33,9 +33,9 @@ jobs:
       # Investigate git commits, extracts updated files per commit, loop through commits and import in Splunk SOAR target
       - name: Publish Git commits to Splunk SOAR Cloud
         env:
-          SOAR_STAGING_DEST_API_URL: ${{ vars.SOAR_STAGING_DEST_API_URL }}
-          SOAR_STAGING_DEST_API_TOKEN: ${{ secrets.SOAR_STAGING_DEST_API_TOKEN }}
-          SOAR_STAGING_DEST_SCM_NAME: ${{ vars.SOAR_STAGING_DEST_SCM_NAME }}
+          SOAR_TESTING_DEST_API_URL: ${{ vars.SOAR_TESTING_DEST_API_URL }}
+          SOAR_TESTING_DEST_API_TOKEN: ${{ secrets.SOAR_TESTING_DEST_API_TOKEN }}
+          SOAR_TESTING_DEST_SCM_NAME: ${{ vars.SOAR_TESTING_DEST_SCM_NAME }}
           SOAR_PROD_DEST_API_URL: ${{ vars.SOAR_PROD_DEST_API_URL }}
           SOAR_PROD_DEST_API_TOKEN: ${{ secrets.SOAR_PROD_DEST_API_TOKEN }}
           SOAR_PROD_DEST_SCM_NAME: ${{ vars.SOAR_PROD_DEST_SCM_NAME }}
@@ -51,19 +51,19 @@ jobs:
           DEST_API_TOKEN=""
           DEST_SCM_NAME=""
 
-          # Check if we are on the 'staging' branch
-          if [[ "${{ github.ref }}" == "refs/heads/staging" ]]; then
-              echo "Environment target is Staging"
-              DEST_API_URL=$SOAR_STAGING_DEST_API_URL
-              DEST_API_TOKEN=$SOAR_STAGING_DEST_API_TOKEN
-              DEST_SCM_NAME=$SOAR_STAGING_DEST_SCM_NAME
+          # Check if we are on the 'testing' branch
+          if [[ "${{ github.ref }}" == "refs/heads/testing" ]]; then
+              echo "Environment target is Tsting"
+              DEST_API_URL=$SOAR_TESTING_DEST_API_URL
+              DEST_API_TOKEN=$SOAR_TESTING_DEST_API_TOKEN
+              DEST_SCM_NAME=$SOAR_TESTING_DEST_SCM_NAME
           elif [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
               echo "Environment target is Production"
               DEST_API_URL=$SOAR_PROD_DEST_API_URL
               DEST_API_TOKEN=$SOAR_PROD_DEST_API_TOKEN
               DEST_SCM_NAME=$SOAR_PROD_DEST_SCM_NAME
           else
-              echo "Invalid branch. This workflow is only for 'staging' or 'main' branches, refusing to excute this against any other branch."
+              echo "Invalid branch. This workflow is only for 'testing' or 'main' branches, refusing to excute this against any other branch."
               exit 1
           fi
 
