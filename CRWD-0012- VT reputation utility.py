@@ -65,7 +65,26 @@ def get_file_reputation(action=None, success=None, container=None, results=None,
     ## Custom Code End
     ################################################################################
 
-    phantom.act("file reputation", parameters=parameters, name="get_file_reputation", assets=["virustotal"])
+    phantom.act("file reputation", parameters=parameters, name="get_file_reputation", assets=["virustotal"], callback=add_comment_1)
+
+    return
+
+
+@phantom.playbook_block()
+def add_comment_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("add_comment_1() called")
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.comment(container=container, comment="v1.0.1")
 
     return
 
