@@ -1,7 +1,7 @@
 {
-    "create_time": "2023-09-18T21:11:06.281455+00:00",
+    "create_time": "2023-09-18T21:52:16.734838+00:00",
     "custom_function_id": "de8a1a0ed08bf734195fff98fb6006b6d37c864c",
-    "description": "This custom function pretty prints a JSON provided in input\nPretty print is cool",
+    "description": "This custom function pretty prints a JSON provided in input\nv1.0.4",
     "draft_mode": false,
     "inputs": [
         {

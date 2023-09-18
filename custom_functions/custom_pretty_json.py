@@ -1,7 +1,7 @@
 def custom_pretty_json(inputJson=None, **kwargs):
     """
     This custom function pretty prints a JSON provided in input
-    Pretty print is cool
+    v1.0.4
     
     Args:
         inputJson: Input JSON object
