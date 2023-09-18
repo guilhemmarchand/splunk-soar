@@ -76,14 +76,23 @@ jobs:
               files=$(git show --name-only --pretty="" $parent | grep -E '\.json$|\.py$' | sed 's/.*/"&"/') || true
               echo "files: $files" || true
 
-              # If no relevant files found, continue to next commit
-              if [ -z "$files" ]; then
-                  echo "No relevant files found for commit id: $parent - nothing to do for this commit id."
+              # Check that for every .json file there's a .py file and vice-versa
+              valid_files=()
+              for file in $files; do
+                  base_name="${file%.*}" # strip extension
+                  if [[ "$file" =~ \.json$ && " $files " =~ " $base_name.py " ]] || 
+                    [[ "$file" =~ \.py$ && " $files " =~ " $base_name.json " ]]; then
+                      valid_files+=("$file")
+                  fi
+              done
+
+              if [ ${#valid_files[@]} -eq 0 ]; then
+                  echo "No matching pairs of .json and .py found for commit id: $parent. Skipping."
                   continue
-              else
-                  echo "list of updated files for commit id $parent:"
-                  echo "$files"
               fi
+
+              echo "list of updated files for commit id $parent:"
+              printf "%s\n" "${valid_files[@]}"
 
               # Determine the object type
               if echo "$files" | grep -q 'custom_functions/'; then
