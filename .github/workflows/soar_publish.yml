@@ -69,6 +69,7 @@ jobs:
 
               # Fetch modified files in the commit
               files=$(git show --name-only --pretty="" $parent | grep -E '\.json$|\.py$')
+              echo "files: $files"
 
               # If no relevant files found, continue to next commit
               if [ -z "$files" ]; then
@@ -80,3 +81,5 @@ jobs:
               fi
 
           done
+
+          exit 0
