@@ -103,6 +103,7 @@ jobs:
               fi
               
               # Call the SOAR publish Python backend
+              echo "running command: python3 utils/soar_publish.py --input_file \"$tarball_path\" --dest_target=\"$DEST_API_URL\" --dest_token=\"$DEST_API_TOKEN\" --dest_scm_name=\"$DEST_SCM_NAME\" --object_type \"$OBJECT_TYPE\""
               python3 utils/soar_publish.py --input_file "$tarball_path" --dest_target="$DEST_API_URL" --dest_token="$DEST_API_TOKEN" --dest_scm_name="$DEST_SCM_NAME" --object_type "$OBJECT_TYPE"
 
           done
