@@ -74,26 +74,9 @@ jobs:
               if [ -z "$files" ]; then
                   echo "No relevant files found for commit id: $parent"
                   continue
+              else
+                  echo "list of updated files for commit id $parent:"
+                  echo "$files"
               fi
 
-              # Determine the object type
-              if echo "$files" | grep -q 'custom_functions/'; then
-              OBJECT_TYPE="custom_functions"
-              else
-              OBJECT_TYPE="playbook"
-              fi
-
-              # Create tarball
-              tarball_path="/tmp/$parent.tgz"
-              if [ "$OBJECT_TYPE" == "custom_functions" ]; then
-              # Move to custom_functions directory and tar the files
-              cd custom_functions
-              tar -czvf $tarball_path $(basename -a $files)
-              cd ..
-              else
-              tar -czvf $tarball_path $files
-              fi
-              
-              # Call the SOAR publish Python backend
-              python3 utils/publish_soar.py --input_file "$tarball_path" --dest_target="$DEST_API_URL" --dest_token="$DEST_API_TOKEN" --dest_scm_name="$DEST_SCM_NAME" --object_type "$OBJECT_TYPE"
           done
