@@ -108,7 +108,9 @@ jobs:
               if [ "$OBJECT_TYPE" == "custom_functions" ]; then
               # Adjust paths to be relative to current directory and tar the files
               adjusted_files=("${files_array[@]/custom_functions\//}")
+              cd custom_functions
               eval tar -czvf $tarball_path "${adjusted_files[@]}"
+              cd ../
               else
               eval tar -czvf $tarball_path $files
               fi
