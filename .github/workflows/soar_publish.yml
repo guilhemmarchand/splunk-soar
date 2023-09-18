@@ -53,7 +53,7 @@ jobs:
 
           # Check if we are on the 'testing' branch
           if [[ "${{ github.ref }}" == "refs/heads/testing" ]]; then
-              echo "Environment target is Tsting"
+              echo "Environment target is Testing"
               DEST_API_URL=$SOAR_TESTING_DEST_API_URL
               DEST_API_TOKEN=$SOAR_TESTING_DEST_API_TOKEN
               DEST_SCM_NAME=$SOAR_TESTING_DEST_SCM_NAME
