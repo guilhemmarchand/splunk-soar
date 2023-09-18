@@ -72,16 +72,17 @@ jobs:
               echo "running command git show"
               git show --name-only --pretty="" $parent || true
 
-              # Fetch modified files in the commit
-              files=$(git show --name-only --pretty="" $parent | grep -E '\.json$|\.py$' | sed 's/.*/"&"/') || true
-              echo "files: $files" || true
+              # Fetch modified files in the commit and store in an array
+              mapfile -t files_array < <(git show --name-only --pretty="" $parent | grep -E '\.json$|\.py$')
+              files=$(printf "\"%s\" " "${files_array[@]}")
+              echo "files: $files"
 
               # Check that for every .json file there's a .py file and vice-versa
               valid_files=()
-              for file in $files; do
+              for file in "${files_array[@]}"; do
                   base_name="${file%.*}" # strip extension
-                  if [[ "$file" =~ \.json$ && " $files " =~ " $base_name.py " ]] || 
-                    [[ "$file" =~ \.py$ && " $files " =~ " $base_name.json " ]]; then
+                  if [[ "$file" =~ \.json$ && " ${files_array[*]} " =~ " $base_name.py " ]] || 
+                    [[ "$file" =~ \.py$ && " ${files_array[*]} " =~ " $base_name.json " ]]; then
                       valid_files+=("$file")
                   fi
               done
