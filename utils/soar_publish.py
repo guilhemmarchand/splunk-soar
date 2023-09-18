@@ -1,3 +1,4 @@
+import sys
 import requests
 import argparse
 import base64
@@ -21,7 +22,7 @@ def import_to_dest(dest_target, dest_token, object_type, file_path, scm_name):
             encoded_content = base64.b64encode(file_content).decode("utf-8")
     except IOError as e:
         logging.error(f"Failed to read file due to: {e}")
-        return False
+        sys.exit(1)
 
     if object_type == "playbook":
         endpoint = f"{dest_target}/rest/import_playbook"
@@ -29,7 +30,7 @@ def import_to_dest(dest_target, dest_token, object_type, file_path, scm_name):
         endpoint = f"{dest_target}/rest/import_custom_function"
     else:
         logging.error(f"Unsupported object type: {object_type}")
-        return False
+        sys.exit(1)
 
     data = {object_type: encoded_content, "scm": scm_name, "force": "true"}
 
@@ -39,7 +40,7 @@ def import_to_dest(dest_target, dest_token, object_type, file_path, scm_name):
         return True
     except requests.RequestException as e:
         logging.error(f"Import failed with error: {str(e)}")
-        return False
+        sys.exit(1)
 
 
 def main():
@@ -86,6 +87,7 @@ def main():
         logging.error(
             f"Failed to import the {args.object_type} to the destination target."
         )
+        sys.exit(1)
 
 
 if __name__ == "__main__":
