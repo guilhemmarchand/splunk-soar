@@ -1,0 +1,78 @@
+name: Splunk SOAR publish
+
+on:
+  push:
+    branches:
+      - Staging
+      - main
+
+jobs:
+  build_release:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10"]
+
+    steps:
+      - run: echo "job automatically triggered by a ${{ github.event_name }} event."
+
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Loop through parent commits of the git merge commit and publish to the target SOAR
+        env:
+          SOAR_STAGING_DEST_API_URL: ${{ vars.SOAR_STAGING_DEST_API_URL }}
+          SOAR_STAGING_DEST_API_TOKEN: ${{ secrets.SOAR_STAGING_DEST_API_TOKEN }}
+          SOAR_STAGING_DEST_SCM_NAME: ${{ vars.SOAR_STAGING_DEST_SCM_NAME }}
+          SOAR_PROD_DEST_API_URL: ${{ vars.SOAR_PROD_DEST_API_URL }}
+          SOAR_PROD_DEST_API_TOKEN: ${{ secrets.SOAR_PROD_DEST_API_TOKEN }}
+          SOAR_PROD_DEST_SCM_NAME: ${{ vars.SOAR_PROD_DEST_SCM_NAME }}
+        run: |
+          DEST_API_URL=""
+          DEST_API_TOKEN=""
+          DEST_SCM_NAME=""
+
+          # Check if we are on the 'Staging' branch
+          if [[ "${{ github.ref }}" == "refs/heads/Staging" ]]; then
+              DEST_API_URL=$SOAR_STAGING_DEST_API_URL
+              DEST_API_TOKEN=$SOAR_STAGING_DEST_API_TOKEN
+              DEST_SCM_NAME=$SOAR_STAGING_DEST_SCM_NAME
+          elif [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+              DEST_API_URL=$SOAR_PROD_DEST_API_URL
+              DEST_API_TOKEN=$SOAR_PROD_DEST_API_TOKEN
+              DEST_SCM_NAME=$SOAR_PROD_DEST_SCM_NAME
+          else
+              echo "Invalid branch. This workflow is only for 'Staging' or 'main' branches."
+              exit 1
+          fi
+
+          for parent in $(git log --pretty=%P -n 1 ${{ github.sha }}); do
+              echo "Handling git commit id: $parent"
+
+              # Fetch modified files in the commit
+              files=$(git show --name-only --pretty="" $parent | grep -E '\.json$|\.py$')
+
+              # Determine the object type
+              if echo "$files" | grep -q 'custom_functions/'; then
+              OBJECT_TYPE="custom_functions"
+              else
+              OBJECT_TYPE="playbook"
+              fi
+
+              # Create tarball
+              tarball_path="/tmp/$parent.tgz"
+              if [ "$OBJECT_TYPE" == "custom_functions" ]; then
+              # Move to custom_functions directory and tar the files
+              cd custom_functions
+              tar -czvf $tarball_path $(basename -a $files)
+              cd ..
+              else
+              tar -czvf $tarball_path $files
+              fi
+              
+              # Call the SOAR publish Python backend
+              python3 utils/publish_soar.py --input_file "$tarball_path" --dest_target="$DEST_API_URL" --dest_token="$DEST_API_TOKEN" --dest_scm_name="$DEST_SCM_NAME" --object_type "$OBJECT_TYPE"
+          done
