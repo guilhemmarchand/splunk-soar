@@ -1,0 +1,25 @@
+{
+    "create_time": "2023-09-18T20:17:20.774496+00:00",
+    "custom_function_id": "de8a1a0ed08bf734195fff98fb6006b6d37c864c",
+    "description": "This custom function pretty prints a JSON provided in input",
+    "draft_mode": false,
+    "inputs": [
+        {
+            "contains_type": [],
+            "description": "Input JSON object",
+            "input_type": "item",
+            "name": "inputJson",
+            "placeholder": ""
+        }
+    ],
+    "outputs": [
+        {
+            "contains_type": [],
+            "data_path": "outputJson",
+            "description": "Output JSON object"
+        }
+    ],
+    "outputs_type": "item",
+    "platform_version": "6.0.2.127725",
+    "python_version": "3"
+}
