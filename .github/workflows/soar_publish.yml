@@ -68,7 +68,7 @@ jobs:
               git show --name-only --pretty="" $parent || true
 
               # Fetch modified files in the commit
-              files=$(git show --name-only --pretty="" $parent | grep -E '\.json$|\.py$') || true
+              files=$(git show --name-only --pretty="" $parent | grep -E '\.json$|\.py$' | sed 's/.*/"&"/') || true
               echo "files: $files" || true
 
               # If no relevant files found, continue to next commit
@@ -90,12 +90,12 @@ jobs:
               # Create tarball
               tarball_path="/tmp/$parent.tgz"
               if [ "$OBJECT_TYPE" == "custom_functions" ]; then
-              # Move to custom_functions directory and tar the files
-              cd custom_functions
-              tar -czvf $tarball_path $(basename -a $files)
-              cd ..
+                  # Move to custom_functions directory and tar the files
+                  cd custom_functions
+                  eval tar -czvf $tarball_path $files
+                  cd ..
               else
-              tar -czvf $tarball_path $files
+                  eval tar -czvf $tarball_path $files
               fi
               
               # Call the SOAR publish Python backend
