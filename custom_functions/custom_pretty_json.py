@@ -1,4 +1,4 @@
-def demo_pretty_json_copy(inputJson=None, **kwargs):
+def custom_pretty_json(inputJson=None, **kwargs):
     """
     This custom function pretty prints a JSON provided in input
     

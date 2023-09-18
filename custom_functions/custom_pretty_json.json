@@ -1,6 +1,6 @@
 {
-    "create_time": "2023-09-15T12:32:52.881071+00:00",
-    "custom_function_id": "cc6a9158c21dbb8011b383471bf386fe55e3dda6",
+    "create_time": "2023-09-18T20:17:20.774496+00:00",
+    "custom_function_id": "de8a1a0ed08bf734195fff98fb6006b6d37c864c",
     "description": "This custom function pretty prints a JSON provided in input",
     "draft_mode": false,
     "inputs": [
