@@ -104,13 +104,13 @@ jobs:
 
               # Create tarball
               tarball_path="/tmp/$parent.tgz"
+
               if [ "$OBJECT_TYPE" == "custom_functions" ]; then
-                  # Move to custom_functions directory and tar the files
-                  cd custom_functions
-                  eval tar -czvf $tarball_path $files
-                  cd ..
+              # Adjust paths to be relative to current directory and tar the files
+              adjusted_files=("${files_array[@]/custom_functions\//}")
+              eval tar -czvf $tarball_path "${adjusted_files[@]}"
               else
-                  eval tar -czvf $tarball_path $files
+              eval tar -czvf $tarball_path $files
               fi
               
               # Call the SOAR publish Python backend
