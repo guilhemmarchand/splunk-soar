@@ -97,7 +97,7 @@ jobs:
 
               # Determine the object type
               if echo "$files" | grep -q 'custom_functions/'; then
-              OBJECT_TYPE="custom_functions"
+              OBJECT_TYPE="custom_function"
               else
               OBJECT_TYPE="playbook"
               fi
@@ -105,7 +105,7 @@ jobs:
               # Create tarball
               tarball_path="/tmp/$parent.tgz"
 
-              if [ "$OBJECT_TYPE" == "custom_functions" ]; then
+              if [ "$OBJECT_TYPE" == "custom_function" ]; then
               # Adjust paths to be relative to current directory and tar the files
               adjusted_files=("${files_array[@]/custom_functions\//}")
               cd custom_functions
