@@ -33,6 +33,7 @@ jobs:
         run: |
           echo "Inspection git branch ${{ github.ref }}"
           echo "Inspection git commit ${{ github.sha }}"
+          echo "commit details: $(git log --pretty=%P -n 1 ${{ github.sha }})"
           DEST_API_URL=""
           DEST_API_TOKEN=""
           DEST_SCM_NAME=""
