@@ -35,6 +35,7 @@ jobs:
           echo "Inspection git commit ${{ github.sha }}"
           git branch -v
           git status
+          git log
           git log --pretty=%P -n 1 ${{ github.sha }}
           commit_details=$(git log --pretty=%P -n 1 ${{ github.sha }})
           echo "commit details: $commit_details"
