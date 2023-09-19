@@ -97,14 +97,14 @@ jobs:
 
               # Determine the object type
               if echo "$files" | grep -q 'custom_functions/'; then
-                  OBJECT_TYPE="custom_functions"
+                  OBJECT_TYPE="custom_function"
               else
                   OBJECT_TYPE="playbook"
               fi
 
               # Create tarball
               tarball_path="/tmp/$parent.tgz"
-              if [ "$OBJECT_TYPE" == "custom_functions" ]; then
+              if [ "$OBJECT_TYPE" == "custom_function" ]; then
                   # Strip directory from file names
                   stripped_files=()
                   for file in "${valid_files[@]}"; do
