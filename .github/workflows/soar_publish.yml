@@ -58,12 +58,12 @@ jobs:
               exit 1
           fi
 
-          commit_parents=$(git log --pretty=%P -n 1 ${{ github.sha }})
-          if [[ $(echo $commit_parents | wc -w) -gt 1 ]]; then
+          commit_parents=($(git log --pretty=%P -n 1 ${{ github.sha }}))
+          if [[ ${#commit_parents[@]} -eq 2 ]]; then
               modified_files=$(git diff --name-only "${commit_parents[0]}" "${commit_parents[1]}")
           else
               modified_files=$(git show --name-only --pretty="" ${{ github.sha }})
-          fi
+          fi          
 
           mapfile -t files_array < <(echo "$modified_files" | grep -E '\.json$|\.py$')
 
