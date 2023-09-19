@@ -47,14 +47,21 @@ jobs:
           echo ""
 
           commit_details=$(git log --pretty=%P -n 1 ${{ github.sha }})
-          if [[ $(echo "$commit_details" | wc -w) -eq 2 ]]; then
+
+          # Handling multiple parent commits for merge scenarios
+          if [[ $(echo "$commit_details" | wc -w) -gt 1 ]]; then
               first_parent=$(echo "$commit_details" | awk '{print $1}')
               second_parent=$(echo "$commit_details" | awk '{print $2}')
-              # Get all commits between the two parents (excluding the parents themselves)
-              commit_details=$(git rev-list --ancestry-path $first_parent^..$second_parent | tail -n +2)
+              
+              # Determine the common ancestor of the two parents and get all commits in the branch being merged
+              common_ancestor=$(git merge-base $first_parent $second_parent)
+              commits_to_process=$(git rev-list $common_ancestor..$second_parent)
+          else
+              # For single commits
+              commits_to_process=$commit_details
           fi
 
-          echo "list of commit identifiers: $commit_details"
+          echo "list of commit identifiers: $commits_to_process"
           DEST_API_URL=""
           DEST_API_TOKEN=""
           DEST_SCM_NAME=""
@@ -75,7 +82,7 @@ jobs:
               exit 1
           fi
 
-          for parent in $commit_details; do
+          for parent in $commits_to_process; do
               echo "Handling git commit id: $parent"
               echo "running command git show"
               git show --name-only --pretty="" $parent || true
