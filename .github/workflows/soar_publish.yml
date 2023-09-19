@@ -97,20 +97,26 @@ jobs:
 
               # Determine the object type
               if echo "$files" | grep -q 'custom_functions/'; then
-              OBJECT_TYPE="custom_functions"
+                  OBJECT_TYPE="custom_functions"
               else
-              OBJECT_TYPE="playbook"
+                  OBJECT_TYPE="playbook"
               fi
 
               # Create tarball
               tarball_path="/tmp/$parent.tgz"
               if [ "$OBJECT_TYPE" == "custom_functions" ]; then
+                  # Strip directory from file names
+                  stripped_files=()
+                  for file in "${valid_files[@]}"; do
+                      stripped_files+=("$(basename "$file")")
+                  done
+
                   # Move to custom_functions directory and tar the files
                   cd custom_functions
-                  eval tar -czvf $tarball_path $files
+                  tar -czvf $tarball_path "${stripped_files[@]}"
                   cd ..
               else
-                  eval tar -czvf $tarball_path $files
+                  tar -czvf $tarball_path "${valid_files[@]}"
               fi
               
               # Call the SOAR publish Python backend
