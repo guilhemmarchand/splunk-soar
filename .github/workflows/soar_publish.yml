@@ -60,7 +60,7 @@ jobs:
 
           commit_parents=$(git log --pretty=%P -n 1 ${{ github.sha }})
           if [[ $(echo $commit_parents | wc -w) -gt 1 ]]; then
-              modified_files=$(git diff --name-only ${commit_parents[0]} ${commit_parents[1]})
+              modified_files=$(git diff --name-only "${commit_parents[0]}" "${commit_parents[1]}")
           else
               modified_files=$(git show --name-only --pretty="" ${{ github.sha }})
           fi
@@ -80,10 +80,10 @@ jobs:
                   if [ "$OBJECT_TYPE" == "custom_function" ]; then
                       adjusted_files=("${paired_files[@]/custom_functions\//}")
                       cd custom_functions
-                      eval tar -czvf $tarball_path "${adjusted_files[@]}"
-                      cd ../
+                      tar -czvf "$tarball_path" "${adjusted_files[@]}"
+                      cd ..
                   else
-                      eval tar -czvf $tarball_path "${paired_files[@]}"
+                      tar -czvf "$tarball_path" "${paired_files[@]}"
                   fi
 
                   # Call the SOAR publish Python backend
