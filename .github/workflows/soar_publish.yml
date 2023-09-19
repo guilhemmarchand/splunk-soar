@@ -45,7 +45,15 @@ jobs:
           echo "running command git log --pretty=%P -n 1 ${{ github.sha }}"
           git log --pretty=%P -n 1 ${{ github.sha }}
           echo ""
+
           commit_details=$(git log --pretty=%P -n 1 ${{ github.sha }})
+          if [[ $(echo "$commit_details" | wc -w) -eq 2 ]]; then
+              first_parent=$(echo "$commit_details" | awk '{print $1}')
+              second_parent=$(echo "$commit_details" | awk '{print $2}')
+              # Get all commits between the two parents (excluding the parents themselves)
+              commit_details=$(git rev-list --ancestry-path $first_parent^..$second_parent | tail -n +2)
+          fi
+
           echo "list of commit identifiers: $commit_details"
           DEST_API_URL=""
           DEST_API_TOKEN=""
