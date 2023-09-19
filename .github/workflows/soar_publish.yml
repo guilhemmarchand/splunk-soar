@@ -1,4 +1,4 @@
-name: Splunk SOAR publish
+name: Publish to Splunk SOAR
 
 on:
   push:
@@ -7,42 +7,29 @@ on:
       - main
 
 jobs:
-  soar_publish:
+  publish:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.10"]
-
     steps:
-      - run: echo "job automatically triggered by a ${{ github.event_name }} event."
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-      # required to access full git Metadata
-      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v2
         with:
-          fetch-depth: 0
+          python-version: "3.x"
 
-      - uses: actions/setup-python@v4
-        with:
-          python-version: ${{ matrix.python-version }}
-
-      # Install required Python modules
-      - name: Install Python requirements
+      - name: Install Python Dependencies
         run: |
+          python -m pip install --upgrade pip
           pip install -r utils/requirements.txt
 
-      - name: Publish Git commits to Splunk SOAR Cloud
-        env:
-          SOAR_TESTING_DEST_API_URL: ${{ vars.SOAR_TESTING_DEST_API_URL }}
-          SOAR_TESTING_DEST_API_TOKEN: ${{ secrets.SOAR_TESTING_DEST_API_TOKEN }}
-          SOAR_TESTING_DEST_SCM_NAME: ${{ vars.SOAR_TESTING_DEST_SCM_NAME }}
-          SOAR_PROD_DEST_API_URL: ${{ vars.SOAR_PROD_DEST_API_URL }}
-          SOAR_PROD_DEST_API_TOKEN: ${{ secrets.SOAR_PROD_DEST_API_TOKEN }}
-          SOAR_PROD_DEST_SCM_NAME: ${{ vars.SOAR_PROD_DEST_SCM_NAME }}
+      - name: Determine Changes and Publish
         run: |
           echo "Inspecting git branch ${{ github.ref }}"
+          commit_ids="${{ github.event.before }} ${{ github.sha }}"
           echo "Inspecting git commit ${{ github.sha }}"
 
-          # Branch environment setup
+          # Determine the target environment based on the branch
           if [[ "${{ github.ref }}" == "refs/heads/testing" ]]; then
               echo "Environment target is Testing"
               DEST_API_URL=$SOAR_TESTING_DEST_API_URL
@@ -54,41 +41,54 @@ jobs:
               DEST_API_TOKEN=$SOAR_PROD_DEST_API_TOKEN
               DEST_SCM_NAME=$SOAR_PROD_DEST_SCM_NAME
           else
-              echo "Invalid branch. Exiting."
+              echo "Invalid branch. This workflow is only for 'testing' or 'main' branches, refusing to excute this against any other branch."
               exit 1
           fi
 
-          commit_parents=($(git log --pretty=%P -n 1 ${{ github.sha }}))
-          if [[ ${#commit_parents[@]} -eq 2 ]]; then
-              modified_files=$(git diff --name-only "${commit_parents[0]}" "${commit_parents[1]}")
-          else
-              modified_files=$(git show --name-only --pretty="" ${{ github.sha }})
-          fi          
+          # Extract the pairs of modified files
+          modified_files=$(git diff --name-only $commit_ids)
+          IFS=$'\n' read -d '' -r -a files_array <<< "$modified_files"
 
-          mapfile -t files_array < <(echo "$modified_files" | grep -E '\.json$|\.py$')
-
-          # Loop through pairs of files
-          for file in "${files_array[@]}"; do
-              base_name="${file%.*}" # strip extension
-
-              if [[ "$file" =~ \.json$ && " ${files_array[*]} " =~ " $base_name.py " ]]; then
-                  paired_files=("$file" "$base_name.py")
-                  OBJECT_TYPE=$(echo "$file" | grep -q 'custom_functions/' && echo "custom_function" || echo "playbook")
-
+          for ((i=0; i<${#files_array[@]}; i+=2)); do
+              # Pair files by two
+              file1="${files_array[i]}"
+              file2="${files_array[i+1]}"
+              
+              # Only process pairs that have .json and .py
+              if [[ "$file1" =~ \.json$ && "$file2" =~ \.py$ ]] || [[ "$file1" =~ \.py$ && "$file2" =~ \.json$ ]]; then
+                  valid_pair=("$file1" "$file2")
+                  
+                  # Determine base name for tarball
+                  base_name="${file1%.*}" # strip extension
+                  
                   # Determine the object type and create tarball
                   tarball_path="/tmp/$base_name.tgz"
-                  if echo "$file_pair" | grep -q 'custom_functions/'; then
+                  if echo "${valid_pair[*]}" | grep -q 'custom_functions/'; then
                       OBJECT_TYPE="custom_function"
-                      # Adjust paths to be relative to current directory and tar the files
-                      adjusted_files=("${valid_pair[@]/custom_functions\//}")
-                      (cd custom_functions && tar -czvf "$tarball_path" "${adjusted_files[@]}")
+                      
+                      # Debugging output
+                      echo "Creating tarball for custom_function at path: $tarball_path with files: ${valid_pair[*]}"
+                      
+                      (cd custom_functions && tar -czvf "$tarball_path" "${valid_pair[@]}")
                   else
                       OBJECT_TYPE="playbook"
+                      
+                      # Debugging output
+                      echo "Creating tarball for playbook at path: $tarball_path with files: ${valid_pair[*]}"
+                      
                       tar -czvf "$tarball_path" "${valid_pair[@]}"
                   fi
 
-                  # Call the SOAR publish Python backend
                   echo "Running command: python3 utils/soar_publish.py --input_file \"$tarball_path\" --dest_target=\"$DEST_API_URL\" --dest_token=\"$DEST_API_TOKEN\" --dest_scm_name=\"$DEST_SCM_NAME\" --object_type \"$OBJECT_TYPE\""
                   python3 utils/soar_publish.py --input_file "$tarball_path" --dest_target="$DEST_API_URL" --dest_token="$DEST_API_TOKEN" --dest_scm_name="$DEST_SCM_NAME" --object_type "$OBJECT_TYPE"
+              else
+                  echo "Invalid file pair detected: $file1 and $file2. Skipping."
               fi
           done
+        env:
+          SOAR_TESTING_DEST_API_URL: ${{ secrets.SOAR_TESTING_DEST_API_URL }}
+          SOAR_TESTING_DEST_API_TOKEN: ${{ secrets.SOAR_TESTING_DEST_API_TOKEN }}
+          SOAR_TESTING_DEST_SCM_NAME: ${{ secrets.SOAR_TESTING_DEST_SCM_NAME }}
+          SOAR_PROD_DEST_API_URL: ${{ secrets.SOAR_PROD_DEST_API_URL }}
+          SOAR_PROD_DEST_API_TOKEN: ${{ secrets.SOAR_PROD_DEST_API_TOKEN }}
+          SOAR_PROD_DEST_SCM_NAME: ${{ secrets.SOAR_PROD_DEST_SCM_NAME }}
