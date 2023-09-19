@@ -128,10 +128,10 @@ jobs:
 
                   # Move to custom_functions directory and tar the files
                   cd custom_functions
-                  tar -czvf $tarball_path "${stripped_files[@]}"
+                  tar -czvf $tarball_path "${stripped_files[@]}" > /dev/null
                   cd ..
               else
-                  tar -czvf $tarball_path "${valid_files[@]}"
+                  tar -czvf $tarball_path "${valid_files[@]}" > /dev/null
               fi
               
               # Call the SOAR publish Python backend
