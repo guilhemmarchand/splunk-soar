@@ -75,15 +75,16 @@ jobs:
                   paired_files=("$file" "$base_name.py")
                   OBJECT_TYPE=$(echo "$file" | grep -q 'custom_functions/' && echo "custom_function" || echo "playbook")
 
-                  tarball_path="/tmp/${base_name}.tgz"
-
-                  if [ "$OBJECT_TYPE" == "custom_function" ]; then
-                      adjusted_files=("${paired_files[@]/custom_functions\//}")
-                      cd custom_functions
-                      tar -czvf "$tarball_path" "${adjusted_files[@]}"
-                      cd ..
+                  # Determine the object type and create tarball
+                  tarball_path="/tmp/$base_name.tgz"
+                  if echo "$file_pair" | grep -q 'custom_functions/'; then
+                      OBJECT_TYPE="custom_function"
+                      # Adjust paths to be relative to current directory and tar the files
+                      adjusted_files=("${valid_pair[@]/custom_functions\//}")
+                      (cd custom_functions && tar -czvf "$tarball_path" "${adjusted_files[@]}")
                   else
-                      tar -czvf "$tarball_path" "${paired_files[@]}"
+                      OBJECT_TYPE="playbook"
+                      tar -czvf "$tarball_path" "${valid_pair[@]}"
                   fi
 
                   # Call the SOAR publish Python backend
