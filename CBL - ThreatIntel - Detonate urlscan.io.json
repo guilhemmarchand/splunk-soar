@@ -120,7 +120,7 @@
                     "targetPort": "11_in"
                 }
             ],
-            "hash": "5c63017d4fed4bbfe17fed166aa7371c67f44f88",
+            "hash": "a91790595ea82fb1de6eef57e893bc698c2b7829",
             "nodes": {
                 "0": {
                     "data": {
@@ -134,8 +134,9 @@
                     "errors": {},
                     "id": "0",
                     "type": "start",
+                    "warnings": {},
                     "x": 190,
-                    "y": -1.2789769243681803e-13
+                    "y": -1.8474111129762605e-13
                 },
                 "1": {
                     "data": {
@@ -151,6 +152,7 @@
                     "id": "1",
                     "type": "end",
                     "userCode": "\n    # This function is called after all actions are completed.\n    # summary of all the action and/or all details of actions\n    # can be collected here.\n\n    # summary_json = phantom.get_summary()\n    # if 'result' in summary_json:\n        # for action_result in summary_json['result']:\n            # if 'action_run_id' in action_result:\n                # action_results = phantom.get_action_results(action_run_id=action_result['action_run_id'], result_data=False, flatten=False)\n                # phantom.debug(action_results)\n\n",
+                    "warnings": {},
                     "x": 190,
                     "y": 1772
                 },
@@ -159,6 +161,8 @@
                         "advanced": {
                             "customName": "Check for screenshot fileUrl",
                             "customNameId": 0,
+                            "delimiter": ",",
+                            "delimiter_enabled": true,
                             "join": []
                         },
                         "conditions": [
@@ -200,6 +204,7 @@
                     "errors": {},
                     "id": "11",
                     "type": "decision",
+                    "warnings": {},
                     "x": 250,
                     "y": 1100
                 },
@@ -260,6 +265,11 @@
                     "errors": {},
                     "id": "13",
                     "type": "utility",
+                    "warnings": {
+                        "config": [
+                            "The referenced custom function has changed. Reconfigure this block to use the updated parameters."
+                        ]
+                    },
                     "x": -1.4210854715202004e-14,
                     "y": 1280
                 },
@@ -282,6 +292,7 @@
                     "errors": {},
                     "id": "17",
                     "type": "format",
+                    "warnings": {},
                     "x": -1.4210854715202004e-14,
                     "y": 1444
                 },
@@ -345,6 +356,7 @@
                     "errors": {},
                     "id": "19",
                     "type": "utility",
+                    "warnings": {},
                     "x": 0,
                     "y": 1616
                 },
@@ -353,6 +365,8 @@
                         "advanced": {
                             "customName": "Filter for URL",
                             "customNameId": 0,
+                            "delimiter": ",",
+                            "delimiter_enabled": true,
                             "join": []
                         },
                         "conditions": [
@@ -378,6 +392,7 @@
                     "errors": {},
                     "id": "2",
                     "type": "filter",
+                    "warnings": {},
                     "x": 230,
                     "y": 148
                 },
@@ -400,6 +415,7 @@
                     "errors": {},
                     "id": "20",
                     "type": "format",
+                    "warnings": {},
                     "x": 340,
                     "y": 1444
                 },
@@ -463,6 +479,7 @@
                     "errors": {},
                     "id": "21",
                     "type": "utility",
+                    "warnings": {},
                     "x": 340,
                     "y": 1608
                 },
@@ -526,6 +543,7 @@
                     "errors": {},
                     "id": "22",
                     "type": "utility",
+                    "warnings": {},
                     "x": 170,
                     "y": 952
                 },
@@ -555,6 +573,7 @@
                         "requiredParameters": [
                             {
                                 "data_type": "string",
+                                "default": "",
                                 "field": "url"
                             },
                             {
@@ -568,6 +587,7 @@
                     "errors": {},
                     "id": "3",
                     "type": "action",
+                    "warnings": {},
                     "x": 170,
                     "y": 328
                 },
@@ -594,6 +614,7 @@
                     "errors": {},
                     "id": "4",
                     "type": "format",
+                    "warnings": {},
                     "x": 170,
                     "y": 640
                 },
@@ -616,8 +637,9 @@
                     "errors": {},
                     "id": "5",
                     "type": "format",
+                    "warnings": {},
                     "x": 170,
-                    "y": 475.9999999999999
+                    "y": 475.99999999999983
                 },
                 "6": {
                     "data": {
@@ -722,6 +744,7 @@
                     "errors": {},
                     "id": "6",
                     "type": "utility",
+                    "warnings": {},
                     "x": 170,
                     "y": 804
                 }
@@ -753,10 +776,10 @@
         ],
         "playbook_type": "automation",
         "python_version": "3",
-        "schema": "5.0.6",
-        "version": "5.3.1.84890"
+        "schema": "5.0.10",
+        "version": "6.0.2.127725"
     },
-    "create_time": "2023-09-20T08:51:50.242447+00:00",
+    "create_time": "2023-09-20T14:33:49.443466+00:00",
     "draft_mode": false,
     "labels": [
         "splunk_events"

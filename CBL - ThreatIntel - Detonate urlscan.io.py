@@ -8,6 +8,7 @@ import json
 from datetime import datetime, timedelta
 
 
+@phantom.playbook_block()
 def on_start(container):
     phantom.debug('on_start() called')
 
@@ -16,6 +17,7 @@ def on_start(container):
 
     return
 
+@phantom.playbook_block()
 def filter_for_url(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug("filter_for_url() called")
 
@@ -25,7 +27,8 @@ def filter_for_url(action=None, success=None, container=None, results=None, hand
         conditions=[
             ["artifact:*.cef.requestURL", "!=", ""]
         ],
-        name="filter_for_url:condition_1")
+        name="filter_for_url:condition_1",
+        delimiter=",")
 
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
@@ -34,6 +37,7 @@ def filter_for_url(action=None, success=None, container=None, results=None, hand
     return
 
 
+@phantom.playbook_block()
 def run_detonate_url(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug("run_detonate_url() called")
 
@@ -68,6 +72,7 @@ def run_detonate_url(action=None, success=None, container=None, results=None, ha
     return
 
 
+@phantom.playbook_block()
 def format_detonate_note_content(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug("format_detonate_note_content() called")
 
@@ -99,6 +104,7 @@ def format_detonate_note_content(action=None, success=None, container=None, resu
     return
 
 
+@phantom.playbook_block()
 def format_detonate_note_title(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug("format_detonate_note_title() called")
 
@@ -126,6 +132,7 @@ def format_detonate_note_title(action=None, success=None, container=None, result
     return
 
 
+@phantom.playbook_block()
 def add_detonate_note(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug("add_detonate_note() called")
 
@@ -149,6 +156,7 @@ def add_detonate_note(action=None, success=None, container=None, results=None, h
     return
 
 
+@phantom.playbook_block()
 def check_for_screenshot_fileurl(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug("check_for_screenshot_fileurl() called")
 
@@ -157,7 +165,8 @@ def check_for_screenshot_fileurl(action=None, success=None, container=None, resu
         container=container,
         conditions=[
             ["run_detonate_url:action_result.data.*.task.screenshotURL", "!=", ""]
-        ])
+        ],
+        delimiter=",")
 
     # call connected blocks if condition 1 matched
     if found_match_1:
@@ -170,6 +179,7 @@ def check_for_screenshot_fileurl(action=None, success=None, container=None, resu
     return
 
 
+@phantom.playbook_block()
 def upload_screenshot_to_container(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug("upload_screenshot_to_container() called")
 
@@ -200,6 +210,7 @@ def upload_screenshot_to_container(action=None, success=None, container=None, re
     return
 
 
+@phantom.playbook_block()
 def format_comment_upload_file(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug("format_comment_upload_file() called")
 
@@ -227,6 +238,7 @@ def format_comment_upload_file(action=None, success=None, container=None, result
     return
 
 
+@phantom.playbook_block()
 def add_comment_upload_file(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug("add_comment_upload_file() called")
 
@@ -247,6 +259,7 @@ def add_comment_upload_file(action=None, success=None, container=None, results=N
     return
 
 
+@phantom.playbook_block()
 def format_comment_domain_not_found(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug("format_comment_domain_not_found() called")
 
@@ -274,6 +287,7 @@ def format_comment_domain_not_found(action=None, success=None, container=None, r
     return
 
 
+@phantom.playbook_block()
 def add_comment_screenshot_not_available(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug("add_comment_screenshot_not_available() called")
 
@@ -294,6 +308,7 @@ def add_comment_screenshot_not_available(action=None, success=None, container=No
     return
 
 
+@phantom.playbook_block()
 def add_detonate_comment(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug("add_detonate_comment() called")
 
@@ -316,6 +331,7 @@ def add_detonate_comment(action=None, success=None, container=None, results=None
     return
 
 
+@phantom.playbook_block()
 def on_finish(container, summary):
     phantom.debug("on_finish() called")
 
