@@ -170,42 +170,11 @@ def check_for_screenshot_fileurl(action=None, success=None, container=None, resu
 
     # call connected blocks if condition 1 matched
     if found_match_1:
-        upload_screenshot_to_container(action=action, success=success, container=container, results=results, handle=handle)
+        upload_file_from_url_6(action=action, success=success, container=container, results=results, handle=handle)
         return
 
     # check for 'else' condition 2
     format_comment_domain_not_found(action=action, success=success, container=container, results=results, handle=handle)
-
-    return
-
-
-@phantom.playbook_block()
-def upload_screenshot_to_container(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
-    phantom.debug("upload_screenshot_to_container() called")
-
-    id_value = container.get("id", None)
-    run_detonate_url_result_data = phantom.collect2(container=container, datapath=["run_detonate_url:action_result.data.*.task.screenshotURL","run_detonate_url:action_result.parameter.context.artifact_id"], action_results=results)
-
-    parameters = []
-
-    # build parameters list for 'upload_screenshot_to_container' call
-    for run_detonate_url_result_item in run_detonate_url_result_data:
-        parameters.append({
-            "fileUrl": run_detonate_url_result_item[0],
-            "container_id": id_value,
-        })
-
-    ################################################################################
-    ## Custom Code Start
-    ################################################################################
-
-    # Write your custom code here...
-
-    ################################################################################
-    ## Custom Code End
-    ################################################################################
-
-    phantom.custom_function(custom_function="local/upload_file_from_url", parameters=parameters, name="upload_screenshot_to_container", callback=format_comment_upload_file)
 
     return
 
@@ -327,6 +296,37 @@ def add_detonate_comment(action=None, success=None, container=None, results=None
     phantom.comment(container=container, comment=format_detonate_note_content__as_list)
 
     check_for_screenshot_fileurl(container=container)
+
+    return
+
+
+@phantom.playbook_block()
+def upload_file_from_url_6(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("upload_file_from_url_6() called")
+
+    id_value = container.get("id", None)
+    run_detonate_url_result_data = phantom.collect2(container=container, datapath=["run_detonate_url:action_result.data.*.task.screenshotURL","run_detonate_url:action_result.parameter.context.artifact_id"], action_results=results)
+
+    parameters = []
+
+    # build parameters list for 'upload_file_from_url_6' call
+    for run_detonate_url_result_item in run_detonate_url_result_data:
+        parameters.append({
+            "fileUrl": run_detonate_url_result_item[0],
+            "container_id": id_value,
+        })
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.custom_function(custom_function="Dev/upload_file_from_url", parameters=parameters, name="upload_file_from_url_6", callback=format_comment_upload_file)
 
     return
 
