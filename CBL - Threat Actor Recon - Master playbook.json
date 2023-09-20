@@ -1,0 +1,3211 @@
+{
+    "blockly": false,
+    "blockly_xml": "<xml></xml>",
+    "category": "Threat Response",
+    "coa": {
+        "data": {
+            "description": "Orchestrates the Threat Actor Recon use case, the master playbook runs all dependent playbooks accordingly",
+            "edges": [
+                {
+                    "id": "port_4_to_port_1",
+                    "sourceNode": "4",
+                    "sourcePort": "4_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                },
+                {
+                    "id": "port_0_to_port_9",
+                    "sourceNode": "0",
+                    "sourcePort": "0_out",
+                    "targetNode": "9",
+                    "targetPort": "9_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 1
+                        }
+                    ],
+                    "id": "port_9_to_port_4",
+                    "sourceNode": "9",
+                    "sourcePort": "9_out",
+                    "targetNode": "4",
+                    "targetPort": "4_in"
+                },
+                {
+                    "id": "port_28_to_port_29",
+                    "sourceNode": "28",
+                    "sourcePort": "28_out",
+                    "targetNode": "29",
+                    "targetPort": "29_in"
+                },
+                {
+                    "id": "port_29_to_port_30",
+                    "sourceNode": "29",
+                    "sourcePort": "29_out",
+                    "targetNode": "30",
+                    "targetPort": "30_in"
+                },
+                {
+                    "id": "port_32_to_port_33",
+                    "sourceNode": "32",
+                    "sourcePort": "32_out",
+                    "targetNode": "33",
+                    "targetPort": "33_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 1
+                        }
+                    ],
+                    "id": "port_23_to_port_34",
+                    "sourceNode": "23",
+                    "sourcePort": "23_out",
+                    "targetNode": "34",
+                    "targetPort": "34_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_34_to_port_26",
+                    "sourceNode": "34",
+                    "sourcePort": "34_out",
+                    "targetNode": "26",
+                    "targetPort": "26_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_23_to_port_35",
+                    "sourceNode": "23",
+                    "sourcePort": "23_out",
+                    "targetNode": "35",
+                    "targetPort": "35_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_35_to_port_25",
+                    "sourceNode": "35",
+                    "sourcePort": "35_out",
+                    "targetNode": "25",
+                    "targetPort": "25_in"
+                },
+                {
+                    "id": "port_25_to_port_37",
+                    "sourceNode": "25",
+                    "sourcePort": "25_out",
+                    "targetNode": "37",
+                    "targetPort": "37_in"
+                },
+                {
+                    "id": "port_26_to_port_37",
+                    "sourceNode": "26",
+                    "sourcePort": "26_out",
+                    "targetNode": "37",
+                    "targetPort": "37_in"
+                },
+                {
+                    "id": "port_15_to_port_19",
+                    "sourceNode": "15",
+                    "sourcePort": "15_out",
+                    "targetNode": "19",
+                    "targetPort": "19_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_13_to_port_14",
+                    "sourceNode": "13",
+                    "sourcePort": "13_out",
+                    "targetNode": "14",
+                    "targetPort": "14_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_38_to_port_13",
+                    "sourceNode": "38",
+                    "sourcePort": "38_out",
+                    "targetNode": "13",
+                    "targetPort": "13_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 1
+                        }
+                    ],
+                    "id": "port_38_to_port_39",
+                    "sourceNode": "38",
+                    "sourcePort": "38_out",
+                    "targetNode": "39",
+                    "targetPort": "39_in"
+                },
+                {
+                    "id": "port_14_to_port_40",
+                    "sourceNode": "14",
+                    "sourcePort": "14_out",
+                    "targetNode": "40",
+                    "targetPort": "40_in"
+                },
+                {
+                    "id": "port_39_to_port_40",
+                    "sourceNode": "39",
+                    "sourcePort": "39_out",
+                    "targetNode": "40",
+                    "targetPort": "40_in"
+                },
+                {
+                    "id": "port_40_to_port_31",
+                    "sourceNode": "40",
+                    "sourcePort": "40_out",
+                    "targetNode": "31",
+                    "targetPort": "31_in"
+                },
+                {
+                    "id": "port_31_to_port_28",
+                    "sourceNode": "31",
+                    "sourcePort": "31_out",
+                    "targetNode": "28",
+                    "targetPort": "28_in"
+                },
+                {
+                    "id": "port_30_to_port_41",
+                    "sourceNode": "30",
+                    "sourcePort": "30_out",
+                    "targetNode": "41",
+                    "targetPort": "41_in"
+                },
+                {
+                    "id": "port_41_to_port_42",
+                    "sourceNode": "41",
+                    "sourcePort": "41_out",
+                    "targetNode": "42",
+                    "targetPort": "42_in"
+                },
+                {
+                    "id": "port_42_to_port_32",
+                    "sourceNode": "42",
+                    "sourcePort": "42_out",
+                    "targetNode": "32",
+                    "targetPort": "32_in"
+                },
+                {
+                    "id": "port_27_to_port_45",
+                    "sourceNode": "27",
+                    "sourcePort": "27_out",
+                    "targetNode": "45",
+                    "targetPort": "45_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_45_to_port_48",
+                    "sourceNode": "45",
+                    "sourcePort": "45_out",
+                    "targetNode": "48",
+                    "targetPort": "48_in"
+                },
+                {
+                    "id": "port_48_to_port_49",
+                    "sourceNode": "48",
+                    "sourcePort": "48_out",
+                    "targetNode": "49",
+                    "targetPort": "49_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 1
+                        }
+                    ],
+                    "id": "port_50_to_port_51",
+                    "sourceNode": "50",
+                    "sourcePort": "50_out",
+                    "targetNode": "51",
+                    "targetPort": "51_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_50_to_port_53",
+                    "sourceNode": "50",
+                    "sourcePort": "50_out",
+                    "targetNode": "53",
+                    "targetPort": "53_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 2
+                        }
+                    ],
+                    "id": "port_50_to_port_54",
+                    "sourceNode": "50",
+                    "sourcePort": "50_out",
+                    "targetNode": "54",
+                    "targetPort": "54_in"
+                },
+                {
+                    "id": "port_51_to_port_55",
+                    "sourceNode": "51",
+                    "sourcePort": "51_out",
+                    "targetNode": "55",
+                    "targetPort": "55_in"
+                },
+                {
+                    "id": "port_53_to_port_55",
+                    "sourceNode": "53",
+                    "sourcePort": "53_out",
+                    "targetNode": "55",
+                    "targetPort": "55_in"
+                },
+                {
+                    "id": "port_54_to_port_55",
+                    "sourceNode": "54",
+                    "sourcePort": "54_out",
+                    "targetNode": "55",
+                    "targetPort": "55_in"
+                },
+                {
+                    "id": "port_55_to_port_56",
+                    "sourceNode": "55",
+                    "sourcePort": "55_out",
+                    "targetNode": "56",
+                    "targetPort": "56_in"
+                },
+                {
+                    "id": "port_49_to_port_57",
+                    "sourceNode": "49",
+                    "sourcePort": "49_out",
+                    "targetNode": "57",
+                    "targetPort": "57_in"
+                },
+                {
+                    "id": "port_57_to_port_50",
+                    "sourceNode": "57",
+                    "sourcePort": "57_out",
+                    "targetNode": "50",
+                    "targetPort": "50_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 1
+                        }
+                    ],
+                    "id": "port_45_to_port_47",
+                    "sourceNode": "45",
+                    "sourcePort": "45_out",
+                    "targetNode": "47",
+                    "targetPort": "47_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_9_to_port_62",
+                    "sourceNode": "9",
+                    "sourcePort": "9_out",
+                    "targetNode": "62",
+                    "targetPort": "62_in"
+                },
+                {
+                    "id": "port_62_to_port_23",
+                    "sourceNode": "62",
+                    "sourcePort": "62_out",
+                    "targetNode": "23",
+                    "targetPort": "23_in"
+                },
+                {
+                    "id": "port_56_to_port_1",
+                    "sourceNode": "56",
+                    "sourcePort": "56_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                },
+                {
+                    "id": "port_47_to_port_1",
+                    "sourceNode": "47",
+                    "sourcePort": "47_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 2
+                        }
+                    ],
+                    "id": "port_45_to_port_65",
+                    "sourceNode": "45",
+                    "sourcePort": "45_out",
+                    "targetNode": "65",
+                    "targetPort": "65_in"
+                },
+                {
+                    "id": "port_65_to_port_1",
+                    "sourceNode": "65",
+                    "sourcePort": "65_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                },
+                {
+                    "id": "port_19_to_port_66",
+                    "sourceNode": "19",
+                    "sourcePort": "19_out",
+                    "targetNode": "66",
+                    "targetPort": "66_in"
+                },
+                {
+                    "id": "port_66_to_port_27",
+                    "sourceNode": "66",
+                    "sourcePort": "66_out",
+                    "targetNode": "27",
+                    "targetPort": "27_in"
+                },
+                {
+                    "id": "port_37_to_port_67",
+                    "sourceNode": "37",
+                    "sourcePort": "37_out",
+                    "targetNode": "67",
+                    "targetPort": "67_in"
+                },
+                {
+                    "id": "port_67_to_port_59",
+                    "sourceNode": "67",
+                    "sourcePort": "67_out",
+                    "targetNode": "59",
+                    "targetPort": "59_in"
+                },
+                {
+                    "id": "port_33_to_port_68",
+                    "sourceNode": "33",
+                    "sourcePort": "33_out",
+                    "targetNode": "68",
+                    "targetPort": "68_in"
+                },
+                {
+                    "id": "port_59_to_port_71",
+                    "sourceNode": "59",
+                    "sourcePort": "59_out",
+                    "targetNode": "71",
+                    "targetPort": "71_in"
+                },
+                {
+                    "id": "port_71_to_port_38",
+                    "sourceNode": "71",
+                    "sourcePort": "71_out",
+                    "targetNode": "38",
+                    "targetPort": "38_in"
+                },
+                {
+                    "id": "port_68_to_port_72",
+                    "sourceNode": "68",
+                    "sourcePort": "68_out",
+                    "targetNode": "72",
+                    "targetPort": "72_in"
+                },
+                {
+                    "id": "port_72_to_port_15",
+                    "sourceNode": "72",
+                    "sourcePort": "72_out",
+                    "targetNode": "15",
+                    "targetPort": "15_in"
+                }
+            ],
+            "hash": "4d164b7492ba561af74bc30762ac545ea1d4ba65",
+            "nodes": {
+                "0": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionName": "on_start",
+                        "id": "0",
+                        "type": "start"
+                    },
+                    "errors": {},
+                    "id": "0",
+                    "type": "start",
+                    "x": 540,
+                    "y": 0
+                },
+                "1": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "on_finish",
+                        "id": "1",
+                        "type": "end"
+                    },
+                    "errors": {},
+                    "id": "1",
+                    "type": "end",
+                    "userCode": "\n    # This function is called after all actions are completed.\n    # summary of all the action and/or all details of actions\n    # can be collected here.\n\n    # summary_json = phantom.get_summary()\n    # if 'result' in summary_json:\n        # for action_result in summary_json['result']:\n            # if 'action_run_id' in action_result:\n                # action_results = phantom.get_action_results(action_run_id=action_result['action_run_id'], result_data=False, flatten=False)\n                # phantom.debug(action_results)\n\n",
+                    "x": 800,
+                    "y": 5920
+                },
+                "13": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Filter for fileHash",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "!=",
+                                        "param": "artifact:*.cef.fileHash",
+                                        "value": ""
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "customName": "if fileHash",
+                                "logic": "and"
+                            }
+                        ],
+                        "functionId": 2,
+                        "functionName": "filter_for_filehash",
+                        "id": "13",
+                        "type": "filter"
+                    },
+                    "errors": {},
+                    "id": "13",
+                    "type": "filter",
+                    "x": 900,
+                    "y": 1860
+                },
+                "14": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Call VirusTotal fileHash reputation",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "call_virustotal_filehash_reputation",
+                        "id": "14",
+                        "inputs": {},
+                        "playbookName": "CBL - Threat Actor Recon - fileHash reputation VirusTotal",
+                        "playbookRepo": 2,
+                        "playbookRepoName": "local",
+                        "playbookType": "automation",
+                        "synchronous": true,
+                        "type": "playbook"
+                    },
+                    "errors": {},
+                    "id": "14",
+                    "type": "playbook",
+                    "x": 840,
+                    "y": 2040
+                },
+                "15": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Format summary note content for correlated results",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "format_summary_note_content_for_correlated_results",
+                        "id": "15",
+                        "parameters": [
+                            "pretty_print_virustotal_results:custom_function_result.data.outputJson",
+                            "pretty_print_inbound_traffic_results:custom_function_result.data.outputJson",
+                            "pretty_print_outbound_traffic_results:custom_function_result.data.outputJson",
+                            "pretty_print_user_info_netskope:custom_function_result.data.outputJson",
+                            "pretty_prunt_hunt_processes:custom_function_result.data.outputJson"
+                        ],
+                        "template": "%%\n- **VirusTotal fileHash reputation:** {0} \n- **Inbound traffic correlation:** {1}\n- **Outbound traffic correlation:** {2}\n- **NetSkope user traces:** {3}\n- **Process hunt traces:** {4}\n%%\n",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "15",
+                    "type": "format",
+                    "x": 1120,
+                    "y": 3968
+                },
+                "19": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Add note summary results",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 4,
+                        "functionName": "add_note_summary_results",
+                        "id": "19",
+                        "selectMore": false,
+                        "tab": "apis",
+                        "type": "utility",
+                        "utilities": {
+                            "add_note": {
+                                "description": "",
+                                "fields": [
+                                    {
+                                        "description": "",
+                                        "label": "title",
+                                        "name": "title",
+                                        "placeholder": "Enter a note title",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "description": "",
+                                        "label": "content",
+                                        "name": "content",
+                                        "placeholder": "Enter the note content",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "choices": [
+                                            "markdown",
+                                            "html"
+                                        ],
+                                        "default": "markdown",
+                                        "description": "",
+                                        "label": "note format",
+                                        "name": "note_format",
+                                        "placeholder": "Enter the note content",
+                                        "renderType": "dropdown",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "container",
+                                        "required": false
+                                    },
+                                    {
+                                        "default": "general",
+                                        "hidden": true,
+                                        "name": "note_type",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "author",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "event_id",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "task_id",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "trace",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "add note",
+                                "name": "add_note"
+                            }
+                        },
+                        "utilityType": "api",
+                        "values": {
+                            "add_note": {
+                                "_internal": [
+                                    "container",
+                                    "note_type",
+                                    "author",
+                                    "event_id",
+                                    "task_id",
+                                    "trace"
+                                ],
+                                "content": "format_summary_note_content_for_correlated_results:formatted_data.*",
+                                "note_format": "markdown",
+                                "note_type": "general",
+                                "title": "Summary correlation results"
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "19",
+                    "type": "utility",
+                    "x": 1120,
+                    "y": 4148
+                },
+                "23": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Filter for destinationAid",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "!=",
+                                        "param": "artifact:*.cef.destinationAid",
+                                        "value": ""
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "customName": "if aid",
+                                "display": "If",
+                                "logic": "and",
+                                "type": "if"
+                            },
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 1,
+                                        "op": "!=",
+                                        "param": "artifact:*.cef.destinationHostName",
+                                        "value": ""
+                                    }
+                                ],
+                                "conditionIndex": 1,
+                                "customName": "if host",
+                                "display": "Else If",
+                                "logic": "and",
+                                "type": "elif"
+                            }
+                        ],
+                        "functionId": 1,
+                        "functionName": "filter_for_destinationaid",
+                        "id": "23",
+                        "type": "decision"
+                    },
+                    "errors": {},
+                    "id": "23",
+                    "type": "decision",
+                    "x": 1200,
+                    "y": 492
+                },
+                "25": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Call PB CrowdStrike enrichment from aid",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 2,
+                        "functionName": "call_pb_crowdstrike_enrichment_from_aid",
+                        "id": "25",
+                        "inputs": {
+                            "artifactId": {
+                                "datapaths": [
+                                    "artifact:*.id"
+                                ],
+                                "deduplicate": false
+                            },
+                            "inputFieldName": {
+                                "datapaths": [
+                                    "device_id"
+                                ],
+                                "deduplicate": false
+                            },
+                            "inputFieldValue": {
+                                "datapaths": [
+                                    "filtered-data:filter_for_aid:condition_1:artifact:*.cef.destinationAid"
+                                ],
+                                "deduplicate": false
+                            }
+                        },
+                        "playbookName": "CBL - Threat Actor Recon - CrowdStrike enrichment",
+                        "playbookRepo": 2,
+                        "playbookRepoName": "local",
+                        "playbookType": "data",
+                        "synchronous": true,
+                        "type": "playbook"
+                    },
+                    "errors": {},
+                    "id": "25",
+                    "type": "playbook",
+                    "x": 860,
+                    "y": 840
+                },
+                "26": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Call PB CrowdStrike enrichment from hostname",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "call_pb_crowdstrike_enrichment_from_hostname",
+                        "id": "26",
+                        "inputs": {
+                            "artifactId": {
+                                "datapaths": [
+                                    "artifact:*.id"
+                                ],
+                                "deduplicate": false
+                            },
+                            "inputFieldName": {
+                                "datapaths": [
+                                    "hostname"
+                                ],
+                                "deduplicate": false
+                            },
+                            "inputFieldValue": {
+                                "datapaths": [
+                                    "filtered-data:filter_for_hostname:condition_1:artifact:*.cef.destinationHostName"
+                                ],
+                                "deduplicate": false
+                            }
+                        },
+                        "playbookName": "CBL - Threat Actor Recon - CrowdStrike enrichment",
+                        "playbookRepo": 2,
+                        "playbookRepoName": "local",
+                        "playbookType": "data",
+                        "synchronous": true,
+                        "type": "playbook"
+                    },
+                    "errors": {},
+                    "id": "26",
+                    "type": "playbook",
+                    "x": 1400,
+                    "y": 840
+                },
+                "27": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Threat Actor Recon",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "approver": "Guilhem-m",
+                        "functionId": 1,
+                        "functionName": "threat_actor_recon",
+                        "id": "27",
+                        "message": "**Recon security event detected:**\n\n- **CrowdStrike device_id:** {0}\n- **HostName**: {1}\n- **IP Address:** {2}\n- **OS Platform:** {3}\n- **OS Version:** {4}\n- **Processes:** {5}\n\n**Network traffic summary:**\n\n- **Inbound traffic detected?:** {6}\n- **Inbound traffic allowed?:** {7}\n- **Inbound traffic blocked?:** {8}\n- **Outbound traffic detected?:** {9}\n- **Outbound traffic allowed?:** {10}\n- **Outbound traffic blocked?:** {11}\n\n**Correlation results:**\n\n{12}\n\n",
+                        "parameters": [
+                            "merge_destinationaid:custom_function_result.data.*.item",
+                            "merge_destinationhostname:custom_function_result.data.*.item",
+                            "merge_destinationaddress:custom_function_result.data.*.item",
+                            "merge_plateform_name:custom_function_result.data.*.item",
+                            "merge_os_version:custom_function_result.data.*.item",
+                            "artifact:*.cef.destinationProcessName",
+                            "call_spl_correlation_in_paloalto:playbook_output:spl_inbound_traffic_detected",
+                            "call_spl_correlation_in_paloalto:playbook_output:spl_inbound_is_traffic_allowed",
+                            "call_spl_correlation_in_paloalto:playbook_output:spl_inbound_is_traffic_blocked",
+                            "call_spl_correlation_in_paloalto:playbook_output:spl_outbound_traffic_detected",
+                            "call_spl_correlation_in_paloalto:playbook_output:spl_outbound_is_traffic_allowed",
+                            "call_spl_correlation_in_paloalto:playbook_output:spl_outbound_is_traffic_blocked",
+                            "format_summary_note_content_for_correlated_results:formatted_data.*"
+                        ],
+                        "responseTime": 3600,
+                        "responses": [
+                            {
+                                "responseOptions": [
+                                    "Promote to case and send email to operation team",
+                                    "Promote to a case",
+                                    "Close this security event (false positive)"
+                                ],
+                                "responsePrompt": "Choose an action to be performed:",
+                                "responseType": "customList"
+                            }
+                        ],
+                        "type": "prompt"
+                    },
+                    "errors": {},
+                    "id": "27",
+                    "type": "prompt",
+                    "x": 1200,
+                    "y": 4460
+                },
+                "28": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Merge destinationAid",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "customFunction": {
+                            "draftMode": false,
+                            "name": "list_merge",
+                            "repoName": "community"
+                        },
+                        "functionId": 8,
+                        "functionName": "merge_destinationaid",
+                        "id": "28",
+                        "selectMore": false,
+                        "type": "utility",
+                        "utilities": {
+                            "list_merge": {
+                                "description": "Merge 2-10 different data paths into a single output data path. For example, if IP addresses are stored in the fields sourceAddress, destinationAddress, and deviceAddress, then those three fields could be merged together to form a single list of IP addresses.",
+                                "fields": [
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_1",
+                                        "name": "input_1",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_2",
+                                        "name": "input_2",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_3",
+                                        "name": "input_3",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_4",
+                                        "name": "input_4",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_5",
+                                        "name": "input_5",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_6",
+                                        "name": "input_6",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_7",
+                                        "name": "input_7",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_8",
+                                        "name": "input_8",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_9",
+                                        "name": "input_9",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_10",
+                                        "name": "input_10",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "list_merge",
+                                "name": "list_merge"
+                            }
+                        },
+                        "utilityType": "custom_function",
+                        "values": {
+                            "list_merge": {
+                                "input_1": "call_pb_crowdstrike_enrichment_from_aid:playbook_output:destinationaid",
+                                "input_10": null,
+                                "input_2": "call_pb_crowdstrike_enrichment_from_hostname:playbook_output:destinationaid",
+                                "input_3": null,
+                                "input_4": null,
+                                "input_5": null,
+                                "input_6": null,
+                                "input_7": null,
+                                "input_8": null,
+                                "input_9": null
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "28",
+                    "type": "utility",
+                    "x": 1120,
+                    "y": 2540
+                },
+                "29": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Merge destinationHostName",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "customFunction": {
+                            "draftMode": false,
+                            "name": "list_merge",
+                            "repoName": "community"
+                        },
+                        "functionId": 9,
+                        "functionName": "merge_destinationhostname",
+                        "id": "29",
+                        "selectMore": false,
+                        "tab": "customFunctions",
+                        "type": "utility",
+                        "utilities": {
+                            "list_merge": {
+                                "description": "Merge 2-10 different data paths into a single output data path. For example, if IP addresses are stored in the fields sourceAddress, destinationAddress, and deviceAddress, then those three fields could be merged together to form a single list of IP addresses.",
+                                "fields": [
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_1",
+                                        "name": "input_1",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_2",
+                                        "name": "input_2",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_3",
+                                        "name": "input_3",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_4",
+                                        "name": "input_4",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_5",
+                                        "name": "input_5",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_6",
+                                        "name": "input_6",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_7",
+                                        "name": "input_7",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_8",
+                                        "name": "input_8",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_9",
+                                        "name": "input_9",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_10",
+                                        "name": "input_10",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "list_merge",
+                                "name": "list_merge"
+                            }
+                        },
+                        "utilityType": "custom_function",
+                        "values": {
+                            "list_merge": {
+                                "input_1": "call_pb_crowdstrike_enrichment_from_aid:playbook_output:destinationhostname",
+                                "input_10": null,
+                                "input_2": "call_pb_crowdstrike_enrichment_from_hostname:playbook_output:destinationhostname",
+                                "input_3": null,
+                                "input_4": null,
+                                "input_5": null,
+                                "input_6": null,
+                                "input_7": null,
+                                "input_8": null,
+                                "input_9": null
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "29",
+                    "type": "utility",
+                    "x": 1120,
+                    "y": 2688
+                },
+                "30": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Merge destinationAddress",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "customFunction": {
+                            "draftMode": false,
+                            "name": "list_merge",
+                            "repoName": "community"
+                        },
+                        "functionId": 10,
+                        "functionName": "merge_destinationaddress",
+                        "id": "30",
+                        "selectMore": false,
+                        "type": "utility",
+                        "utilities": {
+                            "list_merge": {
+                                "description": "Merge 2-10 different data paths into a single output data path. For example, if IP addresses are stored in the fields sourceAddress, destinationAddress, and deviceAddress, then those three fields could be merged together to form a single list of IP addresses.",
+                                "fields": [
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_1",
+                                        "name": "input_1",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_2",
+                                        "name": "input_2",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_3",
+                                        "name": "input_3",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_4",
+                                        "name": "input_4",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_5",
+                                        "name": "input_5",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_6",
+                                        "name": "input_6",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_7",
+                                        "name": "input_7",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_8",
+                                        "name": "input_8",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_9",
+                                        "name": "input_9",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_10",
+                                        "name": "input_10",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "list_merge",
+                                "name": "list_merge"
+                            }
+                        },
+                        "utilityType": "custom_function",
+                        "values": {
+                            "list_merge": {
+                                "input_1": "call_pb_crowdstrike_enrichment_from_aid:playbook_output:destinationaddress",
+                                "input_10": null,
+                                "input_2": "call_pb_crowdstrike_enrichment_from_hostname:playbook_output:destinationaddress",
+                                "input_3": null,
+                                "input_4": null,
+                                "input_5": null,
+                                "input_6": null,
+                                "input_7": null,
+                                "input_8": null,
+                                "input_9": null
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "30",
+                    "type": "utility",
+                    "x": 1120,
+                    "y": 2852
+                },
+                "31": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Pretty print VirusTotal results",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "customFunction": {
+                            "draftMode": false,
+                            "name": "cbl_pretty_json",
+                            "repoName": "local"
+                        },
+                        "functionId": 11,
+                        "functionName": "pretty_print_virustotal_results",
+                        "id": "31",
+                        "selectMore": false,
+                        "type": "utility",
+                        "utilities": {
+                            "cbl_pretty_json": {
+                                "description": "This custom function pretty prints a JSON provided in input",
+                                "fields": [
+                                    {
+                                        "dataTypes": [],
+                                        "description": "Input JSON object",
+                                        "inputType": "item",
+                                        "label": "inputJson",
+                                        "name": "inputJson",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "cbl_pretty_json",
+                                "name": "cbl_pretty_json"
+                            }
+                        },
+                        "utilityType": "custom_function",
+                        "values": {
+                            "cbl_pretty_json": {
+                                "inputJson": "merge_virustotal_results:custom_function_result.data.*.item"
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "31",
+                    "type": "utility",
+                    "x": 1120,
+                    "y": 2376
+                },
+                "32": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Pretty print Inbound traffic results",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "customFunction": {
+                            "draftMode": false,
+                            "name": "cbl_pretty_json",
+                            "repoName": "local"
+                        },
+                        "functionId": 12,
+                        "functionName": "pretty_print_inbound_traffic_results",
+                        "id": "32",
+                        "selectMore": false,
+                        "tab": "customFunctions",
+                        "type": "utility",
+                        "utilities": {
+                            "cbl_pretty_json": {
+                                "description": "This custom function pretty prints a JSON provided in input",
+                                "fields": [
+                                    {
+                                        "dataTypes": [],
+                                        "description": "Input JSON object",
+                                        "inputType": "item",
+                                        "label": "inputJson",
+                                        "name": "inputJson",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "cbl_pretty_json",
+                                "name": "cbl_pretty_json"
+                            }
+                        },
+                        "utilityType": "custom_function",
+                        "values": {
+                            "cbl_pretty_json": {
+                                "inputJson": "call_spl_correlation_in_paloalto:playbook_output:spl_summary_inbound"
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "32",
+                    "type": "utility",
+                    "x": 1120,
+                    "y": 3312
+                },
+                "33": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Pretty print Outbound traffic results",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "customFunction": {
+                            "draftMode": false,
+                            "name": "cbl_pretty_json",
+                            "repoName": "local"
+                        },
+                        "functionId": 13,
+                        "functionName": "pretty_print_outbound_traffic_results",
+                        "id": "33",
+                        "selectMore": false,
+                        "tab": "customFunctions",
+                        "type": "utility",
+                        "utilities": {
+                            "cbl_pretty_json": {
+                                "description": "This custom function pretty prints a JSON provided in input",
+                                "fields": [
+                                    {
+                                        "dataTypes": [],
+                                        "description": "Input JSON object",
+                                        "inputType": "item",
+                                        "label": "inputJson",
+                                        "name": "inputJson",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "cbl_pretty_json",
+                                "name": "cbl_pretty_json"
+                            }
+                        },
+                        "utilityType": "custom_function",
+                        "values": {
+                            "cbl_pretty_json": {
+                                "inputJson": "call_spl_correlation_in_paloalto:playbook_output:spl_summary_outbound"
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "33",
+                    "type": "utility",
+                    "x": 1120,
+                    "y": 3476
+                },
+                "34": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Filter for hostname",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "!=",
+                                        "param": "artifact:*.cef.destinationHostName",
+                                        "value": ""
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "customName": "if host",
+                                "logic": "and"
+                            }
+                        ],
+                        "functionId": 1,
+                        "functionName": "filter_for_hostname",
+                        "id": "34",
+                        "type": "filter"
+                    },
+                    "errors": {},
+                    "id": "34",
+                    "type": "filter",
+                    "x": 1460,
+                    "y": 680
+                },
+                "35": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Filter for AID",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "!=",
+                                        "param": "artifact:*.cef.destinationHostName",
+                                        "value": ""
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "customName": "if aid",
+                                "logic": "and"
+                            }
+                        ],
+                        "functionId": 3,
+                        "functionName": "filter_for_aid",
+                        "id": "35",
+                        "type": "filter"
+                    },
+                    "errors": {},
+                    "id": "35",
+                    "type": "filter",
+                    "x": 920,
+                    "y": 680
+                },
+                "37": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Call SPL correlation in PaloAlto",
+                            "customNameId": 0,
+                            "join": [],
+                            "notRequiredJoins": [
+                                "call_pb_crowdstrike_enrichment_from_aid",
+                                "call_pb_crowdstrike_enrichment_from_hostname"
+                            ]
+                        },
+                        "functionId": 1,
+                        "functionName": "call_spl_correlation_in_paloalto",
+                        "id": "37",
+                        "inputs": {
+                            "destinationAddress": {
+                                "datapaths": [
+                                    "call_pb_crowdstrike_enrichment_from_aid:playbook_output:destinationaddress",
+                                    "call_pb_crowdstrike_enrichment_from_hostname:playbook_output:destinationaddress"
+                                ],
+                                "deduplicate": false
+                            },
+                            "epochtime": {
+                                "datapaths": [
+                                    "artifact:*.cef.epochtime"
+                                ],
+                                "deduplicate": false
+                            }
+                        },
+                        "playbookName": "CBL - Threat Actor Recon - SPL correlation input playbook",
+                        "playbookRepo": 2,
+                        "playbookRepoName": "local",
+                        "playbookType": "data",
+                        "synchronous": true,
+                        "type": "playbook"
+                    },
+                    "errors": {},
+                    "id": "37",
+                    "type": "playbook",
+                    "x": 1120,
+                    "y": 1032
+                },
+                "38": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Check for fileHash",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "!=",
+                                        "param": "artifact:*.cef.fileHash",
+                                        "value": ""
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "customName": "if fileHash",
+                                "display": "If",
+                                "logic": "and",
+                                "type": "if"
+                            },
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 1,
+                                        "op": "==",
+                                        "param": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "conditionIndex": 1,
+                                "customName": "no fileHash",
+                                "display": "Else",
+                                "logic": "and",
+                                "type": "else"
+                            }
+                        ],
+                        "functionId": 3,
+                        "functionName": "check_for_filehash",
+                        "id": "38",
+                        "type": "decision"
+                    },
+                    "errors": {},
+                    "id": "38",
+                    "type": "decision",
+                    "x": 1200,
+                    "y": 1688
+                },
+                "39": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Format no fileHash summary",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 2,
+                        "functionName": "format_no_filehash_summary",
+                        "id": "39",
+                        "parameters": [],
+                        "template": "{\"response\": \"no fileHash available in artifact\"}",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "39",
+                    "type": "format",
+                    "x": 1400,
+                    "y": 1860
+                },
+                "4": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Add comment invalid AF",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "add_comment_invalid_af",
+                        "id": "4",
+                        "selectMore": false,
+                        "tab": "apis",
+                        "type": "utility",
+                        "utilities": {
+                            "comment": {
+                                "description": "",
+                                "fields": [
+                                    {
+                                        "description": "",
+                                        "label": "comment",
+                                        "name": "comment",
+                                        "placeholder": "Enter a comment",
+                                        "renderType": "datapath",
+                                        "required": true
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "container",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "author",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "trace",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "add comment",
+                                "name": "comment"
+                            }
+                        },
+                        "utilityType": "api",
+                        "values": {
+                            "comment": {
+                                "_internal": [
+                                    "container",
+                                    "author",
+                                    "trace"
+                                ],
+                                "comment": "Artifact is invalid and does not contain a destinationHostname"
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "4",
+                    "type": "utility",
+                    "x": 0,
+                    "y": 5772
+                },
+                "40": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Merge virusTotal results",
+                            "customNameId": 0,
+                            "join": [],
+                            "notRequiredJoins": [
+                                "call_virustotal_filehash_reputation",
+                                "call_spl_correlation_in_paloalto"
+                            ]
+                        },
+                        "customFunction": {
+                            "draftMode": false,
+                            "name": "list_merge",
+                            "repoName": "community"
+                        },
+                        "functionId": 2,
+                        "functionName": "merge_virustotal_results",
+                        "id": "40",
+                        "selectMore": false,
+                        "type": "utility",
+                        "utilities": {
+                            "list_merge": {
+                                "description": "Merge 2-10 different data paths into a single output data path. For example, if IP addresses are stored in the fields sourceAddress, destinationAddress, and deviceAddress, then those three fields could be merged together to form a single list of IP addresses.",
+                                "fields": [
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_1",
+                                        "name": "input_1",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_2",
+                                        "name": "input_2",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_3",
+                                        "name": "input_3",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_4",
+                                        "name": "input_4",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_5",
+                                        "name": "input_5",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_6",
+                                        "name": "input_6",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_7",
+                                        "name": "input_7",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_8",
+                                        "name": "input_8",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_9",
+                                        "name": "input_9",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_10",
+                                        "name": "input_10",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "list_merge",
+                                "name": "list_merge"
+                            }
+                        },
+                        "utilityType": "custom_function",
+                        "values": {
+                            "list_merge": {
+                                "input_1": "call_virustotal_filehash_reputation:playbook_output:summary",
+                                "input_10": null,
+                                "input_2": "format_no_filehash_summary:formatted_data",
+                                "input_3": null,
+                                "input_4": null,
+                                "input_5": null,
+                                "input_6": null,
+                                "input_7": null,
+                                "input_8": null,
+                                "input_9": null
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "40",
+                    "type": "utility",
+                    "x": 1120,
+                    "y": 2212
+                },
+                "41": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Merge plateform_name",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "customFunction": {
+                            "draftMode": false,
+                            "name": "list_merge",
+                            "repoName": "community"
+                        },
+                        "functionId": 3,
+                        "functionName": "merge_plateform_name",
+                        "id": "41",
+                        "selectMore": false,
+                        "tab": "customFunctions",
+                        "type": "utility",
+                        "utilities": {
+                            "list_merge": {
+                                "description": "Merge 2-10 different data paths into a single output data path. For example, if IP addresses are stored in the fields sourceAddress, destinationAddress, and deviceAddress, then those three fields could be merged together to form a single list of IP addresses.",
+                                "fields": [
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_1",
+                                        "name": "input_1",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_2",
+                                        "name": "input_2",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_3",
+                                        "name": "input_3",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_4",
+                                        "name": "input_4",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_5",
+                                        "name": "input_5",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_6",
+                                        "name": "input_6",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_7",
+                                        "name": "input_7",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_8",
+                                        "name": "input_8",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_9",
+                                        "name": "input_9",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_10",
+                                        "name": "input_10",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "list_merge",
+                                "name": "list_merge"
+                            }
+                        },
+                        "utilityType": "custom_function",
+                        "values": {
+                            "list_merge": {
+                                "input_1": "call_pb_crowdstrike_enrichment_from_aid:playbook_output:plateform_name",
+                                "input_10": null,
+                                "input_2": "call_pb_crowdstrike_enrichment_from_hostname:playbook_output:plateform_name",
+                                "input_3": null,
+                                "input_4": null,
+                                "input_5": null,
+                                "input_6": null,
+                                "input_7": null,
+                                "input_8": null,
+                                "input_9": null
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "41",
+                    "type": "utility",
+                    "x": 1120,
+                    "y": 3016
+                },
+                "42": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Merge os_version",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "customFunction": {
+                            "draftMode": false,
+                            "name": "list_merge",
+                            "repoName": "community"
+                        },
+                        "functionId": 5,
+                        "functionName": "merge_os_version",
+                        "id": "42",
+                        "selectMore": false,
+                        "type": "utility",
+                        "utilities": {
+                            "list_merge": {
+                                "description": "Merge 2-10 different data paths into a single output data path. For example, if IP addresses are stored in the fields sourceAddress, destinationAddress, and deviceAddress, then those three fields could be merged together to form a single list of IP addresses.",
+                                "fields": [
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_1",
+                                        "name": "input_1",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_2",
+                                        "name": "input_2",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_3",
+                                        "name": "input_3",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_4",
+                                        "name": "input_4",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_5",
+                                        "name": "input_5",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_6",
+                                        "name": "input_6",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_7",
+                                        "name": "input_7",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_8",
+                                        "name": "input_8",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_9",
+                                        "name": "input_9",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_10",
+                                        "name": "input_10",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "list_merge",
+                                "name": "list_merge"
+                            }
+                        },
+                        "utilityType": "custom_function",
+                        "values": {
+                            "list_merge": {
+                                "input_1": "call_pb_crowdstrike_enrichment_from_aid:playbook_output:os_version",
+                                "input_10": null,
+                                "input_2": "call_pb_crowdstrike_enrichment_from_hostname:playbook_output:os_version",
+                                "input_3": null,
+                                "input_4": null,
+                                "input_5": null,
+                                "input_6": null,
+                                "input_7": null,
+                                "input_8": null,
+                                "input_9": null
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "42",
+                    "type": "utility",
+                    "x": 1120,
+                    "y": 3164
+                },
+                "45": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Check for prompt response",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "==",
+                                        "param": "threat_actor_recon:action_result.summary.responses.0",
+                                        "value": "Promote to case and send email to operation team"
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "customName": "promote and email",
+                                "display": "If",
+                                "logic": "and",
+                                "type": "if"
+                            },
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 1,
+                                        "op": "==",
+                                        "param": "threat_actor_recon:action_result.summary.responses.0",
+                                        "value": "Promote to a case"
+                                    }
+                                ],
+                                "conditionIndex": 1,
+                                "customName": "promote only",
+                                "display": "Else If",
+                                "logic": "and",
+                                "type": "elif"
+                            },
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 2,
+                                        "op": "==",
+                                        "param": "threat_actor_recon:action_result.summary.responses.0",
+                                        "value": "Close this security event (false positive)"
+                                    }
+                                ],
+                                "conditionIndex": 2,
+                                "customName": "close",
+                                "display": "Else If",
+                                "logic": "and",
+                                "type": "elif"
+                            }
+                        ],
+                        "functionId": 4,
+                        "functionName": "check_for_prompt_response",
+                        "id": "45",
+                        "type": "decision"
+                    },
+                    "errors": {},
+                    "id": "45",
+                    "type": "decision",
+                    "x": 1200,
+                    "y": 4640
+                },
+                "47": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Promote to case only",
+                            "customNameId": 0,
+                            "join": [],
+                            "refreshNotableData": true
+                        },
+                        "functionId": 14,
+                        "functionName": "promote_to_case_only",
+                        "id": "47",
+                        "selectMore": false,
+                        "tab": "apis",
+                        "type": "utility",
+                        "utilities": {
+                            "promote": {
+                                "description": "",
+                                "fields": [
+                                    {
+                                        "choices": [
+                                            "Risk Investigation",
+                                            "Response Template 1",
+                                            "NIST 800-61",
+                                            "Data Breach",
+                                            "Vulnerability Disclosure",
+                                            "Network Indicator Enrichment",
+                                            "Self-Replicating Malware",
+                                            "Suspicious Email",
+                                            "Account Compromise",
+                                            "Risk Response"
+                                        ],
+                                        "description": "",
+                                        "label": "template",
+                                        "name": "template",
+                                        "placeholder": "Select a template",
+                                        "renderType": "dropdown",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "container",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "trace",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "promote to case",
+                                "name": "promote",
+                                "refreshNotableData": true
+                            }
+                        },
+                        "utilityType": "api",
+                        "values": {
+                            "promote": {
+                                "_internal": [
+                                    "container",
+                                    "trace"
+                                ],
+                                "template": "Risk Response"
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "47",
+                    "type": "utility",
+                    "x": 920,
+                    "y": 5760
+                },
+                "48": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Promote to case and email",
+                            "customNameId": 0,
+                            "join": [],
+                            "refreshNotableData": true
+                        },
+                        "functionId": 15,
+                        "functionName": "promote_to_case_and_email",
+                        "id": "48",
+                        "selectMore": false,
+                        "tab": "apis",
+                        "type": "utility",
+                        "utilities": {
+                            "promote": {
+                                "description": "",
+                                "fields": [
+                                    {
+                                        "choices": [
+                                            "Risk Investigation",
+                                            "Response Template 1",
+                                            "NIST 800-61",
+                                            "Data Breach",
+                                            "Vulnerability Disclosure",
+                                            "Network Indicator Enrichment",
+                                            "Self-Replicating Malware",
+                                            "Suspicious Email",
+                                            "Account Compromise",
+                                            "Risk Response"
+                                        ],
+                                        "description": "",
+                                        "label": "template",
+                                        "name": "template",
+                                        "placeholder": "Select a template",
+                                        "renderType": "dropdown",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "container",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "trace",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "promote to case",
+                                "name": "promote",
+                                "refreshNotableData": true
+                            }
+                        },
+                        "utilityType": "api",
+                        "values": {
+                            "promote": {
+                                "_internal": [
+                                    "container",
+                                    "trace"
+                                ],
+                                "template": "Risk Response"
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "48",
+                    "type": "utility",
+                    "x": 520,
+                    "y": 4820
+                },
+                "49": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Format email body",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 4,
+                        "functionName": "format_email_body",
+                        "id": "49",
+                        "parameters": [
+                            "merge_destinationaid:custom_function_result.data.*.item",
+                            "merge_destinationhostname:custom_function_result.data.*.item",
+                            "merge_destinationaddress:custom_function_result.data.*.item",
+                            "merge_plateform_name:custom_function_result.data.*.item",
+                            "merge_os_version:custom_function_result.data.*.item",
+                            "artifact:*.cef.destinationProcessName"
+                        ],
+                        "template": "%%\nA security event was detected for the following endpoint, please review and justify this actity by reponding to this email:\n\n- **CrowdStrike device_id:** {0}\n- **HostName**: {1}\n- **IP Address:** {2}\n- **OS Platform:** {3}\n- **OS Version:** {4}\n- **Processes:** {5}\n\nThis email was sent by Splunk SOAR automation.\n%%",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "49",
+                    "type": "format",
+                    "x": 520,
+                    "y": 4984
+                },
+                "50": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Check for OS team",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "==",
+                                        "param": "merge_plateform_name:custom_function_result.data.*.item",
+                                        "value": "Windows"
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "customName": "Linux team",
+                                "display": "If",
+                                "logic": "and",
+                                "type": "if"
+                            },
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 1,
+                                        "op": "==",
+                                        "param": "merge_plateform_name:custom_function_result.data.*.item",
+                                        "value": "Linux"
+                                    }
+                                ],
+                                "conditionIndex": 1,
+                                "customName": "Windows team",
+                                "display": "Else If",
+                                "logic": "and",
+                                "type": "elif"
+                            },
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 2,
+                                        "op": "==",
+                                        "param": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "conditionIndex": 2,
+                                "customName": "Unknown or other",
+                                "display": "Else",
+                                "logic": "and",
+                                "type": "else"
+                            }
+                        ],
+                        "functionId": 5,
+                        "functionName": "check_for_os_team",
+                        "id": "50",
+                        "type": "decision"
+                    },
+                    "errors": {},
+                    "id": "50",
+                    "type": "decision",
+                    "x": 600,
+                    "y": 5280
+                },
+                "51": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Format dest Windows team",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 5,
+                        "functionName": "format_dest_windows_team",
+                        "id": "51",
+                        "parameters": [],
+                        "template": "gmarchand@splunk.com",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "51",
+                    "type": "format",
+                    "x": 180,
+                    "y": 5460
+                },
+                "53": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Format dest Linux team",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 6,
+                        "functionName": "format_dest_linux_team",
+                        "id": "53",
+                        "parameters": [],
+                        "template": "gmarchand@splunk.com",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "53",
+                    "type": "format",
+                    "x": 520,
+                    "y": 5468
+                },
+                "54": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Format dest other",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 7,
+                        "functionName": "format_dest_other",
+                        "id": "54",
+                        "parameters": [],
+                        "template": "gmarchand@splunk.com",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "54",
+                    "type": "format",
+                    "x": 860,
+                    "y": 5468
+                },
+                "55": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Merge email dest",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "customFunction": {
+                            "draftMode": false,
+                            "name": "list_merge",
+                            "repoName": "community"
+                        },
+                        "functionId": 17,
+                        "functionName": "merge_email_dest",
+                        "id": "55",
+                        "selectMore": false,
+                        "type": "utility",
+                        "utilities": {
+                            "list_merge": {
+                                "description": "Merge 2-10 different data paths into a single output data path. For example, if IP addresses are stored in the fields sourceAddress, destinationAddress, and deviceAddress, then those three fields could be merged together to form a single list of IP addresses.",
+                                "fields": [
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_1",
+                                        "name": "input_1",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_2",
+                                        "name": "input_2",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_3",
+                                        "name": "input_3",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_4",
+                                        "name": "input_4",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_5",
+                                        "name": "input_5",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_6",
+                                        "name": "input_6",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_7",
+                                        "name": "input_7",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_8",
+                                        "name": "input_8",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_9",
+                                        "name": "input_9",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_10",
+                                        "name": "input_10",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "list_merge",
+                                "name": "list_merge"
+                            }
+                        },
+                        "utilityType": "custom_function",
+                        "values": {
+                            "list_merge": {
+                                "input_1": "format_dest_windows_team:formatted_data",
+                                "input_10": null,
+                                "input_2": "format_dest_linux_team:formatted_data",
+                                "input_3": "format_dest_other:formatted_data",
+                                "input_4": null,
+                                "input_5": null,
+                                "input_6": null,
+                                "input_7": null,
+                                "input_8": null,
+                                "input_9": null
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "55",
+                    "type": "utility",
+                    "x": 520,
+                    "y": 5624
+                },
+                "56": {
+                    "data": {
+                        "action": "send email",
+                        "actionType": "generic",
+                        "advanced": {
+                            "join": []
+                        },
+                        "connector": "SMTP",
+                        "connectorConfigs": [
+                            "internal_smtp"
+                        ],
+                        "connectorId": "45bb6f37-4478-499b-b4a3-51ecfa62b78c",
+                        "connectorVersion": "v1",
+                        "functionId": 1,
+                        "functionName": "send_email_1",
+                        "id": "56",
+                        "parameters": {
+                            "body": "format_email_body:formatted_data.*",
+                            "from": "gmarchand@splunk.com",
+                            "subject": "format_email_subject:formatted_data.*",
+                            "to": "merge_email_dest:custom_function_result.data.*.item"
+                        },
+                        "requiredParameters": [
+                            {
+                                "data_type": "string",
+                                "field": "to"
+                            },
+                            {
+                                "data_type": "string",
+                                "field": "body"
+                            }
+                        ],
+                        "type": "action"
+                    },
+                    "errors": {},
+                    "id": "56",
+                    "type": "action",
+                    "x": 520,
+                    "y": 5772
+                },
+                "57": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Format email subject",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 8,
+                        "functionName": "format_email_subject",
+                        "id": "57",
+                        "parameters": [
+                            "merge_destinationhostname:custom_function_result.data.*.item"
+                        ],
+                        "template": "%%\nSOC - security event detected for endpoint {0}\n%%",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "57",
+                    "type": "format",
+                    "x": 520,
+                    "y": 5132
+                },
+                "59": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Call PB CrowdStrike list processes",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "call_pb_crowdstrike_list_processes",
+                        "id": "59",
+                        "playbookName": "CBL - CrowdStrike - get running processes from aid",
+                        "playbookRepo": 2,
+                        "playbookRepoName": "local",
+                        "playbookType": "automation",
+                        "synchronous": false,
+                        "type": "playbook"
+                    },
+                    "errors": {},
+                    "id": "59",
+                    "type": "playbook",
+                    "x": 1120,
+                    "y": 1360
+                },
+                "62": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Run progress ES notable event",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 4,
+                        "functionName": "run_progress_es_notable_event",
+                        "id": "62",
+                        "inputs": {
+                            "action": {
+                                "datapaths": [
+                                    "progress"
+                                ],
+                                "deduplicate": false
+                            },
+                            "event_id": {
+                                "datapaths": [
+                                    "artifact:*.cef.event_id"
+                                ],
+                                "deduplicate": false
+                            }
+                        },
+                        "playbookName": "CBL - Update ES notable event",
+                        "playbookRepo": 2,
+                        "playbookRepoName": "local",
+                        "playbookType": "data",
+                        "synchronous": true,
+                        "type": "playbook"
+                    },
+                    "errors": {},
+                    "id": "62",
+                    "type": "playbook",
+                    "x": 1120,
+                    "y": 328
+                },
+                "65": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Run close ES notable",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 7,
+                        "functionName": "run_close_es_notable",
+                        "id": "65",
+                        "inputs": {
+                            "action": {
+                                "datapaths": [
+                                    "close"
+                                ],
+                                "deduplicate": false
+                            },
+                            "event_id": {
+                                "datapaths": [
+                                    "artifact:*.cef.event_id"
+                                ],
+                                "deduplicate": false
+                            }
+                        },
+                        "playbookName": "CBL - Update ES notable event",
+                        "playbookRepo": 2,
+                        "playbookRepoName": "local",
+                        "playbookType": "data",
+                        "synchronous": true,
+                        "type": "playbook"
+                    },
+                    "errors": {},
+                    "id": "65",
+                    "type": "playbook",
+                    "x": 1340,
+                    "y": 5640
+                },
+                "66": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Run pending ES notable",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 8,
+                        "functionName": "run_pending_es_notable",
+                        "id": "66",
+                        "inputs": {
+                            "action": {
+                                "datapaths": [
+                                    "pending"
+                                ],
+                                "deduplicate": false
+                            },
+                            "event_id": {
+                                "datapaths": [
+                                    "artifact:*.cef.event_id"
+                                ],
+                                "deduplicate": false
+                            }
+                        },
+                        "playbookName": "CBL - Update ES notable event",
+                        "playbookRepo": 2,
+                        "playbookRepoName": "local",
+                        "playbookType": "data",
+                        "synchronous": true,
+                        "type": "playbook"
+                    },
+                    "errors": {},
+                    "id": "66",
+                    "type": "playbook",
+                    "x": 1120,
+                    "y": 4312
+                },
+                "67": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Call PB user info in NetSkope",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "call_pb_user_info_in_netskope",
+                        "id": "67",
+                        "inputs": {
+                            "destinationHostName": {
+                                "datapaths": [
+                                    "call_pb_crowdstrike_enrichment_from_aid:playbook_output:destinationhostname",
+                                    "call_pb_crowdstrike_enrichment_from_hostname:playbook_output:destinationhostname"
+                                ],
+                                "deduplicate": false
+                            },
+                            "epochtime": {
+                                "datapaths": [
+                                    "artifact:*.cef.epochtime"
+                                ],
+                                "deduplicate": false
+                            }
+                        },
+                        "playbookName": "CBL - Threat Actor Recon - Netskope user info",
+                        "playbookRepo": 2,
+                        "playbookRepoName": "local",
+                        "playbookType": "data",
+                        "synchronous": true,
+                        "type": "playbook"
+                    },
+                    "errors": {},
+                    "id": "67",
+                    "type": "playbook",
+                    "x": 1120,
+                    "y": 1196
+                },
+                "68": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Pretty print user info NetSkope",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "customFunction": {
+                            "draftMode": false,
+                            "name": "cbl_pretty_json",
+                            "repoName": "local"
+                        },
+                        "functionId": 6,
+                        "functionName": "pretty_print_user_info_netskope",
+                        "id": "68",
+                        "selectMore": false,
+                        "type": "utility",
+                        "utilities": {
+                            "cbl_pretty_json": {
+                                "description": "This custom function pretty prints a JSON provided in input",
+                                "fields": [
+                                    {
+                                        "dataTypes": [],
+                                        "description": "Input JSON object",
+                                        "inputType": "item",
+                                        "label": "inputJson",
+                                        "name": "inputJson",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "cbl_pretty_json",
+                                "name": "cbl_pretty_json"
+                            }
+                        },
+                        "utilityType": "custom_function",
+                        "values": {
+                            "cbl_pretty_json": {
+                                "inputJson": "call_pb_user_info_in_netskope:playbook_output:spl_summary_user_info_netskope"
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "68",
+                    "type": "utility",
+                    "x": 1120,
+                    "y": 3640
+                },
+                "71": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Call PB CrowdSttike hunt processes",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "call_pb_crowdsttike_hunt_processes",
+                        "id": "71",
+                        "playbookName": "CBL - Threat Actor Recon - CrowdStrike hunt process automation",
+                        "playbookRepo": 2,
+                        "playbookRepoName": "local",
+                        "playbookType": "automation",
+                        "synchronous": true,
+                        "type": "playbook"
+                    },
+                    "errors": {},
+                    "id": "71",
+                    "type": "playbook",
+                    "x": 1120,
+                    "y": 1524
+                },
+                "72": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Pretty prunt hunt processes",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "customFunction": {
+                            "draftMode": false,
+                            "name": "cbl_pretty_json",
+                            "repoName": "local"
+                        },
+                        "functionId": 16,
+                        "functionName": "pretty_prunt_hunt_processes",
+                        "id": "72",
+                        "selectMore": false,
+                        "tab": "customFunctions",
+                        "type": "utility",
+                        "utilities": {
+                            "cbl_pretty_json": {
+                                "description": "This custom function pretty prints a JSON provided in input",
+                                "fields": [
+                                    {
+                                        "dataTypes": [],
+                                        "description": "Input JSON object",
+                                        "inputType": "item",
+                                        "label": "inputJson",
+                                        "name": "inputJson",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "cbl_pretty_json",
+                                "name": "cbl_pretty_json"
+                            }
+                        },
+                        "utilityType": "custom_function",
+                        "values": {
+                            "cbl_pretty_json": {
+                                "inputJson": "call_pb_crowdsttike_hunt_processes:playbook_output:spl_summary_hunt_processes"
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "72",
+                    "type": "utility",
+                    "x": 1120,
+                    "y": 3804
+                },
+                "9": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Check for AF requirements",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "!=",
+                                        "param": "artifact:*.cef.destinationAid",
+                                        "value": ""
+                                    },
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "!=",
+                                        "param": "artifact:*.cef.destinationHostName",
+                                        "value": ""
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "customName": "if aid or hostname",
+                                "display": "If",
+                                "logic": "or",
+                                "type": "if"
+                            },
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 1,
+                                        "op": "==",
+                                        "param": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "conditionIndex": 1,
+                                "customName": "If artifact is invalid",
+                                "display": "Else",
+                                "logic": "and",
+                                "type": "else"
+                            }
+                        ],
+                        "functionId": 2,
+                        "functionName": "check_for_af_requirements",
+                        "id": "9",
+                        "type": "decision"
+                    },
+                    "errors": {},
+                    "id": "9",
+                    "type": "decision",
+                    "x": 600,
+                    "y": 148
+                }
+            },
+            "notes": "- Use Case:Threat Actor Recon\n\n- Operates on splunk_events through the Master orchestration playbook"
+        },
+        "input_spec": null,
+        "output_spec": null,
+        "playbook_type": "automation",
+        "python_version": "3",
+        "schema": "5.0.6",
+        "version": "5.3.1.84890"
+    },
+    "create_time": "2023-09-20T08:50:40.237793+00:00",
+    "draft_mode": false,
+    "labels": [
+        "splunk_events"
+    ],
+    "tags": [
+        "splunk",
+        "crowdstrike",
+        "threat_intel"
+    ]
+}
