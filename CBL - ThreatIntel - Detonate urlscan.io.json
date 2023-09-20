@@ -120,7 +120,7 @@
                     "targetPort": "17_in"
                 }
             ],
-            "hash": "c9ddfe624af4246175cdd33cfe6a34895f51d9d4",
+            "hash": "5c63017d4fed4bbfe17fed166aa7371c67f44f88",
             "nodes": {
                 "0": {
                     "data": {
@@ -777,7 +777,7 @@
     "create_time": "2023-09-20T14:35:39.287860+00:00",
     "draft_mode": false,
     "labels": [
-        "splunk_events"
+        "*"
     ],
     "tags": []
 }
