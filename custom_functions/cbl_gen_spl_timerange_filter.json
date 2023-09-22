@@ -1,0 +1,44 @@
+{
+    "create_time": "2023-09-20T08:53:19.013615+00:00",
+    "custom_function_id": "69c5c0d60574ffa0e5b5a0808ab2b721a7052e68",
+    "description": "This custom function is designed to generate a range of epoch time filters (earliest and latest) based on provided options",
+    "draft_mode": false,
+    "inputs": [
+        {
+            "contains_type": [],
+            "description": "",
+            "input_type": "item",
+            "name": "epochtime",
+            "placeholder": "Epoch time format"
+        },
+        {
+            "contains_type": [],
+            "description": "",
+            "input_type": "list",
+            "name": "earliest_sec_reduce",
+            "placeholder": ""
+        },
+        {
+            "contains_type": [],
+            "description": "",
+            "input_type": "list",
+            "name": "latest_sec_increase",
+            "placeholder": ""
+        }
+    ],
+    "outputs": [
+        {
+            "contains_type": [],
+            "data_path": "earliest_epoch",
+            "description": "Earliest epoch"
+        },
+        {
+            "contains_type": [],
+            "data_path": "latest_epoch",
+            "description": "Latest epoch"
+        }
+    ],
+    "outputs_type": "item",
+    "platform_version": "5.3.1.84890",
+    "python_version": "3"
+}

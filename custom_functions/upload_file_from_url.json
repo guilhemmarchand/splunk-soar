@@ -1,0 +1,26 @@
+{
+    "create_time": "2023-09-20T08:53:50.074259+00:00",
+    "custom_function_id": "40375448726515493f78095ac7d202fe035aaecc",
+    "description": "This custom function gets a file through the provided  URL and adds it to the container.",
+    "draft_mode": false,
+    "inputs": [
+        {
+            "contains_type": [],
+            "description": "File URL",
+            "input_type": "item",
+            "name": "fileUrl",
+            "placeholder": ""
+        },
+        {
+            "contains_type": [],
+            "description": "Container ID",
+            "input_type": "item",
+            "name": "container_id",
+            "placeholder": ""
+        }
+    ],
+    "outputs": [],
+    "outputs_type": "item",
+    "platform_version": "5.3.1.84890",
+    "python_version": "3"
+}

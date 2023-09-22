@@ -1,0 +1,678 @@
+{
+    "blockly": false,
+    "blockly_xml": "<xml></xml>",
+    "category": "Threat Response",
+    "coa": {
+        "data": {
+            "description": "Orchestrates the ThreatIntel use case, the master playbook runs all dependent playbooks accordingly",
+            "edges": [
+                {
+                    "id": "port_0_to_port_2",
+                    "sourceNode": "0",
+                    "sourcePort": "0_out",
+                    "targetNode": "2",
+                    "targetPort": "2_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 1
+                        }
+                    ],
+                    "id": "port_2_to_port_4",
+                    "sourceNode": "2",
+                    "sourcePort": "2_out",
+                    "targetNode": "4",
+                    "targetPort": "4_in"
+                },
+                {
+                    "id": "port_4_to_port_1",
+                    "sourceNode": "4",
+                    "sourcePort": "4_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                },
+                {
+                    "id": "port_3_to_port_5",
+                    "sourceNode": "3",
+                    "sourcePort": "3_out",
+                    "targetNode": "5",
+                    "targetPort": "5_in"
+                },
+                {
+                    "id": "port_5_to_port_6",
+                    "sourceNode": "5",
+                    "sourcePort": "5_out",
+                    "targetNode": "6",
+                    "targetPort": "6_in"
+                },
+                {
+                    "id": "port_6_to_port_7",
+                    "sourceNode": "6",
+                    "sourcePort": "6_out",
+                    "targetNode": "7",
+                    "targetPort": "7_in"
+                },
+                {
+                    "id": "port_7_to_port_8",
+                    "sourceNode": "7",
+                    "sourcePort": "7_out",
+                    "targetNode": "8",
+                    "targetPort": "8_in"
+                },
+                {
+                    "id": "port_8_to_port_9",
+                    "sourceNode": "8",
+                    "sourcePort": "8_out",
+                    "targetNode": "9",
+                    "targetPort": "9_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 1
+                        }
+                    ],
+                    "id": "port_9_to_port_11",
+                    "sourceNode": "9",
+                    "sourcePort": "9_out",
+                    "targetNode": "11",
+                    "targetPort": "11_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_9_to_port_12",
+                    "sourceNode": "9",
+                    "sourcePort": "9_out",
+                    "targetNode": "12",
+                    "targetPort": "12_in"
+                },
+                {
+                    "id": "port_11_to_port_1",
+                    "sourceNode": "11",
+                    "sourcePort": "11_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                },
+                {
+                    "id": "port_12_to_port_13",
+                    "sourceNode": "12",
+                    "sourcePort": "12_out",
+                    "targetNode": "13",
+                    "targetPort": "13_in"
+                },
+                {
+                    "id": "port_13_to_port_14",
+                    "sourceNode": "13",
+                    "sourcePort": "13_out",
+                    "targetNode": "14",
+                    "targetPort": "14_in"
+                },
+                {
+                    "id": "port_14_to_port_1",
+                    "sourceNode": "14",
+                    "sourcePort": "14_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_2_to_port_15",
+                    "sourceNode": "2",
+                    "sourcePort": "2_out",
+                    "targetNode": "15",
+                    "targetPort": "15_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_15_to_port_3",
+                    "sourceNode": "15",
+                    "sourcePort": "15_out",
+                    "targetNode": "3",
+                    "targetPort": "3_in"
+                }
+            ],
+            "hash": "7a5e81ec64280f244721f5b89072dfee4ca85747",
+            "nodes": {
+                "0": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionName": "on_start",
+                        "id": "0",
+                        "type": "start"
+                    },
+                    "errors": {},
+                    "id": "0",
+                    "type": "start",
+                    "x": 360,
+                    "y": -6.394884621840902e-14
+                },
+                "1": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "on_finish",
+                        "id": "1",
+                        "type": "end"
+                    },
+                    "errors": {},
+                    "id": "1",
+                    "type": "end",
+                    "userCode": "\n    # This function is called after all actions are completed.\n    # summary of all the action and/or all details of actions\n    # can be collected here.\n\n    # summary_json = phantom.get_summary()\n    # if 'result' in summary_json:\n        # for action_result in summary_json['result']:\n            # if 'action_run_id' in action_result:\n                # action_results = phantom.get_action_results(action_run_id=action_result['action_run_id'], result_data=False, flatten=False)\n                # phantom.debug(action_results)\n\n",
+                    "x": 360,
+                    "y": 1984
+                },
+                "11": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Call add allowlist playbook",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "call_add_allowlist_playbook",
+                        "id": "11",
+                        "inputs": {},
+                        "playbookName": "CBL - ThreatIntel - Add to allowlist SPL",
+                        "playbookRepo": 2,
+                        "playbookRepoName": "local",
+                        "playbookType": "automation",
+                        "synchronous": true,
+                        "type": "playbook"
+                    },
+                    "errors": {},
+                    "id": "11",
+                    "type": "playbook",
+                    "x": 340,
+                    "y": 1820
+                },
+                "12": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Promote to case",
+                            "customNameId": 0,
+                            "join": [],
+                            "refreshNotableData": true
+                        },
+                        "functionId": 3,
+                        "functionName": "promote_to_case",
+                        "id": "12",
+                        "selectMore": false,
+                        "tab": "apis",
+                        "type": "utility",
+                        "utilities": {
+                            "promote": {
+                                "description": "",
+                                "fields": [
+                                    {
+                                        "choices": [
+                                            "Risk Investigation",
+                                            "Response Template 1",
+                                            "NIST 800-61",
+                                            "Data Breach",
+                                            "Vulnerability Disclosure",
+                                            "Network Indicator Enrichment",
+                                            "Self-Replicating Malware",
+                                            "Suspicious Email",
+                                            "Account Compromise",
+                                            "Risk Response"
+                                        ],
+                                        "description": "",
+                                        "label": "template",
+                                        "name": "template",
+                                        "placeholder": "Select a template",
+                                        "renderType": "dropdown",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "container",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "trace",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "promote to case",
+                                "name": "promote",
+                                "refreshNotableData": true
+                            }
+                        },
+                        "utilityType": "api",
+                        "values": {
+                            "promote": {
+                                "_internal": [
+                                    "container",
+                                    "trace"
+                                ],
+                                "template": "Risk Investigation"
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "12",
+                    "type": "utility",
+                    "x": 680,
+                    "y": 1508
+                },
+                "13": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Format Remedy ticket description",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 2,
+                        "functionName": "format_remedy_ticket_description",
+                        "id": "13",
+                        "parameters": [
+                            "filtered-data:filter_for_url:condition_1:artifact:*.cef.requestURL"
+                        ],
+                        "template": "%%\nImpersonating domain alert for {0}\n%%",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "13",
+                    "type": "format",
+                    "x": 680,
+                    "y": 1656
+                },
+                "14": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Call create ticket and block playbook",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "call_create_ticket_and_block_playbook",
+                        "id": "14",
+                        "inputs": {
+                            "description": {
+                                "datapaths": [
+                                    "format_remedy_ticket_description:formatted_data.*"
+                                ],
+                                "deduplicate": false
+                            },
+                            "requestUrl": {
+                                "datapaths": [
+                                    "filtered-data:filter_for_url:condition_1:artifact:*.cef.requestURL"
+                                ],
+                                "deduplicate": false
+                            }
+                        },
+                        "playbookName": "CBL - ThreatIntel - Create ticket and block domain input playbook",
+                        "playbookRepo": 2,
+                        "playbookRepoName": "local",
+                        "playbookType": "data",
+                        "synchronous": true,
+                        "type": "playbook"
+                    },
+                    "errors": {},
+                    "id": "14",
+                    "type": "playbook",
+                    "x": 680,
+                    "y": 1820
+                },
+                "15": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Filter for URL",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "!=",
+                                        "param": "artifact:*.cef.requestURL",
+                                        "value": ""
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "customName": "If URL",
+                                "logic": "and"
+                            }
+                        ],
+                        "functionId": 1,
+                        "functionName": "filter_for_url",
+                        "id": "15",
+                        "type": "filter"
+                    },
+                    "errors": {},
+                    "id": "15",
+                    "type": "filter",
+                    "x": 570,
+                    "y": 328
+                },
+                "2": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Check for URL",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "!=",
+                                        "param": "artifact:*.cef.requestURL",
+                                        "value": ""
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "customName": "if requestUrl",
+                                "display": "If",
+                                "logic": "and",
+                                "type": "if"
+                            },
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 1,
+                                        "op": "==",
+                                        "param": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "conditionIndex": 1,
+                                "customName": "invalid AF",
+                                "display": "Else",
+                                "logic": "and",
+                                "type": "else"
+                            }
+                        ],
+                        "functionId": 1,
+                        "functionName": "check_for_url",
+                        "id": "2",
+                        "type": "decision"
+                    },
+                    "errors": {},
+                    "id": "2",
+                    "type": "decision",
+                    "x": 420,
+                    "y": 148
+                },
+                "3": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Call SPL correlation playbook",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "call_spl_correlation_playbook",
+                        "id": "3",
+                        "inputs": {},
+                        "playbookName": "CBL - ThreatIntel - SPL correlation",
+                        "playbookRepo": 2,
+                        "playbookRepoName": "local",
+                        "playbookType": "automation",
+                        "synchronous": true,
+                        "type": "playbook"
+                    },
+                    "errors": {},
+                    "id": "3",
+                    "type": "playbook",
+                    "x": 510,
+                    "y": 508
+                },
+                "4": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Add comment invalid AF",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "add_comment_invalid_af",
+                        "id": "4",
+                        "selectMore": false,
+                        "tab": "apis",
+                        "type": "utility",
+                        "utilities": {
+                            "comment": {
+                                "description": "",
+                                "fields": [
+                                    {
+                                        "description": "",
+                                        "label": "comment",
+                                        "name": "comment",
+                                        "placeholder": "Enter a comment",
+                                        "renderType": "datapath",
+                                        "required": true
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "container",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "author",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "trace",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "add comment",
+                                "name": "comment"
+                            }
+                        },
+                        "utilityType": "api",
+                        "values": {
+                            "comment": {
+                                "_internal": [
+                                    "container",
+                                    "author",
+                                    "trace"
+                                ],
+                                "comment": "Artifact is invalid and has no requestURL"
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "4",
+                    "type": "utility",
+                    "x": 0,
+                    "y": 1828
+                },
+                "5": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Call Urlscan detonate URL playbook",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "call_urlscan_detonate_url_playbook",
+                        "id": "5",
+                        "inputs": {},
+                        "playbookName": "CBL - ThreatIntel - Detonate urlscan.io",
+                        "playbookRepo": 2,
+                        "playbookRepoName": "local",
+                        "playbookType": "automation",
+                        "synchronous": true,
+                        "type": "playbook"
+                    },
+                    "errors": {},
+                    "id": "5",
+                    "type": "playbook",
+                    "x": 510,
+                    "y": 672
+                },
+                "6": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Call VirusTotal detonate URL playbook",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "call_virustotal_detonate_url_playbook",
+                        "id": "6",
+                        "inputs": {},
+                        "playbookName": "CBL - ThreatIntel - Detonate VirusTotal",
+                        "playbookRepo": 2,
+                        "playbookRepoName": "local",
+                        "playbookType": "automation",
+                        "synchronous": true,
+                        "type": "playbook"
+                    },
+                    "errors": {},
+                    "id": "6",
+                    "type": "playbook",
+                    "x": 510,
+                    "y": 836
+                },
+                "7": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Format actions results",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "format_actions_results",
+                        "id": "7",
+                        "parameters": [
+                            "filtered-data:filter_for_url:condition_1:artifact:*.cef.requestURL",
+                            "call_spl_correlation_playbook:playbook_output:summary",
+                            "call_urlscan_detonate_url_playbook:playbook_output:summary",
+                            "call_virustotal_detonate_url_playbook:playbook_output:summary"
+                        ],
+                        "template": "%%\nCorrelation results for domain {0}\n- Splunk results: {1}\n- Urlscan.io results: {2}\n- VirusTotal results: {3}\n%%",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "7",
+                    "type": "format",
+                    "x": 510,
+                    "y": 1000
+                },
+                "8": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Prompt action on Digital Shadow alert",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "approver": "Incident Commander",
+                        "functionId": 1,
+                        "functionName": "prompt_action_on_digital_shadow_alert",
+                        "id": "8",
+                        "message": "A new Digital Shadow alert was detected, correlations were performed as follows:\n{0}\n\nChoose the action to be performed:\n\n- Yes: A new Remedy ticket will be opened and the domain will be blocked on Netskope and Mimecast\n\n- No: If the alert is a false positive, this domain will be added to an allow list stored in Splunk to prevent new alerts from triggering",
+                        "parameters": [
+                            "format_actions_results:formatted_data.*"
+                        ],
+                        "responseTime": 240,
+                        "responses": [
+                            {
+                                "responseOptions": [
+                                    "Yes",
+                                    "No"
+                                ],
+                                "responsePrompt": "Open Remedy ticket and block the domain?",
+                                "responseType": "yes/no"
+                            }
+                        ],
+                        "type": "prompt"
+                    },
+                    "errors": {},
+                    "id": "8",
+                    "type": "prompt",
+                    "x": 590,
+                    "y": 1148
+                },
+                "9": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Chek for prompt response",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "==",
+                                        "param": "prompt_action_on_digital_shadow_alert:action_result.summary.responses.0",
+                                        "value": "Yes"
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "customName": "True positive",
+                                "display": "If",
+                                "logic": "and",
+                                "type": "if"
+                            },
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 1,
+                                        "op": "==",
+                                        "param": "prompt_action_on_digital_shadow_alert:action_result.summary.responses.0",
+                                        "value": "No"
+                                    }
+                                ],
+                                "conditionIndex": 1,
+                                "customName": "False positive",
+                                "display": "Else If",
+                                "logic": "and",
+                                "type": "elif"
+                            }
+                        ],
+                        "functionId": 2,
+                        "functionName": "chek_for_prompt_response",
+                        "id": "9",
+                        "type": "decision"
+                    },
+                    "errors": {},
+                    "id": "9",
+                    "type": "decision",
+                    "x": 590,
+                    "y": 1328
+                }
+            },
+            "notes": "- Use Case: ThreatIntel\n\n- Operates on splunk_events through the Master orchestration playbook"
+        },
+        "input_spec": null,
+        "output_spec": null,
+        "playbook_type": "automation",
+        "python_version": "3",
+        "schema": "5.0.6",
+        "version": "5.3.1.84890"
+    },
+    "create_time": "2023-09-20T08:52:08.116258+00:00",
+    "draft_mode": false,
+    "labels": [
+        "splunk_events"
+    ],
+    "tags": []
+}
