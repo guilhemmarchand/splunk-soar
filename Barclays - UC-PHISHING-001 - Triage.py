@@ -126,17 +126,17 @@ def send_email_1(action=None, success=None, container=None, results=None, handle
 
     # phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
 
-    format_subject_invalid_af = phantom.get_format_data(name="format_subject_invalid_af")
     format_body_invalid_af = phantom.get_format_data(name="format_body_invalid_af")
+    format_subject_invalid_af = phantom.get_format_data(name="format_subject_invalid_af")
 
     parameters = []
 
     if format_body_invalid_af is not None:
         parameters.append({
-            "from": "foo@bar.com",
             "to": "bar@barc.om",
-            "subject": format_subject_invalid_af,
             "body": format_body_invalid_af,
+            "from": "foo@bar.com",
+            "subject": format_subject_invalid_af,
         })
 
     ################################################################################
@@ -182,7 +182,7 @@ def filter_for_af(action=None, success=None, container=None, results=None, handl
 
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_2 or matched_results_2:
-        pass
+        playbook_barclays___virustotal_file_reputation_1(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_2, filtered_results=matched_results_2)
 
     # collect filtered artifact ids and results for 'if' condition 3
     matched_artifacts_3, matched_results_3 = phantom.condition(
@@ -196,6 +196,34 @@ def filter_for_af(action=None, success=None, container=None, results=None, handl
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_3 or matched_results_3:
         pass
+
+    return
+
+
+@phantom.playbook_block()
+def playbook_barclays___virustotal_file_reputation_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("playbook_barclays___virustotal_file_reputation_1() called")
+
+    filtered_artifact_0_data_filter_for_af = phantom.collect2(container=container, datapath=["filtered-data:filter_for_af:condition_1:artifact:*.cef.fileHash"])
+
+    filtered_artifact_0__cef_filehash = [item[0] for item in filtered_artifact_0_data_filter_for_af]
+
+    inputs = {
+        "filehash": filtered_artifact_0__cef_filehash,
+    }
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    # call playbook "Dev/Barclays - VirusTotal file reputation", returns the playbook_run_id
+    playbook_run_id = phantom.playbook("Dev/Barclays - VirusTotal file reputation", container=container, name="playbook_barclays___virustotal_file_reputation_1", inputs=inputs)
 
     return
 
