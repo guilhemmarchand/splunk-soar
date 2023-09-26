@@ -34,7 +34,7 @@ def check_for_af_requirements(action=None, success=None, container=None, results
 
     # call connected blocks if condition 1 matched
     if found_match_1:
-        filter_2(action=action, success=success, container=container, results=results, handle=handle)
+        filter_for_af(action=action, success=success, container=container, results=results, handle=handle)
         return
 
     # check for 'else' condition 2
@@ -59,12 +59,104 @@ def add_comment_invalid_af(action=None, success=None, container=None, results=No
 
     phantom.comment(container=container, comment="Artifact is invalid and does not contain a destinationHostname")
 
+    format_subject_invalid_af(container=container)
+
     return
 
 
 @phantom.playbook_block()
-def filter_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
-    phantom.debug("filter_2() called")
+def format_subject_invalid_af(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("format_subject_invalid_af() called")
+
+    template = """%%\nSOAR Cloud: invalid event detected {0}\n%%"""
+
+    # parameter list for template variable replacement
+    parameters = [
+        "container:id"
+    ]
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.format(container=container, template=template, parameters=parameters, name="format_subject_invalid_af")
+
+    format_body_invalid_af(container=container)
+
+    return
+
+
+@phantom.playbook_block()
+def format_body_invalid_af(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("format_body_invalid_af() called")
+
+    template = """SOAR detected that conditions for the triage of the following events were not met:\n\n{0}\n\nPlease review this incident."""
+
+    # parameter list for template variable replacement
+    parameters = [
+        "container:id"
+    ]
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.format(container=container, template=template, parameters=parameters, name="format_body_invalid_af")
+
+    send_email_1(container=container)
+
+    return
+
+
+@phantom.playbook_block()
+def send_email_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("send_email_1() called")
+
+    # phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
+
+    format_subject_invalid_af = phantom.get_format_data(name="format_subject_invalid_af")
+    format_body_invalid_af = phantom.get_format_data(name="format_body_invalid_af")
+
+    parameters = []
+
+    if format_body_invalid_af is not None:
+        parameters.append({
+            "from": "foo@bar.com",
+            "to": "bar@barc.om",
+            "subject": format_subject_invalid_af,
+            "body": format_body_invalid_af,
+        })
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.act("send email", parameters=parameters, name="send_email_1", assets=["internal_smtp"])
+
+    return
+
+
+@phantom.playbook_block()
+def filter_for_af(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("filter_for_af() called")
 
     # collect filtered artifact ids and results for 'if' condition 1
     matched_artifacts_1, matched_results_1 = phantom.condition(
@@ -72,7 +164,7 @@ def filter_2(action=None, success=None, container=None, results=None, handle=Non
         conditions=[
             ["artifact:*.cef.requestURL", "!=", ""]
         ],
-        name="filter_2:condition_1",
+        name="filter_for_af:condition_1",
         delimiter=None)
 
     # call connected blocks if filtered artifacts or results
@@ -83,9 +175,9 @@ def filter_2(action=None, success=None, container=None, results=None, handle=Non
     matched_artifacts_2, matched_results_2 = phantom.condition(
         container=container,
         conditions=[
-            ["artifact:*.cef.sourceAddress", "!=", ""]
+            ["artifact:*.cef.fileHash", "!=", ""]
         ],
-        name="filter_2:condition_2",
+        name="filter_for_af:condition_2",
         delimiter=None)
 
     # call connected blocks if filtered artifacts or results
@@ -96,9 +188,9 @@ def filter_2(action=None, success=None, container=None, results=None, handle=Non
     matched_artifacts_3, matched_results_3 = phantom.condition(
         container=container,
         conditions=[
-            ["artifact:*.cef.fileHash", "!=", ""]
+            ["artifact:*.cef.sourceAddress", "!=", ""]
         ],
-        name="filter_2:condition_3",
+        name="filter_for_af:condition_3",
         delimiter=None)
 
     # call connected blocks if filtered artifacts or results
