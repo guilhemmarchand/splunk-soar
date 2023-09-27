@@ -301,8 +301,8 @@ def playbook_barclays___reversinglabs_sanbox_detonate_1(action=None, success=Non
     phantom.debug("playbook_barclays___reversinglabs_sanbox_detonate_1() called")
 
     inputs = {
-        "message_id": [],
         "recipient": [],
+        "message_id": [],
     }
 
     ################################################################################
@@ -337,8 +337,8 @@ def playbook_barclays___uc_phising_splunk_correlation_1(action=None, success=Non
     phantom.debug("playbook_barclays___uc_phising_splunk_correlation_1() called")
 
     inputs = {
-        "requesturl": [],
         "subject": [],
+        "requesturl": [],
     }
 
     ################################################################################
@@ -418,8 +418,8 @@ def prompt_analyst(action=None, success=None, container=None, results=None, hand
 
 
 @phantom.playbook_block()
-def prompt_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
-    phantom.debug("prompt_2() called")
+def prompt_approval(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("prompt_approval() called")
 
     # set user and message variables for phantom.prompt call
 
@@ -430,7 +430,21 @@ def prompt_2(action=None, success=None, container=None, results=None, handle=Non
     # parameter list for template variable replacement
     parameters = []
 
-    phantom.prompt2(container=container, user=user, role=role, message=message, respond_in_mins=30, name="prompt_2", parameters=parameters)
+    # responses
+    response_types = [
+        {
+            "prompt": "Grant?",
+            "options": {
+                "type": "list",
+                "choices": [
+                    "Yes",
+                    "No"
+                ],
+            },
+        }
+    ]
+
+    phantom.prompt2(container=container, user=user, role=role, message=message, respond_in_mins=30, name="prompt_approval", parameters=parameters, response_types=response_types)
 
     return
 
@@ -449,8 +463,69 @@ def decision_2(action=None, success=None, container=None, results=None, handle=N
 
     # call connected blocks if condition 1 matched
     if found_match_1:
-        prompt_2(action=action, success=success, container=container, results=results, handle=handle)
+        prompt_approval(action=action, success=success, container=container, results=results, handle=handle)
         return
+
+    # check for 'else' condition 2
+    add_comment_false_positve(action=action, success=success, container=container, results=results, handle=handle)
+
+    return
+
+
+@phantom.playbook_block()
+def add_comment_false_positve(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("add_comment_false_positve() called")
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.comment(container=container, comment="boo")
+
+    playbook_barclays___update_es_notable_event_1(container=container)
+
+    return
+
+
+@phantom.playbook_block()
+def playbook_barclays___update_es_notable_event_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("playbook_barclays___update_es_notable_event_1() called")
+
+    inputs = {
+        "event_id": [],
+        "action": [],
+    }
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    # call playbook "Dev/Barclays - Update ES notable event", returns the playbook_run_id
+    playbook_run_id = phantom.playbook("Dev/Barclays - Update ES notable event", container=container, name="playbook_barclays___update_es_notable_event_1", callback=playbook_barclays___update_es_notable_event_1_callback, inputs=inputs)
+
+    return
+
+
+@phantom.playbook_block()
+def playbook_barclays___update_es_notable_event_1_callback(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("playbook_barclays___update_es_notable_event_1_callback() called")
+
+    
+    # Downstream End block cannot be called directly, since execution will call on_finish automatically.
+    # Using placeholder callback function so child playbook is run synchronously.
+
 
     return
 
