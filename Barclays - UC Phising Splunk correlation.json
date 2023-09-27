@@ -91,35 +91,21 @@
                     "targetPort": "12_in"
                 },
                 {
-                    "id": "port_0_to_port_17",
+                    "id": "port_0_to_port_5",
                     "sourceNode": "0",
                     "sourcePort": "0_out",
-                    "targetNode": "17",
-                    "targetPort": "17_in"
-                },
-                {
-                    "id": "port_17_to_port_5",
-                    "sourceNode": "17",
-                    "sourcePort": "17_out",
                     "targetNode": "5",
                     "targetPort": "5_in"
                 },
                 {
-                    "id": "port_0_to_port_18",
+                    "id": "port_0_to_port_10",
                     "sourceNode": "0",
                     "sourcePort": "0_out",
-                    "targetNode": "18",
-                    "targetPort": "18_in"
-                },
-                {
-                    "id": "port_18_to_port_10",
-                    "sourceNode": "18",
-                    "sourcePort": "18_out",
                     "targetNode": "10",
                     "targetPort": "10_in"
                 }
             ],
-            "hash": "c5177a151b1c552d6f3a0ad3a334599025d15353",
+            "hash": "576dfba19ae1913cfdb44ef502800c4f804f6f82",
             "nodes": {
                 "0": {
                     "data": {
@@ -135,7 +121,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 190,
-                    "y": -1.8474111129762605e-13
+                    "y": 0
                 },
                 "1": {
                     "data": {
@@ -153,71 +139,70 @@
                     "userCode": "\n    # This function is called after all actions are completed.\n    # summary of all the action and/or all details of actions\n    # can be collected here.\n\n    # summary_json = phantom.get_summary()\n    # if 'result' in summary_json:\n        # for action_result in summary_json['result']:\n            # if 'action_run_id' in action_result:\n                # action_results = phantom.get_action_results(action_run_id=action_result['action_run_id'], result_data=False, flatten=False)\n                # phantom.debug(action_results)\n\n",
                     "warnings": {},
                     "x": 190,
-                    "y": 1296
+                    "y": 1132
                 },
                 "10": {
                     "data": {
                         "advanced": {
-                            "customName": "Format SPL query PaloAlto outbound",
+                            "customName": "Format SPL query Email search",
                             "customNameId": 0,
                             "join": []
                         },
                         "functionId": 5,
-                        "functionName": "format_spl_query_paloalto_outbound",
+                        "functionName": "format_spl_query_email_search",
                         "id": "10",
                         "parameters": [
-                            "playbook_input:destinationaddress",
-                            "gen_spl_time_range_filters_outbound:custom_function_result.data.earliest_epoch",
-                            "gen_spl_time_range_filters_outbound:custom_function_result.data.latest_epoch"
+                            "playbook_input:destinationaddress"
                         ],
-                        "template": "%%\nindex=sec_paloalto sourcetype=\"pan:traffic\" (dest=\"{0}\") earliest=\"{1}\" latest=\"{2}\" | addinfo\n| stats min(_time) as earliest_time_event, max(_time) as last_time_event, first(info_min_time) as info_min_time, first(info_max_time) as info_max_time, values(action) as action, values(app) as app, values(client_location) as client_location, values(signature) as signature, sum(bytes) as bytes, sum(bytes_in) as bytes_in, sum(bytes_out) as bytes_out, sum(duration) as duration, values(src) as src, values(dest_location) as dest_location, values(dest_port) as dest_port, values(dest_zone) as dest_zone, count by dest\n| foreach * [ eval <<FIELD>> = mvjoin('<<FIELD>>', \",\") ]\n| foreach earliest_time_event, last_time_event, info_min_time, info_max_time [ eval <<FIELD>> = strftime('<<FIELD>>', \"%c\") ]\n| eval direction=\"outbound\", outbound_traffic_detected=if(count>0, \"true\", \"false\"), is_traffic_allowed=if(match(action, \"allowed\"), \"true\", \"false\"),  is_traffic_blocked=if(match(action, \"(blocked|failure)\"), \"true\", \"false\")\n| append [ | makeresults | eval count=0, dest=\"{0}\" ]\n| head 1\n| eval summary=if(count>0, \"Outbound traffic results were found in PaloAlto for the dest=\" . dest, \"No outbound traffic results were found in PaloAlto for the dest=\" . dest) | tojson\n%%",
+                        "template": "%%\n(index=exchange_mt) subject=\"{0}\"\n| stats dc(recipient) as count_recipients, values(action) as actions\n| tojson\n| rename _raw as summary\n%%",
                         "type": "format"
                     },
                     "errors": {},
                     "id": "10",
                     "type": "format",
-                    "warnings": {
-                        "config": [
-                            "Reconfigure invalid datapath."
-                        ]
-                    },
+                    "warnings": {},
                     "x": 340,
-                    "y": 311.99999999999983
+                    "y": 148
                 },
                 "12": {
                     "data": {
                         "action": "run query",
                         "actionType": "investigate",
                         "advanced": {
-                            "customName": "Run SPL query PaloAlto outbound",
+                            "customName": "Run SPL query email search",
                             "customNameId": 0,
                             "join": []
                         },
                         "connector": "Splunk",
                         "connectorConfigs": [
-                            "splunkes"
+                            "splunk"
                         ],
                         "connectorId": "91883aa8-9c81-470b-97a1-5d8f7995f560",
                         "connectorVersion": "v1",
                         "functionId": 2,
-                        "functionName": "run_spl_query_paloalto_outbound",
+                        "functionName": "run_spl_query_email_search",
                         "id": "12",
                         "parameters": {
                             "command": "search",
-                            "end_time": "gen_spl_time_range_filters_outbound:custom_function_result.data.latest_epoch",
-                            "query": "format_spl_query_paloalto_outbound:formatted_data.*",
-                            "start_time": "gen_spl_time_range_filters_outbound:custom_function_result.data.earliest_epoch"
+                            "end_time": "now",
+                            "query": "format_spl_query_email_search:formatted_data.*",
+                            "search_mode": "smart",
+                            "start_time": "-24h"
                         },
                         "requiredParameters": [
                             {
                                 "data_type": "string",
-                                "default": "",
                                 "field": "query"
                             },
                             {
                                 "data_type": "string",
                                 "default": "search",
                                 "field": "command"
+                            },
+                            {
+                                "data_type": "string",
+                                "default": "smart",
+                                "field": "search_mode"
                             }
                         ],
                         "type": "action"
@@ -225,23 +210,19 @@
                     "errors": {},
                     "id": "12",
                     "type": "action",
-                    "warnings": {
-                        "config": [
-                            "Reconfigure invalid datapath."
-                        ]
-                    },
+                    "warnings": {},
                     "x": 340,
-                    "y": 475.99999999999983
+                    "y": 312
                 },
                 "13": {
                     "data": {
                         "advanced": {
-                            "customName": "Add comment PaloAlto outbound",
+                            "customName": "Add comment email search results",
                             "customNameId": 0,
                             "join": []
                         },
                         "functionId": 5,
-                        "functionName": "add_comment_paloalto_outbound",
+                        "functionName": "add_comment_email_search_results",
                         "id": "13",
                         "selectMore": false,
                         "tab": "apis",
@@ -286,7 +267,7 @@
                                     "author",
                                     "trace"
                                 ],
-                                "comment": "run_spl_query_paloalto_outbound:action_result.data.*.summary"
+                                "comment": "run_spl_query_email_search:action_result.data.*.summary"
                             }
                         }
                     },
@@ -295,17 +276,17 @@
                     "type": "utility",
                     "warnings": {},
                     "x": 340,
-                    "y": 640
+                    "y": 476
                 },
                 "14": {
                     "data": {
                         "advanced": {
-                            "customName": "Format note SPL results title outbound",
+                            "customName": "Format note SPL results title email search",
                             "customNameId": 0,
                             "join": []
                         },
                         "functionId": 6,
-                        "functionName": "format_note_spl_results_title_outbound",
+                        "functionName": "format_note_spl_results_title_email_search",
                         "id": "14",
                         "parameters": [
                             "playbook_input:destinationaddress"
@@ -318,20 +299,20 @@
                     "type": "format",
                     "warnings": {},
                     "x": 340,
-                    "y": 804
+                    "y": 640
                 },
                 "15": {
                     "data": {
                         "advanced": {
-                            "customName": "Format note SPL results content outbound",
+                            "customName": "Format note SPL results content email search",
                             "customNameId": 0,
                             "join": []
                         },
                         "functionId": 7,
-                        "functionName": "format_note_spl_results_content_outbound",
+                        "functionName": "format_note_spl_results_content_email_search",
                         "id": "15",
                         "parameters": [
-                            "run_spl_query_paloalto_outbound:action_result.data.*._raw"
+                            "run_spl_query_email_search:action_result.data.*._raw"
                         ],
                         "template": "%%\n{0}\n%%",
                         "type": "format"
@@ -341,17 +322,17 @@
                     "type": "format",
                     "warnings": {},
                     "x": 340,
-                    "y": 968
+                    "y": 804
                 },
                 "16": {
                     "data": {
                         "advanced": {
-                            "customName": "Add note SPL results outbound",
+                            "customName": "Add note SPL results email search",
                             "customNameId": 0,
                             "join": []
                         },
                         "functionId": 6,
-                        "functionName": "add_note_spl_results_outbound",
+                        "functionName": "add_note_spl_results_email_search",
                         "id": "16",
                         "selectMore": false,
                         "tab": "apis",
@@ -436,10 +417,10 @@
                                     "task_id",
                                     "trace"
                                 ],
-                                "content": "format_note_spl_results_content_outbound:formatted_data.*",
+                                "content": "format_note_spl_results_content_email_search:formatted_data.*",
                                 "note_format": "markdown",
                                 "note_type": "general",
-                                "title": "format_note_spl_results_title_outbound:formatted_data.*"
+                                "title": "format_note_spl_results_title_email_search:formatted_data.*"
                             }
                         }
                     },
@@ -448,186 +429,47 @@
                     "type": "utility",
                     "warnings": {},
                     "x": 340,
-                    "y": 1132
-                },
-                "17": {
-                    "data": {
-                        "advanced": {
-                            "customName": "Gen SPL time range filters inbound",
-                            "customNameId": 1,
-                            "join": []
-                        },
-                        "customFunction": {
-                            "draftMode": false,
-                            "name": "cbl_gen_spl_timerange_filter",
-                            "repoName": "local"
-                        },
-                        "functionId": 7,
-                        "functionName": "gen_spl_time_range_filters_inbound_1",
-                        "id": "17",
-                        "selectMore": false,
-                        "type": "utility",
-                        "utilities": {
-                            "cbl_gen_spl_timerange_filter": {
-                                "description": "This custom function is designed to generate a range of epoch time filters (earliest and latest) based on provided options",
-                                "fields": [
-                                    {
-                                        "dataTypes": [],
-                                        "description": "",
-                                        "inputType": "item",
-                                        "label": "epochtime",
-                                        "name": "epochtime",
-                                        "placeholder": "Epoch time format",
-                                        "renderType": "datapath",
-                                        "required": false
-                                    },
-                                    {
-                                        "dataTypes": [],
-                                        "description": "",
-                                        "inputType": "list",
-                                        "label": "earliest_sec_reduce",
-                                        "name": "earliest_sec_reduce",
-                                        "placeholder": "",
-                                        "renderType": "datapath",
-                                        "required": false
-                                    },
-                                    {
-                                        "dataTypes": [],
-                                        "description": "",
-                                        "inputType": "list",
-                                        "label": "latest_sec_increase",
-                                        "name": "latest_sec_increase",
-                                        "placeholder": "",
-                                        "renderType": "datapath",
-                                        "required": false
-                                    }
-                                ],
-                                "label": "cbl_gen_spl_timerange_filter",
-                                "name": "cbl_gen_spl_timerange_filter"
-                            }
-                        },
-                        "utilityType": "custom_function",
-                        "values": {
-                            "cbl_gen_spl_timerange_filter": {
-                                "earliest_sec_reduce": "3600",
-                                "epochtime": "playbook_input:epochtime",
-                                "latest_sec_increase": "60"
-                            }
-                        }
-                    },
-                    "errors": {},
-                    "id": "17",
-                    "type": "utility",
-                    "warnings": {},
-                    "x": -1.4210854715202004e-14,
-                    "y": 147.99999999999991
-                },
-                "18": {
-                    "data": {
-                        "advanced": {
-                            "customName": "Gen SPL time range filters outbound",
-                            "customNameId": 0,
-                            "join": []
-                        },
-                        "customFunction": {
-                            "draftMode": false,
-                            "name": "cbl_gen_spl_timerange_filter",
-                            "repoName": "local"
-                        },
-                        "functionId": 8,
-                        "functionName": "gen_spl_time_range_filters_outbound",
-                        "id": "18",
-                        "selectMore": false,
-                        "type": "utility",
-                        "utilities": {
-                            "cbl_gen_spl_timerange_filter": {
-                                "description": "This custom function is designed to generate a range of epoch time filters (earliest and latest) based on provided options",
-                                "fields": [
-                                    {
-                                        "dataTypes": [],
-                                        "description": "",
-                                        "inputType": "item",
-                                        "label": "epochtime",
-                                        "name": "epochtime",
-                                        "placeholder": "Epoch time format",
-                                        "renderType": "datapath",
-                                        "required": false
-                                    },
-                                    {
-                                        "dataTypes": [],
-                                        "description": "",
-                                        "inputType": "list",
-                                        "label": "earliest_sec_reduce",
-                                        "name": "earliest_sec_reduce",
-                                        "placeholder": "",
-                                        "renderType": "datapath",
-                                        "required": false
-                                    },
-                                    {
-                                        "dataTypes": [],
-                                        "description": "",
-                                        "inputType": "list",
-                                        "label": "latest_sec_increase",
-                                        "name": "latest_sec_increase",
-                                        "placeholder": "",
-                                        "renderType": "datapath",
-                                        "required": false
-                                    }
-                                ],
-                                "label": "cbl_gen_spl_timerange_filter",
-                                "name": "cbl_gen_spl_timerange_filter"
-                            }
-                        },
-                        "utilityType": "custom_function",
-                        "values": {
-                            "cbl_gen_spl_timerange_filter": {
-                                "earliest_sec_reduce": "3600",
-                                "epochtime": "playbook_input:epochtime",
-                                "latest_sec_increase": "60"
-                            }
-                        }
-                    },
-                    "errors": {},
-                    "id": "18",
-                    "type": "utility",
-                    "warnings": {},
-                    "x": 340,
-                    "y": 147.99999999999991
+                    "y": 968
                 },
                 "4": {
                     "data": {
                         "action": "run query",
                         "actionType": "investigate",
                         "advanced": {
-                            "customName": "Run SPL query PaloAlto inbound",
+                            "customName": "Run SPL query proxy search",
                             "customNameId": 0,
                             "join": []
                         },
                         "connector": "Splunk",
                         "connectorConfigs": [
-                            "splunkes"
+                            "splunk"
                         ],
                         "connectorId": "91883aa8-9c81-470b-97a1-5d8f7995f560",
                         "connectorVersion": "v1",
                         "functionId": 1,
-                        "functionName": "run_spl_query_paloalto_inbound",
+                        "functionName": "run_spl_query_proxy_search",
                         "id": "4",
                         "parameters": {
                             "command": "search",
-                            "end_time": "gen_spl_time_range_filters_inbound_1:custom_function_result.data.latest_epoch",
-                            "query": "format_spl_query_paloalto_inbound:formatted_data.*",
-                            "start_time": "gen_spl_time_range_filters_inbound_1:custom_function_result.data.earliest_epoch"
+                            "end_time": "now",
+                            "query": "format_spl_query_proxy_search:formatted_data.*",
+                            "search_mode": "smart",
+                            "start_time": "-24h"
                         },
                         "requiredParameters": [
                             {
                                 "data_type": "string",
-                                "default": "",
                                 "field": "query"
                             },
                             {
                                 "data_type": "string",
                                 "default": "search",
                                 "field": "command"
+                            },
+                            {
+                                "data_type": "string",
+                                "default": "smart",
+                                "field": "search_mode"
                             }
                         ],
                         "type": "action"
@@ -635,52 +477,42 @@
                     "errors": {},
                     "id": "4",
                     "type": "action",
-                    "warnings": {
-                        "config": [
-                            "Reconfigure invalid datapath."
-                        ]
-                    },
-                    "x": -1.4210854715202004e-14,
-                    "y": 475.99999999999983
+                    "warnings": {},
+                    "x": 0,
+                    "y": 312
                 },
                 "5": {
                     "data": {
                         "advanced": {
-                            "customName": "Format SPL query PaloAlto inbound",
+                            "customName": "Format SPL query Proxy search",
                             "customNameId": 0,
                             "join": []
                         },
                         "functionId": 2,
-                        "functionName": "format_spl_query_paloalto_inbound",
+                        "functionName": "format_spl_query_proxy_search",
                         "id": "5",
                         "parameters": [
-                            "playbook_input:destinationaddress",
-                            "gen_spl_time_range_filters_inbound_1:custom_function_result.data.earliest_epoch",
-                            "gen_spl_time_range_filters_inbound_1:custom_function_result.data.latest_epoch"
+                            "playbook_input:destinationaddress"
                         ],
-                        "template": "%%\nindex=sec_paloalto sourcetype=\"pan:traffic\" (src=\"{0}\") earliest=\"{1}\" latest=\"{2}\" | addinfo\n| stats min(_time) as earliest_time_event, max(_time) as last_time_event, first(info_min_time) as info_min_time, first(info_max_time) as info_max_time, values(action) as action, values(app) as app, values(client_location) as client_location, values(signature) as signature, sum(bytes) as bytes, sum(bytes_in) as bytes_in, sum(bytes_out) as bytes_out, sum(duration) as duration, dc(dest) as dcount_dest, values(dest_location) as dest_location, values(dest_port) as dest_port, values(dest_zone) as dest_zone, count by src\n| foreach * [ eval <<FIELD>> = mvjoin('<<FIELD>>', \",\") ]\n| foreach earliest_time_event, last_time_event, info_min_time, info_max_time [ eval <<FIELD>> = strftime('<<FIELD>>', \"%c\") ]\n| eval direction=\"inbound\", inbound_traffic_detected=if(count>0, \"true\", \"false\"), \n is_traffic_allowed=if(match(action, \"allowed\"), \"true\", \"false\"),  is_traffic_blocked=if(match(action, \"(blocked|failure)\"), \"true\", \"false\")\n| append [ | makeresults | eval count=0, src=\"{0}\" ]\n| head 1\n| eval summary=if(count>0, \"Inbound traffic results were found in PaloAlto for the src=\" . src, \"No results were found in PaloAlto for the src=\" . src) | tojson\n%%",
+                        "template": "%%\n(index=gis_bcoat sourcetype=bcoat_proxysg) url=\"{0}\"\n| stats dc(dest_host) as dest_count, values(category) as categories, values(rule_name) as rules, values(http_referrer) as referrers\n| tojson\n| rename _raw as summary\n%%",
                         "type": "format"
                     },
                     "errors": {},
                     "id": "5",
                     "type": "format",
-                    "warnings": {
-                        "config": [
-                            "Reconfigure invalid datapath."
-                        ]
-                    },
-                    "x": -1.4210854715202004e-14,
-                    "y": 311.99999999999983
+                    "warnings": {},
+                    "x": 0,
+                    "y": 148
                 },
                 "6": {
                     "data": {
                         "advanced": {
-                            "customName": "Add comment PaloAlto inbound",
+                            "customName": "Add comment proxy search results",
                             "customNameId": 0,
                             "join": []
                         },
                         "functionId": 2,
-                        "functionName": "add_comment_paloalto_inbound",
+                        "functionName": "add_comment_proxy_search_results",
                         "id": "6",
                         "selectMore": false,
                         "tab": "apis",
@@ -725,7 +557,7 @@
                                     "author",
                                     "trace"
                                 ],
-                                "comment": "run_spl_query_paloalto_inbound:action_result.data.*.summary"
+                                "comment": "run_spl_query_proxy_search:action_result.data.*.summary"
                             }
                         }
                     },
@@ -733,18 +565,18 @@
                     "id": "6",
                     "type": "utility",
                     "warnings": {},
-                    "x": -1.4210854715202004e-14,
-                    "y": 640
+                    "x": 0,
+                    "y": 476
                 },
                 "7": {
                     "data": {
                         "advanced": {
-                            "customName": "Format note SPL results title inbound",
+                            "customName": "Format note SPL results title proxy search",
                             "customNameId": 0,
                             "join": []
                         },
                         "functionId": 3,
-                        "functionName": "format_note_spl_results_title_inbound",
+                        "functionName": "format_note_spl_results_title_proxy_search",
                         "id": "7",
                         "parameters": [
                             "playbook_input:destinationaddress"
@@ -756,21 +588,21 @@
                     "id": "7",
                     "type": "format",
                     "warnings": {},
-                    "x": -1.4210854715202004e-14,
-                    "y": 804
+                    "x": 0,
+                    "y": 640
                 },
                 "8": {
                     "data": {
                         "advanced": {
-                            "customName": "Format note SPL results content inbound",
+                            "customName": "Format note SPL results content proxy search",
                             "customNameId": 0,
                             "join": []
                         },
                         "functionId": 4,
-                        "functionName": "format_note_spl_results_content_inbound",
+                        "functionName": "format_note_spl_results_content_proxy_search",
                         "id": "8",
                         "parameters": [
-                            "run_spl_query_paloalto_inbound:action_result.data.*._raw"
+                            "run_spl_query_proxy_search:action_result.data.*._raw"
                         ],
                         "template": "%%\n{0}\n%%",
                         "type": "format"
@@ -779,18 +611,18 @@
                     "id": "8",
                     "type": "format",
                     "warnings": {},
-                    "x": -1.4210854715202004e-14,
-                    "y": 968
+                    "x": 0,
+                    "y": 804
                 },
                 "9": {
                     "data": {
                         "advanced": {
-                            "customName": "Add note SPL results inbound",
+                            "customName": "Add note SPL results proxy search",
                             "customNameId": 0,
                             "join": []
                         },
                         "functionId": 3,
-                        "functionName": "add_note_spl_results_inbound",
+                        "functionName": "add_note_spl_results_proxy_search",
                         "id": "9",
                         "selectMore": false,
                         "tab": "apis",
@@ -875,10 +707,10 @@
                                     "task_id",
                                     "trace"
                                 ],
-                                "content": "format_note_spl_results_content_inbound:formatted_data.*",
+                                "content": "format_note_spl_results_content_proxy_search:formatted_data.*",
                                 "note_format": "markdown",
                                 "note_type": "general",
-                                "title": "format_note_spl_results_title_inbound:formatted_data.*"
+                                "title": "format_note_spl_results_title_proxy_search:formatted_data.*"
                             }
                         }
                     },
@@ -886,8 +718,8 @@
                     "id": "9",
                     "type": "utility",
                     "warnings": {},
-                    "x": -1.4210854715202004e-14,
-                    "y": 1132
+                    "x": 0,
+                    "y": 968
                 }
             },
             "notes": ""
@@ -895,15 +727,15 @@
         "input_spec": [
             {
                 "contains": [
-                    "ip"
+                    "url"
                 ],
-                "description": "The endpoint local IP Address",
-                "name": "destinationAddress"
+                "description": "URL",
+                "name": "requestUrl"
             },
             {
                 "contains": [],
-                "description": "The time string of the event in epoch format",
-                "name": "epochtime"
+                "description": "Email subject",
+                "name": "subject"
             }
         ],
         "output_spec": [
@@ -993,7 +825,7 @@
         "schema": "5.0.10",
         "version": "6.0.2.127725"
     },
-    "create_time": "2023-09-27T06:50:41.282499+00:00",
+    "create_time": "2023-09-27T08:19:57.070742+00:00",
     "draft_mode": false,
     "labels": [
         "*"
