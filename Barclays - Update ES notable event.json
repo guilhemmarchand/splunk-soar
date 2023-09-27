@@ -118,7 +118,7 @@
                     "targetPort": "1_in"
                 }
             ],
-            "hash": "40363eb415a1bf0d12dd81c5d058afeb77002a09",
+            "hash": "6c28626d7b2276a3f4f464982e74a8ae3f07eb91",
             "nodes": {
                 "0": {
                     "data": {
@@ -134,7 +134,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 530,
-                    "y": -5.684341886080802e-14
+                    "y": -1.1368683772161603e-13
                 },
                 "1": {
                     "data": {
@@ -175,7 +175,7 @@
                         "parameters": {
                             "command": "| makeresults",
                             "end_time": "now",
-                            "query": "format_spl_query_pending:formatted_data",
+                            "query": "format_spl_query_resolved:formatted_data",
                             "start_time": "-5m"
                         },
                         "requiredParameters": [
@@ -195,11 +195,7 @@
                     "errors": {},
                     "id": "10",
                     "type": "action",
-                    "warnings": {
-                        "config": [
-                            "Reconfigure invalid datapath."
-                        ]
-                    },
+                    "warnings": {},
                     "x": 1020,
                     "y": 492
                 },
@@ -330,6 +326,7 @@
                             {
                                 "comparisons": [
                                     {
+                                        "conditionIndex": 3,
                                         "op": "==",
                                         "param": "playbook_input:action",
                                         "value": "resolved"
@@ -375,7 +372,7 @@
                     "type": "format",
                     "warnings": {},
                     "x": 340,
-                    "y": 327.99999999999994
+                    "y": 327.9999999999999
                 },
                 "6": {
                     "data": {
@@ -443,7 +440,7 @@
                     "type": "format",
                     "warnings": {},
                     "x": 680,
-                    "y": 327.99999999999994
+                    "y": 327.9999999999999
                 },
                 "8": {
                     "data": {
@@ -511,7 +508,7 @@
                     "type": "format",
                     "warnings": {},
                     "x": 1020,
-                    "y": 327.99999999999994
+                    "y": 327.9999999999999
                 }
             },
             "notes": ""
@@ -548,7 +545,7 @@
         "schema": "5.0.10",
         "version": "6.0.2.127725"
     },
-    "create_time": "2023-09-27T08:53:45.968962+00:00",
+    "create_time": "2023-09-27T09:12:57.194359+00:00",
     "draft_mode": false,
     "labels": [
         "*"
