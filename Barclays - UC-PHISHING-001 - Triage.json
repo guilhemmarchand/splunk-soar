@@ -241,7 +241,7 @@
                     "targetPort": "25_in"
                 }
             ],
-            "hash": "3447c665b0c4391865814880bc410284a6fe363a",
+            "hash": "61c1afb37d98e3a48fc0c856b057f2975eeecf23",
             "nodes": {
                 "0": {
                     "data": {
@@ -763,7 +763,7 @@
                             "join": []
                         },
                         "functionId": 1,
-                        "functionName": "playbook_Barclays___Update_ES_notable_event_1",
+                        "functionName": "playbook_Barclays___UC_Phishing___Report_phase_1",
                         "id": "25",
                         "inputs": {
                             "action": {
@@ -775,7 +775,7 @@
                                 "deduplicate": false
                             }
                         },
-                        "playbookName": "Barclays - Update ES notable event",
+                        "playbookName": "Barclays - UC Phishing - Report phase",
                         "playbookRepo": 11,
                         "playbookRepoName": "Dev",
                         "playbookType": "data",
@@ -1109,7 +1109,7 @@
         "schema": "5.0.10",
         "version": "6.0.2.127725"
     },
-    "create_time": "2023-09-27T09:09:26.855516+00:00",
+    "create_time": "2023-09-27T09:18:54.498320+00:00",
     "draft_mode": false,
     "labels": [
         "*"

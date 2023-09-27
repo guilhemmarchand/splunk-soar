@@ -488,29 +488,29 @@ def add_comment_false_positve(action=None, success=None, container=None, results
 
     phantom.comment(container=container, comment="boo")
 
-    join_playbook_barclays___update_es_notable_event_1(container=container)
+    join_playbook_barclays___uc_phishing___report_phase_1(container=container)
 
     return
 
 
 @phantom.playbook_block()
-def join_playbook_barclays___update_es_notable_event_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
-    phantom.debug("join_playbook_barclays___update_es_notable_event_1() called")
+def join_playbook_barclays___uc_phishing___report_phase_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("join_playbook_barclays___uc_phishing___report_phase_1() called")
 
     if phantom.completed(action_names=["prompt_analyst", "prompt_approval"], playbook_names=["playbook_barclays___uc_phising_remediate_and_contain_1"]):
-        # call connected block "playbook_barclays___update_es_notable_event_1"
-        playbook_barclays___update_es_notable_event_1(container=container, handle=handle)
+        # call connected block "playbook_barclays___uc_phishing___report_phase_1"
+        playbook_barclays___uc_phishing___report_phase_1(container=container, handle=handle)
 
     return
 
 
 @phantom.playbook_block()
-def playbook_barclays___update_es_notable_event_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
-    phantom.debug("playbook_barclays___update_es_notable_event_1() called")
+def playbook_barclays___uc_phishing___report_phase_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("playbook_barclays___uc_phishing___report_phase_1() called")
 
     inputs = {
-        "action": [],
         "event_id": [],
+        "action": [],
     }
 
     ################################################################################
@@ -523,15 +523,15 @@ def playbook_barclays___update_es_notable_event_1(action=None, success=None, con
     ## Custom Code End
     ################################################################################
 
-    # call playbook "Dev/Barclays - Update ES notable event", returns the playbook_run_id
-    playbook_run_id = phantom.playbook("Dev/Barclays - Update ES notable event", container=container, name="playbook_barclays___update_es_notable_event_1", callback=playbook_barclays___update_es_notable_event_1_callback, inputs=inputs)
+    # call playbook "Dev/Barclays - UC Phishing - Report phase", returns the playbook_run_id
+    playbook_run_id = phantom.playbook("Dev/Barclays - UC Phishing - Report phase", container=container, name="playbook_barclays___uc_phishing___report_phase_1", callback=playbook_barclays___uc_phishing___report_phase_1_callback, inputs=inputs)
 
     return
 
 
 @phantom.playbook_block()
-def playbook_barclays___update_es_notable_event_1_callback(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
-    phantom.debug("playbook_barclays___update_es_notable_event_1_callback() called")
+def playbook_barclays___uc_phishing___report_phase_1_callback(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("playbook_barclays___uc_phishing___report_phase_1_callback() called")
 
     
     # Downstream End block cannot be called directly, since execution will call on_finish automatically.
@@ -566,7 +566,7 @@ def playbook_barclays___uc_phising_remediate_and_contain_1(action=None, success=
     ################################################################################
 
     # call playbook "Dev/Barclays - UC Phising remediate and contain", returns the playbook_run_id
-    playbook_run_id = phantom.playbook("Dev/Barclays - UC Phising remediate and contain", container=container, name="playbook_barclays___uc_phising_remediate_and_contain_1", callback=join_playbook_barclays___update_es_notable_event_1)
+    playbook_run_id = phantom.playbook("Dev/Barclays - UC Phising remediate and contain", container=container, name="playbook_barclays___uc_phising_remediate_and_contain_1", callback=join_playbook_barclays___uc_phishing___report_phase_1)
 
     return
 
@@ -587,7 +587,7 @@ def add_comment_remediation_refused(action=None, success=None, container=None, r
 
     phantom.comment(container=container, comment="WTF")
 
-    join_playbook_barclays___update_es_notable_event_1(container=container)
+    join_playbook_barclays___uc_phishing___report_phase_1(container=container)
 
     return
 
