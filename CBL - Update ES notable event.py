@@ -8,6 +8,7 @@ import json
 from datetime import datetime, timedelta
 
 
+@phantom.playbook_block()
 def on_start(container):
     phantom.debug('on_start() called')
 
@@ -16,6 +17,7 @@ def on_start(container):
 
     return
 
+@phantom.playbook_block()
 def format_spl_query_close(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug("format_spl_query_close() called")
 
@@ -43,6 +45,7 @@ def format_spl_query_close(action=None, success=None, container=None, results=No
     return
 
 
+@phantom.playbook_block()
 def run_spl_query_close_notable(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug("run_spl_query_close_notable() called")
 
@@ -70,11 +73,12 @@ def run_spl_query_close_notable(action=None, success=None, container=None, resul
     ## Custom Code End
     ################################################################################
 
-    phantom.act("run query", parameters=parameters, name="run_spl_query_close_notable", assets=["splunkes"])
+    phantom.act("run query", parameters=parameters, name="run_spl_query_close_notable", assets=["splunk"])
 
     return
 
 
+@phantom.playbook_block()
 def check_for_action(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug("check_for_action() called")
 
@@ -83,7 +87,8 @@ def check_for_action(action=None, success=None, container=None, results=None, ha
         container=container,
         conditions=[
             ["playbook_input:action", "==", "progress"]
-        ])
+        ],
+        delimiter=",")
 
     # call connected blocks if condition 1 matched
     if found_match_1:
@@ -95,7 +100,8 @@ def check_for_action(action=None, success=None, container=None, results=None, ha
         container=container,
         conditions=[
             ["playbook_input:action", "==", "close"]
-        ])
+        ],
+        delimiter=",")
 
     # call connected blocks if condition 2 matched
     if found_match_2:
@@ -107,7 +113,8 @@ def check_for_action(action=None, success=None, container=None, results=None, ha
         container=container,
         conditions=[
             ["playbook_input:action", "==", "pending"]
-        ])
+        ],
+        delimiter=",")
 
     # call connected blocks if condition 3 matched
     if found_match_3:
@@ -119,7 +126,8 @@ def check_for_action(action=None, success=None, container=None, results=None, ha
         container=container,
         conditions=[
             ["playbook_input:action", "==", "resolved"]
-        ])
+        ],
+        delimiter=",")
 
     # call connected blocks if condition 4 matched
     if found_match_4:
@@ -129,6 +137,7 @@ def check_for_action(action=None, success=None, container=None, results=None, ha
     return
 
 
+@phantom.playbook_block()
 def format_spl_query_progress(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug("format_spl_query_progress() called")
 
@@ -156,6 +165,7 @@ def format_spl_query_progress(action=None, success=None, container=None, results
     return
 
 
+@phantom.playbook_block()
 def run_spl_query_progress_notable(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug("run_spl_query_progress_notable() called")
 
@@ -167,8 +177,8 @@ def run_spl_query_progress_notable(action=None, success=None, container=None, re
 
     if format_spl_query_progress is not None:
         parameters.append({
-            "command": "| makeresults",
             "query": format_spl_query_progress,
+            "command": "| makeresults",
             "end_time": "now",
             "start_time": "-5m",
         })
@@ -183,11 +193,12 @@ def run_spl_query_progress_notable(action=None, success=None, container=None, re
     ## Custom Code End
     ################################################################################
 
-    phantom.act("run query", parameters=parameters, name="run_spl_query_progress_notable", assets=["splunkes"])
+    phantom.act("run query", parameters=parameters, name="run_spl_query_progress_notable", assets=["splunk"])
 
     return
 
 
+@phantom.playbook_block()
 def format_spl_query_pending(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug("format_spl_query_pending() called")
 
@@ -215,6 +226,7 @@ def format_spl_query_pending(action=None, success=None, container=None, results=
     return
 
 
+@phantom.playbook_block()
 def run_spl_query_pending_notable(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug("run_spl_query_pending_notable() called")
 
@@ -226,8 +238,8 @@ def run_spl_query_pending_notable(action=None, success=None, container=None, res
 
     if format_spl_query_pending is not None:
         parameters.append({
-            "command": "| makeresults",
             "query": format_spl_query_pending,
+            "command": "| makeresults",
             "end_time": "now",
             "start_time": "-5m",
         })
@@ -242,11 +254,12 @@ def run_spl_query_pending_notable(action=None, success=None, container=None, res
     ## Custom Code End
     ################################################################################
 
-    phantom.act("run query", parameters=parameters, name="run_spl_query_pending_notable", assets=["splunkes"])
+    phantom.act("run query", parameters=parameters, name="run_spl_query_pending_notable", assets=["splunk"])
 
     return
 
 
+@phantom.playbook_block()
 def format_spl_query_resolved(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug("format_spl_query_resolved() called")
 
@@ -274,6 +287,7 @@ def format_spl_query_resolved(action=None, success=None, container=None, results
     return
 
 
+@phantom.playbook_block()
 def run_spl_query_resolved_notable(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug("run_spl_query_resolved_notable() called")
 
@@ -285,8 +299,8 @@ def run_spl_query_resolved_notable(action=None, success=None, container=None, re
 
     if format_spl_query_pending is not None:
         parameters.append({
-            "command": "| makeresults",
             "query": format_spl_query_pending,
+            "command": "| makeresults",
             "end_time": "now",
             "start_time": "-5m",
         })
@@ -301,11 +315,12 @@ def run_spl_query_resolved_notable(action=None, success=None, container=None, re
     ## Custom Code End
     ################################################################################
 
-    phantom.act("run query", parameters=parameters, name="run_spl_query_resolved_notable", assets=["splunkes"])
+    phantom.act("run query", parameters=parameters, name="run_spl_query_resolved_notable", assets=["splunk"])
 
     return
 
 
+@phantom.playbook_block()
 def on_finish(container, summary):
     phantom.debug("on_finish() called")
 

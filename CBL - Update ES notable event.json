@@ -118,7 +118,7 @@
                     "targetPort": "1_in"
                 }
             ],
-            "hash": "25c505bf88d3b16a2c32290e3c661aead1d3d42b",
+            "hash": "40363eb415a1bf0d12dd81c5d058afeb77002a09",
             "nodes": {
                 "0": {
                     "data": {
@@ -132,8 +132,9 @@
                     "errors": {},
                     "id": "0",
                     "type": "start",
+                    "warnings": {},
                     "x": 530,
-                    "y": 0
+                    "y": -5.684341886080802e-14
                 },
                 "1": {
                     "data": {
@@ -149,6 +150,7 @@
                     "id": "1",
                     "type": "end",
                     "userCode": "\n    # This function is called after all actions are completed.\n    # summary of all the action and/or all details of actions\n    # can be collected here.\n\n    # summary_json = phantom.get_summary()\n    # if 'result' in summary_json:\n        # for action_result in summary_json['result']:\n            # if 'action_run_id' in action_result:\n                # action_results = phantom.get_action_results(action_run_id=action_result['action_run_id'], result_data=False, flatten=False)\n                # phantom.debug(action_results)\n\n",
+                    "warnings": {},
                     "x": 530,
                     "y": 656
                 },
@@ -163,7 +165,7 @@
                         },
                         "connector": "Splunk",
                         "connectorConfigs": [
-                            "splunkes"
+                            "splunk"
                         ],
                         "connectorId": "91883aa8-9c81-470b-97a1-5d8f7995f560",
                         "connectorVersion": "v1",
@@ -179,6 +181,7 @@
                         "requiredParameters": [
                             {
                                 "data_type": "string",
+                                "default": "",
                                 "field": "query"
                             },
                             {
@@ -192,6 +195,11 @@
                     "errors": {},
                     "id": "10",
                     "type": "action",
+                    "warnings": {
+                        "config": [
+                            "Reconfigure invalid datapath."
+                        ]
+                    },
                     "x": 1020,
                     "y": 492
                 },
@@ -214,6 +222,7 @@
                     "errors": {},
                     "id": "2",
                     "type": "format",
+                    "warnings": {},
                     "x": 0,
                     "y": 336
                 },
@@ -228,7 +237,7 @@
                         },
                         "connector": "Splunk",
                         "connectorConfigs": [
-                            "splunkes"
+                            "splunk"
                         ],
                         "connectorId": "91883aa8-9c81-470b-97a1-5d8f7995f560",
                         "connectorVersion": "v1",
@@ -244,6 +253,7 @@
                         "requiredParameters": [
                             {
                                 "data_type": "string",
+                                "default": "",
                                 "field": "query"
                             },
                             {
@@ -258,7 +268,8 @@
                     "errors": {},
                     "id": "3",
                     "type": "action",
-                    "x": 0,
+                    "warnings": {},
+                    "x": -1.4210854715202004e-14,
                     "y": 492
                 },
                 "4": {
@@ -266,6 +277,8 @@
                         "advanced": {
                             "customName": "Check for action",
                             "customNameId": 0,
+                            "delimiter": ",",
+                            "delimiter_enabled": true,
                             "join": []
                         },
                         "conditions": [
@@ -337,6 +350,7 @@
                     "errors": {},
                     "id": "4",
                     "type": "decision",
+                    "warnings": {},
                     "x": 590,
                     "y": 148
                 },
@@ -359,8 +373,9 @@
                     "errors": {},
                     "id": "5",
                     "type": "format",
+                    "warnings": {},
                     "x": 340,
-                    "y": 328
+                    "y": 327.99999999999994
                 },
                 "6": {
                     "data": {
@@ -373,7 +388,7 @@
                         },
                         "connector": "Splunk",
                         "connectorConfigs": [
-                            "splunkes"
+                            "splunk"
                         ],
                         "connectorId": "91883aa8-9c81-470b-97a1-5d8f7995f560",
                         "connectorVersion": "v1",
@@ -389,6 +404,7 @@
                         "requiredParameters": [
                             {
                                 "data_type": "string",
+                                "default": "",
                                 "field": "query"
                             },
                             {
@@ -402,6 +418,7 @@
                     "errors": {},
                     "id": "6",
                     "type": "action",
+                    "warnings": {},
                     "x": 340,
                     "y": 492
                 },
@@ -424,8 +441,9 @@
                     "errors": {},
                     "id": "7",
                     "type": "format",
+                    "warnings": {},
                     "x": 680,
-                    "y": 328
+                    "y": 327.99999999999994
                 },
                 "8": {
                     "data": {
@@ -438,7 +456,7 @@
                         },
                         "connector": "Splunk",
                         "connectorConfigs": [
-                            "splunkes"
+                            "splunk"
                         ],
                         "connectorId": "91883aa8-9c81-470b-97a1-5d8f7995f560",
                         "connectorVersion": "v1",
@@ -454,6 +472,7 @@
                         "requiredParameters": [
                             {
                                 "data_type": "string",
+                                "default": "",
                                 "field": "query"
                             },
                             {
@@ -467,6 +486,7 @@
                     "errors": {},
                     "id": "8",
                     "type": "action",
+                    "warnings": {},
                     "x": 680,
                     "y": 492
                 },
@@ -489,8 +509,9 @@
                     "errors": {},
                     "id": "9",
                     "type": "format",
+                    "warnings": {},
                     "x": 1020,
-                    "y": 328
+                    "y": 327.99999999999994
                 }
             },
             "notes": ""
@@ -524,10 +545,10 @@
         ],
         "playbook_type": "data",
         "python_version": "3",
-        "schema": "5.0.6",
-        "version": "5.3.1.84890"
+        "schema": "5.0.10",
+        "version": "6.0.2.127725"
     },
-    "create_time": "2023-09-20T08:52:35.849834+00:00",
+    "create_time": "2023-09-27T08:53:24.236226+00:00",
     "draft_mode": false,
     "labels": [
         "*"
