@@ -241,7 +241,7 @@
                     "targetPort": "25_in"
                 }
             ],
-            "hash": "61c1afb37d98e3a48fc0c856b057f2975eeecf23",
+            "hash": "3447c665b0c4391865814880bc410284a6fe363a",
             "nodes": {
                 "0": {
                     "data": {
@@ -313,7 +313,11 @@
                     "errors": {},
                     "id": "10",
                     "type": "action",
-                    "warnings": {},
+                    "warnings": {
+                        "config": [
+                            "Reconfigure invalid datapath."
+                        ]
+                    },
                     "x": 600,
                     "y": 1120
                 },
@@ -403,7 +407,11 @@
                     "errors": {},
                     "id": "12",
                     "type": "playbook",
-                    "warnings": {},
+                    "warnings": {
+                        "config": [
+                            "Reconfigure invalid datapath."
+                        ]
+                    },
                     "x": 1300,
                     "y": 1000
                 },
@@ -669,6 +677,7 @@
                             {
                                 "comparisons": [
                                     {
+                                        "conditionIndex": 1,
                                         "op": "==",
                                         "param": "",
                                         "value": ""
