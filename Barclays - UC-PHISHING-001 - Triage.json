@@ -78,7 +78,6 @@
                     "targetPort": "12_in"
                 }
             ],
-            "hash": "b0234e550c777478ee6dd2f00680c4586d6452d2",
             "nodes": {
                 "0": {
                     "data": {
@@ -242,7 +241,7 @@
                     "type": "playbook",
                     "warnings": {},
                     "x": 1300,
-                    "y": 980
+                    "y": 1000
                 },
                 "4": {
                     "data": {
