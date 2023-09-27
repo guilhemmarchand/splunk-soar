@@ -76,8 +76,21 @@
                     "sourcePort": "11_out",
                     "targetNode": "12",
                     "targetPort": "12_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_11_to_port_13",
+                    "sourceNode": "11",
+                    "sourcePort": "11_out",
+                    "targetNode": "13",
+                    "targetPort": "13_in"
                 }
             ],
+            "hash": "8cd799e35cdb77797caea85812d38c116dc34fea",
             "nodes": {
                 "0": {
                     "data": {
@@ -241,6 +254,34 @@
                     "type": "playbook",
                     "warnings": {},
                     "x": 1300,
+                    "y": 1000
+                },
+                "13": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "playbook_Barclays___VirusTotal_url_reputation_1",
+                        "id": "13",
+                        "inputs": {
+                            "fileHash": {
+                                "datapaths": [],
+                                "deduplicate": false
+                            }
+                        },
+                        "playbookName": "Barclays - VirusTotal url reputation",
+                        "playbookRepo": 11,
+                        "playbookRepoName": "Dev",
+                        "playbookType": "data",
+                        "synchronous": true,
+                        "type": "playbook"
+                    },
+                    "errors": {},
+                    "id": "13",
+                    "type": "playbook",
+                    "warnings": {},
+                    "x": 1000,
                     "y": 1000
                 },
                 "4": {
@@ -426,7 +467,7 @@
         "schema": "5.0.10",
         "version": "6.0.2.127725"
     },
-    "create_time": "2023-09-26T12:45:31.479896+00:00",
+    "create_time": "2023-09-27T05:38:37.998621+00:00",
     "draft_mode": false,
     "labels": [
         "*"
