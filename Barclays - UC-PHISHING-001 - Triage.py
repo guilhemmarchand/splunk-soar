@@ -271,7 +271,7 @@ def playbook_barclays___virustotal_ip_reputation_1(action=None, success=None, co
     ################################################################################
 
     # call playbook "Dev/Barclays - VirusTotal IP reputation", returns the playbook_run_id
-    playbook_run_id = phantom.playbook("Dev/Barclays - VirusTotal IP reputation", container=container, name="playbook_barclays___virustotal_ip_reputation_1", inputs=inputs)
+    playbook_run_id = phantom.playbook("Dev/Barclays - VirusTotal IP reputation", container=container, name="playbook_barclays___virustotal_ip_reputation_1", callback=join_playbook_barclays___uc_phising_splunk_correlation_1, inputs=inputs)
 
     return
 
@@ -291,7 +291,7 @@ def playbook_barclays___detonate_urlscan_io_1(action=None, success=None, contain
     ################################################################################
 
     # call playbook "Dev/Barclays - Detonate urlscan.io", returns the playbook_run_id
-    playbook_run_id = phantom.playbook("Dev/Barclays - Detonate urlscan.io", container=container, name="playbook_barclays___detonate_urlscan_io_1")
+    playbook_run_id = phantom.playbook("Dev/Barclays - Detonate urlscan.io", container=container, name="playbook_barclays___detonate_urlscan_io_1", callback=join_playbook_barclays___uc_phising_splunk_correlation_1)
 
     return
 
@@ -316,7 +316,141 @@ def playbook_barclays___reversinglabs_sanbox_detonate_1(action=None, success=Non
     ################################################################################
 
     # call playbook "Dev/Barclays - ReversingLabs Sanbox detonate", returns the playbook_run_id
-    playbook_run_id = phantom.playbook("Dev/Barclays - ReversingLabs Sanbox detonate", container=container, name="playbook_barclays___reversinglabs_sanbox_detonate_1", inputs=inputs)
+    playbook_run_id = phantom.playbook("Dev/Barclays - ReversingLabs Sanbox detonate", container=container, name="playbook_barclays___reversinglabs_sanbox_detonate_1", callback=join_playbook_barclays___uc_phising_splunk_correlation_1, inputs=inputs)
+
+    return
+
+
+@phantom.playbook_block()
+def join_playbook_barclays___uc_phising_splunk_correlation_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("join_playbook_barclays___uc_phising_splunk_correlation_1() called")
+
+    if phantom.completed(playbook_names=["playbook_barclays___virustotal_ip_reputation_1", "playbook_barclays___detonate_urlscan_io_1", "playbook_barclays___reversinglabs_sanbox_detonate_1"]):
+        # call connected block "playbook_barclays___uc_phising_splunk_correlation_1"
+        playbook_barclays___uc_phising_splunk_correlation_1(container=container, handle=handle)
+
+    return
+
+
+@phantom.playbook_block()
+def playbook_barclays___uc_phising_splunk_correlation_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("playbook_barclays___uc_phising_splunk_correlation_1() called")
+
+    inputs = {
+        "requesturl": [],
+        "subject": [],
+    }
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    # call playbook "Dev/Barclays - UC Phising Splunk correlation", returns the playbook_run_id
+    playbook_run_id = phantom.playbook("Dev/Barclays - UC Phising Splunk correlation", container=container, name="playbook_barclays___uc_phising_splunk_correlation_1", callback=format_prompt_analyst, inputs=inputs)
+
+    return
+
+
+@phantom.playbook_block()
+def format_prompt_analyst(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("format_prompt_analyst() called")
+
+    template = """%%\n{0}\n%%"""
+
+    # parameter list for template variable replacement
+    parameters = [
+        "playbook_barclays___virustotal_ip_reputation_1:playbook_output:summary"
+    ]
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.format(container=container, template=template, parameters=parameters, name="format_prompt_analyst")
+
+    prompt_analyst(container=container)
+
+    return
+
+
+@phantom.playbook_block()
+def prompt_analyst(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("prompt_analyst() called")
+
+    # set user and message variables for phantom.prompt call
+
+    user = None
+    role = "CyberOperations T3"
+    message = """Option 1\nOption 2"""
+
+    # parameter list for template variable replacement
+    parameters = []
+
+    # responses
+    response_types = [
+        {
+            "prompt": "True positive",
+            "options": {
+                "type": "list",
+                "choices": [
+                    "Yes",
+                    "No"
+                ],
+            },
+        }
+    ]
+
+    phantom.prompt2(container=container, user=user, role=role, message=message, respond_in_mins=30, name="prompt_analyst", parameters=parameters, response_types=response_types, callback=decision_2)
+
+    return
+
+
+@phantom.playbook_block()
+def prompt_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("prompt_2() called")
+
+    # set user and message variables for phantom.prompt call
+
+    user = None
+    role = "CyberOperations T3"
+    message = """option 1"""
+
+    # parameter list for template variable replacement
+    parameters = []
+
+    phantom.prompt2(container=container, user=user, role=role, message=message, respond_in_mins=30, name="prompt_2", parameters=parameters)
+
+    return
+
+
+@phantom.playbook_block()
+def decision_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("decision_2() called")
+
+    # check for 'if' condition 1
+    found_match_1 = phantom.decision(
+        container=container,
+        conditions=[
+            ["prompt_analyst:action_result.summary.responses.0", "==", "yes"]
+        ],
+        delimiter=None)
+
+    # call connected blocks if condition 1 matched
+    if found_match_1:
+        prompt_2(action=action, success=success, container=container, results=results, handle=handle)
+        return
 
     return
 

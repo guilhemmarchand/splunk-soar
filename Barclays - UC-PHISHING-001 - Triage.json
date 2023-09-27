@@ -114,9 +114,63 @@
                     "sourcePort": "12_out",
                     "targetNode": "16",
                     "targetPort": "16_in"
+                },
+                {
+                    "id": "port_15_to_port_18",
+                    "sourceNode": "15",
+                    "sourcePort": "15_out",
+                    "targetNode": "18",
+                    "targetPort": "18_in"
+                },
+                {
+                    "id": "port_16_to_port_18",
+                    "sourceNode": "16",
+                    "sourcePort": "16_out",
+                    "targetNode": "18",
+                    "targetPort": "18_in"
+                },
+                {
+                    "id": "port_14_to_port_18",
+                    "sourceNode": "14",
+                    "sourcePort": "14_out",
+                    "targetNode": "18",
+                    "targetPort": "18_in"
+                },
+                {
+                    "id": "port_18_to_port_19",
+                    "sourceNode": "18",
+                    "sourcePort": "18_out",
+                    "targetNode": "19",
+                    "targetPort": "19_in"
+                },
+                {
+                    "id": "port_19_to_port_20",
+                    "sourceNode": "19",
+                    "sourcePort": "19_out",
+                    "targetNode": "20",
+                    "targetPort": "20_in"
+                },
+                {
+                    "id": "port_20_to_port_22",
+                    "sourceNode": "20",
+                    "sourcePort": "20_out",
+                    "targetNode": "22",
+                    "targetPort": "22_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_22_to_port_21",
+                    "sourceNode": "22",
+                    "sourcePort": "22_out",
+                    "targetNode": "21",
+                    "targetPort": "21_in"
                 }
             ],
-            "hash": "9d2de6b4fea4690c4deea2829e62aa16ed3013d9",
+            "hash": "bf9ff422f24bff632e29bfe27d39478613820655",
             "nodes": {
                 "0": {
                     "data": {
@@ -147,8 +201,8 @@
                     "id": "1",
                     "type": "end",
                     "warnings": {},
-                    "x": 1020,
-                    "y": 1580
+                    "x": 1000,
+                    "y": 2160
                 },
                 "10": {
                     "data": {
@@ -393,6 +447,170 @@
                     "x": 1300,
                     "y": 1120
                 },
+                "18": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "playbook_Barclays___UC_Phising_Splunk_correlation_1",
+                        "id": "18",
+                        "inputs": {
+                            "requestUrl": {
+                                "datapaths": [],
+                                "deduplicate": false
+                            },
+                            "subject": {
+                                "datapaths": [],
+                                "deduplicate": false
+                            }
+                        },
+                        "playbookName": "Barclays - UC Phising Splunk correlation",
+                        "playbookRepo": 11,
+                        "playbookRepoName": "Dev",
+                        "playbookType": "data",
+                        "synchronous": true,
+                        "type": "playbook"
+                    },
+                    "errors": {},
+                    "id": "18",
+                    "type": "playbook",
+                    "warnings": {},
+                    "x": 1300,
+                    "y": 1280
+                },
+                "19": {
+                    "data": {
+                        "advanced": {
+                            "customName": "format prompt analyst",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "format_prompt_analyst",
+                        "id": "19",
+                        "parameters": [
+                            "playbook_barclays___virustotal_ip_reputation_1:playbook_output:summary"
+                        ],
+                        "template": "%%\n{0}\n%%",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "19",
+                    "type": "format",
+                    "warnings": {},
+                    "x": 1300,
+                    "y": 1400
+                },
+                "20": {
+                    "data": {
+                        "advanced": {
+                            "customName": "prompt analyst",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "approver": {
+                            "type": "role",
+                            "value": "CyberOperations T3"
+                        },
+                        "functionId": 1,
+                        "functionName": "prompt_analyst",
+                        "id": "20",
+                        "message": "Option 1\nOption 2",
+                        "parameters": [],
+                        "responseTime": 30,
+                        "responses": [
+                            {
+                                "responseOptions": [
+                                    "Yes",
+                                    "No"
+                                ],
+                                "responsePrompt": "True positive",
+                                "responseType": "yes/no"
+                            }
+                        ],
+                        "type": "prompt"
+                    },
+                    "errors": {},
+                    "id": "20",
+                    "type": "prompt",
+                    "warnings": {},
+                    "x": 1380,
+                    "y": 1500
+                },
+                "21": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "approver": {
+                            "type": "role",
+                            "value": "CyberOperations T3"
+                        },
+                        "functionId": 2,
+                        "functionName": "prompt_2",
+                        "id": "21",
+                        "message": "option 1",
+                        "parameters": [],
+                        "responseTime": 30,
+                        "responses": [],
+                        "type": "prompt"
+                    },
+                    "errors": {},
+                    "id": "21",
+                    "type": "prompt",
+                    "warnings": {},
+                    "x": 1560,
+                    "y": 1780
+                },
+                "22": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "==",
+                                        "param": "prompt_analyst:action_result.summary.responses.0",
+                                        "value": "yes"
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "customName": "true positive",
+                                "display": "If",
+                                "logic": "and",
+                                "type": "if"
+                            },
+                            {
+                                "comparisons": [
+                                    {
+                                        "op": "==",
+                                        "param": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "conditionIndex": 1,
+                                "customName": "false positive",
+                                "display": "Else",
+                                "logic": "and",
+                                "type": "else"
+                            }
+                        ],
+                        "functionId": 2,
+                        "functionName": "decision_2",
+                        "id": "22",
+                        "type": "decision"
+                    },
+                    "errors": {},
+                    "id": "22",
+                    "type": "decision",
+                    "warnings": {},
+                    "x": 1380,
+                    "y": 1644.5
+                },
                 "4": {
                     "data": {
                         "advanced": {
@@ -576,7 +794,7 @@
         "schema": "5.0.10",
         "version": "6.0.2.127725"
     },
-    "create_time": "2023-09-27T06:46:19.699940+00:00",
+    "create_time": "2023-09-27T08:44:48.976471+00:00",
     "draft_mode": false,
     "labels": [
         "*"
