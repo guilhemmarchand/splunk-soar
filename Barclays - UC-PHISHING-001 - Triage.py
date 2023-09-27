@@ -195,7 +195,7 @@ def filter_for_af(action=None, success=None, container=None, results=None, handl
 
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_3 or matched_results_3:
-        pass
+        playbook_barclays___virustotal_ip_reputation_1(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_3, filtered_results=matched_results_3)
 
     return
 
@@ -248,6 +248,30 @@ def playbook_barclays___virustotal_url_reputation_1(action=None, success=None, c
 
     # call playbook "Dev/Barclays - VirusTotal url reputation", returns the playbook_run_id
     playbook_run_id = phantom.playbook("Dev/Barclays - VirusTotal url reputation", container=container, name="playbook_barclays___virustotal_url_reputation_1", inputs=inputs)
+
+    return
+
+
+@phantom.playbook_block()
+def playbook_barclays___virustotal_ip_reputation_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("playbook_barclays___virustotal_ip_reputation_1() called")
+
+    inputs = {
+        "filehash": [],
+    }
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    # call playbook "Dev/Barclays - VirusTotal IP reputation", returns the playbook_run_id
+    playbook_run_id = phantom.playbook("Dev/Barclays - VirusTotal IP reputation", container=container, name="playbook_barclays___virustotal_ip_reputation_1", inputs=inputs)
 
     return
 

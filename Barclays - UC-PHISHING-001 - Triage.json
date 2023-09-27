@@ -88,9 +88,21 @@
                     "sourcePort": "11_out",
                     "targetNode": "13",
                     "targetPort": "13_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 2
+                        }
+                    ],
+                    "id": "port_11_to_port_14",
+                    "sourceNode": "11",
+                    "sourcePort": "11_out",
+                    "targetNode": "14",
+                    "targetPort": "14_in"
                 }
             ],
-            "hash": "8cd799e35cdb77797caea85812d38c116dc34fea",
+            "hash": "76421d572d014db2c87c1d271ebd70a3cf8010a0",
             "nodes": {
                 "0": {
                     "data": {
@@ -284,6 +296,34 @@
                     "x": 1000,
                     "y": 1000
                 },
+                "14": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "playbook_Barclays___VirusTotal_IP_reputation_1",
+                        "id": "14",
+                        "inputs": {
+                            "fileHash": {
+                                "datapaths": [],
+                                "deduplicate": false
+                            }
+                        },
+                        "playbookName": "Barclays - VirusTotal IP reputation",
+                        "playbookRepo": 11,
+                        "playbookRepoName": "Dev",
+                        "playbookType": "data",
+                        "synchronous": true,
+                        "type": "playbook"
+                    },
+                    "errors": {},
+                    "id": "14",
+                    "type": "playbook",
+                    "warnings": {},
+                    "x": 1600,
+                    "y": 1004.5
+                },
                 "4": {
                     "data": {
                         "advanced": {
@@ -467,7 +507,7 @@
         "schema": "5.0.10",
         "version": "6.0.2.127725"
     },
-    "create_time": "2023-09-27T05:38:37.998621+00:00",
+    "create_time": "2023-09-27T05:46:53.256893+00:00",
     "draft_mode": false,
     "labels": [
         "*"
