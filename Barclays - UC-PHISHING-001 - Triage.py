@@ -444,7 +444,7 @@ def prompt_approval(action=None, success=None, container=None, results=None, han
         }
     ]
 
-    phantom.prompt2(container=container, user=user, role=role, message=message, respond_in_mins=30, name="prompt_approval", parameters=parameters, response_types=response_types)
+    phantom.prompt2(container=container, user=user, role=role, message=message, respond_in_mins=30, name="prompt_approval", parameters=parameters, response_types=response_types, callback=approval_decision)
 
     return
 
@@ -488,7 +488,18 @@ def add_comment_false_positve(action=None, success=None, container=None, results
 
     phantom.comment(container=container, comment="boo")
 
-    playbook_barclays___update_es_notable_event_1(container=container)
+    join_playbook_barclays___update_es_notable_event_1(container=container)
+
+    return
+
+
+@phantom.playbook_block()
+def join_playbook_barclays___update_es_notable_event_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("join_playbook_barclays___update_es_notable_event_1() called")
+
+    if phantom.completed(action_names=["prompt_analyst", "prompt_approval"], playbook_names=["playbook_barclays___uc_phising_remediate_and_contain_1"]):
+        # call connected block "playbook_barclays___update_es_notable_event_1"
+        playbook_barclays___update_es_notable_event_1(container=container, handle=handle)
 
     return
 
@@ -498,8 +509,8 @@ def playbook_barclays___update_es_notable_event_1(action=None, success=None, con
     phantom.debug("playbook_barclays___update_es_notable_event_1() called")
 
     inputs = {
-        "event_id": [],
         "action": [],
+        "event_id": [],
     }
 
     ################################################################################
@@ -526,6 +537,57 @@ def playbook_barclays___update_es_notable_event_1_callback(action=None, success=
     # Downstream End block cannot be called directly, since execution will call on_finish automatically.
     # Using placeholder callback function so child playbook is run synchronously.
 
+
+    return
+
+
+@phantom.playbook_block()
+def approval_decision(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("approval_decision() called")
+
+    # check for 'else' condition 2
+    add_comment_remediation_refused(action=action, success=success, container=container, results=results, handle=handle)
+
+    return
+
+
+@phantom.playbook_block()
+def playbook_barclays___uc_phising_remediate_and_contain_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("playbook_barclays___uc_phising_remediate_and_contain_1() called")
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    # call playbook "Dev/Barclays - UC Phising remediate and contain", returns the playbook_run_id
+    playbook_run_id = phantom.playbook("Dev/Barclays - UC Phising remediate and contain", container=container, name="playbook_barclays___uc_phising_remediate_and_contain_1", callback=join_playbook_barclays___update_es_notable_event_1)
+
+    return
+
+
+@phantom.playbook_block()
+def add_comment_remediation_refused(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("add_comment_remediation_refused() called")
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.comment(container=container, comment="WTF")
+
+    join_playbook_barclays___update_es_notable_event_1(container=container)
 
     return
 

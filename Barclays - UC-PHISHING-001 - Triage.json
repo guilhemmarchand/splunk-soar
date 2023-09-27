@@ -194,9 +194,54 @@
                     "sourcePort": "25_out",
                     "targetNode": "1",
                     "targetPort": "1_in"
+                },
+                {
+                    "id": "port_21_to_port_26",
+                    "sourceNode": "21",
+                    "sourcePort": "21_out",
+                    "targetNode": "26",
+                    "targetPort": "26_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_26_to_port_27",
+                    "sourceNode": "26",
+                    "sourcePort": "26_out",
+                    "targetNode": "27",
+                    "targetPort": "27_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 1
+                        }
+                    ],
+                    "id": "port_26_to_port_29",
+                    "sourceNode": "26",
+                    "sourcePort": "26_out",
+                    "targetNode": "29",
+                    "targetPort": "29_in"
+                },
+                {
+                    "id": "port_29_to_port_25",
+                    "sourceNode": "29",
+                    "sourcePort": "29_out",
+                    "targetNode": "25",
+                    "targetPort": "25_in"
+                },
+                {
+                    "id": "port_27_to_port_25",
+                    "sourceNode": "27",
+                    "sourcePort": "27_out",
+                    "targetNode": "25",
+                    "targetPort": "25_in"
                 }
             ],
-            "hash": "7f70f8daa887f0f03593575f24acc3fc72765f57",
+            "hash": "3447c665b0c4391865814880bc410284a6fe363a",
             "nodes": {
                 "0": {
                     "data": {
@@ -597,7 +642,7 @@
                     "id": "21",
                     "type": "prompt",
                     "warnings": {},
-                    "x": 1560,
+                    "x": 1760,
                     "y": 1780
                 },
                 "22": {
@@ -709,7 +754,7 @@
                     "id": "23",
                     "type": "utility",
                     "warnings": {},
-                    "x": 1100,
+                    "x": 940,
                     "y": 1780
                 },
                 "25": {
@@ -741,8 +786,145 @@
                     "id": "25",
                     "type": "playbook",
                     "warnings": {},
-                    "x": 1100,
-                    "y": 1900
+                    "x": 940,
+                    "y": 2280
+                },
+                "26": {
+                    "data": {
+                        "advanced": {
+                            "customName": "approval decision",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "==",
+                                        "param": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "customName": "Approve remediation",
+                                "display": "If",
+                                "logic": "and",
+                                "type": "if"
+                            },
+                            {
+                                "comparisons": [
+                                    {
+                                        "op": "==",
+                                        "param": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "conditionIndex": 1,
+                                "customName": "Refuse remediation",
+                                "display": "Else",
+                                "logic": "and",
+                                "type": "else"
+                            }
+                        ],
+                        "functionId": 3,
+                        "functionName": "approval_decision",
+                        "id": "26",
+                        "type": "decision"
+                    },
+                    "errors": {},
+                    "id": "26",
+                    "type": "decision",
+                    "warnings": {},
+                    "x": 1760,
+                    "y": 1920
+                },
+                "27": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "playbook_Barclays___UC_Phising_remediate_and_contain_1",
+                        "id": "27",
+                        "inputs": {},
+                        "playbookName": "Barclays - UC Phising remediate and contain",
+                        "playbookRepo": 11,
+                        "playbookRepoName": "Dev",
+                        "playbookType": "automation",
+                        "synchronous": true,
+                        "type": "playbook"
+                    },
+                    "errors": {},
+                    "id": "27",
+                    "type": "playbook",
+                    "warnings": {},
+                    "x": 1880,
+                    "y": 2060
+                },
+                "29": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Add comment remediation refused",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 3,
+                        "functionName": "add_comment_remediation_refused",
+                        "id": "29",
+                        "selectMore": false,
+                        "tab": "apis",
+                        "type": "utility",
+                        "utilities": {
+                            "comment": {
+                                "description": "",
+                                "fields": [
+                                    {
+                                        "description": "",
+                                        "label": "comment",
+                                        "name": "comment",
+                                        "placeholder": "Enter a comment",
+                                        "renderType": "datapath",
+                                        "required": true
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "container",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "author",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "trace",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "add comment",
+                                "name": "comment"
+                            }
+                        },
+                        "utilityType": "api",
+                        "values": {
+                            "comment": {
+                                "_internal": [
+                                    "container",
+                                    "author",
+                                    "trace"
+                                ],
+                                "comment": "WTF"
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "29",
+                    "type": "utility",
+                    "warnings": {},
+                    "x": 1520,
+                    "y": 2064.5
                 },
                 "4": {
                     "data": {
@@ -927,7 +1109,7 @@
         "schema": "5.0.10",
         "version": "6.0.2.127725"
     },
-    "create_time": "2023-09-27T08:58:15.783153+00:00",
+    "create_time": "2023-09-27T09:09:26.855516+00:00",
     "draft_mode": false,
     "labels": [
         "*"
