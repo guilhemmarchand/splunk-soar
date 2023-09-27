@@ -109,7 +109,7 @@
                     "targetPort": "15_in"
                 }
             ],
-            "hash": "91ae81ccb7e897a015b5b51261053bbf4a5d7964",
+            "hash": "02222776a70c22d3314f9829c2219a04da1647d5",
             "nodes": {
                 "0": {
                     "data": {
@@ -336,9 +336,15 @@
                         "advanced": {
                             "join": []
                         },
-                        "functionId": 4,
-                        "functionName": "playbook_4",
+                        "functionId": 1,
+                        "functionName": "playbook_Barclays___Detonate_urlscan.io_1",
                         "id": "15",
+                        "inputs": {},
+                        "playbookName": "Barclays - Detonate urlscan.io",
+                        "playbookRepo": 11,
+                        "playbookRepoName": "Dev",
+                        "playbookType": "automation",
+                        "synchronous": true,
                         "type": "playbook"
                     },
                     "errors": {},
@@ -346,7 +352,7 @@
                     "type": "playbook",
                     "warnings": {},
                     "x": 1000,
-                    "y": 1144.5
+                    "y": 1120
                 },
                 "4": {
                     "data": {
@@ -531,7 +537,7 @@
         "schema": "5.0.10",
         "version": "6.0.2.127725"
     },
-    "create_time": "2023-09-27T05:55:02.303690+00:00",
+    "create_time": "2023-09-27T05:55:41.746189+00:00",
     "draft_mode": false,
     "labels": [
         "*"

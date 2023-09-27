@@ -247,7 +247,7 @@ def playbook_barclays___virustotal_url_reputation_1(action=None, success=None, c
     ################################################################################
 
     # call playbook "Dev/Barclays - VirusTotal url reputation", returns the playbook_run_id
-    playbook_run_id = phantom.playbook("Dev/Barclays - VirusTotal url reputation", container=container, name="playbook_barclays___virustotal_url_reputation_1", callback=playbook_4, inputs=inputs)
+    playbook_run_id = phantom.playbook("Dev/Barclays - VirusTotal url reputation", container=container, name="playbook_barclays___virustotal_url_reputation_1", callback=playbook_barclays___detonate_urlscan_io_1, inputs=inputs)
 
     return
 
@@ -277,8 +277,8 @@ def playbook_barclays___virustotal_ip_reputation_1(action=None, success=None, co
 
 
 @phantom.playbook_block()
-def playbook_4(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
-    phantom.debug("playbook_4() called")
+def playbook_barclays___detonate_urlscan_io_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("playbook_barclays___detonate_urlscan_io_1() called")
 
     ################################################################################
     ## Custom Code Start
@@ -290,8 +290,8 @@ def playbook_4(action=None, success=None, container=None, results=None, handle=N
     ## Custom Code End
     ################################################################################
 
-    # call playbook "local/playbook", returns the playbook_run_id
-    playbook_run_id = phantom.playbook("local/playbook", container=container)
+    # call playbook "Dev/Barclays - Detonate urlscan.io", returns the playbook_run_id
+    playbook_run_id = phantom.playbook("Dev/Barclays - Detonate urlscan.io", container=container, name="playbook_barclays___detonate_urlscan_io_1")
 
     return
 
