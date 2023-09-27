@@ -107,9 +107,16 @@
                     "sourcePort": "13_out",
                     "targetNode": "15",
                     "targetPort": "15_in"
+                },
+                {
+                    "id": "port_12_to_port_16",
+                    "sourceNode": "12",
+                    "sourcePort": "12_out",
+                    "targetNode": "16",
+                    "targetPort": "16_in"
                 }
             ],
-            "hash": "91ae81ccb7e897a015b5b51261053bbf4a5d7964",
+            "hash": "9d2de6b4fea4690c4deea2829e62aa16ed3013d9",
             "nodes": {
                 "0": {
                     "data": {
@@ -354,6 +361,38 @@
                     "x": 1000,
                     "y": 1120
                 },
+                "16": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "playbook_Barclays___ReversingLabs_Sanbox_detonate_1",
+                        "id": "16",
+                        "inputs": {
+                            "message_id": {
+                                "datapaths": [],
+                                "deduplicate": false
+                            },
+                            "recipient": {
+                                "datapaths": [],
+                                "deduplicate": false
+                            }
+                        },
+                        "playbookName": "Barclays - ReversingLabs Sanbox detonate",
+                        "playbookRepo": 11,
+                        "playbookRepoName": "Dev",
+                        "playbookType": "data",
+                        "synchronous": true,
+                        "type": "playbook"
+                    },
+                    "errors": {},
+                    "id": "16",
+                    "type": "playbook",
+                    "warnings": {},
+                    "x": 1300,
+                    "y": 1120
+                },
                 "4": {
                     "data": {
                         "advanced": {
@@ -537,7 +576,7 @@
         "schema": "5.0.10",
         "version": "6.0.2.127725"
     },
-    "create_time": "2023-09-27T05:55:41.746189+00:00",
+    "create_time": "2023-09-27T06:46:19.699940+00:00",
     "draft_mode": false,
     "labels": [
         "*"

@@ -223,7 +223,7 @@ def playbook_barclays___virustotal_file_reputation_1(action=None, success=None, 
     ################################################################################
 
     # call playbook "Dev/Barclays - VirusTotal file reputation", returns the playbook_run_id
-    playbook_run_id = phantom.playbook("Dev/Barclays - VirusTotal file reputation", container=container, name="playbook_barclays___virustotal_file_reputation_1", inputs=inputs)
+    playbook_run_id = phantom.playbook("Dev/Barclays - VirusTotal file reputation", container=container, name="playbook_barclays___virustotal_file_reputation_1", callback=playbook_barclays___reversinglabs_sanbox_detonate_1, inputs=inputs)
 
     return
 
@@ -292,6 +292,31 @@ def playbook_barclays___detonate_urlscan_io_1(action=None, success=None, contain
 
     # call playbook "Dev/Barclays - Detonate urlscan.io", returns the playbook_run_id
     playbook_run_id = phantom.playbook("Dev/Barclays - Detonate urlscan.io", container=container, name="playbook_barclays___detonate_urlscan_io_1")
+
+    return
+
+
+@phantom.playbook_block()
+def playbook_barclays___reversinglabs_sanbox_detonate_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("playbook_barclays___reversinglabs_sanbox_detonate_1() called")
+
+    inputs = {
+        "message_id": [],
+        "recipient": [],
+    }
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    # call playbook "Dev/Barclays - ReversingLabs Sanbox detonate", returns the playbook_run_id
+    playbook_run_id = phantom.playbook("Dev/Barclays - ReversingLabs Sanbox detonate", container=container, name="playbook_barclays___reversinglabs_sanbox_detonate_1", inputs=inputs)
 
     return
 
