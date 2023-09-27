@@ -100,9 +100,16 @@
                     "sourcePort": "11_out",
                     "targetNode": "14",
                     "targetPort": "14_in"
+                },
+                {
+                    "id": "port_13_to_port_15",
+                    "sourceNode": "13",
+                    "sourcePort": "13_out",
+                    "targetNode": "15",
+                    "targetPort": "15_in"
                 }
             ],
-            "hash": "76421d572d014db2c87c1d271ebd70a3cf8010a0",
+            "hash": "91ae81ccb7e897a015b5b51261053bbf4a5d7964",
             "nodes": {
                 "0": {
                     "data": {
@@ -324,6 +331,23 @@
                     "x": 1600,
                     "y": 1004.5
                 },
+                "15": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionId": 4,
+                        "functionName": "playbook_4",
+                        "id": "15",
+                        "type": "playbook"
+                    },
+                    "errors": {},
+                    "id": "15",
+                    "type": "playbook",
+                    "warnings": {},
+                    "x": 1000,
+                    "y": 1144.5
+                },
                 "4": {
                     "data": {
                         "advanced": {
@@ -507,7 +531,7 @@
         "schema": "5.0.10",
         "version": "6.0.2.127725"
     },
-    "create_time": "2023-09-27T05:46:53.256893+00:00",
+    "create_time": "2023-09-27T05:55:02.303690+00:00",
     "draft_mode": false,
     "labels": [
         "*"
