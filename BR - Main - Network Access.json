@@ -28,7 +28,7 @@
                     "targetPort": "1_in"
                 }
             ],
-            "hash": "4bcedfd1b9adef3ee5afa1fef1e18a39372b04d7",
+            "hash": "de23e50b2a8300f60d2d5df4f84dd0206436d45e",
             "nodes": {
                 "0": {
                     "data": {
@@ -73,10 +73,9 @@
                         "functionName": "format_comment",
                         "id": "3",
                         "parameters": [
-                            "playbook:launching_user.name",
-                            "playbook:launching_user.id"
+                            "artifact:*.cef.soar_playbook"
                         ],
-                        "template": "Triage was accepted and playbook named: {0} with id: {1} was executed.\n",
+                        "template": "Triage was accepted and playbook named: {0} was executed successfully.\n",
                         "type": "format"
                     },
                     "errors": {},
@@ -160,7 +159,7 @@
         "schema": "5.0.10",
         "version": "6.0.2.127725"
     },
-    "create_time": "2023-09-28T13:37:06.602007+00:00",
+    "create_time": "2023-09-28T13:41:06.492525+00:00",
     "draft_mode": false,
     "labels": [
         "splunk_events"

@@ -21,12 +21,11 @@ def on_start(container):
 def format_comment(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug("format_comment() called")
 
-    template = """Triage was accepted and playbook named: {0} with id: {1} was executed.\n"""
+    template = """Triage was accepted and playbook named: {0} was executed successfully.\n"""
 
     # parameter list for template variable replacement
     parameters = [
-        "playbook:launching_user.name",
-        "playbook:launching_user.id"
+        "artifact:*.cef.soar_playbook"
     ]
 
     ################################################################################
