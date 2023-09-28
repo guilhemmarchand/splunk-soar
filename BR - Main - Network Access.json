@@ -28,7 +28,7 @@
                     "targetPort": "1_in"
                 }
             ],
-            "hash": "04d7959a0940f595f5d28edc42b51c6bb3ed61ce",
+            "hash": "4bcedfd1b9adef3ee5afa1fef1e18a39372b04d7",
             "nodes": {
                 "0": {
                     "data": {
@@ -134,7 +134,12 @@
                         "utilityType": "api",
                         "values": {
                             "comment": {
-                                "comment": null
+                                "_internal": [
+                                    "container",
+                                    "author",
+                                    "trace"
+                                ],
+                                "comment": "format_comment:formatted_data"
                             }
                         }
                     },
@@ -155,7 +160,7 @@
         "schema": "5.0.10",
         "version": "6.0.2.127725"
     },
-    "create_time": "2023-09-28T13:36:54.767146+00:00",
+    "create_time": "2023-09-28T13:37:06.602007+00:00",
     "draft_mode": false,
     "labels": [
         "splunk_events"

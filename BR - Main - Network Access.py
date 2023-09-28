@@ -50,6 +50,8 @@ def format_comment(action=None, success=None, container=None, results=None, hand
 def add_comment(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug("add_comment() called")
 
+    format_comment = phantom.get_format_data(name="format_comment")
+
     ################################################################################
     ## Custom Code Start
     ################################################################################
@@ -60,7 +62,7 @@ def add_comment(action=None, success=None, container=None, results=None, handle=
     ## Custom Code End
     ################################################################################
 
-    phantom.comment()
+    phantom.comment(container=container, comment=format_comment)
 
     return
 
