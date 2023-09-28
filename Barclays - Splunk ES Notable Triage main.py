@@ -172,21 +172,18 @@ def send_email_1(action=None, success=None, container=None, results=None, handle
 
     # phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
 
-    format_invalid_notable_email_title__as_list = phantom.get_format_data(name="format_invalid_notable_email_title__as_list")
-    format_invalid_notablke_email_body__as_list = phantom.get_format_data(name="format_invalid_notablke_email_body__as_list")
+    format_invalid_notable_email_title = phantom.get_format_data(name="format_invalid_notable_email_title")
+    format_invalid_notablke_email_body = phantom.get_format_data(name="format_invalid_notablke_email_body")
 
     parameters = []
 
-    # build parameters list for 'send_email_1' call
-    for format_invalid_notable_email_title__item in format_invalid_notable_email_title__as_list:
-        for format_invalid_notablke_email_body__item in format_invalid_notablke_email_body__as_list:
-            if format_invalid_notablke_email_body__item is not None:
-                parameters.append({
-                    "from": "gmarchand@splunk.com",
-                    "to": "gmarchand@splunk.com",
-                    "subject": format_invalid_notable_email_title__item,
-                    "body": format_invalid_notablke_email_body__item,
-                })
+    if format_invalid_notablke_email_body is not None:
+        parameters.append({
+            "from": "gmarchand@splunk.com",
+            "to": "gmarchand@splunk.com",
+            "subject": format_invalid_notable_email_title,
+            "body": format_invalid_notablke_email_body,
+        })
 
     ################################################################################
     ## Custom Code Start

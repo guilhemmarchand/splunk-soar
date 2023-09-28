@@ -85,7 +85,7 @@
                     "targetPort": "1_in"
                 }
             ],
-            "hash": "285bdeb99cb17c9ea1763033a98daf41402491f4",
+            "hash": "210207be3486ef8b8446ee946415735d31480cfa",
             "nodes": {
                 "0": {
                     "data": {
@@ -302,9 +302,9 @@
                         "functionName": "send_email_1",
                         "id": "14",
                         "parameters": {
-                            "body": "format_invalid_notablke_email_body:formatted_data.*",
+                            "body": "format_invalid_notablke_email_body:formatted_data",
                             "from": "gmarchand@splunk.com",
-                            "subject": "format_invalid_notable_email_title:formatted_data.*",
+                            "subject": "format_invalid_notable_email_title:formatted_data",
                             "to": "gmarchand@splunk.com"
                         },
                         "requiredParameters": [
@@ -398,7 +398,7 @@
         "schema": "5.0.10",
         "version": "6.0.2.127725"
     },
-    "create_time": "2023-09-28T11:06:03.003997+00:00",
+    "create_time": "2023-09-28T11:09:17.203965+00:00",
     "draft_mode": false,
     "labels": [
         "splunk_events"
