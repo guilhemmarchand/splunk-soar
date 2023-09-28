@@ -85,7 +85,7 @@
                     "targetPort": "1_in"
                 }
             ],
-            "hash": "50fe7e7ec6f165f63b643f2344099bebef4a8769",
+            "hash": "ac03999391c48dbc01fe0d7c4e50c4598452a46f",
             "nodes": {
                 "0": {
                     "data": {
@@ -100,8 +100,8 @@
                     "id": "0",
                     "type": "start",
                     "warnings": {},
-                    "x": 200,
-                    "y": -160.00000000000006
+                    "x": 190,
+                    "y": 0
                 },
                 "1": {
                     "data": {
@@ -119,7 +119,7 @@
                     "userCode": "\n    # This function is called after all actions are completed.\n    # summary of all the action and/or all details of actions\n    # can be collected here.\n\n    # summary_json = phantom.get_summary()\n    # if 'result' in summary_json:\n        # for action_result in summary_json['result']:\n            # if 'action_run_id' in action_result:\n                # action_results = phantom.get_action_results(action_run_id=action_result['action_run_id'], result_data=False, flatten=False)\n                # phantom.debug(action_results)\n\n",
                     "warnings": {},
                     "x": 190,
-                    "y": 656
+                    "y": 968
                 },
                 "10": {
                     "data": {
@@ -171,8 +171,8 @@
                     "id": "10",
                     "type": "decision",
                     "warnings": {},
-                    "x": 260,
-                    "y": -40
+                    "x": 250,
+                    "y": 148
                 },
                 "11": {
                     "data": {
@@ -235,8 +235,8 @@
                     "id": "11",
                     "type": "utility",
                     "warnings": {},
-                    "x": 480,
-                    "y": 180
+                    "x": 420,
+                    "y": 320
                 },
                 "12": {
                     "data": {
@@ -258,8 +258,8 @@
                     "id": "12",
                     "type": "format",
                     "warnings": {},
-                    "x": 480,
-                    "y": 304.49999999999983
+                    "x": 420,
+                    "y": 440
                 },
                 "13": {
                     "data": {
@@ -282,8 +282,8 @@
                     "id": "13",
                     "type": "format",
                     "warnings": {},
-                    "x": 480,
-                    "y": 419.9999999999999
+                    "x": 420,
+                    "y": 560
                 },
                 "14": {
                     "data": {
@@ -323,8 +323,8 @@
                     "id": "14",
                     "type": "action",
                     "warnings": {},
-                    "x": 480,
-                    "y": 544.5
+                    "x": 420,
+                    "y": 700
                 },
                 "5": {
                     "data": {
@@ -361,8 +361,8 @@
                     "id": "5",
                     "type": "filter",
                     "warnings": {},
-                    "x": 60,
-                    "y": 160
+                    "x": 0,
+                    "y": 640
                 },
                 "9": {
                     "data": {
@@ -385,8 +385,8 @@
                     "type": "code",
                     "userCode": "\n    # Write your custom code here...\n    phantom.debug(\"Calling playbook={0}\".format(filtered_artifact_0__cef_soar_playbook[0]))\n    playbook_run_id = phantom.playbook(filtered_artifact_0__cef_soar_playbook[0], container=container)\n\n",
                     "warnings": {},
-                    "x": -220,
-                    "y": 380
+                    "x": 0,
+                    "y": 820
                 }
             },
             "notes": "Relies on the enriched custom field splunk_use_case_ref"
