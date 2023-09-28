@@ -7,21 +7,28 @@
             "description": "",
             "edges": [
                 {
-                    "id": "port_0_to_port_2",
+                    "id": "port_0_to_port_3",
                     "sourceNode": "0",
                     "sourcePort": "0_out",
-                    "targetNode": "2",
-                    "targetPort": "2_in"
+                    "targetNode": "3",
+                    "targetPort": "3_in"
                 },
                 {
-                    "id": "port_2_to_port_1",
-                    "sourceNode": "2",
-                    "sourcePort": "2_out",
+                    "id": "port_3_to_port_4",
+                    "sourceNode": "3",
+                    "sourcePort": "3_out",
+                    "targetNode": "4",
+                    "targetPort": "4_in"
+                },
+                {
+                    "id": "port_4_to_port_1",
+                    "sourceNode": "4",
+                    "sourcePort": "4_out",
                     "targetNode": "1",
                     "targetPort": "1_in"
                 }
             ],
-            "hash": "eaec8416757d421f2753afb43c1944cb0cefef41",
+            "hash": "04d7959a0940f595f5d28edc42b51c6bb3ed61ce",
             "nodes": {
                 "0": {
                     "data": {
@@ -53,16 +60,42 @@
                     "type": "end",
                     "warnings": {},
                     "x": 20,
-                    "y": 296
+                    "y": 444
                 },
-                "2": {
+                "3": {
                     "data": {
                         "advanced": {
+                            "customName": "format comment",
+                            "customNameId": 0,
                             "join": []
                         },
                         "functionId": 1,
-                        "functionName": "add_comment_1",
-                        "id": "2",
+                        "functionName": "format_comment",
+                        "id": "3",
+                        "parameters": [
+                            "playbook:launching_user.name",
+                            "playbook:launching_user.id"
+                        ],
+                        "template": "Triage was accepted and playbook named: {0} with id: {1} was executed.\n",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "3",
+                    "type": "format",
+                    "warnings": {},
+                    "x": 0,
+                    "y": 148
+                },
+                "4": {
+                    "data": {
+                        "advanced": {
+                            "customName": "add comment",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 2,
+                        "functionName": "add_comment",
+                        "id": "4",
                         "selectMore": false,
                         "tab": "apis",
                         "type": "utility",
@@ -101,21 +134,16 @@
                         "utilityType": "api",
                         "values": {
                             "comment": {
-                                "_internal": [
-                                    "container",
-                                    "author",
-                                    "trace"
-                                ],
-                                "comment": "All done."
+                                "comment": null
                             }
                         }
                     },
                     "errors": {},
-                    "id": "2",
+                    "id": "4",
                     "type": "utility",
                     "warnings": {},
                     "x": 0,
-                    "y": 148
+                    "y": 296
                 }
             },
             "notes": ""
@@ -127,7 +155,7 @@
         "schema": "5.0.10",
         "version": "6.0.2.127725"
     },
-    "create_time": "2023-09-28T11:08:26.536846+00:00",
+    "create_time": "2023-09-28T13:36:54.767146+00:00",
     "draft_mode": false,
     "labels": [
         "splunk_events"

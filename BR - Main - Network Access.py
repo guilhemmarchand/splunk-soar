@@ -12,14 +12,22 @@ from datetime import datetime, timedelta
 def on_start(container):
     phantom.debug('on_start() called')
 
-    # call 'add_comment_1' block
-    add_comment_1(container=container)
+    # call 'format_comment' block
+    format_comment(container=container)
 
     return
 
 @phantom.playbook_block()
-def add_comment_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
-    phantom.debug("add_comment_1() called")
+def format_comment(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("format_comment() called")
+
+    template = """Triage was accepted and playbook named: {0} with id: {1} was executed.\n"""
+
+    # parameter list for template variable replacement
+    parameters = [
+        "playbook:launching_user.name",
+        "playbook:launching_user.id"
+    ]
 
     ################################################################################
     ## Custom Code Start
@@ -31,7 +39,28 @@ def add_comment_1(action=None, success=None, container=None, results=None, handl
     ## Custom Code End
     ################################################################################
 
-    phantom.comment(container=container, comment="All done.")
+    phantom.format(container=container, template=template, parameters=parameters, name="format_comment")
+
+    add_comment(container=container)
+
+    return
+
+
+@phantom.playbook_block()
+def add_comment(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("add_comment() called")
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.comment()
 
     return
 
