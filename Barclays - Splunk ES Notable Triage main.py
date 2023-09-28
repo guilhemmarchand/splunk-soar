@@ -102,7 +102,7 @@ def add_comment_af_invalid(action=None, success=None, container=None, results=No
     ## Custom Code End
     ################################################################################
 
-    phantom.comment(container=container, comment="Invalid: the soar_playbook fields is missing from the artifact")
+    phantom.comment(container=container, comment="Notable Triage has failed: This event is missing the expected soar_playbook field.")
 
     format_invalid_notable_email_title(container=container)
 

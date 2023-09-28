@@ -85,7 +85,7 @@
                     "targetPort": "1_in"
                 }
             ],
-            "hash": "210207be3486ef8b8446ee946415735d31480cfa",
+            "hash": "50fe7e7ec6f165f63b643f2344099bebef4a8769",
             "nodes": {
                 "0": {
                     "data": {
@@ -101,7 +101,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 200,
-                    "y": -160
+                    "y": -160.00000000000006
                 },
                 "1": {
                     "data": {
@@ -227,7 +227,7 @@
                                     "author",
                                     "trace"
                                 ],
-                                "comment": "Invalid: the soar_playbook fields is missing from the artifact"
+                                "comment": "Notable Triage has failed: This event is missing the expected soar_playbook field."
                             }
                         }
                     },
@@ -259,7 +259,7 @@
                     "type": "format",
                     "warnings": {},
                     "x": 480,
-                    "y": 304.49999999999994
+                    "y": 304.49999999999983
                 },
                 "13": {
                     "data": {
@@ -283,7 +283,7 @@
                     "type": "format",
                     "warnings": {},
                     "x": 480,
-                    "y": 420
+                    "y": 419.9999999999999
                 },
                 "14": {
                     "data": {
@@ -398,7 +398,7 @@
         "schema": "5.0.10",
         "version": "6.0.2.127725"
     },
-    "create_time": "2023-09-28T11:09:17.203965+00:00",
+    "create_time": "2023-09-28T12:47:39.138525+00:00",
     "draft_mode": false,
     "labels": [
         "splunk_events"
