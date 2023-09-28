@@ -85,7 +85,7 @@
                     "targetPort": "1_in"
                 }
             ],
-            "hash": "ac03999391c48dbc01fe0d7c4e50c4598452a46f",
+            "hash": "ec7d9c0bc264d2c2705e2b9873220e467085c633",
             "nodes": {
                 "0": {
                     "data": {
@@ -101,7 +101,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 190,
-                    "y": 0
+                    "y": -8.526512829121202e-14
                 },
                 "1": {
                     "data": {
@@ -259,7 +259,7 @@
                     "type": "format",
                     "warnings": {},
                     "x": 420,
-                    "y": 440
+                    "y": 439.99999999999983
                 },
                 "13": {
                     "data": {
@@ -275,7 +275,7 @@
                             "container:id",
                             "container:url"
                         ],
-                        "template": "An invalid Notable was forwarded to Splunk SOAR Cloud, triage was refused as the Notable event is missing the Playbook target.\n\nPlease review this issue urgently:\n- Event ID: {0}\n- Event URL: {1}{1}\n\nSplunk SOAR Cloud.",
+                        "template": "An invalid Notable was forwarded to Splunk SOAR Cloud, triage was refused as the Notable event is missing the Playbook target.\n\nPlease review this issue urgently:\n- Event ID: {0}\n- Event URL: {1}\n\nSplunk SOAR Cloud.",
                         "type": "format"
                     },
                     "errors": {},
@@ -398,7 +398,7 @@
         "schema": "5.0.10",
         "version": "6.0.2.127725"
     },
-    "create_time": "2023-09-28T12:47:39.138525+00:00",
+    "create_time": "2023-09-28T13:30:20.202208+00:00",
     "draft_mode": false,
     "labels": [
         "splunk_events"

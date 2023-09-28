@@ -141,7 +141,7 @@ def format_invalid_notable_email_title(action=None, success=None, container=None
 def format_invalid_notablke_email_body(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug("format_invalid_notablke_email_body() called")
 
-    template = """An invalid Notable was forwarded to Splunk SOAR Cloud, triage was refused as the Notable event is missing the Playbook target.\n\nPlease review this issue urgently:\n- Event ID: {0}\n- Event URL: {1}{1}\n\nSplunk SOAR Cloud."""
+    template = """An invalid Notable was forwarded to Splunk SOAR Cloud, triage was refused as the Notable event is missing the Playbook target.\n\nPlease review this issue urgently:\n- Event ID: {0}\n- Event URL: {1}\n\nSplunk SOAR Cloud."""
 
     # parameter list for template variable replacement
     parameters = [
