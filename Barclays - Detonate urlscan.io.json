@@ -136,7 +136,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 190,
-                    "y": -1.2079226507921703e-13
+                    "y": -1.8474111129762605e-13
                 },
                 "1": {
                     "data": {
@@ -679,7 +679,7 @@
                     "type": "format",
                     "warnings": {},
                     "x": 170,
-                    "y": 475.9999999999999
+                    "y": 475.99999999999983
                 },
                 "6": {
                     "data": {
@@ -798,7 +798,7 @@
                     "y": 804
                 }
             },
-            "notes": "- Requires requestUrl in the artifact\n- test update"
+            "notes": "- Requires requestUrl in the artifact\n- test update v2"
         },
         "input_spec": null,
         "output_spec": [
