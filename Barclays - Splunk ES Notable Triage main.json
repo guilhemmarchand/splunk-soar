@@ -85,7 +85,7 @@
                     "targetPort": "1_in"
                 }
             ],
-            "hash": "285bdeb99cb17c9ea1763033a98daf41402491f4",
+            "hash": "ec7d9c0bc264d2c2705e2b9873220e467085c633",
             "nodes": {
                 "0": {
                     "data": {
@@ -100,8 +100,8 @@
                     "id": "0",
                     "type": "start",
                     "warnings": {},
-                    "x": 200,
-                    "y": -160
+                    "x": 190,
+                    "y": -8.526512829121202e-14
                 },
                 "1": {
                     "data": {
@@ -119,7 +119,7 @@
                     "userCode": "\n    # This function is called after all actions are completed.\n    # summary of all the action and/or all details of actions\n    # can be collected here.\n\n    # summary_json = phantom.get_summary()\n    # if 'result' in summary_json:\n        # for action_result in summary_json['result']:\n            # if 'action_run_id' in action_result:\n                # action_results = phantom.get_action_results(action_run_id=action_result['action_run_id'], result_data=False, flatten=False)\n                # phantom.debug(action_results)\n\n",
                     "warnings": {},
                     "x": 190,
-                    "y": 656
+                    "y": 968
                 },
                 "10": {
                     "data": {
@@ -171,8 +171,8 @@
                     "id": "10",
                     "type": "decision",
                     "warnings": {},
-                    "x": 260,
-                    "y": -40
+                    "x": 250,
+                    "y": 148
                 },
                 "11": {
                     "data": {
@@ -227,7 +227,7 @@
                                     "author",
                                     "trace"
                                 ],
-                                "comment": "Invalid: the soar_playbook fields is missing from the artifact"
+                                "comment": "Notable Triage has failed: This event is missing the expected soar_playbook field."
                             }
                         }
                     },
@@ -235,8 +235,8 @@
                     "id": "11",
                     "type": "utility",
                     "warnings": {},
-                    "x": 480,
-                    "y": 180
+                    "x": 420,
+                    "y": 320
                 },
                 "12": {
                     "data": {
@@ -258,8 +258,8 @@
                     "id": "12",
                     "type": "format",
                     "warnings": {},
-                    "x": 480,
-                    "y": 304.49999999999994
+                    "x": 420,
+                    "y": 439.99999999999983
                 },
                 "13": {
                     "data": {
@@ -275,15 +275,15 @@
                             "container:id",
                             "container:url"
                         ],
-                        "template": "An invalid Notable was forwarded to Splunk SOAR Cloud, triage was refused as the Notable event is missing the Playbook target.\n\nPlease review this issue urgently:\n- Event ID: {0}\n- Event URL: {1}{1}\n\nSplunk SOAR Cloud.",
+                        "template": "An invalid Notable was forwarded to Splunk SOAR Cloud, triage was refused as the Notable event is missing the Playbook target.\n\nPlease review this issue urgently:\n- Event ID: {0}\n- Event URL: {1}\n\nSplunk SOAR Cloud.",
                         "type": "format"
                     },
                     "errors": {},
                     "id": "13",
                     "type": "format",
                     "warnings": {},
-                    "x": 480,
-                    "y": 420
+                    "x": 420,
+                    "y": 560
                 },
                 "14": {
                     "data": {
@@ -302,9 +302,9 @@
                         "functionName": "send_email_1",
                         "id": "14",
                         "parameters": {
-                            "body": "format_invalid_notablke_email_body:formatted_data.*",
+                            "body": "format_invalid_notablke_email_body:formatted_data",
                             "from": "gmarchand@splunk.com",
-                            "subject": "format_invalid_notable_email_title:formatted_data.*",
+                            "subject": "format_invalid_notable_email_title:formatted_data",
                             "to": "gmarchand@splunk.com"
                         },
                         "requiredParameters": [
@@ -323,8 +323,8 @@
                     "id": "14",
                     "type": "action",
                     "warnings": {},
-                    "x": 480,
-                    "y": 544.5
+                    "x": 420,
+                    "y": 700
                 },
                 "5": {
                     "data": {
@@ -361,8 +361,8 @@
                     "id": "5",
                     "type": "filter",
                     "warnings": {},
-                    "x": 60,
-                    "y": 160
+                    "x": 0,
+                    "y": 640
                 },
                 "9": {
                     "data": {
@@ -385,8 +385,8 @@
                     "type": "code",
                     "userCode": "\n    # Write your custom code here...\n    phantom.debug(\"Calling playbook={0}\".format(filtered_artifact_0__cef_soar_playbook[0]))\n    playbook_run_id = phantom.playbook(filtered_artifact_0__cef_soar_playbook[0], container=container)\n\n",
                     "warnings": {},
-                    "x": -220,
-                    "y": 380
+                    "x": 0,
+                    "y": 820
                 }
             },
             "notes": "Relies on the enriched custom field splunk_use_case_ref"
@@ -398,7 +398,7 @@
         "schema": "5.0.10",
         "version": "6.0.2.127725"
     },
-    "create_time": "2023-09-28T11:05:35.661790+00:00",
+    "create_time": "2023-09-28T13:30:20.202208+00:00",
     "draft_mode": false,
     "labels": [
         "splunk_events"

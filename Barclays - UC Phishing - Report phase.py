@@ -293,13 +293,13 @@ def run_spl_query_resolved_notable(action=None, success=None, container=None, re
 
     # phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
 
-    format_spl_query_pending = phantom.get_format_data(name="format_spl_query_pending")
+    format_spl_query_resolved = phantom.get_format_data(name="format_spl_query_resolved")
 
     parameters = []
 
-    if format_spl_query_pending is not None:
+    if format_spl_query_resolved is not None:
         parameters.append({
-            "query": format_spl_query_pending,
+            "query": format_spl_query_resolved,
             "command": "| makeresults",
             "end_time": "now",
             "start_time": "-5m",

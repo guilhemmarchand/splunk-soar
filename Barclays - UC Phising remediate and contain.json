@@ -1,0 +1,812 @@
+{
+    "blockly": false,
+    "blockly_xml": "<xml></xml>",
+    "category": "CrowdStrike",
+    "coa": {
+        "data": {
+            "description": "This playbook is designed to be triggered by the master playbook, it will perform several correlation in Splunk data sources to be consolidated for the analyst decision purposes",
+            "edges": [
+                {
+                    "id": "port_0_to_port_2",
+                    "sourceNode": "0",
+                    "sourcePort": "0_out",
+                    "targetNode": "2",
+                    "targetPort": "2_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_2_to_port_4",
+                    "sourceNode": "2",
+                    "sourcePort": "2_out",
+                    "targetNode": "4",
+                    "targetPort": "4_in"
+                },
+                {
+                    "id": "port_4_to_port_5",
+                    "sourceNode": "4",
+                    "sourcePort": "4_out",
+                    "targetNode": "5",
+                    "targetPort": "5_in"
+                },
+                {
+                    "id": "port_5_to_port_6",
+                    "sourceNode": "5",
+                    "sourcePort": "5_out",
+                    "targetNode": "6",
+                    "targetPort": "6_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_7_to_port_8",
+                    "sourceNode": "7",
+                    "sourcePort": "7_out",
+                    "targetNode": "8",
+                    "targetPort": "8_in"
+                },
+                {
+                    "id": "port_8_to_port_9",
+                    "sourceNode": "8",
+                    "sourcePort": "8_out",
+                    "targetNode": "9",
+                    "targetPort": "9_in"
+                },
+                {
+                    "id": "port_9_to_port_1",
+                    "sourceNode": "9",
+                    "sourcePort": "9_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 1
+                        }
+                    ],
+                    "id": "port_7_to_port_10",
+                    "sourceNode": "7",
+                    "sourcePort": "7_out",
+                    "targetNode": "10",
+                    "targetPort": "10_in"
+                },
+                {
+                    "id": "port_10_to_port_11",
+                    "sourceNode": "10",
+                    "sourcePort": "10_out",
+                    "targetNode": "11",
+                    "targetPort": "11_in"
+                },
+                {
+                    "id": "port_11_to_port_12",
+                    "sourceNode": "11",
+                    "sourcePort": "11_out",
+                    "targetNode": "12",
+                    "targetPort": "12_in"
+                },
+                {
+                    "id": "port_12_to_port_13",
+                    "sourceNode": "12",
+                    "sourcePort": "12_out",
+                    "targetNode": "13",
+                    "targetPort": "13_in"
+                },
+                {
+                    "id": "port_13_to_port_14",
+                    "sourceNode": "13",
+                    "sourcePort": "13_out",
+                    "targetNode": "14",
+                    "targetPort": "14_in"
+                },
+                {
+                    "id": "port_14_to_port_15",
+                    "sourceNode": "14",
+                    "sourcePort": "14_out",
+                    "targetNode": "15",
+                    "targetPort": "15_in"
+                },
+                {
+                    "id": "port_15_to_port_1",
+                    "sourceNode": "15",
+                    "sourcePort": "15_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                },
+                {
+                    "id": "port_6_to_port_7",
+                    "sourceNode": "6",
+                    "sourcePort": "6_out",
+                    "targetNode": "7",
+                    "targetPort": "7_in"
+                }
+            ],
+            "hash": "fe4fa7aab5e802df6e189ccf0943e33217952d13",
+            "nodes": {
+                "0": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionName": "on_start",
+                        "id": "0",
+                        "type": "start"
+                    },
+                    "errors": {},
+                    "id": "0",
+                    "type": "start",
+                    "warnings": {},
+                    "x": 190,
+                    "y": -5.684341886080802e-14
+                },
+                "1": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "on_finish",
+                        "id": "1",
+                        "type": "end"
+                    },
+                    "errors": {},
+                    "id": "1",
+                    "type": "end",
+                    "userCode": "\n    # This function is called after all actions are completed.\n    # summary of all the action and/or all details of actions\n    # can be collected here.\n\n    # summary_json = phantom.get_summary()\n    # if 'result' in summary_json:\n        # for action_result in summary_json['result']:\n            # if 'action_run_id' in action_result:\n                # action_results = phantom.get_action_results(action_run_id=action_result['action_run_id'], result_data=False, flatten=False)\n                # phantom.debug(action_results)\n\n",
+                    "warnings": {},
+                    "x": 190,
+                    "y": 1984
+                },
+                "10": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Format SPL query hunt child processes",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 3,
+                        "functionName": "format_spl_query_hunt_child_processes",
+                        "id": "10",
+                        "parameters": [
+                            "filtered-data:filter_for_af_requirements:condition_1:artifact:*.cef.destinationAid",
+                            "run_spl_query_search_parent_process:action_result.data.*.parent_process_id"
+                        ],
+                        "template": "%%\nindex=sec_crowdstrike aid=\"{0}\" parent_process_id=\"{1}\" | addinfo | stats count, min(_time) as earliest_time_event, max(_time) as last_time_event, first(info_min_time) as info_min_time, first(info_max_time) as info_max_time, values(process) as process, values(process_id) as process_id, values(process_hash) as process_hash by aid, parent_process_id, parent_process_name | foreach earliest_time_event, last_time_event, info_min_time, info_max_time [ eval <<FIELD>> = strftime('<<FIELD>>', \"%c\") ] | foreach * [ eval <<FIELD>> = mvjoin('<<FIELD>>', \",\") ] | append [ | makeresults | eval count=0 ] | head 1 | eval summary=if(count>0, \"Child processes were found in CrowdStrike for parent_process=\" . parent_process_name, \"No results were found in CrowdStrike for the parent_process_name=\" . parent_process_name) | tojson\n%%",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "10",
+                    "type": "format",
+                    "warnings": {},
+                    "x": 340,
+                    "y": 1000
+                },
+                "11": {
+                    "data": {
+                        "action": "run query",
+                        "actionType": "investigate",
+                        "advanced": {
+                            "customName": "Run SPL query hunt processes from parent",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "connector": "Splunk",
+                        "connectorConfigs": [
+                            "splunk"
+                        ],
+                        "connectorId": "91883aa8-9c81-470b-97a1-5d8f7995f560",
+                        "connectorVersion": "v1",
+                        "functionId": 2,
+                        "functionName": "run_spl_query_hunt_processes_from_parent",
+                        "id": "11",
+                        "parameters": {
+                            "command": "search",
+                            "end_time": "gen_spl_time_range_filters:custom_function_result.data.latest_epoch",
+                            "query": "format_spl_query_hunt_child_processes:formatted_data",
+                            "start_time": "gen_spl_time_range_filters:custom_function_result.data.earliest_epoch"
+                        },
+                        "requiredParameters": [
+                            {
+                                "data_type": "string",
+                                "default": "",
+                                "field": "query"
+                            },
+                            {
+                                "data_type": "string",
+                                "default": "search",
+                                "field": "command"
+                            }
+                        ],
+                        "type": "action"
+                    },
+                    "errors": {},
+                    "id": "11",
+                    "type": "action",
+                    "warnings": {
+                        "config": [
+                            "Reconfigure invalid datapath."
+                        ]
+                    },
+                    "x": 340,
+                    "y": 1164
+                },
+                "12": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Add comment parent process hunt",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 3,
+                        "functionName": "add_comment_parent_process_hunt",
+                        "id": "12",
+                        "selectMore": false,
+                        "tab": "apis",
+                        "type": "utility",
+                        "utilities": {
+                            "comment": {
+                                "description": "",
+                                "fields": [
+                                    {
+                                        "description": "",
+                                        "label": "comment",
+                                        "name": "comment",
+                                        "placeholder": "Enter a comment",
+                                        "renderType": "datapath",
+                                        "required": true
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "container",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "author",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "trace",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "add comment",
+                                "name": "comment"
+                            }
+                        },
+                        "utilityType": "api",
+                        "values": {
+                            "comment": {
+                                "_internal": [
+                                    "container",
+                                    "author",
+                                    "trace"
+                                ],
+                                "comment": "run_spl_query_hunt_processes_from_parent:action_result.data.*.summary"
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "12",
+                    "type": "utility",
+                    "warnings": {},
+                    "x": 340,
+                    "y": 1328
+                },
+                "13": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Format note title hunt processes",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 4,
+                        "functionName": "format_note_title_hunt_processes",
+                        "id": "13",
+                        "parameters": [
+                            "run_spl_query_search_parent_process:action_result.data.*.parent_process_name"
+                        ],
+                        "template": "%%\nCrowdStrike processes hunt Splunk results for parent_process_name=\"{0}\"\n%%",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "13",
+                    "type": "format",
+                    "warnings": {},
+                    "x": 340,
+                    "y": 1492
+                },
+                "14": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Format note content hunt processes",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 5,
+                        "functionName": "format_note_content_hunt_processes",
+                        "id": "14",
+                        "parameters": [
+                            "run_spl_query_hunt_processes_from_parent:action_result.data.*._raw"
+                        ],
+                        "template": "%%\n{0}\n%%",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "14",
+                    "type": "format",
+                    "warnings": {},
+                    "x": 340,
+                    "y": 1656
+                },
+                "15": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Add note hunt processes",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 4,
+                        "functionName": "add_note_hunt_processes",
+                        "id": "15",
+                        "selectMore": false,
+                        "tab": "apis",
+                        "type": "utility",
+                        "utilities": {
+                            "add_note": {
+                                "description": "",
+                                "fields": [
+                                    {
+                                        "description": "",
+                                        "label": "title",
+                                        "name": "title",
+                                        "placeholder": "Enter a note title",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "description": "",
+                                        "label": "content",
+                                        "name": "content",
+                                        "placeholder": "Enter the note content",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "choices": [
+                                            "markdown",
+                                            "html"
+                                        ],
+                                        "default": "markdown",
+                                        "description": "",
+                                        "label": "note format",
+                                        "name": "note_format",
+                                        "placeholder": "Enter the note content",
+                                        "renderType": "dropdown",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "container",
+                                        "required": false
+                                    },
+                                    {
+                                        "default": "general",
+                                        "hidden": true,
+                                        "name": "note_type",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "author",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "event_id",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "task_id",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "trace",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "add note",
+                                "name": "add_note"
+                            }
+                        },
+                        "utilityType": "api",
+                        "values": {
+                            "add_note": {
+                                "_internal": [
+                                    "container",
+                                    "note_type",
+                                    "author",
+                                    "event_id",
+                                    "task_id",
+                                    "trace"
+                                ],
+                                "content": "format_note_content_hunt_processes:formatted_data.*",
+                                "note_format": "markdown",
+                                "note_type": "general",
+                                "title": "format_note_title_hunt_processes:formatted_data.*"
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "15",
+                    "type": "utility",
+                    "warnings": {},
+                    "x": 340,
+                    "y": 1828
+                },
+                "2": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Filter for AF requirements",
+                            "customNameId": 0,
+                            "delimiter": ",",
+                            "delimiter_enabled": true,
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "!=",
+                                        "param": "artifact:*.cef.destinationAid",
+                                        "value": ""
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "customName": "If aid",
+                                "logic": "and"
+                            }
+                        ],
+                        "functionId": 1,
+                        "functionName": "filter_for_af_requirements",
+                        "id": "2",
+                        "type": "filter"
+                    },
+                    "errors": {},
+                    "id": "2",
+                    "type": "filter",
+                    "warnings": {},
+                    "x": 230,
+                    "y": 148
+                },
+                "4": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Gen SPL time range filters",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "customFunction": {
+                            "draftMode": false,
+                            "name": "cbl_gen_spl_timerange_filter",
+                            "repoName": "local"
+                        },
+                        "functionId": 1,
+                        "functionName": "gen_spl_time_range_filters",
+                        "id": "4",
+                        "selectMore": false,
+                        "tab": "customFunctions",
+                        "type": "utility",
+                        "utilities": {
+                            "cbl_gen_spl_timerange_filter": {
+                                "description": "This custom function is designed to generate a range of epoch time filters (earliest and latest) based on provided options",
+                                "fields": [
+                                    {
+                                        "dataTypes": [],
+                                        "description": "",
+                                        "inputType": "item",
+                                        "label": "epochtime",
+                                        "name": "epochtime",
+                                        "placeholder": "Epoch time format",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "earliest_sec_reduce",
+                                        "name": "earliest_sec_reduce",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "latest_sec_increase",
+                                        "name": "latest_sec_increase",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "cbl_gen_spl_timerange_filter",
+                                "name": "cbl_gen_spl_timerange_filter"
+                            }
+                        },
+                        "utilityType": "custom_function",
+                        "values": {
+                            "cbl_gen_spl_timerange_filter": {
+                                "earliest_sec_reduce": "86400",
+                                "epochtime": "artifact:*.cef.epochtime",
+                                "latest_sec_increase": "300"
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "4",
+                    "type": "utility",
+                    "warnings": {},
+                    "x": 170,
+                    "y": 327.99999999999994
+                },
+                "5": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Format SPL query search parent process",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "format_spl_query_search_parent_process",
+                        "id": "5",
+                        "parameters": [
+                            "filtered-data:filter_for_af_requirements:condition_1:artifact:*.cef.destinationAid",
+                            "filtered-data:filter_for_af_requirements:condition_1:artifact:*.cef.destinationProcessName",
+                            "gen_spl_time_range_filters:custom_function_result.data.earliest_epoch",
+                            "gen_spl_time_range_filters:custom_function_result.data.latest_epoch"
+                        ],
+                        "template": "%%\nindex=sec_crowdstrike earliest=\"{2}\" latest=\"{3}\" aid=\"{0}\"  [ | makeresults | eval process=\"{1}\" | rex field=process mode=sed \"s/\\[//g\" | rex field=process mode=sed \"s/\\]//g\" | rex field=process mode=sed \"s/\\'/\\\"/g\" | table process | eval process = \"process IN (\" . process . \")\" | return $process | fields search ] | stats count, values(parent*) as \"parent*\" | foreach parent* [ eval <<FIELD>> = mvjoin('<<FIELD>>', \",\") ] | append [ | makeresults | eval count=0 ] | head 1\n%%",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "5",
+                    "type": "format",
+                    "warnings": {
+                        "config": [
+                            "Reconfigure invalid datapath."
+                        ]
+                    },
+                    "x": 170,
+                    "y": 492
+                },
+                "6": {
+                    "data": {
+                        "action": "run query",
+                        "actionType": "investigate",
+                        "advanced": {
+                            "customName": "Run SPL query search parent process",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "connector": "Splunk",
+                        "connectorConfigs": [
+                            "splunk"
+                        ],
+                        "connectorId": "91883aa8-9c81-470b-97a1-5d8f7995f560",
+                        "connectorVersion": "v1",
+                        "functionId": 1,
+                        "functionName": "run_spl_query_search_parent_process",
+                        "id": "6",
+                        "parameters": {
+                            "command": "search",
+                            "end_time": "gen_spl_time_range_filters:custom_function_result.data.latest_epoch",
+                            "query": "format_spl_query_search_parent_process:formatted_data.*",
+                            "start_time": "gen_spl_time_range_filters:custom_function_result.data.earliest_epoch"
+                        },
+                        "requiredParameters": [
+                            {
+                                "data_type": "string",
+                                "default": "",
+                                "field": "query"
+                            },
+                            {
+                                "data_type": "string",
+                                "default": "search",
+                                "field": "command"
+                            }
+                        ],
+                        "type": "action"
+                    },
+                    "errors": {},
+                    "id": "6",
+                    "type": "action",
+                    "warnings": {
+                        "config": [
+                            "Reconfigure invalid datapath."
+                        ]
+                    },
+                    "x": 170,
+                    "y": 656
+                },
+                "7": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Check for parent hunt result",
+                            "customNameId": 0,
+                            "delimiter": ",",
+                            "delimiter_enabled": true,
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "==",
+                                        "param": "run_spl_query_search_parent_process:action_result.data.*.count",
+                                        "value": "0"
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "customName": "Parent process not found",
+                                "display": "If",
+                                "logic": "and",
+                                "type": "if"
+                            },
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 1,
+                                        "op": "==",
+                                        "param": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "conditionIndex": 1,
+                                "customName": "Parent process found",
+                                "display": "Else",
+                                "logic": "and",
+                                "type": "else"
+                            }
+                        ],
+                        "functionId": 1,
+                        "functionName": "check_for_parent_hunt_result",
+                        "id": "7",
+                        "type": "decision"
+                    },
+                    "errors": {},
+                    "id": "7",
+                    "type": "decision",
+                    "warnings": {},
+                    "x": 250,
+                    "y": 820
+                },
+                "8": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Format comment parent not found",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 2,
+                        "functionName": "format_comment_parent_not_found",
+                        "id": "8",
+                        "parameters": [
+                            "filtered-data:filter_for_af_requirements:condition_1:artifact:*.cef.destinationProcessName",
+                            "filtered-data:filter_for_af_requirements:condition_1:artifact:*.cef.destinationAid"
+                        ],
+                        "template": "%%\nThe parent process for {0} on device id {1} could not be identified\n%%",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "8",
+                    "type": "format",
+                    "warnings": {},
+                    "x": -1.4210854715202004e-14,
+                    "y": 1656
+                },
+                "9": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Add comment parent process not found",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 2,
+                        "functionName": "add_comment_parent_process_not_found",
+                        "id": "9",
+                        "selectMore": false,
+                        "tab": "apis",
+                        "type": "utility",
+                        "utilities": {
+                            "comment": {
+                                "description": "",
+                                "fields": [
+                                    {
+                                        "description": "",
+                                        "label": "comment",
+                                        "name": "comment",
+                                        "placeholder": "Enter a comment",
+                                        "renderType": "datapath",
+                                        "required": true
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "container",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "author",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "trace",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "add comment",
+                                "name": "comment"
+                            }
+                        },
+                        "utilityType": "api",
+                        "values": {
+                            "comment": {
+                                "_internal": [
+                                    "container",
+                                    "author",
+                                    "trace"
+                                ],
+                                "comment": "format_comment_parent_not_found:formatted_data.*"
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "9",
+                    "type": "utility",
+                    "warnings": {},
+                    "x": -1.4210854715202004e-14,
+                    "y": 1820
+                }
+            },
+            "notes": ""
+        },
+        "input_spec": null,
+        "output_spec": [
+            {
+                "contains": [],
+                "datapaths": [
+                    "run_spl_query_hunt_processes_from_parent:action_result.data.*._raw"
+                ],
+                "deduplicate": false,
+                "description": "CrowdStrile hunt processes results",
+                "metadata": {},
+                "name": "spl_summary_hunt_processes"
+            }
+        ],
+        "playbook_type": "automation",
+        "python_version": "3",
+        "schema": "5.0.10",
+        "version": "6.0.2.127725"
+    },
+    "create_time": "2023-09-27T09:03:38.444565+00:00",
+    "draft_mode": false,
+    "labels": [
+        "splunk_events"
+    ],
+    "tags": []
+}

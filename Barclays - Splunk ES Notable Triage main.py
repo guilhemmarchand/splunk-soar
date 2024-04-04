@@ -102,7 +102,7 @@ def add_comment_af_invalid(action=None, success=None, container=None, results=No
     ## Custom Code End
     ################################################################################
 
-    phantom.comment(container=container, comment="Invalid: the soar_playbook fields is missing from the artifact")
+    phantom.comment(container=container, comment="Notable Triage has failed: This event is missing the expected soar_playbook field.")
 
     format_invalid_notable_email_title(container=container)
 
@@ -141,7 +141,7 @@ def format_invalid_notable_email_title(action=None, success=None, container=None
 def format_invalid_notablke_email_body(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug("format_invalid_notablke_email_body() called")
 
-    template = """An invalid Notable was forwarded to Splunk SOAR Cloud, triage was refused as the Notable event is missing the Playbook target.\n\nPlease review this issue urgently:\n- Event ID: {0}\n- Event URL: {1}{1}\n\nSplunk SOAR Cloud."""
+    template = """An invalid Notable was forwarded to Splunk SOAR Cloud, triage was refused as the Notable event is missing the Playbook target.\n\nPlease review this issue urgently:\n- Event ID: {0}\n- Event URL: {1}\n\nSplunk SOAR Cloud."""
 
     # parameter list for template variable replacement
     parameters = [
@@ -172,21 +172,18 @@ def send_email_1(action=None, success=None, container=None, results=None, handle
 
     # phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
 
-    format_invalid_notable_email_title__as_list = phantom.get_format_data(name="format_invalid_notable_email_title__as_list")
-    format_invalid_notablke_email_body__as_list = phantom.get_format_data(name="format_invalid_notablke_email_body__as_list")
+    format_invalid_notable_email_title = phantom.get_format_data(name="format_invalid_notable_email_title")
+    format_invalid_notablke_email_body = phantom.get_format_data(name="format_invalid_notablke_email_body")
 
     parameters = []
 
-    # build parameters list for 'send_email_1' call
-    for format_invalid_notable_email_title__item in format_invalid_notable_email_title__as_list:
-        for format_invalid_notablke_email_body__item in format_invalid_notablke_email_body__as_list:
-            if format_invalid_notablke_email_body__item is not None:
-                parameters.append({
-                    "from": "gmarchand@splunk.com",
-                    "to": "gmarchand@splunk.com",
-                    "subject": format_invalid_notable_email_title__item,
-                    "body": format_invalid_notablke_email_body__item,
-                })
+    if format_invalid_notablke_email_body is not None:
+        parameters.append({
+            "from": "gmarchand@splunk.com",
+            "to": "gmarchand@splunk.com",
+            "subject": format_invalid_notable_email_title,
+            "body": format_invalid_notablke_email_body,
+        })
 
     ################################################################################
     ## Custom Code Start
