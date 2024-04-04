@@ -18,7 +18,7 @@ def on_start(container):
     return
 
 @phantom.playbook_block()
-def filter_for_url(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def filter_for_url(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("filter_for_url() called")
 
     # collect filtered artifact ids and results for 'if' condition 1
@@ -38,7 +38,7 @@ def filter_for_url(action=None, success=None, container=None, results=None, hand
 
 
 @phantom.playbook_block()
-def run_detonate_url(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def run_detonate_url(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("run_detonate_url() called")
 
     # phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
@@ -73,7 +73,7 @@ def run_detonate_url(action=None, success=None, container=None, results=None, ha
 
 
 @phantom.playbook_block()
-def format_detonate_note_content(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def format_detonate_note_content(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("format_detonate_note_content() called")
 
     template = """%%\nDomain: {0}, Score: {1}, Malicious: {2}, Report URL: {3}, Screenshot URL: {4}\n%%"""
@@ -105,7 +105,7 @@ def format_detonate_note_content(action=None, success=None, container=None, resu
 
 
 @phantom.playbook_block()
-def format_detonate_note_title(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def format_detonate_note_title(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("format_detonate_note_title() called")
 
     template = """%%\nurlscan.io results for URL: {0}\n%%"""
@@ -133,7 +133,7 @@ def format_detonate_note_title(action=None, success=None, container=None, result
 
 
 @phantom.playbook_block()
-def add_detonate_note(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def add_detonate_note(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("add_detonate_note() called")
 
     format_detonate_note_content__as_list = phantom.get_format_data(name="format_detonate_note_content__as_list")
@@ -157,7 +157,7 @@ def add_detonate_note(action=None, success=None, container=None, results=None, h
 
 
 @phantom.playbook_block()
-def check_for_screenshot_fileurl(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def check_for_screenshot_fileurl(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("check_for_screenshot_fileurl() called")
 
     # check for 'if' condition 1
@@ -180,7 +180,7 @@ def check_for_screenshot_fileurl(action=None, success=None, container=None, resu
 
 
 @phantom.playbook_block()
-def format_comment_upload_file(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def format_comment_upload_file(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("format_comment_upload_file() called")
 
     template = """%%\nurlscan.io screenshot file downloaded from {0} and added as file attached to the container\n%%"""
@@ -208,7 +208,7 @@ def format_comment_upload_file(action=None, success=None, container=None, result
 
 
 @phantom.playbook_block()
-def add_comment_upload_file(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def add_comment_upload_file(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("add_comment_upload_file() called")
 
     format_comment_upload_file__as_list = phantom.get_format_data(name="format_comment_upload_file__as_list")
@@ -229,7 +229,7 @@ def add_comment_upload_file(action=None, success=None, container=None, results=N
 
 
 @phantom.playbook_block()
-def format_comment_domain_not_found(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def format_comment_domain_not_found(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("format_comment_domain_not_found() called")
 
     template = """%%\nurlscan.io screenshot for {0} is not available, likely the domain was not found.\n%%"""
@@ -257,7 +257,7 @@ def format_comment_domain_not_found(action=None, success=None, container=None, r
 
 
 @phantom.playbook_block()
-def add_comment_screenshot_not_available(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def add_comment_screenshot_not_available(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("add_comment_screenshot_not_available() called")
 
     format_comment_domain_not_found__as_list = phantom.get_format_data(name="format_comment_domain_not_found__as_list")
@@ -278,7 +278,7 @@ def add_comment_screenshot_not_available(action=None, success=None, container=No
 
 
 @phantom.playbook_block()
-def add_detonate_comment(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def add_detonate_comment(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("add_detonate_comment() called")
 
     format_detonate_note_content__as_list = phantom.get_format_data(name="format_detonate_note_content__as_list")
@@ -301,7 +301,7 @@ def add_detonate_comment(action=None, success=None, container=None, results=None
 
 
 @phantom.playbook_block()
-def upload_file_from_url_6(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def upload_file_from_url_6(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("upload_file_from_url_6() called")
 
     id_value = container.get("id", None)

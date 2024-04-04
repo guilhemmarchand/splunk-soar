@@ -120,7 +120,7 @@
                     "targetPort": "17_in"
                 }
             ],
-            "hash": "c9ddfe624af4246175cdd33cfe6a34895f51d9d4",
+            "hash": "635d7222591063d51cd2c234df39ca0bb9b92287",
             "nodes": {
                 "0": {
                     "data": {
@@ -136,7 +136,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 190,
-                    "y": -5.684341886080802e-14
+                    "y": -1.2079226507921703e-13
                 },
                 "1": {
                     "data": {
@@ -241,6 +241,15 @@
                         "functionId": 4,
                         "functionName": "add_comment_upload_file",
                         "id": "19",
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
                         "selectMore": false,
                         "tab": "apis",
                         "type": "utility",
@@ -364,6 +373,15 @@
                         "functionId": 3,
                         "functionName": "add_comment_screenshot_not_available",
                         "id": "21",
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
                         "selectMore": false,
                         "tab": "apis",
                         "type": "utility",
@@ -428,6 +446,15 @@
                         "functionId": 5,
                         "functionName": "add_detonate_comment",
                         "id": "22",
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
                         "selectMore": false,
                         "tab": "apis",
                         "type": "utility",
@@ -495,6 +522,15 @@
                         "functionId": 6,
                         "functionName": "upload_file_from_url_6",
                         "id": "24",
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
                         "selectMore": false,
                         "tab": "customFunctions",
                         "type": "utility",
@@ -560,6 +596,15 @@
                         "functionId": 1,
                         "functionName": "run_detonate_url",
                         "id": "3",
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
                         "parameters": {
                             "get_result": true,
                             "private": true,
@@ -634,7 +679,7 @@
                     "type": "format",
                     "warnings": {},
                     "x": 170,
-                    "y": 475.99999999999994
+                    "y": 475.9999999999999
                 },
                 "6": {
                     "data": {
@@ -646,6 +691,15 @@
                         "functionId": 1,
                         "functionName": "add_detonate_note",
                         "id": "6",
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
                         "selectMore": false,
                         "tab": "apis",
                         "type": "utility",
@@ -744,7 +798,7 @@
                     "y": 804
                 }
             },
-            "notes": "- Requires requestUrl in the artifact"
+            "notes": "- Requires requestUrl in the artifact\n- test update"
         },
         "input_spec": null,
         "output_spec": [
@@ -771,10 +825,10 @@
         ],
         "playbook_type": "automation",
         "python_version": "3",
-        "schema": "5.0.10",
-        "version": "6.0.2.127725"
+        "schema": "5.0.11",
+        "version": "6.2.1.305"
     },
-    "create_time": "2023-09-27T05:51:48.354538+00:00",
+    "create_time": "2024-04-04T09:31:09.119955+00:00",
     "draft_mode": false,
     "labels": [
         "*"
