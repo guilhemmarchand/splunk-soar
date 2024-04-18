@@ -3,7 +3,7 @@ name: Splunk SOAR publish
 on:
   push:
     branches:
-      - testing
+      - qua
       - main
 
 jobs:
@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.10"]
+        python-version: ["3.x"]
 
     steps:
       - run: echo "job automatically triggered by a ${{ github.event_name }} event."
@@ -33,9 +33,9 @@ jobs:
       # Investigate git commits, extracts updated files per commit, loop through commits and import in Splunk SOAR target
       - name: Publish Git commits to Splunk SOAR Cloud
         env:
-          SOAR_TESTING_DEST_API_URL: ${{ vars.SOAR_TESTING_DEST_API_URL }}
-          SOAR_TESTING_DEST_API_TOKEN: ${{ secrets.SOAR_TESTING_DEST_API_TOKEN }}
-          SOAR_TESTING_DEST_SCM_NAME: ${{ vars.SOAR_TESTING_DEST_SCM_NAME }}
+          SOAR_QUA_DEST_API_URL: ${{ vars.SOAR_QUA_DEST_API_URL }}
+          SOAR_QUA_DEST_API_TOKEN: ${{ secrets.SOAR_QUA_DEST_API_TOKEN }}
+          SOAR_QUA_DEST_SCM_NAME: ${{ vars.SOAR_QUA_DEST_SCM_NAME }}
           SOAR_PROD_DEST_API_URL: ${{ vars.SOAR_PROD_DEST_API_URL }}
           SOAR_PROD_DEST_API_TOKEN: ${{ secrets.SOAR_PROD_DEST_API_TOKEN }}
           SOAR_PROD_DEST_SCM_NAME: ${{ vars.SOAR_PROD_DEST_SCM_NAME }}
@@ -69,9 +69,9 @@ jobs:
           # Check if we are on the 'testing' branch
           if [[ "${{ github.ref }}" == "refs/heads/testing" ]]; then
               echo "Environment target is Tsting"
-              DEST_API_URL=$SOAR_TESTING_DEST_API_URL
-              DEST_API_TOKEN=$SOAR_TESTING_DEST_API_TOKEN
-              DEST_SCM_NAME=$SOAR_TESTING_DEST_SCM_NAME
+              DEST_API_URL=$SOAR_QUA_DEST_API_URL
+              DEST_API_TOKEN=$SOAR_QUA_DEST_API_TOKEN
+              DEST_SCM_NAME=$SOAR_QUA_DEST_SCM_NAME
           elif [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
               echo "Environment target is Production"
               DEST_API_URL=$SOAR_PROD_DEST_API_URL
