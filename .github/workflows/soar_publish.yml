@@ -66,8 +66,8 @@ jobs:
           DEST_API_TOKEN=""
           DEST_SCM_NAME=""
 
-          # Check if we are on the 'testing' branch
-          if [[ "${{ github.ref }}" == "refs/heads/testing" ]]; then
+          # Check if we are on the 'qua' branch
+          if [[ "${{ github.ref }}" == "refs/heads/qua" ]]; then
               echo "Environment target is Tsting"
               DEST_API_URL=$SOAR_QUA_DEST_API_URL
               DEST_API_TOKEN=$SOAR_QUA_DEST_API_TOKEN
@@ -78,7 +78,7 @@ jobs:
               DEST_API_TOKEN=$SOAR_PROD_DEST_API_TOKEN
               DEST_SCM_NAME=$SOAR_PROD_DEST_SCM_NAME
           else
-              echo "Invalid branch. This workflow is only for 'testing' or 'main' branches, refusing to excute this against any other branch."
+              echo "Invalid branch. This workflow is only for 'qua' or 'main' branches, refusing to excute this against any other branch."
               exit 1
           fi
 
