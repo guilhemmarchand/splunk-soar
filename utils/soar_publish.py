@@ -13,18 +13,18 @@ logging.basicConfig(format="%(levelname)s: %(message)s", level=logging.INFO)
 
 
 def import_to_dest(dest_target, dest_token, object_type, file_path, scm_name):
-    headers = {"ph-auth-token": f"{dest_token}"}
+    headers = {"ph-auth-token": dest_token}
 
-    # Encode the file in base64
+    # Read and encode the tarball file in base64
     try:
-        with open(file_path, "rb") as f:
-            file_content = f.read()
+        with open(file_path, "rb") as file:
+            file_content = file.read()
             encoded_content = base64.b64encode(file_content).decode("utf-8")
-    except IOError as e:
-        logging.error(f"Failed to read file due to: {e}")
+    except IOError as error:
+        logging.error(f"Failed to read file due to: {error}")
         sys.exit(1)
 
-    # Select endpoint based on object type
+    # Define the endpoint based on the object type
     if object_type == "custom_function":
         endpoint = f"{dest_target}/rest/import_custom_function"
     elif object_type == "playbook":
@@ -33,8 +33,9 @@ def import_to_dest(dest_target, dest_token, object_type, file_path, scm_name):
         logging.error("Unsupported object type")
         sys.exit(1)
 
-    data = {object_type: encoded_content, "scm": scm_name, "force": "true"}
+    data = {"scm": scm_name, "force": "true", object_type: encoded_content}
 
+    # Post request to the SOAR API
     try:
         response = requests.post(endpoint, headers=headers, json=data, verify=False)
         response.raise_for_status()
@@ -47,9 +48,9 @@ def import_to_dest(dest_target, dest_token, object_type, file_path, scm_name):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Import a custom function or playbook from the specified Python file."
+        description="Import a custom function or playbook from the specified tarball."
     )
-    parser.add_argument("--input_file", required=True, help="Path to the .py file.")
+    parser.add_argument("--input_file", required=True, help="Path to the .tar.gz file.")
     parser.add_argument(
         "--object_type",
         required=True,
@@ -71,7 +72,7 @@ def main():
 
     args = parser.parse_args()
 
-    # Import the Python file based on its type
+    # Process the import based on the provided arguments
     import_to_dest(
         args.dest_target,
         args.dest_token,

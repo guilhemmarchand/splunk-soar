@@ -56,16 +56,19 @@ jobs:
               
               # Check if both files exist
               if [[ -f "$json_file" && -f "$py_file" ]]; then
+                  echo "Processing pair: $json_file and $py_file"
+                  tarball_path="/tmp/$(basename "${json_file%.json}").tar.gz"
+                  tar -czf "$tarball_path" "$json_file" "$py_file"
+                  
                   # Determine the object type based on the directory
-                  if [[ "$py_file" == *"custom_functions"* ]]; then
+                  if [[ "$json_file" == *"custom_functions"* ]]; then
                       object_type="custom_function"
                   else
                       object_type="playbook"
                   fi
 
-                  echo "Processing $py_file as a $object_type"
-                  # Call the Python script to import the Python file only
-                  python3 utils/soar_publish.py --input_file "$py_file" --object_type "$object_type" --dest_target="$DEST_API_URL" --dest_token="$DEST_API_TOKEN" --dest_scm_name="$DEST_SCM_NAME"
+                  # Call the Python script to import the tarball
+                  python3 utils/soar_publish.py --input_file "$tarball_path" --object_type "$object_type" --dest_target="$DEST_API_URL" --dest_token="$DEST_API_TOKEN" --dest_scm_name="$DEST_SCM_NAME"
               else
                   echo "Skipping incomplete set: $json_file does not have a matching $py_file"
               fi
