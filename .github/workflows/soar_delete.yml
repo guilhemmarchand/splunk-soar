@@ -22,7 +22,12 @@ jobs:
         run: |
           DELETED_FILES=$(git diff --name-only --diff-filter=D ${{ github.sha }})
           PLAYBOOK_AND_CF_FILES=$(echo "$DELETED_FILES" | grep -E '(\.json|\.py)$' | grep -E '(playbooks|custom_functions)/')
-          echo "::set-output name=list::$PLAYBOOK_AND_CF_FILES"
+          if [ -z "$PLAYBOOK_AND_CF_FILES" ]; then
+            echo "No relevant playbook or custom function files were deleted."
+            echo "::set-output name=list::"
+          else
+            echo "::set-output name=list::$PLAYBOOK_AND_CF_FILES"
+          fi
 
       - uses: actions/checkout@v3
         with:
@@ -46,11 +51,14 @@ jobs:
                   object_type="playbook" if [[ "$file" == *"playbooks/"* ]]; then object_type="custom_function"; fi
                   base_name="${file%.json}"
                   python_file="${base_name}.py"
-                  if [[ -f "$python_file" ]]; then  # Check if corresponding Python file exists
-                    echo "Skipping deletion as Python file still exists: $python_file"
-                  else
+                  if [[ ! -f "$python_file" ]]; then  # Ensure the corresponding Python file does not exist
+                    echo "Handling deletion for $file"
+                    # Extract object name from file path
+                    object_name=$(basename "${file%.json}")
                     # Call the Python script to delete the playbook or custom function
-                    python3 utils/soar_delete.py --deleted_file "$file" --object_type "$object_type" --dest_target="$DEST_API_URL" --dest_token "$DEST_API_TOKEN" --dest_scm_name "$DEST_SCM_NAME"
+                    python3 utils/soar_delete.py --object_name "$object_name" --object_type "$object_type" --dest_target="$DEST_API_URL" --dest_token "$DEST_API_TOKEN"
+                  else
+                    echo "Skipping deletion as Python file still exists: $python_file"
                   fi
               fi
           done
