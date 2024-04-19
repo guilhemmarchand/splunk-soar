@@ -24,13 +24,16 @@ def import_to_dest(dest_target, dest_token, object_type, file_path, scm_name):
         logging.error(f"Failed to read file due to: {e}")
         sys.exit(1)
 
+    # Select endpoint based on object type
     if object_type == "custom_function":
         endpoint = f"{dest_target}/rest/import_custom_function"
+    elif object_type == "playbook":
+        endpoint = f"{dest_target}/rest/import_playbook"
     else:
-        logging.error("Unsupported object type for .py files")
+        logging.error("Unsupported object type")
         sys.exit(1)
 
-    data = {"custom_function": encoded_content, "scm": scm_name, "force": "true"}
+    data = {object_type: encoded_content, "scm": scm_name, "force": "true"}
 
     try:
         response = requests.post(endpoint, headers=headers, json=data, verify=False)
@@ -44,9 +47,14 @@ def import_to_dest(dest_target, dest_token, object_type, file_path, scm_name):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Import a custom function from the specified Python file."
+        description="Import a custom function or playbook from the specified Python file."
     )
     parser.add_argument("--input_file", required=True, help="Path to the .py file.")
+    parser.add_argument(
+        "--object_type",
+        required=True,
+        help="Type of object to import (custom_function or playbook).",
+    )
     parser.add_argument(
         "--dest_target",
         required=True,
@@ -63,11 +71,11 @@ def main():
 
     args = parser.parse_args()
 
-    # Import the Python file as a custom function
+    # Import the Python file based on its type
     import_to_dest(
         args.dest_target,
         args.dest_token,
-        "custom_function",
+        args.object_type,
         args.input_file,
         args.dest_scm_name,
     )

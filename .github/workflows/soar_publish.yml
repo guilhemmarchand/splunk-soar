@@ -56,9 +56,16 @@ jobs:
               
               # Check if both files exist
               if [[ -f "$json_file" && -f "$py_file" ]]; then
-                  echo "Processing $py_file"
+                  # Determine the object type based on the directory
+                  if [[ "$py_file" == *"custom_functions"* ]]; then
+                      object_type="custom_function"
+                  else
+                      object_type="playbook"
+                  fi
+
+                  echo "Processing $py_file as a $object_type"
                   # Call the Python script to import the Python file only
-                  python3 utils/soar_publish.py --input_file "$py_file" --dest_target="$DEST_API_URL" --dest_token="$DEST_API_TOKEN" --dest_scm_name="$DEST_SCM_NAME"
+                  python3 utils/soar_publish.py --input_file "$py_file" --object_type "$object_type" --dest_target="$DEST_API_URL" --dest_token="$DEST_API_TOKEN" --dest_scm_name="$DEST_SCM_NAME"
               else
                   echo "Skipping incomplete set: $json_file does not have a matching $py_file"
               fi
