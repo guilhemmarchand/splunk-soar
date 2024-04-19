@@ -40,7 +40,7 @@ def import_to_dest(dest_target, dest_token, object_type, file_path, scm_name):
     data = {object_type: encoded_content, "scm": scm_name, "force": "true"}
 
     logging.info(
-        f"Running call to SOAR API, endpoint: {endpoint}, content: {json.dumps(file_content, indent=0)}"
+        f"Running call to SOAR API, endpoint: {endpoint}, content: {json.dumps(tar_content, indent=0)}"
     )
 
     try:
