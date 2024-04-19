@@ -5,6 +5,7 @@ import base64
 import logging
 import urllib3
 import json
+import tarfile
 
 # Disable insecure request warnings for urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -22,10 +23,11 @@ def import_to_dest(dest_target, dest_token, object_type, file_path, scm_name):
         with open(file_path, "rb") as f:
             file_content = f.read()
             encoded_content = base64.b64encode(file_content).decode("utf-8")
-            # for each file in the tar, add the name of the file to tar_files_list
-            tar_content = json.loads(file_content)
-            for file in tar_content:
-                tar_files_list.append(file)
+
+        # Open the tar file again to list its contents
+        with tarfile.open(file_path, "r:gz") as tar:
+            tar_files_list = tar.getnames()  # Get all member names from the tar file
+            logging.info(f"Files in the tarball: {tar_files_list}")
 
     except IOError as e:
         logging.error(f"Failed to read file due to: {e}")
