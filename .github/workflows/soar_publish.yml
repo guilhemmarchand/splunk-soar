@@ -23,12 +23,12 @@ jobs:
 
       - name: Gather and Publish All Objects to Splunk SOAR Cloud
         env:
-          SOAR_QUA_DEST_API_URL: ${{ secrets.SOAR_QUA_DEST_API_URL }}
+          SOAR_QUA_DEST_API_URL: ${{ vars.SOAR_QUA_DEST_API_URL }}
           SOAR_QUA_DEST_API_TOKEN: ${{ secrets.SOAR_QUA_DEST_API_TOKEN }}
-          SOAR_QUA_DEST_SCM_NAME: ${{ secrets.SOAR_QUA_DEST_SCM_NAME }}
-          SOAR_PROD_DEST_API_URL: ${{ secrets.SOAR_PROD_DEST_API_URL }}
+          SOAR_QUA_DEST_SCM_NAME: ${{ vars.SOAR_QUA_DEST_SCM_NAME }}
+          SOAR_PROD_DEST_API_URL: ${{ vars.SOAR_PROD_DEST_API_URL }}
           SOAR_PROD_DEST_API_TOKEN: ${{ secrets.SOAR_PROD_DEST_API_TOKEN }}
-          SOAR_PROD_DEST_SCM_NAME: ${{ secrets.SOAR_PROD_DEST_SCM_NAME }}
+          SOAR_PROD_DEST_SCM_NAME: ${{ vars.SOAR_PROD_DEST_SCM_NAME }}
         run: |
           echo "Branch: ${{ github.ref }}"
 
