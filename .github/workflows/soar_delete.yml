@@ -17,20 +17,20 @@ jobs:
       - name: Checkout previous commit
         run: git checkout HEAD^1
 
-      - name: Get deleted files from previous commit
+      - name: Get deleted files
         id: deleted_files
         run: |
-          git fetch --all
-          PREV_COMMIT=$(git rev-parse HEAD)
-          git checkout ${{ github.event.before }}
-          git diff --name-only --diff-filter=D $PREV_COMMIT ${{ github.sha }} > changes.txt
-          DELETED_FILES=$(cat changes.txt || echo "")
+          if [[ $(git log -1 --pretty=%P | wc -w) -gt 1 ]]; then
+            # Handle merge commit by checking against both parents
+            DELETED_FILES=$(git diff --name-only --diff-filter=D HEAD^1 HEAD^2 || echo "")
+          else
+            # Non-merge commit, simple diff
+            DELETED_FILES=$(git diff --name-only --diff-filter=D HEAD^ HEAD || echo "")
+          fi
           PLAYBOOK_AND_CF_FILES=$(echo "$DELETED_FILES" | grep -E '(\.json|\.py)$' || echo "")
-          echo "Previous commit: $PREV_COMMIT"
-          echo "Current commit: ${{ github.sha }}"
           echo "Deleted files: $DELETED_FILES"
           echo "Filtered files: $PLAYBOOK_AND_CF_FILES"
-          echo "::set-output name=list::$PLAYBOOK_AND_CF_FILES"
+          echo "::set-output name=list::${PLAYBOOK_AND_CF_FILES}"
 
       - uses: actions/checkout@v3
         with:
@@ -46,9 +46,10 @@ jobs:
       - name: Handle deleted playbooks and custom functions
         if: steps.deleted_files.outputs.list != ''
         run: |
-          IFS=$'\n' read -d '' -r -a FILES <<< "${{ steps.deleted_files.outputs.list }}"
+          IFS=$'\n' read -r -a FILES <<< "${{ steps.deleted_files.outputs.list }}"
           echo "Processing these files: ${FILES[@]}"
           for file in "${FILES[@]}"; do
+              echo "Current file: '$file'"
               if [[ "$file" == *".json" ]]; then
                   object_type="playbook"
                   if [[ "$file" == *"custom_functions/"* ]]; then
@@ -56,13 +57,13 @@ jobs:
                   fi
                   base_name="${file%.json}"
                   python_file="${base_name}.py"
-                  echo "Checking existence of $python_file"
+                  echo "Checking existence of '$python_file'"
                   if [[ ! -f "$python_file" ]]; then
-                    echo "Handling deletion for $file"
+                    echo "Handling deletion for '$file'"
                     object_name=$(basename "${base_name}")
-                    python3 utils/soar_delete.py --object_name "$object_name" --object_type "$object_type" --dest_target="$DEST_API_URL" --dest_token "$DEST_API_TOKEN"
+                    python3 utils/soar_delete.py --object_name "$object_name" --object_type "$object_type" --dest_target "$DEST_API_URL" --dest_token "$DEST_API_TOKEN"
                   else
-                    echo "Skipping deletion as Python file still exists: $python_file"
+                    echo "Skipping deletion as Python file still exists: '$python_file'"
                   fi
               fi
           done
