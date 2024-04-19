@@ -24,32 +24,29 @@ def import_to_dest(dest_target, dest_token, object_type, file_path, scm_name):
         logging.error(f"Failed to read file due to: {e}")
         sys.exit(1)
 
-    if object_type == "playbook":
-        endpoint = f"{dest_target}/rest/import_playbook"
-    elif object_type == "custom_function":
+    if object_type == "custom_function":
         endpoint = f"{dest_target}/rest/import_custom_function"
     else:
-        logging.error(f"Unsupported object type: {object_type}")
+        logging.error("Unsupported object type for .py files")
         sys.exit(1)
 
-    data = {object_type: encoded_content, "scm": scm_name, "force": "true"}
+    data = {"custom_function": encoded_content, "scm": scm_name, "force": "true"}
 
     try:
         response = requests.post(endpoint, headers=headers, json=data, verify=False)
         response.raise_for_status()
-        return True
+        logging.info(f"Successfully imported {file_path} to {dest_target}")
     except requests.RequestException as e:
         logging.error(f"Import failed with error: {str(e)}")
+        logging.error(f"Response body: {response.text}")
         sys.exit(1)
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Import a playbook or custom function from the specified file."
+        description="Import a custom function from the specified Python file."
     )
-    parser.add_argument(
-        "--input_file", required=True, help="Path to the .json or .py input file."
-    )
+    parser.add_argument("--input_file", required=True, help="Path to the .py file.")
     parser.add_argument(
         "--dest_target",
         required=True,
@@ -66,28 +63,14 @@ def main():
 
     args = parser.parse_args()
 
-    # Determine object type based on the file path or extension
-    object_type = (
-        "custom_function"
-        if "custom_functions" in args.input_file or args.input_file.endswith(".py")
-        else "playbook"
-    )
-
-    # Call the import function
-    imported = import_to_dest(
+    # Import the Python file as a custom function
+    import_to_dest(
         args.dest_target,
         args.dest_token,
-        object_type,
+        "custom_function",
         args.input_file,
         args.dest_scm_name,
     )
-    if imported:
-        logging.info(
-            f"{object_type} was successfully imported to the destination target!"
-        )
-    else:
-        logging.error(f"Failed to import the {object_type} to the destination target.")
-        sys.exit(1)
 
 
 if __name__ == "__main__":
