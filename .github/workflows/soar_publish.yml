@@ -51,12 +51,12 @@ jobs:
               py_file="${json_file%.json}.py"
               if [[ -f "$py_file" ]]; then
                   tarball_path="/tmp/$(basename "${json_file%.json}").tgz"
-                  tar -czvf "$tarball_path" "$json_file" "$py_file"
+                  # Change to the directory containing the files to avoid './' prefix
+                  cd "$(dirname "$json_file")"
+                  tar -czf "$tarball_path" "$(basename "$json_file")" "$(basename "$py_file")"
+                  # Return to the previous directory
+                  cd - 
                   
-                  # Check the contents of the tarball
-                  echo "Contents of $tarball_path:"
-                  tar -tzf "$tarball_path"
-
                   # Determine object type, assuming default is playbook unless in a specific directory
                   object_type="playbook"
                   if [[ "$json_file" == *"/custom_functions/"* ]]; then
