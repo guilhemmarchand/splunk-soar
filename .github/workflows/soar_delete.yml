@@ -17,17 +17,18 @@ jobs:
       - name: Checkout previous commit
         run: git checkout HEAD^1
 
-      - name: Get deleted files
+      - name: Get deleted files in merges
         id: deleted_files
         run: |
-          DELETED_FILES=$(git diff --name-only --diff-filter=D ${{ github.sha }} || echo "")
-          PLAYBOOK_AND_CF_FILES=$(echo "$DELETED_FILES" | grep -E '(\.json|\.py)$' | grep -E '(playbooks|custom_functions)/' || echo "")
-          if [ -z "$PLAYBOOK_AND_CF_FILES" ]; then
-            echo "No relevant playbook or custom function files were deleted."
-            echo "::set-output name=list::"
+          if [[ $(git log -1 --pretty=%P | wc -w) -gt 1 ]]; then
+            # Handle merge commit by checking against both parents
+            DELETED_FILES=$(git diff --name-only --diff-filter=D HEAD^1 HEAD^2)
           else
-            echo "::set-output name=list::$PLAYBOOK_AND_CF_FILES"
+            # Non-merge commit, simple diff
+            DELETED_FILES=$(git diff --name-only --diff-filter=D HEAD^ HEAD)
           fi
+          PLAYBOOK_AND_CF_FILES=$(echo "$DELETED_FILES" | grep -E '(\.json|\.py)$' | grep -E '(playbooks|custom_functions)/' || echo "")
+          echo "::set-output name=list::$PLAYBOOK_AND_CF_FILES"
 
       - uses: actions/checkout@v3
         with:
