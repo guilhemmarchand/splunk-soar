@@ -27,7 +27,7 @@ jobs:
             # Non-merge commit, simple diff
             DELETED_FILES=$(git diff --name-only --diff-filter=D HEAD^ HEAD || echo "")
           fi
-          PLAYBOOK_AND_CF_FILES=$(echo "$DELETED_FILES" | grep -E '(\.json|\.py)$' | grep -E '(playbooks|custom_functions)/' || echo "")
+          PLAYBOOK_AND_CF_FILES=$(echo "$DELETED_FILES" | grep -E '(\.json|\.py)$' || echo "")
           echo "Deleted files: $DELETED_FILES"
           echo "Filtered files: $PLAYBOOK_AND_CF_FILES"
           echo "::set-output name=list::$PLAYBOOK_AND_CF_FILES"
