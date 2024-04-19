@@ -1,0 +1,49 @@
+name: Splunk SOAR delete
+
+on:
+  push:
+    branches:
+      - qua
+      - main
+
+jobs:
+  soar_publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Checkout previous commit
+        run: git checkout HEAD^1
+
+      - name: Get deleted files
+        id: deleted_files
+        run: |
+          echo "::set-output name=list::$(git diff --name-only --diff-filter=D ${{ github.sha }})"
+
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Install Python requirements
+        run: pip install -r utils/requirements.txt
+
+      # Existing steps to package and publish objects go here...
+
+      - name: Handle deleted playbooks and custom functions
+        if: steps.deleted_files.outputs.list != ''
+        run: |
+          IFS=' ' read -ra FILES <<< "${{ steps.deleted_files.outputs.list }}"
+          for file in "${FILES[@]}"; do
+              if [[ "$file" == *"custom_functions"* ]]; then
+                  object_type="custom_function"
+              else
+                  object_type="playbook"
+              fi
+              python3 utils/soar_delete.py --deleted_file "$file" --object_type "$object_type" --dest_target="$DEST_API_URL" --dest_token="$DEST_API_TOKEN" --dest_scm_name="$DEST_SCM_NAME"
+          done
