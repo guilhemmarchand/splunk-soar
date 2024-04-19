@@ -25,7 +25,7 @@ jobs:
           git checkout ${{ github.event.before }}
           git diff --name-only --diff-filter=D $PREV_COMMIT ${{ github.sha }} > changes.txt
           DELETED_FILES=$(cat changes.txt || echo "")
-          PLAYBOOK_AND_CF_FILES=$(echo "$DELETED_FILES" | grep -E '(\.json|\.py)$' | grep -E '(playbooks|custom_functions)/' || echo "")
+          PLAYBOOK_AND_CF_FILES=$(echo "$DELETED_FILES" | grep -E '(\.json|\.py)$' || echo "")
           echo "Previous commit: $PREV_COMMIT"
           echo "Current commit: ${{ github.sha }}"
           echo "Deleted files: $DELETED_FILES"
