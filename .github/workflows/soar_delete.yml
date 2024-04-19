@@ -17,17 +17,17 @@ jobs:
       - name: Checkout previous commit
         run: git checkout HEAD^1
 
-      - name: Get deleted files
+      - name: Get deleted files from previous commit
         id: deleted_files
         run: |
-          if [[ $(git log -1 --pretty=%P | wc -w) -gt 1 ]]; then
-            # Handle merge commit by checking against both parents
-            DELETED_FILES=$(git diff --name-only --diff-filter=D HEAD^1 HEAD^2 || echo "")
-          else
-            # Non-merge commit, simple diff
-            DELETED_FILES=$(git diff --name-only --diff-filter=D HEAD^ HEAD || echo "")
-          fi
-          PLAYBOOK_AND_CF_FILES=$(echo "$DELETED_FILES" | grep -E '(\.json|\.py)$' || echo "")
+          git fetch --all
+          PREV_COMMIT=$(git rev-parse HEAD)
+          git checkout ${{ github.event.before }}
+          git diff --name-only --diff-filter=D $PREV_COMMIT ${{ github.sha }} > changes.txt
+          DELETED_FILES=$(cat changes.txt || echo "")
+          PLAYBOOK_AND_CF_FILES=$(echo "$DELETED_FILES" | grep -E '(\.json|\.py)$' | grep -E '(playbooks|custom_functions)/' || echo "")
+          echo "Previous commit: $PREV_COMMIT"
+          echo "Current commit: ${{ github.sha }}"
           echo "Deleted files: $DELETED_FILES"
           echo "Filtered files: $PLAYBOOK_AND_CF_FILES"
           echo "::set-output name=list::$PLAYBOOK_AND_CF_FILES"
