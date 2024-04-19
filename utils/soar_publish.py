@@ -17,13 +17,15 @@ def import_to_dest(dest_target, dest_token, object_type, file_path, scm_name):
     headers = {"ph-auth-token": f"{dest_token}"}
 
     # Encode the file in base64
-    tar_content = []
+    tar_files_list = []
     try:
         with open(file_path, "rb") as f:
             file_content = f.read()
             encoded_content = base64.b64encode(file_content).decode("utf-8")
-            # for each file in the tar, add it to the list
-            tar_content.append(encoded_content)
+            # for each file in the tar, add the name of the file to tar_files_list
+            tar_content = json.loads(file_content)
+            for file in tar_content:
+                tar_files_list.append(file)
 
     except IOError as e:
         logging.error(f"Failed to read file due to: {e}")
@@ -40,7 +42,7 @@ def import_to_dest(dest_target, dest_token, object_type, file_path, scm_name):
     data = {object_type: encoded_content, "scm": scm_name, "force": "true"}
 
     logging.info(
-        f"Running call to SOAR API, endpoint: {endpoint}, content: {json.dumps(tar_content, indent=0)}"
+        f"Running call to SOAR API, endpoint: {endpoint}, content: {json.dumps(tar_files_list, indent=0)}"
     )
 
     try:
