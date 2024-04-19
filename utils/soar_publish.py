@@ -45,16 +45,10 @@ def import_to_dest(dest_target, dest_token, object_type, file_path, scm_name):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Import a playbook/custom_function from an input tgz file."
+        description="Import a playbook/custom_function directly from specified files."
     )
     parser.add_argument(
-        "--input_file", required=True, help="Path to the tgz input file."
-    )
-    parser.add_argument(
-        "--object_type",
-        choices=["playbook", "custom_function"],
-        required=True,
-        help="Type of object in the input file: playbook or custom_function.",
+        "--input_file", required=True, help="Path to the json or py input file."
     )
     parser.add_argument(
         "--dest_target",
@@ -72,21 +66,27 @@ def main():
 
     args = parser.parse_args()
 
+    # Determine object type based on the file path or extension
+    object_type = (
+        "custom_function"
+        if "custom_functions" in args.input_file or args.input_file.endswith(".py")
+        else "playbook"
+    )
+
+    # Call the import function
     imported = import_to_dest(
         args.dest_target,
         args.dest_token,
-        args.object_type,
+        object_type,
         args.input_file,
         args.dest_scm_name,
     )
     if imported:
         logging.info(
-            f"{args.object_type} was successfully imported to the destination target!"
+            f"{object_type} was successfully imported to the destination target!"
         )
     else:
-        logging.error(
-            f"Failed to import the {args.object_type} to the destination target."
-        )
+        logging.error(f"Failed to import the {object_type} to the destination target.")
         sys.exit(1)
 
 

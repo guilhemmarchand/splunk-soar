@@ -9,135 +9,49 @@ on:
 jobs:
   soar_publish:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.x"]
-
     steps:
-      - run: echo "job automatically triggered by a ${{ github.event_name }} event."
-
-      # required to access full git Metadata
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 0
+          fetch-depth: 0 # Ensures the entire repo history is available
 
       - uses: actions/setup-python@v4
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: "3.x"
 
-      # Install required Python modules
       - name: Install Python requirements
-        run: |
-          pip install -r utils/requirements.txt
+        run: pip install -r utils/requirements.txt
 
-      # Investigate git commits, extracts updated files per commit, loop through commits and import in Splunk SOAR target
-      - name: Publish Git commits to Splunk SOAR Cloud
+      - name: Gather and Publish All Objects to Splunk SOAR Cloud
         env:
-          SOAR_QUA_DEST_API_URL: ${{ vars.SOAR_QUA_DEST_API_URL }}
+          SOAR_QUA_DEST_API_URL: ${{ secrets.SOAR_QUA_DEST_API_URL }}
           SOAR_QUA_DEST_API_TOKEN: ${{ secrets.SOAR_QUA_DEST_API_TOKEN }}
-          SOAR_QUA_DEST_SCM_NAME: ${{ vars.SOAR_QUA_DEST_SCM_NAME }}
-          SOAR_PROD_DEST_API_URL: ${{ vars.SOAR_PROD_DEST_API_URL }}
+          SOAR_QUA_DEST_SCM_NAME: ${{ secrets.SOAR_QUA_DEST_SCM_NAME }}
+          SOAR_PROD_DEST_API_URL: ${{ secrets.SOAR_PROD_DEST_API_URL }}
           SOAR_PROD_DEST_API_TOKEN: ${{ secrets.SOAR_PROD_DEST_API_TOKEN }}
-          SOAR_PROD_DEST_SCM_NAME: ${{ vars.SOAR_PROD_DEST_SCM_NAME }}
+          SOAR_PROD_DEST_SCM_NAME: ${{ secrets.SOAR_PROD_DEST_SCM_NAME }}
         run: |
-          echo "Inspecting git branch ${{ github.ref }}"
-          echo "Inspecting git commit ${{ github.sha }}"
-          echo "running command git log --pretty=%P -n 1 ${{ github.sha }}"
-          git log --pretty=%P -n 1 ${{ github.sha }}
-          echo ""
+          echo "Branch: ${{ github.ref }}"
 
-          commit_details=$(git log --pretty=%P -n 1 ${{ github.sha }})
-
-          # Handling multiple parent commits for merge scenarios
-          if [[ $(echo "$commit_details" | wc -w) -gt 1 ]]; then
-              first_parent=$(echo "$commit_details" | awk '{print $1}')
-              second_parent=$(echo "$commit_details" | awk '{print $2}')
-              
-              # Determine the common ancestor of the two parents and get all commits in the branch being merged
-              common_ancestor=$(git merge-base $first_parent $second_parent)
-              commits_to_process=$(git rev-list $common_ancestor..$second_parent)
-          else
-              # For single commits
-              commits_to_process=$commit_details
-          fi
-
-          echo "list of commit identifiers: $commits_to_process"
-          DEST_API_URL=""
-          DEST_API_TOKEN=""
-          DEST_SCM_NAME=""
-
-          # Check if we are on the 'qua' branch
+          # Set API parameters based on the branch
           if [[ "${{ github.ref }}" == "refs/heads/qua" ]]; then
-              echo "Environment target is Qua"
               DEST_API_URL=$SOAR_QUA_DEST_API_URL
               DEST_API_TOKEN=$SOAR_QUA_DEST_API_TOKEN
               DEST_SCM_NAME=$SOAR_QUA_DEST_SCM_NAME
           elif [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
-              echo "Environment target is Production"
               DEST_API_URL=$SOAR_PROD_DEST_API_URL
               DEST_API_TOKEN=$SOAR_PROD_DEST_API_TOKEN
               DEST_SCM_NAME=$SOAR_PROD_DEST_SCM_NAME
           else
-              echo "Invalid branch. This workflow is only for 'qua' or 'main' branches, refusing to excute this against any other branch."
+              echo "Invalid branch. Exiting."
               exit 1
           fi
 
-          for parent in $commits_to_process; do
-              echo "Handling git commit id: $parent"
-              echo "running command git show"
-              git show --name-only --pretty="" $parent || true
+          # Find all playbook and custom function files
+          find . -type f \( -name '*.json' -o -name '*.py' \) | sort > files_list.txt
+          cat files_list.txt
 
-              # Fetch modified files in the commit and store in an array
-              mapfile -t files_array < <(git show --name-only --pretty="" $parent | grep -E '\.json$|\.py$')
-              files=$(printf "\"%s\" " "${files_array[@]}")
-              echo "files: $files"
-
-              # Check that for every .json file there's a .py file and vice-versa
-              valid_files=()
-              for file in "${files_array[@]}"; do
-                  base_name="${file%.*}" # strip extension
-                  if [[ "$file" =~ \.json$ && " ${files_array[*]} " =~ " $base_name.py " ]] || 
-                    [[ "$file" =~ \.py$ && " ${files_array[*]} " =~ " $base_name.json " ]]; then
-                      valid_files+=("$file")
-                  fi
-              done
-
-              if [ ${#valid_files[@]} -eq 0 ]; then
-                  echo "No matching pairs of .json and .py found for commit id: $parent. Skipping."
-                  continue
-              fi
-
-              echo "list of updated files for commit id $parent:"
-              printf "%s\n" "${valid_files[@]}"
-
-              # Determine the object type
-              if echo "$files" | grep -q 'custom_functions/'; then
-                  OBJECT_TYPE="custom_function"
-              else
-                  OBJECT_TYPE="playbook"
-              fi
-
-              # Create tarball
-              tarball_path="/tmp/$parent.tgz"
-              if [ "$OBJECT_TYPE" == "custom_function" ]; then
-                  # Strip directory from file names
-                  stripped_files=()
-                  for file in "${valid_files[@]}"; do
-                      stripped_files+=("$(basename "$file")")
-                  done
-
-                  # Move to custom_functions directory and tar the files
-                  cd custom_functions
-                  tar -czvf $tarball_path "${stripped_files[@]}" > /dev/null
-                  cd ..
-              else
-                  tar -czvf $tarball_path "${valid_files[@]}" > /dev/null
-              fi
-              
-              # Call the SOAR publish Python backend
-              echo "running command: python3 utils/soar_publish.py --input_file \"$tarball_path\" --dest_target=\"$DEST_API_URL\" --dest_token=\"$DEST_API_TOKEN\" --dest_scm_name=\"$DEST_SCM_NAME\" --object_type \"$OBJECT_TYPE\""
-              python3 utils/soar_publish.py --input_file "$tarball_path" --dest_target="$DEST_API_URL" --dest_token="$DEST_API_TOKEN" --dest_scm_name="$DEST_SCM_NAME" --object_type "$OBJECT_TYPE"
-
-          done
-
-          exit 0
+          # Process each pair found
+          while read -r file; do
+              # Assume all files are valid since we check pairs in repository structure
+              python3 utils/soar_publish.py --input_file "$file" --dest_target="$DEST_API_URL" --dest_token="$DEST_API_TOKEN" --dest_scm_name="$DEST_SCM_NAME" --object_type "determine_from_file_path"
+          done < files_list.txt
