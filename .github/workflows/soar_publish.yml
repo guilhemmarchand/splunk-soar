@@ -56,10 +56,9 @@ jobs:
               
               # Check if both files exist
               if [[ -f "$json_file" && -f "$py_file" ]]; then
-                  echo "Processing $json_file and $py_file"
-                  # Call the Python script to import both files as they are a complete set
+                  echo "Processing $json_file"
+                  # Call the Python script to import the JSON file only as it is a complete set
                   python3 utils/soar_publish.py --input_file "$json_file" --dest_target="$DEST_API_URL" --dest_token="$DEST_API_TOKEN" --dest_scm_name="$DEST_SCM_NAME"
-                  python3 utils/soar_publish.py --input_file "$py_file" --dest_target="$DEST_API_URL" --dest_token "$DEST_API_TOKEN" --dest_scm_name "$DEST_SCM_NAME"
               else
                   echo "Skipping incomplete set: $json_file does not have a matching $py_file"
               fi
