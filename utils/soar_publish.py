@@ -4,6 +4,7 @@ import argparse
 import base64
 import logging
 import urllib3
+import json
 
 # Disable insecure request warnings for urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -16,10 +17,14 @@ def import_to_dest(dest_target, dest_token, object_type, file_path, scm_name):
     headers = {"ph-auth-token": f"{dest_token}"}
 
     # Encode the file in base64
+    tar_content = []
     try:
         with open(file_path, "rb") as f:
             file_content = f.read()
             encoded_content = base64.b64encode(file_content).decode("utf-8")
+            # for each file in the tar, add it to the list
+            tar_content.append(encoded_content)
+
     except IOError as e:
         logging.error(f"Failed to read file due to: {e}")
         sys.exit(1)
@@ -34,7 +39,9 @@ def import_to_dest(dest_target, dest_token, object_type, file_path, scm_name):
 
     data = {object_type: encoded_content, "scm": scm_name, "force": "true"}
 
-    logging.info(f"Running call to SOAR API, endpoint: {endpoint}")
+    logging.info(
+        f"Running call to SOAR API, endpoint: {endpoint}, content: {json.dumps(file_content, indent=0)}"
+    )
 
     try:
         response = requests.post(endpoint, headers=headers, json=data, verify=False)
