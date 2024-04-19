@@ -20,8 +20,8 @@ jobs:
       - name: Get deleted files
         id: deleted_files
         run: |
-          DELETED_FILES=$(git diff --name-only --diff-filter=D ${{ github.sha }})
-          PLAYBOOK_AND_CF_FILES=$(echo "$DELETED_FILES" | grep -E '(\.json|\.py)$' | grep -E '(playbooks|custom_functions)/')
+          DELETED_FILES=$(git diff --name-only --diff-filter=D ${{ github.sha }} || echo "")
+          PLAYBOOK_AND_CF_FILES=$(echo "$DELETED_FILES" | grep -E '(\.json|\.py)$' | grep -E '(playbooks|custom_functions)/' || echo "")
           if [ -z "$PLAYBOOK_AND_CF_FILES" ]; then
             echo "No relevant playbook or custom function files were deleted."
             echo "::set-output name=list::"
