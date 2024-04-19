@@ -45,10 +45,10 @@ def import_to_dest(dest_target, dest_token, object_type, file_path, scm_name):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Import a playbook/custom_function directly from specified files."
+        description="Import a playbook or custom function from the specified file."
     )
     parser.add_argument(
-        "--input_file", required=True, help="Path to the json or py input file."
+        "--input_file", required=True, help="Path to the .json or .py input file."
     )
     parser.add_argument(
         "--dest_target",

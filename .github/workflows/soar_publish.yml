@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 0 # Ensures the entire repo history is available
+          fetch-depth: 0
 
       - uses: actions/setup-python@v4
         with:
@@ -52,6 +52,6 @@ jobs:
 
           # Process each pair found
           while read -r file; do
-              # Assume all files are valid since we check pairs in repository structure
-              python3 utils/soar_publish.py --input_file "$file" --dest_target="$DEST_API_URL" --dest_token="$DEST_API_TOKEN" --dest_scm_name="$DEST_SCM_NAME" --object_type "determine_from_file_path"
+              # Use the Python script to determine object type and import
+              python3 utils/soar_publish.py --input_file "$file" --dest_target="$DEST_API_URL" --dest_token="$DEST_API_TOKEN" --dest_scm_name="$DEST_SCM_NAME"
           done < files_list.txt
