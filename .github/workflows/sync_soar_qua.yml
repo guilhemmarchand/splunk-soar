@@ -1,0 +1,29 @@
+name: Sync SOAR and Git for Qualification
+
+on:
+  push:
+    branches:
+      - qua
+
+jobs:
+  sync_soar_with_git:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Install Python requirements
+        run: pip install -r utils/requirements.txt
+
+      - name: Sync SOAR with Git Repository
+        run: |
+          python3 utils/sync_soar.py --dest_target "${{ secrets.SOAR_API_URL }}" --dest_token "${{ secrets.SOAR_API_TOKEN }}" --dest_scm_name "${{ secrets.SOAR_SCM_NAME }}"
+        env:
+          SOAR_DEST_API_URL: ${{ vars.SOAR_PROD_DEST_API_URL }}
+          SOAR_DEST_API_TOKEN: ${{ secrets.PROD_QUA_DEST_API_TOKEN }}
+          SOAR_DEST_SCM_NAME: ${{ vars.SOAR_PROD_DEST_SCM_NAME }}

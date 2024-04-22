@@ -1,10 +1,9 @@
-name: Sync SOAR and Git
+name: Sync SOAR and Git for Production
 
 on:
   push:
     branches:
       - main
-      - qua
 
 jobs:
   sync_soar_with_git:
@@ -25,6 +24,6 @@ jobs:
         run: |
           python3 utils/sync_soar.py --dest_target "${{ secrets.SOAR_API_URL }}" --dest_token "${{ secrets.SOAR_API_TOKEN }}" --dest_scm_name "${{ secrets.SOAR_SCM_NAME }}"
         env:
-          SOAR_API_URL: ${{ secrets.SOAR_QUA_DEST_API_URL }}
-          SOAR_API_TOKEN: ${{ secrets.SOAR_QUA_DEST_API_TOKEN }}
-          SOAR_SCM_NAME: ${{ secrets.SOAR_QUA_DEST_SCM_NAME }}
+          SOAR_DEST_API_URL: ${{ vars.SOAR_QUA_DEST_API_URL }}
+          SOAR_DEST_API_TOKEN: ${{ secrets.SOAR_QUA_DEST_API_TOKEN }}
+          SOAR_DEST_SCM_NAME: ${{ vars.SOAR_QUA_DEST_SCM_NAME }}
