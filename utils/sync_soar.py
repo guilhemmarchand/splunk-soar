@@ -182,7 +182,7 @@ def main():
     )
 
     # log the number of local playbooks found
-    logging.info("################## Start information ##################")
+    logging.info("################## Start job information ##################")
     logging.info(f"Found {len(local_playbooks)} local playbooks.")
     logging.info(f"local_playbooks={json.dumps(local_playbooks, indent=2)}")
     # log the number of local custom functions found
@@ -198,11 +198,13 @@ def main():
     logging.info(
         f"remote_custom_functions={json.dumps(remote_custom_functions, indent=2)}"
     )
-    logging.info("################## End information ##################")
+    logging.info("################## End job information ##################")
 
     #
     # Sync playbooks
     #
+
+    logging.info("************ Start Syncing playbooks ************ ")
 
     for name, files in local_playbooks.items():
 
@@ -229,6 +231,10 @@ def main():
         else:
             logging.error(f"Playbook {name} has failed to be synchronized.")
             sys.exit(1)
+
+    logging.info("************ Start Syncing playbooks ************ ")
+
+    logging.info("************ Start Syncing custom functions ************ ")
 
     #
     # Sync custom functions
@@ -261,6 +267,10 @@ def main():
                 logging.error(f"Custom function {name} has failed to be synchronized.")
                 sys.exit(1)
 
+    logging.info("************ End Syncing custom functions ************ ")
+
+    logging.info("************ Start Purging remote playbooks ************ ")
+
     # Delete playbooks not found locally
     playbooks_ids_to_delete = []
     for name, id in remote_playbooks.items():
@@ -283,6 +293,10 @@ def main():
             )
     else:
         logging.info("No playbooks to be deleted on the remote SOAR.")
+
+    logging.info("************ End Purging remote playbooks ************ ")
+
+    logging.info("************ Start Purging remote custom functions ************ ")
 
     # Delete custom functions not found locally
     custom_functions_ids_to_delete = []
@@ -312,6 +326,8 @@ def main():
                 )
     else:
         logging.info("No custom functions to be deleted on the remote SOAR.")
+
+    logging.info("************ End Purging remote custom functions ************ ")
 
     # log end
     logging.info("SOAR Sync completed successfully.")
