@@ -22,8 +22,8 @@ jobs:
 
       - name: Sync SOAR with Git Repository
         env:
-          SOAR_API_URL: ${{ vars.SOAR_PROD_DEST_API_URL }}
-          SOAR_API_TOKEN: ${{ secrets.SOAR_PROD_DEST_API_TOKEN }}
-          SOAR_SCM_NAME: ${{ vars.SOAR_PROD_DEST_SCM_NAME }}
+          SOAR_QUA_DEST_API_URL: ${{ vars.SOAR_QUA_DEST_API_URL }}
+          SOAR_QUA_DEST_API_TOKEN: ${{ secrets.SOAR_QUA_DEST_API_TOKEN }}
+          SOAR_QUA_DEST_SCM_NAME: ${{ vars.SOAR_QUA_DEST_SCM_NAME }}
         run: |
-          python3 utils/sync_soar.py --dest_target "$SOAR_API_URL" --dest_token "$SOAR_API_TOKEN" --dest_scm_name "$SOAR_SCM_NAME"
+          python3 utils/sync_soar.py --dest_target "$SOAR_QUA_DEST_API_URL" --dest_token "$SOAR_QUA_DEST_API_TOKEN" --dest_scm_name "$SOAR_QUA_DEST_SCM_NAME"
