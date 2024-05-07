@@ -18,7 +18,7 @@ def on_start(container):
     return
 
 @phantom.playbook_block()
-def filter_for_uc_ref(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def filter_for_uc_ref(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("filter_for_uc_ref() called")
 
     ################################################################################
@@ -43,7 +43,7 @@ def filter_for_uc_ref(action=None, success=None, container=None, results=None, h
 
 
 @phantom.playbook_block()
-def call_uc_playbook(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def call_uc_playbook(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("call_uc_playbook() called")
 
     filtered_artifact_0_data_filter_for_uc_ref = phantom.collect2(container=container, datapath=["filtered-data:filter_for_uc_ref:condition_1:artifact:*.cef.soar_playbook"])
@@ -66,7 +66,7 @@ def call_uc_playbook(action=None, success=None, container=None, results=None, ha
 
 
 @phantom.playbook_block()
-def check_for_uc_requirements(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def check_for_uc_requirements(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("check_for_uc_requirements() called")
 
     # check for 'if' condition 1
@@ -80,6 +80,7 @@ def check_for_uc_requirements(action=None, success=None, container=None, results
     # call connected blocks if condition 1 matched
     if found_match_1:
         filter_for_uc_ref(action=action, success=success, container=container, results=results, handle=handle)
+        format_3(action=action, success=success, container=container, results=results, handle=handle)
         return
 
     # check for 'else' condition 2
@@ -89,7 +90,7 @@ def check_for_uc_requirements(action=None, success=None, container=None, results
 
 
 @phantom.playbook_block()
-def add_comment_af_invalid(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def add_comment_af_invalid(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("add_comment_af_invalid() called")
 
     ################################################################################
@@ -110,7 +111,7 @@ def add_comment_af_invalid(action=None, success=None, container=None, results=No
 
 
 @phantom.playbook_block()
-def format_invalid_notable_email_title(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def format_invalid_notable_email_title(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("format_invalid_notable_email_title() called")
 
     template = """SOAR Invalid Splunk Notable detected id: {0}\n"""
@@ -138,7 +139,7 @@ def format_invalid_notable_email_title(action=None, success=None, container=None
 
 
 @phantom.playbook_block()
-def format_invalid_notablke_email_body(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def format_invalid_notablke_email_body(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("format_invalid_notablke_email_body() called")
 
     template = """An invalid Notable was forwarded to Splunk SOAR Cloud, triage was refused as the Notable event is missing the Playbook target.\n\nPlease review this issue urgently:\n- Event ID: {0}\n- Event URL: {1}\n\nSplunk SOAR Cloud."""
@@ -167,22 +168,22 @@ def format_invalid_notablke_email_body(action=None, success=None, container=None
 
 
 @phantom.playbook_block()
-def send_email_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def send_email_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("send_email_1() called")
 
     # phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
 
-    format_invalid_notable_email_title = phantom.get_format_data(name="format_invalid_notable_email_title")
     format_invalid_notablke_email_body = phantom.get_format_data(name="format_invalid_notablke_email_body")
+    format_invalid_notable_email_title = phantom.get_format_data(name="format_invalid_notable_email_title")
 
     parameters = []
 
     if format_invalid_notablke_email_body is not None:
         parameters.append({
-            "from": "gmarchand@splunk.com",
             "to": "gmarchand@splunk.com",
-            "subject": format_invalid_notable_email_title,
             "body": format_invalid_notablke_email_body,
+            "from": "gmarchand@splunk.com",
+            "subject": format_invalid_notable_email_title,
         })
 
     ################################################################################
@@ -196,6 +197,32 @@ def send_email_1(action=None, success=None, container=None, results=None, handle
     ################################################################################
 
     phantom.act("send email", parameters=parameters, name="send_email_1", assets=["internal_smtp"])
+
+    return
+
+
+@phantom.playbook_block()
+def format_3(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
+    phantom.debug("format_3() called")
+
+    template = """%%\n{0}\n%%"""
+
+    # parameter list for template variable replacement
+    parameters = [
+        ""
+    ]
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.format(container=container, template=template, parameters=parameters, name="format_3")
 
     return
 

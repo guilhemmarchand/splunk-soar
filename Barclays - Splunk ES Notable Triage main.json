@@ -83,9 +83,21 @@
                     "sourcePort": "14_out",
                     "targetNode": "1",
                     "targetPort": "1_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_10_to_port_15",
+                    "sourceNode": "10",
+                    "sourcePort": "10_out",
+                    "targetNode": "15",
+                    "targetPort": "15_in"
                 }
             ],
-            "hash": "ec7d9c0bc264d2c2705e2b9873220e467085c633",
+            "hash": "135f363cbe5835a9895a28b67270662c55fc7414",
             "nodes": {
                 "0": {
                     "data": {
@@ -101,7 +113,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 190,
-                    "y": -8.526512829121202e-14
+                    "y": -1.4921397450962104e-13
                 },
                 "1": {
                     "data": {
@@ -184,6 +196,15 @@
                         "functionId": 1,
                         "functionName": "add_comment_af_invalid",
                         "id": "11",
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
                         "selectMore": false,
                         "tab": "apis",
                         "type": "utility",
@@ -259,7 +280,7 @@
                     "type": "format",
                     "warnings": {},
                     "x": 420,
-                    "y": 439.99999999999983
+                    "y": 439.9999999999998
                 },
                 "13": {
                     "data": {
@@ -301,6 +322,15 @@
                         "functionId": 1,
                         "functionName": "send_email_1",
                         "id": "14",
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
                         "parameters": {
                             "body": "format_invalid_notablke_email_body:formatted_data",
                             "from": "gmarchand@splunk.com",
@@ -325,6 +355,27 @@
                     "warnings": {},
                     "x": 420,
                     "y": 700
+                },
+                "15": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionId": 3,
+                        "functionName": "format_3",
+                        "id": "15",
+                        "parameters": [
+                            ""
+                        ],
+                        "template": "%%\n{0}\n%%",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "15",
+                    "type": "format",
+                    "warnings": {},
+                    "x": -40,
+                    "y": 284.5
                 },
                 "5": {
                     "data": {
@@ -384,7 +435,11 @@
                     "id": "9",
                     "type": "code",
                     "userCode": "\n    # Write your custom code here...\n    phantom.debug(\"Calling playbook={0}\".format(filtered_artifact_0__cef_soar_playbook[0]))\n    playbook_run_id = phantom.playbook(filtered_artifact_0__cef_soar_playbook[0], container=container)\n\n",
-                    "warnings": {},
+                    "warnings": {
+                        "config": [
+                            "Reconfigure invalid datapath."
+                        ]
+                    },
                     "x": 0,
                     "y": 820
                 }
@@ -395,10 +450,10 @@
         "output_spec": null,
         "playbook_type": "automation",
         "python_version": "3",
-        "schema": "5.0.10",
-        "version": "6.0.2.127725"
+        "schema": "5.0.11",
+        "version": "6.2.1.305"
     },
-    "create_time": "2023-09-28T13:30:20.202208+00:00",
+    "create_time": "2024-05-07T09:46:00.649983+00:00",
     "draft_mode": false,
     "labels": [
         "splunk_events"
