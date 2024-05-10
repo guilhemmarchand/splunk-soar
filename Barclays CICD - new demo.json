@@ -12,6 +12,13 @@
                     "sourcePort": "0_out",
                     "targetNode": "2",
                     "targetPort": "2_in"
+                },
+                {
+                    "id": "port_2_to_port_1",
+                    "sourceNode": "2",
+                    "sourcePort": "2_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
                 }
             ],
             "hash": "cd9a7692bd381b7d8b7c7d5769e4534504a9b58c",
@@ -30,7 +37,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 1000,
-                    "y": 419.9999999999999
+                    "y": 419.9999999999998
                 },
                 "1": {
                     "data": {
@@ -66,8 +73,8 @@
                     "id": "2",
                     "type": "format",
                     "warnings": {},
-                    "x": 980,
-                    "y": 564.5
+                    "x": 960,
+                    "y": 640
                 }
             },
             "notes": ""
