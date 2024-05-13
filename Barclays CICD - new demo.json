@@ -21,7 +21,7 @@
                     "targetPort": "1_in"
                 }
             ],
-            "hash": "cd9a7692bd381b7d8b7c7d5769e4534504a9b58c",
+            "hash": "92826339fc1de75cd0c603a86f9ead4e051053bf",
             "nodes": {
                 "0": {
                     "data": {
@@ -37,7 +37,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 1000,
-                    "y": 419.9999999999998
+                    "y": 419.99999999999966
                 },
                 "1": {
                     "data": {
@@ -64,7 +64,7 @@
                         "functionName": "format_1",
                         "id": "2",
                         "parameters": [
-                            ""
+                            "artifact:*.cef.act"
                         ],
                         "template": "%%\n{0}\n%%",
                         "type": "format"
@@ -86,7 +86,7 @@
         "schema": "5.0.11",
         "version": "6.2.1.305"
     },
-    "create_time": "2024-05-07T09:59:34.113844+00:00",
+    "create_time": "2024-05-13T10:49:13.282992+00:00",
     "draft_mode": false,
     "labels": [
         "*"
