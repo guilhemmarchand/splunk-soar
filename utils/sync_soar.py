@@ -128,7 +128,7 @@ def sync_soar_object(dest_target, dest_token, object_type, file_path, scm_name, 
 
     data = {object_type: encoded_content, "scm": scm_name, "force": "true"}
 
-    if mode == "simulation":
+    if mode == "dryrun":
         logging.info(
             f"Simulation mode: Would have called {endpoint} with data keys: {list(data.keys())}"
         )
@@ -154,9 +154,9 @@ def delete_soar_playbooks(api_url, token, items_list, mode):
     # Attention: data must be sent via json.dumps
     url = f"{api_url}/playbooks"
 
-    if mode == "simulation":
-        logging.info(f"Simulation mode: Would have deleted playbooks with data: {data}")
-        return 200, "Simulated delete"
+    if mode == "dryrun":
+        logging.info(f"Dry run mode: Would have deleted playbooks with data: {data}")
+        return 200, "Dry run delete"
     else:
         response = requests.post(
             url, headers=headers, data=json.dumps(data), verify=False
@@ -169,7 +169,7 @@ def delete_soar_custom_function(api_url, token, item_id, mode):
     headers = {"ph-auth-token": f"{token}"}
     url = f"{api_url}/rest/custom_functions/{item_id}"
 
-    if mode == "simulation":
+    if mode == "dryrun":
         logging.info(
             f"Simulation mode: Would have deleted custom function with ID: {item_id}"
         )
@@ -192,9 +192,9 @@ def main():
     )
     parser.add_argument(
         "--mode",
-        choices=["simulation", "live"],
-        default="simulation",
-        help="Mode of operation: simulation or live (default: simulation)",
+        choices=["dryrun", "live"],
+        default="dryrun",
+        help="Mode of operation: dryrun or live (default: dryrun)",
     )
     parser.add_argument("--verbose", action="store_true", help="Enable verbose logging")
     args = parser.parse_args()
