@@ -10,7 +10,8 @@ import logging
 requests.packages.urllib3.disable_warnings()
 
 # Set up logging
-logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 
 # cd context manager
@@ -98,7 +99,7 @@ def fetch_soar_items(api_url, token, item_type):
     return remote_objects_list
 
 
-def sync_soar_object(dest_target, dest_token, object_type, file_path, scm_name):
+def sync_soar_object(dest_target, dest_token, object_type, file_path, scm_name, mode):
     headers = {"ph-auth-token": f"{dest_token}"}
 
     # Encode the file in base64
@@ -127,20 +128,25 @@ def sync_soar_object(dest_target, dest_token, object_type, file_path, scm_name):
 
     data = {object_type: encoded_content, "scm": scm_name, "force": "true"}
 
-    logging.info(
-        f"Running call to SOAR API, endpoint: {endpoint}, content: {json.dumps(tar_files_list, indent=0)}"
-    )
-
-    try:
-        response = requests.post(endpoint, headers=headers, json=data, verify=False)
-        response.raise_for_status()
+    if mode == "simulation":
+        logging.info(
+            f"Simulation mode: Would have called {endpoint} with data keys: {list(data.keys())}"
+        )
         return True
-    except requests.RequestException as e:
-        logging.error(f"Import failed with error: {str(e)}")
-        sys.exit(1)
+    else:
+        logging.info(
+            f"Running call to SOAR API, endpoint: {endpoint}, content: {json.dumps(tar_files_list, indent=0)}"
+        )
+        try:
+            response = requests.post(endpoint, headers=headers, json=data, verify=False)
+            response.raise_for_status()
+            return True
+        except requests.RequestException as e:
+            logging.error(f"Import failed with error: {str(e)}")
+            sys.exit(1)
 
 
-def delete_soar_playbooks(api_url, token, items_list):
+def delete_soar_playbooks(api_url, token, items_list, mode):
     """Delete a list of items based."""
     headers = {"ph-auth-token": f"{token}"}
     data = {"ids": items_list, "delete": "true"}
@@ -148,17 +154,29 @@ def delete_soar_playbooks(api_url, token, items_list):
     # Attention: data must be sent via json.dumps
     url = f"{api_url}/playbooks"
 
-    response = requests.post(url, headers=headers, data=json.dumps(data), verify=False)
-    return response.status_code, response.text
+    if mode == "simulation":
+        logging.info(f"Simulation mode: Would have deleted playbooks with data: {data}")
+        return 200, "Simulated delete"
+    else:
+        response = requests.post(
+            url, headers=headers, data=json.dumps(data), verify=False
+        )
+        return response.status_code, response.text
 
 
-def delete_soar_custom_function(api_url, token, item_id):
+def delete_soar_custom_function(api_url, token, item_id, mode):
     """Delete a custom function based."""
     headers = {"ph-auth-token": f"{token}"}
     url = f"{api_url}/rest/custom_functions/{item_id}"
 
-    response = requests.delete(url, headers=headers, verify=False)
-    return response.status_code, response.text
+    if mode == "simulation":
+        logging.info(
+            f"Simulation mode: Would have deleted custom function with ID: {item_id}"
+        )
+        return 200, "Simulated delete"
+    else:
+        response = requests.delete(url, headers=headers, verify=False)
+        return response.status_code, response.text
 
 
 def main():
@@ -172,7 +190,17 @@ def main():
     parser.add_argument(
         "--dest_scm_name", required=True, help="The SCM name for the SOAR environment."
     )
+    parser.add_argument(
+        "--mode",
+        choices=["simulation", "live"],
+        default="simulation",
+        help="Mode of operation: simulation or live (default: simulation)",
+    )
+    parser.add_argument("--verbose", action="store_true", help="Enable verbose logging")
     args = parser.parse_args()
+
+    if not args.verbose:
+        logger.disabled = True
 
     local_playbooks = list_files_in_directory(".")
     local_custom_functions = list_files_in_directory("./custom_functions")
@@ -200,6 +228,14 @@ def main():
     )
     logging.info("################## End job information ##################")
 
+    # Initialize result structure
+    result = {
+        "synced_playbooks": [],
+        "synced_custom_functions": [],
+        "deleted_playbooks": [],
+        "deleted_custom_functions": [],
+    }
+
     #
     # Sync playbooks
     #
@@ -222,17 +258,19 @@ def main():
             "playbook",
             tarfile_name,
             args.dest_scm_name,
+            args.mode,
         )
 
         if imported:
             logging.info(
                 f"Playbook {name} was successfully synchronized to the destination target!"
             )
+            result["synced_playbooks"].append(name)
         else:
             logging.error(f"Playbook {name} has failed to be synchronized.")
             sys.exit(1)
 
-    logging.info("************ Start Syncing playbooks ************ ")
+    logging.info("************ End Syncing playbooks ************ ")
 
     logging.info("************ Start Syncing custom functions ************ ")
 
@@ -257,12 +295,14 @@ def main():
                 "custom_function",
                 tarfile_name,
                 args.dest_scm_name,
+                args.mode,
             )
 
             if imported:
                 logging.info(
                     f"Custom function {name} was successfully synchronized to the destination target!"
                 )
+                result["synced_custom_functions"].append(name)
             else:
                 logging.error(f"Custom function {name} has failed to be synchronized.")
                 sys.exit(1)
@@ -284,13 +324,16 @@ def main():
     if len(playbooks_ids_to_delete) > 0:
         logging.info(f'Deleting playbooks with IDs "{playbooks_ids_to_delete}"')
         response_code, response_text = delete_soar_playbooks(
-            args.dest_target, args.dest_token, playbooks_ids_to_delete
+            args.dest_target, args.dest_token, playbooks_ids_to_delete, args.mode
         )
         # if response_code != 2*, log an error
         if response_code < 200 or response_code >= 300:
             logging.error(
                 f"Failed to delete playbooks with IDs {playbooks_ids_to_delete}, response_code={response_code}, response_text={response_text}."
             )
+        else:
+            for name in playbooks_ids_to_delete:
+                result["deleted_playbooks"].append(name)
     else:
         logging.info("No playbooks to be deleted on the remote SOAR.")
 
@@ -305,7 +348,7 @@ def main():
             logging.info(
                 f'Deleting custom function "{name}" with ID {id} as it is not available in the source sync repository.'
             )
-            custom_functions_ids_to_delete.append(id.gte("id"))
+            custom_functions_ids_to_delete.append(id.get("id"))
 
     # proceed with deletion
     if len(custom_functions_ids_to_delete) > 0:
@@ -318,12 +361,15 @@ def main():
                 args.dest_target,
                 args.dest_token,
                 custom_function_id,
+                args.mode,
             )
             # if response_code != 2*, log an error
             if response_code < 200 or response_code >= 300:
                 logging.error(
                     f"Failed to delete custom functions with IDs {custom_functions_ids_to_delete}, response_code={response_code}, response_text={response_text}."
                 )
+            else:
+                result["deleted_custom_functions"].append(custom_function_id)
     else:
         logging.info("No custom functions to be deleted on the remote SOAR.")
 
@@ -331,6 +377,7 @@ def main():
 
     # log end
     logging.info("SOAR Sync completed successfully.")
+    print(json.dumps(result, indent=2))
 
 
 if __name__ == "__main__":
