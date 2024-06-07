@@ -35,8 +35,9 @@ jobs:
             echo "Invalid branch. Exiting."
             exit 1
           fi
-          python3 utils/sync_soar.py --dest_target "$DEST_API_URL" --dest_token "$DEST_API_TOKEN" --dest_scm_name "$DEST_SCM_NAME" --mode live
+          python3 utils/sync_soar.py src_scm_name "$SOAR_SOURCE_SCM_NAME" --dest_target "$DEST_API_URL" --dest_token "$DEST_API_TOKEN" --dest_scm_name "$DEST_SCM_NAME" --mode live
         env:
+          SOAR_SOURCE_SCM_NAME: ${{ vars.SOAR_SOURCE_SCM_NAME }}
           SOAR_QUA_DEST_API_URL: ${{ vars.SOAR_QUA_DEST_API_URL }}
           SOAR_QUA_DEST_API_TOKEN: ${{ secrets.SOAR_QUA_DEST_API_TOKEN }}
           SOAR_QUA_DEST_SCM_NAME: ${{ vars.SOAR_QUA_DEST_SCM_NAME }}

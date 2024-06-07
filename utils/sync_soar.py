@@ -99,6 +99,19 @@ def fetch_soar_items(api_url, token, item_type):
     return remote_objects_list
 
 
+def replace_scm_references(file_path, src_scm_name, dest_scm_name):
+    """Replace source SCM references with destination SCM references in JSON files."""
+    with open(file_path, "r") as file:
+        content = file.read()
+
+    if file_path.endswith(".json"):
+        updated_content = content.replace(
+            f'"repoName": "{src_scm_name}"', f'"repoName": "{dest_scm_name}"'
+        )
+        with open(file_path, "w") as file:
+            file.write(updated_content)
+
+
 def sync_soar_object(dest_target, dest_token, object_type, file_path, scm_name, mode):
     headers = {"ph-auth-token": f"{dest_token}"}
 
@@ -191,6 +204,11 @@ def main():
         "--dest_scm_name", required=True, help="The SCM name for the SOAR environment."
     )
     parser.add_argument(
+        "--src_scm_name",
+        required=True,
+        help="The SCM name for the source SOAR environment.",
+    )
+    parser.add_argument(
         "--mode",
         choices=["dryrun", "live"],
         default="dryrun",
@@ -246,6 +264,11 @@ def main():
 
         logging.info(f'Processing playbook "{name}", files={files}')
 
+        # Update SCM references in the JSON files
+        for file in files:
+            if file.endswith(".json"):
+                replace_scm_references(file, args.src_scm_name, args.dest_scm_name)
+
         # create a gzip compressed tar file using name (remove spaces) as the filename, and the content are the files in files
         tarfile_name = f"{name.replace(' ', '')}.tgz"
         with tarfile.open(f"{tarfile_name}", "w:gz") as tar:
@@ -283,6 +306,11 @@ def main():
         logging.info(f'Processing custom function "{name}", files={files}')
 
         with cd("custom_functions"):
+            # Update SCM references in the JSON files
+            for file in files:
+                if file.endswith(".json"):
+                    replace_scm_references(file, args.src_scm_name, args.dest_scm_name)
+
             # create a gzip compressed tar file using name (remove spaces) as the filename, and the content are the files in files
             tarfile_name = f"{name.replace(' ', '')}.tgz"
             with tarfile.open(f"{tarfile_name}", "w:gz") as tar:
