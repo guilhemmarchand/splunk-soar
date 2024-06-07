@@ -143,7 +143,11 @@ def sync_soar_object(dest_target, dest_token, object_type, file_path, scm_name, 
         logging.error(f"Unsupported object type: {object_type}")
         sys.exit(1)
 
-    data = {object_type: encoded_content, "scm": scm_name, "force": "true"}
+    data = {
+        object_type: encoded_content,
+        "scm": scm_name,
+        "force": True,
+    }
 
     if mode == "dryrun":
         logging.info(
