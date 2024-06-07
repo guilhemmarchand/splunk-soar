@@ -114,8 +114,8 @@ def replace_scm_references(file_path, src_scm_name, dest_scm_name):
             f'phantom.custom_function(custom_function="{dest_scm_name}/',
         )
         updated_content = updated_content.replace(
-            f'phantom.playbook="{src_scm_name}/',
-            f'phantom.playbook="{dest_scm_name}/',
+            f'phantom.playbook("{src_scm_name}/',
+            f'phantom.playbook("{dest_scm_name}/',
         )
 
     with open(file_path, "w") as file:
