@@ -235,6 +235,14 @@ def main():
         args.dest_target, args.dest_token, "custom_function"
     )
 
+    # log the run parameters
+    logging.info("################## Start run parameters ##################")
+    logging.info(f"dest_target={args.dest_target}")
+    logging.info(f"dest_scm_name={args.dest_scm_name}")
+    logging.info(f"src_scm_name={args.src_scm_name}")
+    logging.info(f"mode={args.mode}")
+    logging.info("################## End run parameters ##################")
+
     # log the number of local playbooks found
     logging.info("################## Start job information ##################")
     logging.info(f"Found {len(local_playbooks)} local playbooks.")
