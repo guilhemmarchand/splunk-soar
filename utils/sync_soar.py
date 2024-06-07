@@ -100,7 +100,7 @@ def fetch_soar_items(api_url, token, item_type):
 
 
 def replace_scm_references(file_path, src_scm_name, dest_scm_name):
-    """Replace source SCM references with destination SCM references in JSON files."""
+    """Replace source SCM references with destination SCM references in JSON and Python files."""
     with open(file_path, "r") as file:
         content = file.read()
 
@@ -108,8 +108,14 @@ def replace_scm_references(file_path, src_scm_name, dest_scm_name):
         updated_content = content.replace(
             f'"repoName": "{src_scm_name}"', f'"repoName": "{dest_scm_name}"'
         )
-        with open(file_path, "w") as file:
-            file.write(updated_content)
+    elif file_path.endswith(".py"):
+        updated_content = content.replace(
+            f'phantom.custom_function(custom_function="{src_scm_name}/',
+            f'phantom.custom_function(custom_function="{dest_scm_name}/',
+        )
+
+    with open(file_path, "w") as file:
+        file.write(updated_content)
 
 
 def sync_soar_object(dest_target, dest_token, object_type, file_path, scm_name, mode):
@@ -264,10 +270,9 @@ def main():
 
         logging.info(f'Processing playbook "{name}", files={files}')
 
-        # Update SCM references in the JSON files
+        # Update SCM references in the JSON and Python files
         for file in files:
-            if file.endswith(".json"):
-                replace_scm_references(file, args.src_scm_name, args.dest_scm_name)
+            replace_scm_references(file, args.src_scm_name, args.dest_scm_name)
 
         # create a gzip compressed tar file using name (remove spaces) as the filename, and the content are the files in files
         tarfile_name = f"{name.replace(' ', '')}.tgz"
@@ -306,10 +311,9 @@ def main():
         logging.info(f'Processing custom function "{name}", files={files}')
 
         with cd("custom_functions"):
-            # Update SCM references in the JSON files
+            # Update SCM references in the JSON and Python files
             for file in files:
-                if file.endswith(".json"):
-                    replace_scm_references(file, args.src_scm_name, args.dest_scm_name)
+                replace_scm_references(file, args.src_scm_name, args.dest_scm_name)
 
             # create a gzip compressed tar file using name (remove spaces) as the filename, and the content are the files in files
             tarfile_name = f"{name.replace(' ', '')}.tgz"
