@@ -228,6 +228,13 @@ def main():
     if not args.verbose:
         logger.disabled = True
 
+    # Validate SCM names
+    if not args.src_scm_name or not args.dest_scm_name:
+        logging.error(
+            "Source SCM name and destination SCM name cannot be null or empty."
+        )
+        sys.exit(1)
+
     local_playbooks = list_files_in_directory(".")
     local_custom_functions = list_files_in_directory("./custom_functions")
     remote_playbooks = fetch_soar_items(args.dest_target, args.dest_token, "playbook")
