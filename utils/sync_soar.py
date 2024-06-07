@@ -105,17 +105,11 @@ def replace_scm_references(file_path, src_scm_name, dest_scm_name):
         content = file.read()
 
     if file_path.endswith(".json"):
-        updated_content = content.replace(
-            f'"repoName": "{src_scm_name}"', f'"repoName": "{dest_scm_name}"'
-        )
+        updated_content = content.replace(f'"{src_scm_name}"', f'"{dest_scm_name}"')
     elif file_path.endswith(".py"):
         updated_content = content.replace(
-            f'phantom.custom_function(custom_function="{src_scm_name}/',
-            f'phantom.custom_function(custom_function="{dest_scm_name}/',
-        )
-        updated_content = updated_content.replace(
-            f'phantom.playbook("{src_scm_name}/',
-            f'phantom.playbook("{dest_scm_name}/',
+            f'"{src_scm_name}/',
+            f'"{dest_scm_name}/',
         )
 
     with open(file_path, "w") as file:
