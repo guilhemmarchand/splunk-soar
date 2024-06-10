@@ -38,7 +38,19 @@ def get_automation_broker_statuses(action=None, success=None, container=None, re
     ################################################################################
 
     # call playbook "splunk-soar/AB-monitor - Get Automation Broker statuses", returns the playbook_run_id
-    playbook_run_id = phantom.playbook("splunk-soar/AB-monitor - Get Automation Broker statuses", container=container, name="get_automation_broker_statuses", callback=decide_on_offline_brokers_detected, inputs=inputs)
+    playbook_run_id = phantom.playbook("splunk-soar/AB-monitor - Get Automation Broker statuses", container=container, name="get_automation_broker_statuses", callback=get_automation_broker_statuses_callback, inputs=inputs)
+
+    return
+
+
+@phantom.playbook_block()
+def get_automation_broker_statuses_callback(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
+    phantom.debug("get_automation_broker_statuses_callback() called")
+
+    
+    decide_on_offline_brokers_detected(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=filtered_artifacts, filtered_results=filtered_results)
+    format_4(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=filtered_artifacts, filtered_results=filtered_results)
+
 
     return
 
@@ -565,6 +577,32 @@ def set_sensitivity_white(action=None, success=None, container=None, results=Non
     container = phantom.get_container(container.get('id', None))
 
     join_update_and_maintain_assets(container=container)
+
+    return
+
+
+@phantom.playbook_block()
+def format_4(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
+    phantom.debug("format_4() called")
+
+    template = """%%\n{0}\n%%"""
+
+    # parameter list for template variable replacement
+    parameters = [
+        "container:artifact_count"
+    ]
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.format(container=container, template=template, parameters=parameters, name="format_4")
 
     return
 
