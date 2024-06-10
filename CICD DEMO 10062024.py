@@ -12,21 +12,14 @@ from datetime import datetime, timedelta
 def on_start(container):
     phantom.debug('on_start() called')
 
-    # call 'format_1' block
-    format_1(container=container)
+    # call 'add_comment_1' block
+    add_comment_1(container=container)
 
     return
 
 @phantom.playbook_block()
-def format_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
-    phantom.debug("format_1() called")
-
-    template = """%%\n{0}\n%%"""
-
-    # parameter list for template variable replacement
-    parameters = [
-        "artifact:*.cef.app"
-    ]
+def add_comment_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
+    phantom.debug("add_comment_1() called")
 
     ################################################################################
     ## Custom Code Start
@@ -38,7 +31,7 @@ def format_1(action=None, success=None, container=None, results=None, handle=Non
     ## Custom Code End
     ################################################################################
 
-    phantom.format(container=container, template=template, parameters=parameters, name="format_1")
+    phantom.comment(container=container, comment="demo 10062024")
 
     return
 
