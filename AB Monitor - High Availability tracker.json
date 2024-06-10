@@ -210,16 +210,9 @@
                     "sourcePort": "28_out",
                     "targetNode": "8",
                     "targetPort": "8_in"
-                },
-                {
-                    "id": "port_2_to_port_29",
-                    "sourceNode": "2",
-                    "sourcePort": "2_out",
-                    "targetNode": "29",
-                    "targetPort": "29_in"
                 }
             ],
-            "hash": "1b67da4fa916ade310b20c220574955f767f121c",
+            "hash": "479892e4f9e8389c4a8d1c09046df5983592533e",
             "nodes": {
                 "0": {
                     "data": {
@@ -1550,27 +1543,6 @@
                     "x": 579.9999999999999,
                     "y": 767.9999999999998
                 },
-                "29": {
-                    "data": {
-                        "advanced": {
-                            "join": []
-                        },
-                        "functionId": 4,
-                        "functionName": "format_4",
-                        "id": "29",
-                        "parameters": [
-                            "container:artifact_count"
-                        ],
-                        "template": "%%\n{0}\n%%",
-                        "type": "format"
-                    },
-                    "errors": {},
-                    "id": "29",
-                    "type": "format",
-                    "warnings": {},
-                    "x": 80,
-                    "y": 60
-                },
                 "4": {
                     "data": {
                         "advanced": {
@@ -1740,7 +1712,7 @@
         "schema": "5.0.11",
         "version": "6.2.1.305"
     },
-    "create_time": "2024-06-10T12:49:50.961845+00:00",
+    "create_time": "2024-06-10T12:55:44.279043+00:00",
     "draft_mode": false,
     "labels": [
         "abmon"
