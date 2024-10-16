@@ -29,6 +29,28 @@ class cd:
         os.chdir(self.savedPath)
 
 
+def sync_source_scm(api_url, token, scm_id):
+    """Force sync the source SCM."""
+    headers = {
+        "ph-auth-token": f"{token}",
+        "Content-Type": "application/json",
+    }
+    url = f"{api_url}/rest/scm/{scm_id}"
+    data = {"pull": True, "force": True}
+
+    try:
+        response = requests.post(
+            url, headers=headers, data=json.dumps(data), verify=False
+        )
+        response.raise_for_status()
+        logging.info(f"Successfully synced SCM with ID {scm_id}.")
+        return True
+    except requests.RequestException as e:
+        error_msg = f"Failed to sync SCM with ID {scm_id}: {str(e)}"
+        logging.error(error_msg)
+        return False
+
+
 def list_files_in_directory(directory, file_types=(".json", ".py")):
     """List all file pairs in the specified directory with the given file extensions."""
     files_dict = {}
@@ -41,16 +63,16 @@ def list_files_in_directory(directory, file_types=(".json", ".py")):
     return {k: v for k, v in files_dict.items() if len(v) == 2}
 
 
-def fetch_scm_id(api_url, token):
+def fetch_scm_id(api_url, token, target="local"):
     """Fetch SCM ID for the 'local' configuration."""
     headers = {"ph-auth-token": f"{token}"}
     url = f"{api_url}/rest/scm"
     response = requests.get(url, headers=headers, verify=False)
     data = response.json()
     for scm in data["data"]:
-        if scm["name"] == "local":
+        if scm["name"] == target:
             return int(scm["id"])
-    logging.error("Local SCM not found.")
+    logging.error(f'SCM with target="{target}" was not found.')
     return None
 
 
@@ -97,6 +119,63 @@ def fetch_soar_items(api_url, token, item_type):
             }
 
     return remote_objects_list
+
+
+def fetch_all_playbooks(api_url, token, item_type):
+    """Fetch a list of items (playbooks or custom functions) from SOAR with pagination."""
+
+    # get the sscm target id
+    target_scm_id = fetch_scm_id(api_url, token)
+
+    headers = {"ph-auth-token": f"{token}"}
+    params = {"page": 0, "page_size": 100}
+    url = f"{api_url}/rest/{item_type}"
+    res = requests.get(url, headers=headers, params=params, verify=False)
+    res_json = res.json()
+
+    # final response
+    response_list = []
+
+    if "count" in res_json and "num_pages" in res_json:
+        no_pages = int(res_json.get("num_pages", 1))
+        for entry in res_json["data"]:
+            response_list.append(entry)
+        for page_number in range(
+            1, no_pages
+        ):  # start from page 1 (which is actually the second page)
+            params["page"] = page_number
+            res = requests.get(url, headers=headers, params=params, verify=False)
+            res_json = res.json()
+            for entry in res_json["data"]:
+                response_list.append(entry)
+
+    remote_objects_list = {}
+
+    for item in response_list:
+        if int(item["scm"]) == target_scm_id:
+            object_name = item["name"]
+            object_id = item["id"]
+            object_scm_id = item["scm"]
+
+            # add to the dict
+            remote_objects_list[object_name] = {
+                "id": object_id,
+                "scm_id": object_scm_id,
+            }
+
+    return remote_objects_list
+
+
+def fetch_users(api_url, token):
+    """Fetch the full list of users from SOAR with pagination."""
+
+    headers = {"ph-auth-token": f"{token}"}
+    url = f"{api_url}/rest/user_info"
+    res = requests.get(url, headers=headers, verify=False)
+    res_json = res.json()
+
+    # return
+    return res_json["users"]
 
 
 def replace_scm_references(file_path, src_scm_name, dest_scm_name):
@@ -200,6 +279,91 @@ def delete_soar_custom_function(api_url, token, item_id, mode):
         return response.status_code, response.text
 
 
+def load_metadata_file(file_path):
+    """Load playbook metadata from the specified JSON file."""
+    try:
+        with open(file_path, "r") as f:
+            data = json.load(f)
+            if not isinstance(data, dict):
+                raise ValueError("Metadata file is not a valid dictionary.")
+            return data
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        logging.error(f"Error loading metadata file: {str(e)}")
+        sys.exit(1)
+
+
+def update_playbook_active_status(
+    api_url, token, playbook_id, playbook_name, active_status
+):
+    """Update the active status of a playbook."""
+    headers = {"ph-auth-token": f"{token}", "Content-Type": "application/json"}
+    url = f"{api_url}/playbooks"
+    data = {"id": playbook_id, "active": active_status, "toggle": True}
+
+    try:
+        response = requests.post(url, headers=headers, json=data, verify=False)
+        response.raise_for_status()
+        logging.info(
+            f'Successfully updated active status for playbook playbook_id="{playbook_id}", playbook_name="{playbook_name}".'
+        )
+        return True
+    except requests.RequestException as e:
+        logging.error(
+            f'Failed to update active status for playbook playbook_id="{playbook_id}", playbook_name="{playbook_name}": {str(e)}'
+        )
+        sys.exit(1)
+
+
+def get_user_id(username, remote_users):
+    """Get the user ID corresponding to the username."""
+    user_id = None
+
+    for remote_user in remote_users:
+        remote_username = remote_user.get("username")
+        if remote_username:
+            if remote_username == username:
+                user_id = remote_user["id"]
+                break
+
+    if not user_id:
+        logging.error(f"User '{username}' was not found.")
+        sys.exit(1)
+
+    return user_id
+
+
+def update_run_as(api_url, token, playbook_id, user_id):
+    """Update the run_as field for a playbook."""
+    headers = {"ph-auth-token": f"{token}", "Content-Type": "application/json"}
+    url = f"{api_url}/coa/playbooks/{playbook_id}"
+
+    # Fetch current metadata
+    try:
+        response = requests.get(url, headers=headers, verify=False)
+        playbook_metadata = response.json()
+    except requests.RequestException as e:
+        logging.error(
+            f"Failed to fetch playbook metadata for ID {playbook_id}: {str(e)}"
+        )
+        sys.exit(1)
+
+    # Update the run_as field
+    playbook_metadata["run_as"] = user_id
+
+    try:
+        response = requests.post(
+            url, headers=headers, json=playbook_metadata, verify=False
+        )
+        response.raise_for_status()
+        logging.info(f"Successfully updated run_as for playbook ID {playbook_id}.")
+        return True
+    except requests.RequestException as e:
+        logging.error(
+            f"Failed to update run_as for playbook ID {playbook_id}: {str(e)}"
+        )
+        sys.exit(1)
+
+
 def main():
     parser = argparse.ArgumentParser(description="Sync Git repository with SOAR.")
     parser.add_argument(
@@ -209,7 +373,9 @@ def main():
         "--dest_token", required=True, help="The API token for the SOAR service."
     )
     parser.add_argument(
-        "--dest_scm_name", required=True, help="The SCM name for the SOAR environment."
+        "--dest_scm_name",
+        required=False,
+        help="The SCM name for the SOAR environment. (required for dry_run and live)",
     )
     parser.add_argument(
         "--src_scm_name",
@@ -218,9 +384,9 @@ def main():
     )
     parser.add_argument(
         "--mode",
-        choices=["dryrun", "live"],
+        choices=["dryrun", "live", "sync_source", "update_playbook_metadata"],
         default="dryrun",
-        help="Mode of operation: dryrun or live (default: dryrun)",
+        help="Mode of operation: dryrun, live, sync_source, or update_playbook_metadata (default: dryrun)",
     )
     parser.add_argument("--verbose", action="store_true", help="Enable verbose logging")
     args = parser.parse_args()
@@ -228,13 +394,84 @@ def main():
     if not args.verbose:
         logger.disabled = True
 
+    # Fetch the source SCM ID
+    src_scm_id = fetch_scm_id(
+        args.dest_target, args.dest_token, target=args.src_scm_name
+    )
+
+    #
+    # sync_source
+    #
+
+    if args.mode == "sync_source":
+        # Force sync the source SCM
+        logging.info(f"Starting force sync for source SCM: {args.src_scm_name}")
+        sync_source_scm(args.dest_target, args.dest_token, src_scm_id)
+        return
+
     # Validate SCM names
     if not args.src_scm_name or not args.dest_scm_name:
+        print(f"here!")
         logging.error(
             "Source SCM name and destination SCM name cannot be null or empty."
         )
         sys.exit(1)
 
+    else:
+
+        # Fetch the source SCM ID
+        src_scm_id = fetch_scm_id(
+            args.dest_target, args.dest_token, target=args.src_scm_name
+        )
+
+    #
+    # update metadata
+    #
+
+    if args.mode == "update_playbook_metadata":
+        # Load metadata file
+        metadata_file = "metadata/playbook_references.json"
+        playbook_metadata = load_metadata_file(metadata_file)
+
+        # Fetch remote playbooks
+        remote_playbooks = fetch_soar_items(
+            args.dest_target, args.dest_token, "playbook"
+        )
+
+        # Fetch remote users
+        remote_users = fetch_users(args.dest_target, args.dest_token)
+
+        # Iterate over playbooks in the metadata
+        for playbook_name, metadata in playbook_metadata.items():
+            logging.info(f"Processing playbook '{playbook_name}'")
+
+            # Find the playbook ID
+            if playbook_name in remote_playbooks:
+                playbook_id = remote_playbooks[playbook_name]["id"]
+            else:
+                error_msg = f"Playbook '{playbook_name}' not found in remote SOAR using dest_scm_name={args.dest_scm_name}."
+                logging.error(error_msg)
+                raise ValueError(error_msg)
+
+            # Update active status
+            if "active" in metadata:
+                update_playbook_active_status(
+                    args.dest_target,
+                    args.dest_token,
+                    playbook_id,
+                    playbook_name,
+                    metadata["active"],
+                )
+
+            # Update run_as user
+            if "run_as" in metadata:
+                user_id = get_user_id(metadata["run_as"], remote_users)
+                update_run_as(args.dest_target, args.dest_token, playbook_id, user_id)
+
+        logging.info("Playbook metadata update completed successfully.")
+        return
+
+    # Existing logic for live and dryrun modes
     local_playbooks = list_files_in_directory(".")
     local_custom_functions = list_files_in_directory("./custom_functions")
     remote_playbooks = fetch_soar_items(args.dest_target, args.dest_token, "playbook")
