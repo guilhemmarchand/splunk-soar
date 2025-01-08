@@ -241,7 +241,7 @@
                     "targetPort": "25_in"
                 }
             ],
-            "hash": "3447c665b0c4391865814880bc410284a6fe363a",
+            "hash": "f4e79bd71990f683bfc49ebd9b46496722ddaf56",
             "nodes": {
                 "0": {
                     "data": {
@@ -257,7 +257,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 1000,
-                    "y": 420
+                    "y": 419.9999999999999
                 },
                 "1": {
                     "data": {
@@ -291,6 +291,15 @@
                         "functionId": 1,
                         "functionName": "send_email_1",
                         "id": "10",
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
                         "parameters": {
                             "body": "format_body_invalid_af:formatted_data",
                             "from": "foo@bar.com",
@@ -313,11 +322,7 @@
                     "errors": {},
                     "id": "10",
                     "type": "action",
-                    "warnings": {
-                        "config": [
-                            "Reconfigure invalid datapath."
-                        ]
-                    },
+                    "warnings": {},
                     "x": 600,
                     "y": 1120
                 },
@@ -397,6 +402,15 @@
                                 "deduplicate": false
                             }
                         },
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
                         "playbookName": "Barclays - VirusTotal file reputation",
                         "playbookRepo": 11,
                         "playbookRepoName": "Dev",
@@ -407,11 +421,7 @@
                     "errors": {},
                     "id": "12",
                     "type": "playbook",
-                    "warnings": {
-                        "config": [
-                            "Reconfigure invalid datapath."
-                        ]
-                    },
+                    "warnings": {},
                     "x": 1300,
                     "y": 1000
                 },
@@ -428,6 +438,15 @@
                                 "datapaths": [],
                                 "deduplicate": false
                             }
+                        },
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
                         },
                         "playbookName": "Barclays - VirusTotal url reputation",
                         "playbookRepo": 11,
@@ -457,6 +476,15 @@
                                 "deduplicate": false
                             }
                         },
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
                         "playbookName": "Barclays - VirusTotal IP reputation",
                         "playbookRepo": 11,
                         "playbookRepoName": "Dev",
@@ -480,6 +508,15 @@
                         "functionName": "playbook_Barclays___Detonate_urlscan.io_1",
                         "id": "15",
                         "inputs": {},
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
                         "playbookName": "Barclays - Detonate urlscan.io",
                         "playbookRepo": 11,
                         "playbookRepoName": "Dev",
@@ -512,6 +549,15 @@
                                 "deduplicate": false
                             }
                         },
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
                         "playbookName": "Barclays - ReversingLabs Sanbox detonate",
                         "playbookRepo": 11,
                         "playbookRepoName": "Dev",
@@ -543,6 +589,15 @@
                                 "datapaths": [],
                                 "deduplicate": false
                             }
+                        },
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
                         },
                         "playbookName": "Barclays - UC Phising Splunk correlation",
                         "playbookRepo": 11,
@@ -594,12 +649,14 @@
                         },
                         "functionId": 1,
                         "functionName": "prompt_analyst",
+                        "hasExternalApprover": false,
                         "id": "20",
                         "message": "Option 1\nOption 2",
                         "parameters": [],
                         "responseTime": 30,
                         "responses": [
                             {
+                                "required": true,
                                 "responseOptions": [
                                     "Yes",
                                     "No"
@@ -608,6 +665,8 @@
                                 "responseType": "yes/no"
                             }
                         ],
+                        "samlEnabled": false,
+                        "samlGroupsAllowed": [],
                         "type": "prompt"
                     },
                     "errors": {},
@@ -630,12 +689,14 @@
                         },
                         "functionId": 2,
                         "functionName": "prompt_approval",
+                        "hasExternalApprover": false,
                         "id": "21",
                         "message": "option 1",
                         "parameters": [],
                         "responseTime": 30,
                         "responses": [
                             {
+                                "required": true,
                                 "responseOptions": [
                                     "Yes",
                                     "No"
@@ -644,6 +705,8 @@
                                 "responseType": "yes/no"
                             }
                         ],
+                        "samlEnabled": false,
+                        "samlGroupsAllowed": [],
                         "type": "prompt"
                     },
                     "errors": {},
@@ -712,6 +775,15 @@
                         "functionId": 2,
                         "functionName": "add_comment_false_positve",
                         "id": "23",
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
                         "selectMore": false,
                         "tab": "apis",
                         "type": "utility",
@@ -783,6 +855,15 @@
                                 "datapaths": [],
                                 "deduplicate": false
                             }
+                        },
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
                         },
                         "playbookName": "Barclays - UC Phishing - Report phase",
                         "playbookRepo": 11,
@@ -857,6 +938,15 @@
                         "functionName": "playbook_Barclays___UC_Phising_remediate_and_contain_1",
                         "id": "27",
                         "inputs": {},
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
                         "playbookName": "Barclays - UC Phising remediate and contain",
                         "playbookRepo": 11,
                         "playbookRepoName": "Dev",
@@ -881,6 +971,15 @@
                         "functionId": 3,
                         "functionName": "add_comment_remediation_refused",
                         "id": "29",
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
                         "selectMore": false,
                         "tab": "apis",
                         "type": "utility",
@@ -1008,6 +1107,15 @@
                         "functionId": 1,
                         "functionName": "add_comment_invalid_af",
                         "id": "6",
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
                         "selectMore": false,
                         "tab": "apis",
                         "type": "utility",
@@ -1109,16 +1217,23 @@
                     "y": 1024.5
                 }
             },
-            "notes": ""
+            "notes": "",
+            "origin": {
+                "playbook_id": 182,
+                "playbook_name": "Barclays - UC-PHISHING-001 - Triage",
+                "playbook_repo_id": 4,
+                "playbook_repo_name": "soar-demo"
+            }
         },
         "input_spec": null,
         "output_spec": null,
+        "playbook_trigger": "artifact_created",
         "playbook_type": "automation",
         "python_version": "3",
-        "schema": "5.0.10",
-        "version": "6.0.2.127725"
+        "schema": "5.0.15",
+        "version": "6.3.1.178"
     },
-    "create_time": "2023-09-27T09:18:54.498320+00:00",
+    "create_time": "2025-01-08T12:40:38.148333+00:00",
     "draft_mode": false,
     "labels": [
         "*"

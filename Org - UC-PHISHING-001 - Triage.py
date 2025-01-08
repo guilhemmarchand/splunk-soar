@@ -18,7 +18,7 @@ def on_start(container):
     return
 
 @phantom.playbook_block()
-def check_for_af_requirements(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def check_for_af_requirements(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("check_for_af_requirements() called")
 
     # check for 'if' condition 1
@@ -44,7 +44,7 @@ def check_for_af_requirements(action=None, success=None, container=None, results
 
 
 @phantom.playbook_block()
-def add_comment_invalid_af(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def add_comment_invalid_af(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("add_comment_invalid_af() called")
 
     ################################################################################
@@ -65,7 +65,7 @@ def add_comment_invalid_af(action=None, success=None, container=None, results=No
 
 
 @phantom.playbook_block()
-def format_subject_invalid_af(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def format_subject_invalid_af(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("format_subject_invalid_af() called")
 
     template = """%%\nSOAR Cloud: invalid event detected {0}\n%%"""
@@ -93,7 +93,7 @@ def format_subject_invalid_af(action=None, success=None, container=None, results
 
 
 @phantom.playbook_block()
-def format_body_invalid_af(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def format_body_invalid_af(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("format_body_invalid_af() called")
 
     template = """SOAR detected that conditions for the triage of the following events were not met:\n\n{0}\n\nPlease review this incident."""
@@ -121,7 +121,7 @@ def format_body_invalid_af(action=None, success=None, container=None, results=No
 
 
 @phantom.playbook_block()
-def send_email_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def send_email_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("send_email_1() called")
 
     # phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
@@ -155,7 +155,7 @@ def send_email_1(action=None, success=None, container=None, results=None, handle
 
 
 @phantom.playbook_block()
-def filter_for_af(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def filter_for_af(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("filter_for_af() called")
 
     # collect filtered artifact ids and results for 'if' condition 1
@@ -201,7 +201,7 @@ def filter_for_af(action=None, success=None, container=None, results=None, handl
 
 
 @phantom.playbook_block()
-def playbook_barclays___virustotal_file_reputation_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def playbook_barclays___virustotal_file_reputation_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("playbook_barclays___virustotal_file_reputation_1() called")
 
     filtered_artifact_0_data_filter_for_af = phantom.collect2(container=container, datapath=["filtered-data:filter_for_af:condition_1:artifact:*.cef.fileHash"])
@@ -229,7 +229,7 @@ def playbook_barclays___virustotal_file_reputation_1(action=None, success=None, 
 
 
 @phantom.playbook_block()
-def playbook_barclays___virustotal_url_reputation_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def playbook_barclays___virustotal_url_reputation_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("playbook_barclays___virustotal_url_reputation_1() called")
 
     inputs = {
@@ -253,7 +253,7 @@ def playbook_barclays___virustotal_url_reputation_1(action=None, success=None, c
 
 
 @phantom.playbook_block()
-def playbook_barclays___virustotal_ip_reputation_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def playbook_barclays___virustotal_ip_reputation_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("playbook_barclays___virustotal_ip_reputation_1() called")
 
     inputs = {
@@ -277,7 +277,7 @@ def playbook_barclays___virustotal_ip_reputation_1(action=None, success=None, co
 
 
 @phantom.playbook_block()
-def playbook_barclays___detonate_urlscan_io_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def playbook_barclays___detonate_urlscan_io_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("playbook_barclays___detonate_urlscan_io_1() called")
 
     ################################################################################
@@ -297,7 +297,7 @@ def playbook_barclays___detonate_urlscan_io_1(action=None, success=None, contain
 
 
 @phantom.playbook_block()
-def playbook_barclays___reversinglabs_sanbox_detonate_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def playbook_barclays___reversinglabs_sanbox_detonate_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("playbook_barclays___reversinglabs_sanbox_detonate_1() called")
 
     inputs = {
@@ -322,7 +322,7 @@ def playbook_barclays___reversinglabs_sanbox_detonate_1(action=None, success=Non
 
 
 @phantom.playbook_block()
-def join_playbook_barclays___uc_phising_splunk_correlation_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def join_playbook_barclays___uc_phising_splunk_correlation_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("join_playbook_barclays___uc_phising_splunk_correlation_1() called")
 
     if phantom.completed(playbook_names=["playbook_barclays___virustotal_ip_reputation_1", "playbook_barclays___detonate_urlscan_io_1", "playbook_barclays___reversinglabs_sanbox_detonate_1"]):
@@ -333,7 +333,7 @@ def join_playbook_barclays___uc_phising_splunk_correlation_1(action=None, succes
 
 
 @phantom.playbook_block()
-def playbook_barclays___uc_phising_splunk_correlation_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def playbook_barclays___uc_phising_splunk_correlation_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("playbook_barclays___uc_phising_splunk_correlation_1() called")
 
     inputs = {
@@ -358,7 +358,7 @@ def playbook_barclays___uc_phising_splunk_correlation_1(action=None, success=Non
 
 
 @phantom.playbook_block()
-def format_prompt_analyst(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def format_prompt_analyst(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("format_prompt_analyst() called")
 
     template = """%%\n{0}\n%%"""
@@ -386,10 +386,10 @@ def format_prompt_analyst(action=None, success=None, container=None, results=Non
 
 
 @phantom.playbook_block()
-def prompt_analyst(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def prompt_analyst(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("prompt_analyst() called")
 
-    # set user and message variables for phantom.prompt call
+    # set approver and message variables for phantom.prompt call
 
     user = None
     role = "CyberOperations T3"
@@ -404,6 +404,7 @@ def prompt_analyst(action=None, success=None, container=None, results=None, hand
             "prompt": "True positive",
             "options": {
                 "type": "list",
+                "required": True,
                 "choices": [
                     "Yes",
                     "No"
@@ -418,10 +419,10 @@ def prompt_analyst(action=None, success=None, container=None, results=None, hand
 
 
 @phantom.playbook_block()
-def prompt_approval(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def prompt_approval(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("prompt_approval() called")
 
-    # set user and message variables for phantom.prompt call
+    # set approver and message variables for phantom.prompt call
 
     user = None
     role = "CyberOperations T3"
@@ -436,6 +437,7 @@ def prompt_approval(action=None, success=None, container=None, results=None, han
             "prompt": "Grant?",
             "options": {
                 "type": "list",
+                "required": True,
                 "choices": [
                     "Yes",
                     "No"
@@ -450,7 +452,7 @@ def prompt_approval(action=None, success=None, container=None, results=None, han
 
 
 @phantom.playbook_block()
-def decision_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def decision_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("decision_2() called")
 
     # check for 'if' condition 1
@@ -473,7 +475,7 @@ def decision_2(action=None, success=None, container=None, results=None, handle=N
 
 
 @phantom.playbook_block()
-def add_comment_false_positve(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def add_comment_false_positve(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("add_comment_false_positve() called")
 
     ################################################################################
@@ -494,7 +496,7 @@ def add_comment_false_positve(action=None, success=None, container=None, results
 
 
 @phantom.playbook_block()
-def join_playbook_barclays___uc_phishing___report_phase_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def join_playbook_barclays___uc_phishing___report_phase_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("join_playbook_barclays___uc_phishing___report_phase_1() called")
 
     if phantom.completed(action_names=["prompt_analyst", "prompt_approval"], playbook_names=["playbook_barclays___uc_phising_remediate_and_contain_1"]):
@@ -505,12 +507,12 @@ def join_playbook_barclays___uc_phishing___report_phase_1(action=None, success=N
 
 
 @phantom.playbook_block()
-def playbook_barclays___uc_phishing___report_phase_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def playbook_barclays___uc_phishing___report_phase_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("playbook_barclays___uc_phishing___report_phase_1() called")
 
     inputs = {
-        "event_id": [],
         "action": [],
+        "event_id": [],
     }
 
     ################################################################################
@@ -530,7 +532,7 @@ def playbook_barclays___uc_phishing___report_phase_1(action=None, success=None, 
 
 
 @phantom.playbook_block()
-def playbook_barclays___uc_phishing___report_phase_1_callback(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def playbook_barclays___uc_phishing___report_phase_1_callback(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("playbook_barclays___uc_phishing___report_phase_1_callback() called")
 
     
@@ -542,7 +544,7 @@ def playbook_barclays___uc_phishing___report_phase_1_callback(action=None, succe
 
 
 @phantom.playbook_block()
-def approval_decision(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def approval_decision(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("approval_decision() called")
 
     # check for 'else' condition 2
@@ -552,7 +554,7 @@ def approval_decision(action=None, success=None, container=None, results=None, h
 
 
 @phantom.playbook_block()
-def playbook_barclays___uc_phising_remediate_and_contain_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def playbook_barclays___uc_phising_remediate_and_contain_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("playbook_barclays___uc_phising_remediate_and_contain_1() called")
 
     ################################################################################
@@ -572,7 +574,7 @@ def playbook_barclays___uc_phising_remediate_and_contain_1(action=None, success=
 
 
 @phantom.playbook_block()
-def add_comment_remediation_refused(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+def add_comment_remediation_refused(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, loop_state_json=None, **kwargs):
     phantom.debug("add_comment_remediation_refused() called")
 
     ################################################################################
