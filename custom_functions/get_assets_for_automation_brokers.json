@@ -1,0 +1,17 @@
+{
+    "create_time": "2024-06-07T08:27:42.749233+00:00",
+    "custom_function_id": "2b6e1b431470bf396405d890926496099d7b4e97",
+    "description": "This function is designed to be used for the purposes of handling High Availability concepts with the Automation Brokers. It returns the list of assets with Automation Brokers associations in a programmatic manner.",
+    "draft_mode": false,
+    "inputs": [],
+    "outputs": [
+        {
+            "contains_type": [],
+            "data_path": "assets_dict",
+            "description": "Assets and automation brokers association dictionnary "
+        }
+    ],
+    "outputs_type": "item",
+    "platform_version": "6.2.1.305",
+    "python_version": "3"
+}

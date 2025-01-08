@@ -1,0 +1,554 @@
+{
+    "blockly": false,
+    "blockly_xml": "<xml></xml>",
+    "category": "Splunk",
+    "coa": {
+        "data": {
+            "description": "This input playbook closes a notable event in Splunk Enterprise Security",
+            "edges": [
+                {
+                    "id": "port_2_to_port_3",
+                    "sourceNode": "2",
+                    "sourcePort": "2_out",
+                    "targetNode": "3",
+                    "targetPort": "3_in"
+                },
+                {
+                    "id": "port_3_to_port_1",
+                    "sourceNode": "3",
+                    "sourcePort": "3_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                },
+                {
+                    "id": "port_0_to_port_4",
+                    "sourceNode": "0",
+                    "sourcePort": "0_out",
+                    "targetNode": "4",
+                    "targetPort": "4_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 1
+                        }
+                    ],
+                    "id": "port_4_to_port_2",
+                    "sourceNode": "4",
+                    "sourcePort": "4_out",
+                    "targetNode": "2",
+                    "targetPort": "2_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_4_to_port_5",
+                    "sourceNode": "4",
+                    "sourcePort": "4_out",
+                    "targetNode": "5",
+                    "targetPort": "5_in"
+                },
+                {
+                    "id": "port_5_to_port_6",
+                    "sourceNode": "5",
+                    "sourcePort": "5_out",
+                    "targetNode": "6",
+                    "targetPort": "6_in"
+                },
+                {
+                    "id": "port_6_to_port_1",
+                    "sourceNode": "6",
+                    "sourcePort": "6_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 2
+                        }
+                    ],
+                    "id": "port_4_to_port_7",
+                    "sourceNode": "4",
+                    "sourcePort": "4_out",
+                    "targetNode": "7",
+                    "targetPort": "7_in"
+                },
+                {
+                    "id": "port_7_to_port_8",
+                    "sourceNode": "7",
+                    "sourcePort": "7_out",
+                    "targetNode": "8",
+                    "targetPort": "8_in"
+                },
+                {
+                    "id": "port_8_to_port_1",
+                    "sourceNode": "8",
+                    "sourcePort": "8_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 3
+                        }
+                    ],
+                    "id": "port_4_to_port_9",
+                    "sourceNode": "4",
+                    "sourcePort": "4_out",
+                    "targetNode": "9",
+                    "targetPort": "9_in"
+                },
+                {
+                    "id": "port_9_to_port_10",
+                    "sourceNode": "9",
+                    "sourcePort": "9_out",
+                    "targetNode": "10",
+                    "targetPort": "10_in"
+                },
+                {
+                    "id": "port_10_to_port_1",
+                    "sourceNode": "10",
+                    "sourcePort": "10_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                }
+            ],
+            "hash": "6c28626d7b2276a3f4f464982e74a8ae3f07eb91",
+            "nodes": {
+                "0": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionName": "on_start",
+                        "id": "0",
+                        "type": "start"
+                    },
+                    "errors": {},
+                    "id": "0",
+                    "type": "start",
+                    "warnings": {},
+                    "x": 530,
+                    "y": -1.1368683772161603e-13
+                },
+                "1": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "on_finish",
+                        "id": "1",
+                        "type": "end"
+                    },
+                    "errors": {},
+                    "id": "1",
+                    "type": "end",
+                    "userCode": "\n    # This function is called after all actions are completed.\n    # summary of all the action and/or all details of actions\n    # can be collected here.\n\n    # summary_json = phantom.get_summary()\n    # if 'result' in summary_json:\n        # for action_result in summary_json['result']:\n            # if 'action_run_id' in action_result:\n                # action_results = phantom.get_action_results(action_run_id=action_result['action_run_id'], result_data=False, flatten=False)\n                # phantom.debug(action_results)\n\n",
+                    "warnings": {},
+                    "x": 530,
+                    "y": 656
+                },
+                "10": {
+                    "data": {
+                        "action": "run query",
+                        "actionType": "investigate",
+                        "advanced": {
+                            "customName": "Run SPL query resolved notable",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "connector": "Splunk",
+                        "connectorConfigs": [
+                            "splunk"
+                        ],
+                        "connectorId": "91883aa8-9c81-470b-97a1-5d8f7995f560",
+                        "connectorVersion": "v1",
+                        "functionId": 4,
+                        "functionName": "run_spl_query_resolved_notable",
+                        "id": "10",
+                        "parameters": {
+                            "command": "| makeresults",
+                            "end_time": "now",
+                            "query": "format_spl_query_resolved:formatted_data",
+                            "start_time": "-5m"
+                        },
+                        "requiredParameters": [
+                            {
+                                "data_type": "string",
+                                "default": "",
+                                "field": "query"
+                            },
+                            {
+                                "data_type": "string",
+                                "default": "search",
+                                "field": "command"
+                            }
+                        ],
+                        "type": "action"
+                    },
+                    "errors": {},
+                    "id": "10",
+                    "type": "action",
+                    "warnings": {},
+                    "x": 1020,
+                    "y": 492
+                },
+                "2": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Format SPL query close",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "format_spl_query_close",
+                        "id": "2",
+                        "parameters": [
+                            "artifact:*.cef.event_id"
+                        ],
+                        "template": "| eval event_id=\"{0}\"\n| eval _key=event_id, rule_id=event_id, comment=\"Updated from SOAR automation\", time=now(), status=5, user=\"admin\", owner=\"soar\"\n| table _key comment rule_id time status rule_name user owner\n| outputlookup append=true incident_review_lookup",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "2",
+                    "type": "format",
+                    "warnings": {},
+                    "x": 0,
+                    "y": 336
+                },
+                "3": {
+                    "data": {
+                        "action": "run query",
+                        "actionType": "investigate",
+                        "advanced": {
+                            "customName": "Run SPL query close notable",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "connector": "Splunk",
+                        "connectorConfigs": [
+                            "splunk"
+                        ],
+                        "connectorId": "91883aa8-9c81-470b-97a1-5d8f7995f560",
+                        "connectorVersion": "v1",
+                        "functionId": 1,
+                        "functionName": "run_spl_query_close_notable",
+                        "id": "3",
+                        "parameters": {
+                            "command": "| makeresults",
+                            "end_time": "now",
+                            "query": "format_spl_query_close:formatted_data",
+                            "start_time": "-5m"
+                        },
+                        "requiredParameters": [
+                            {
+                                "data_type": "string",
+                                "default": "",
+                                "field": "query"
+                            },
+                            {
+                                "data_type": "string",
+                                "default": "search",
+                                "field": "command"
+                            }
+                        ],
+                        "tab": "byConnector",
+                        "type": "action"
+                    },
+                    "errors": {},
+                    "id": "3",
+                    "type": "action",
+                    "warnings": {},
+                    "x": -1.4210854715202004e-14,
+                    "y": 492
+                },
+                "4": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Check for action",
+                            "customNameId": 0,
+                            "delimiter": ",",
+                            "delimiter_enabled": true,
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "==",
+                                        "param": "playbook_input:action",
+                                        "value": "progress"
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "customName": "If progress",
+                                "display": "If",
+                                "logic": "and",
+                                "type": "if"
+                            },
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 1,
+                                        "op": "==",
+                                        "param": "playbook_input:action",
+                                        "value": "close"
+                                    }
+                                ],
+                                "conditionIndex": 1,
+                                "customName": "if close",
+                                "display": "Else If",
+                                "logic": "and",
+                                "type": "elif"
+                            },
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 2,
+                                        "op": "==",
+                                        "param": "playbook_input:action",
+                                        "value": "pending"
+                                    }
+                                ],
+                                "conditionIndex": 2,
+                                "customName": "if pending",
+                                "display": "Else If",
+                                "logic": "and",
+                                "type": "elif"
+                            },
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 3,
+                                        "op": "==",
+                                        "param": "playbook_input:action",
+                                        "value": "resolved"
+                                    }
+                                ],
+                                "conditionIndex": 3,
+                                "customName": "if resolved",
+                                "display": "Else If",
+                                "logic": "and",
+                                "type": "elif"
+                            }
+                        ],
+                        "functionId": 1,
+                        "functionName": "check_for_action",
+                        "id": "4",
+                        "type": "decision"
+                    },
+                    "errors": {},
+                    "id": "4",
+                    "type": "decision",
+                    "warnings": {},
+                    "x": 590,
+                    "y": 148
+                },
+                "5": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Format SPL query progress",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 2,
+                        "functionName": "format_spl_query_progress",
+                        "id": "5",
+                        "parameters": [
+                            "artifact:*.cef.event_id"
+                        ],
+                        "template": "| eval event_id=\"{0}\"\n| eval _key=event_id, rule_id=event_id, comment=\"Updated from SOAR automation\", time=now(), status=2, user=\"admin\", owner=\"soar\"\n| table _key comment rule_id time status rule_name user owner\n| outputlookup append=true incident_review_lookup",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "5",
+                    "type": "format",
+                    "warnings": {},
+                    "x": 340,
+                    "y": 327.9999999999999
+                },
+                "6": {
+                    "data": {
+                        "action": "run query",
+                        "actionType": "investigate",
+                        "advanced": {
+                            "customName": "Run SPL query progress notable",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "connector": "Splunk",
+                        "connectorConfigs": [
+                            "splunk"
+                        ],
+                        "connectorId": "91883aa8-9c81-470b-97a1-5d8f7995f560",
+                        "connectorVersion": "v1",
+                        "functionId": 2,
+                        "functionName": "run_spl_query_progress_notable",
+                        "id": "6",
+                        "parameters": {
+                            "command": "| makeresults",
+                            "end_time": "now",
+                            "query": "format_spl_query_progress:formatted_data",
+                            "start_time": "-5m"
+                        },
+                        "requiredParameters": [
+                            {
+                                "data_type": "string",
+                                "default": "",
+                                "field": "query"
+                            },
+                            {
+                                "data_type": "string",
+                                "default": "search",
+                                "field": "command"
+                            }
+                        ],
+                        "type": "action"
+                    },
+                    "errors": {},
+                    "id": "6",
+                    "type": "action",
+                    "warnings": {},
+                    "x": 340,
+                    "y": 492
+                },
+                "7": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Format SPL query pending",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 3,
+                        "functionName": "format_spl_query_pending",
+                        "id": "7",
+                        "parameters": [
+                            "artifact:*.cef.event_id"
+                        ],
+                        "template": "| eval event_id=\"{0}\"\n| eval _key=event_id, rule_id=event_id, comment=\"Updated from SOAR automation\", time=now(), status=3, user=\"admin\", owner=\"soar\"\n| table _key comment rule_id time status rule_name user owner\n| outputlookup append=true incident_review_lookup",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "7",
+                    "type": "format",
+                    "warnings": {},
+                    "x": 680,
+                    "y": 327.9999999999999
+                },
+                "8": {
+                    "data": {
+                        "action": "run query",
+                        "actionType": "investigate",
+                        "advanced": {
+                            "customName": "Run SPL query pending notable",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "connector": "Splunk",
+                        "connectorConfigs": [
+                            "splunk"
+                        ],
+                        "connectorId": "91883aa8-9c81-470b-97a1-5d8f7995f560",
+                        "connectorVersion": "v1",
+                        "functionId": 3,
+                        "functionName": "run_spl_query_pending_notable",
+                        "id": "8",
+                        "parameters": {
+                            "command": "| makeresults",
+                            "end_time": "now",
+                            "query": "format_spl_query_pending:formatted_data",
+                            "start_time": "-5m"
+                        },
+                        "requiredParameters": [
+                            {
+                                "data_type": "string",
+                                "default": "",
+                                "field": "query"
+                            },
+                            {
+                                "data_type": "string",
+                                "default": "search",
+                                "field": "command"
+                            }
+                        ],
+                        "type": "action"
+                    },
+                    "errors": {},
+                    "id": "8",
+                    "type": "action",
+                    "warnings": {},
+                    "x": 680,
+                    "y": 492
+                },
+                "9": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Format SPL query resolved",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 4,
+                        "functionName": "format_spl_query_resolved",
+                        "id": "9",
+                        "parameters": [
+                            "artifact:*.cef.event_id"
+                        ],
+                        "template": "| eval event_id=\"{0}\"\n| eval _key=event_id, rule_id=event_id, comment=\"Updated from SOAR automation\", time=now(), status=4, user=\"admin\", owner=\"soar\"\n| table _key comment rule_id time status rule_name user owner\n| outputlookup append=true incident_review_lookup",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "9",
+                    "type": "format",
+                    "warnings": {},
+                    "x": 1020,
+                    "y": 327.9999999999999
+                }
+            },
+            "notes": ""
+        },
+        "input_spec": [
+            {
+                "contains": [],
+                "description": "The notable event identifier",
+                "name": "event_id"
+            },
+            {
+                "contains": [],
+                "description": "Action to be performed, valid actions are: progress /pending / resolved / close",
+                "name": "action"
+            }
+        ],
+        "output_spec": [
+            {
+                "contains": [],
+                "datapaths": [
+                    "run_spl_query_close_notable:action_result.status",
+                    "run_spl_query_progress_notable:action_result.status",
+                    "run_spl_query_pending_notable:action_result.status",
+                    "run_spl_query_resolved_notable:action_result.status"
+                ],
+                "deduplicate": false,
+                "description": "The operation status return",
+                "metadata": {},
+                "name": "status"
+            }
+        ],
+        "playbook_type": "data",
+        "python_version": "3",
+        "schema": "5.0.10",
+        "version": "6.0.2.127725"
+    },
+    "create_time": "2023-09-27T09:12:57.194359+00:00",
+    "draft_mode": false,
+    "labels": [
+        "*"
+    ],
+    "tags": []
+}

@@ -1,0 +1,50 @@
+{
+    "create_time": "2024-06-07T08:27:54.440559+00:00",
+    "custom_function_id": "45668b6469126a44b56bd32b3c9c81acbeb287ab",
+    "description": "This function is designed to be used for the purposes of handling High Availability concepts with the Automation Brokers. It returns various dicts and information regarding the Automation Brokers and their current status.",
+    "draft_mode": false,
+    "inputs": [
+        {
+            "contains_type": [],
+            "description": "Restrict to a given list of selectable brokers, to manage a couple of active / active or active / passive brokers, add the brokers names as a CSV string.",
+            "input_type": "item",
+            "name": "selectable_brokers",
+            "placeholder": "comma separated string of selectable brokers"
+        }
+    ],
+    "outputs": [
+        {
+            "contains_type": [],
+            "data_path": "brokers_dict_by_id",
+            "description": ""
+        },
+        {
+            "contains_type": [],
+            "data_path": "brokers_dict_by_name",
+            "description": ""
+        },
+        {
+            "contains_type": [],
+            "data_path": "brokers_active_list",
+            "description": "The list of active brokers."
+        },
+        {
+            "contains_type": [],
+            "data_path": "brokers_active_count",
+            "description": "Count of active brokers"
+        },
+        {
+            "contains_type": [],
+            "data_path": "brokers_inactive_list",
+            "description": "The list of inactive brokers."
+        },
+        {
+            "contains_type": [],
+            "data_path": "brokers_inactive_count",
+            "description": "Count of inactive brokers"
+        }
+    ],
+    "outputs_type": "item",
+    "platform_version": "6.2.1.305",
+    "python_version": "3"
+}

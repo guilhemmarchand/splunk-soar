@@ -1,2 +1,5 @@
 # vscode
 .vscode
+
+# tgz files at the root and in custom_functions
+*.tgz

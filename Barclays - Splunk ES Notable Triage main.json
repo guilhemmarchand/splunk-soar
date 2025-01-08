@@ -1,0 +1,462 @@
+{
+    "blockly": false,
+    "blockly_xml": "<xml></xml>",
+    "category": "Splunk",
+    "coa": {
+        "data": {
+            "description": "This playbook is designed to operate automatically on the label splunk_events which corresponds to events send by Splunk ES from Notable Events.",
+            "edges": [
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_5_to_port_9",
+                    "sourceNode": "5",
+                    "sourcePort": "5_out",
+                    "targetNode": "9",
+                    "targetPort": "9_in"
+                },
+                {
+                    "id": "port_9_to_port_1",
+                    "sourceNode": "9",
+                    "sourcePort": "9_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                },
+                {
+                    "id": "port_0_to_port_10",
+                    "sourceNode": "0",
+                    "sourcePort": "0_out",
+                    "targetNode": "10",
+                    "targetPort": "10_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_10_to_port_5",
+                    "sourceNode": "10",
+                    "sourcePort": "10_out",
+                    "targetNode": "5",
+                    "targetPort": "5_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 1
+                        }
+                    ],
+                    "id": "port_10_to_port_11",
+                    "sourceNode": "10",
+                    "sourcePort": "10_out",
+                    "targetNode": "11",
+                    "targetPort": "11_in"
+                },
+                {
+                    "id": "port_11_to_port_12",
+                    "sourceNode": "11",
+                    "sourcePort": "11_out",
+                    "targetNode": "12",
+                    "targetPort": "12_in"
+                },
+                {
+                    "id": "port_12_to_port_13",
+                    "sourceNode": "12",
+                    "sourcePort": "12_out",
+                    "targetNode": "13",
+                    "targetPort": "13_in"
+                },
+                {
+                    "id": "port_13_to_port_14",
+                    "sourceNode": "13",
+                    "sourcePort": "13_out",
+                    "targetNode": "14",
+                    "targetPort": "14_in"
+                },
+                {
+                    "id": "port_14_to_port_1",
+                    "sourceNode": "14",
+                    "sourcePort": "14_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_10_to_port_15",
+                    "sourceNode": "10",
+                    "sourcePort": "10_out",
+                    "targetNode": "15",
+                    "targetPort": "15_in"
+                }
+            ],
+            "hash": "135f363cbe5835a9895a28b67270662c55fc7414",
+            "nodes": {
+                "0": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionName": "on_start",
+                        "id": "0",
+                        "type": "start"
+                    },
+                    "errors": {},
+                    "id": "0",
+                    "type": "start",
+                    "warnings": {},
+                    "x": 190,
+                    "y": -1.4921397450962104e-13
+                },
+                "1": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "on_finish",
+                        "id": "1",
+                        "type": "end"
+                    },
+                    "errors": {},
+                    "id": "1",
+                    "type": "end",
+                    "userCode": "\n    # This function is called after all actions are completed.\n    # summary of all the action and/or all details of actions\n    # can be collected here.\n\n    # summary_json = phantom.get_summary()\n    # if 'result' in summary_json:\n        # for action_result in summary_json['result']:\n            # if 'action_run_id' in action_result:\n                # action_results = phantom.get_action_results(action_run_id=action_result['action_run_id'], result_data=False, flatten=False)\n                # phantom.debug(action_results)\n\n",
+                    "warnings": {},
+                    "x": 190,
+                    "y": 968
+                },
+                "10": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Check for UC requirements",
+                            "customNameId": 0,
+                            "delimiter": ",",
+                            "delimiter_enabled": true,
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "!=",
+                                        "param": "artifact:*.cef.soar_playbook",
+                                        "value": ""
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "customName": "If playbook field",
+                                "display": "If",
+                                "logic": "and",
+                                "type": "if"
+                            },
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 1,
+                                        "op": "==",
+                                        "param": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "conditionIndex": 1,
+                                "customName": "requirements not met",
+                                "display": "Else",
+                                "logic": "and",
+                                "type": "else"
+                            }
+                        ],
+                        "functionId": 2,
+                        "functionName": "check_for_uc_requirements",
+                        "id": "10",
+                        "type": "decision"
+                    },
+                    "errors": {},
+                    "id": "10",
+                    "type": "decision",
+                    "warnings": {},
+                    "x": 250,
+                    "y": 148
+                },
+                "11": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Add comment AF invalid",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "add_comment_af_invalid",
+                        "id": "11",
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
+                        "selectMore": false,
+                        "tab": "apis",
+                        "type": "utility",
+                        "utilities": {
+                            "comment": {
+                                "description": "",
+                                "fields": [
+                                    {
+                                        "description": "",
+                                        "label": "comment",
+                                        "name": "comment",
+                                        "placeholder": "Enter a comment",
+                                        "renderType": "datapath",
+                                        "required": true
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "container",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "author",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "trace",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "add comment",
+                                "name": "comment"
+                            }
+                        },
+                        "utilityType": "api",
+                        "values": {
+                            "comment": {
+                                "_internal": [
+                                    "container",
+                                    "author",
+                                    "trace"
+                                ],
+                                "comment": "Notable Triage has failed: This event is missing the expected soar_playbook field."
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "11",
+                    "type": "utility",
+                    "warnings": {},
+                    "x": 420,
+                    "y": 320
+                },
+                "12": {
+                    "data": {
+                        "advanced": {
+                            "customName": "format invalid notable email title",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "format_invalid_notable_email_title",
+                        "id": "12",
+                        "parameters": [
+                            "container:id"
+                        ],
+                        "template": "SOAR Invalid Splunk Notable detected id: {0}\n",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "12",
+                    "type": "format",
+                    "warnings": {},
+                    "x": 420,
+                    "y": 439.9999999999998
+                },
+                "13": {
+                    "data": {
+                        "advanced": {
+                            "customName": "format invalid notablke email body",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 2,
+                        "functionName": "format_invalid_notablke_email_body",
+                        "id": "13",
+                        "parameters": [
+                            "container:id",
+                            "container:url"
+                        ],
+                        "template": "An invalid Notable was forwarded to Splunk SOAR Cloud, triage was refused as the Notable event is missing the Playbook target.\n\nPlease review this issue urgently:\n- Event ID: {0}\n- Event URL: {1}\n\nSplunk SOAR Cloud.",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "13",
+                    "type": "format",
+                    "warnings": {},
+                    "x": 420,
+                    "y": 560
+                },
+                "14": {
+                    "data": {
+                        "action": "send email",
+                        "actionType": "generic",
+                        "advanced": {
+                            "join": []
+                        },
+                        "connector": "SMTP",
+                        "connectorConfigs": [
+                            "internal_smtp"
+                        ],
+                        "connectorId": "45bb6f37-4478-499b-b4a3-51ecfa62b78c",
+                        "connectorVersion": "v1",
+                        "functionId": 1,
+                        "functionName": "send_email_1",
+                        "id": "14",
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
+                        "parameters": {
+                            "body": "format_invalid_notablke_email_body:formatted_data",
+                            "from": "gmarchand@splunk.com",
+                            "subject": "format_invalid_notable_email_title:formatted_data",
+                            "to": "gmarchand@splunk.com"
+                        },
+                        "requiredParameters": [
+                            {
+                                "data_type": "string",
+                                "field": "to"
+                            },
+                            {
+                                "data_type": "string",
+                                "field": "body"
+                            }
+                        ],
+                        "type": "action"
+                    },
+                    "errors": {},
+                    "id": "14",
+                    "type": "action",
+                    "warnings": {},
+                    "x": 420,
+                    "y": 700
+                },
+                "15": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionId": 3,
+                        "functionName": "format_3",
+                        "id": "15",
+                        "parameters": [
+                            ""
+                        ],
+                        "template": "%%\n{0}\n%%",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "15",
+                    "type": "format",
+                    "warnings": {},
+                    "x": -40,
+                    "y": 284.5
+                },
+                "5": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Filter for UC ref",
+                            "customNameId": 0,
+                            "delimiter": ",",
+                            "delimiter_enabled": true,
+                            "description": "Filers for artifacts containing the custom field splunk_use_care_ref provided by enrichment from Splunk",
+                            "join": [],
+                            "note": "Green: the artifact has a field value for splunk_use_case_ref"
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "!=",
+                                        "param": "artifact:*.cef.soar_playbook",
+                                        "value": ""
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "customName": "Filter for playbook field",
+                                "logic": "and"
+                            }
+                        ],
+                        "functionId": 1,
+                        "functionName": "filter_for_uc_ref",
+                        "id": "5",
+                        "type": "filter"
+                    },
+                    "errors": {},
+                    "id": "5",
+                    "type": "filter",
+                    "warnings": {},
+                    "x": 0,
+                    "y": 640
+                },
+                "9": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Call UC playbook",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "call_uc_playbook",
+                        "id": "9",
+                        "inputParameters": [
+                            "filtered-data:filter_for_uc_ref:condition_1:artifact:*.cef.soar_playbook"
+                        ],
+                        "outputVariables": [],
+                        "type": "code"
+                    },
+                    "errors": {},
+                    "id": "9",
+                    "type": "code",
+                    "userCode": "\n    # Write your custom code here...\n    phantom.debug(\"Calling playbook={0}\".format(filtered_artifact_0__cef_soar_playbook[0]))\n    playbook_run_id = phantom.playbook(filtered_artifact_0__cef_soar_playbook[0], container=container)\n\n",
+                    "warnings": {
+                        "config": [
+                            "Reconfigure invalid datapath."
+                        ]
+                    },
+                    "x": 0,
+                    "y": 820
+                }
+            },
+            "notes": "Relies on the enriched custom field splunk_use_case_ref"
+        },
+        "input_spec": null,
+        "output_spec": null,
+        "playbook_type": "automation",
+        "python_version": "3",
+        "schema": "5.0.11",
+        "version": "6.2.1.305"
+    },
+    "create_time": "2024-05-07T09:46:00.649983+00:00",
+    "draft_mode": false,
+    "labels": [
+        "splunk_events"
+    ],
+    "tags": []
+}

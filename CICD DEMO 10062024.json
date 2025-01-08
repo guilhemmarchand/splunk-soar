@@ -4,24 +4,24 @@
     "category": "Uncategorized",
     "coa": {
         "data": {
-            "description": "Version 1.0.13",
+            "description": "",
             "edges": [
                 {
-                    "id": "port_0_to_port_2",
+                    "id": "port_0_to_port_3",
                     "sourceNode": "0",
                     "sourcePort": "0_out",
-                    "targetNode": "2",
-                    "targetPort": "2_in"
+                    "targetNode": "3",
+                    "targetPort": "3_in"
                 },
                 {
-                    "id": "port_2_to_port_1",
-                    "sourceNode": "2",
-                    "sourcePort": "2_out",
+                    "id": "port_3_to_port_1",
+                    "sourceNode": "3",
+                    "sourcePort": "3_out",
                     "targetNode": "1",
                     "targetPort": "1_in"
                 }
             ],
-            "hash": "359c1bcdf578485b294adc2e279c579fca8df8ac",
+            "hash": "ecb1b762a99ff2ba867e09c14d9653c7e422423b",
             "nodes": {
                 "0": {
                     "data": {
@@ -37,7 +37,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 20,
-                    "y": -7.389644451905042e-13
+                    "y": 0
                 },
                 "1": {
                     "data": {
@@ -55,11 +55,13 @@
                     "x": 20,
                     "y": 296
                 },
-                "2": {
+                "3": {
                     "data": {
                         "action": "file reputation",
                         "actionType": "investigate",
                         "advanced": {
+                            "customName": "Get VT file reputation",
+                            "customNameId": 0,
                             "join": []
                         },
                         "connector": "VirusTotal v3",
@@ -69,8 +71,17 @@
                         "connectorId": "3fe4875d-a4a7-47d3-9ef1-f9e63a6653a4",
                         "connectorVersion": "v1",
                         "functionId": 1,
-                        "functionName": "file_reputation_1",
-                        "id": "2",
+                        "functionName": "get_vt_file_reputation",
+                        "id": "3",
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
                         "parameters": {
                             "hash": "artifact:*.cef.fileHash"
                         },
@@ -80,10 +91,11 @@
                                 "field": "hash"
                             }
                         ],
+                        "tab": "byAction",
                         "type": "action"
                     },
                     "errors": {},
-                    "id": "2",
+                    "id": "3",
                     "type": "action",
                     "warnings": {},
                     "x": 0,
@@ -96,10 +108,10 @@
         "output_spec": null,
         "playbook_type": "automation",
         "python_version": "3",
-        "schema": "5.0.10",
-        "version": "6.0.2.127725"
+        "schema": "5.0.11",
+        "version": "6.2.1.305"
     },
-    "create_time": "2023-09-19T09:14:26.295451+00:00",
+    "create_time": "2024-06-24T09:53:39.531839+00:00",
     "draft_mode": false,
     "labels": [
         "*"

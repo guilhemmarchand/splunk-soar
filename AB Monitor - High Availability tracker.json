@@ -1,0 +1,1721 @@
+{
+    "blockly": false,
+    "blockly_xml": "<xml></xml>",
+    "category": "Monitoring",
+    "coa": {
+        "data": {
+            "description": "This platybook is designed to handle High Availability for the SOAR Automation Broker:\n- Retrieves the list of brokers and build dictionnaries with their status, you scope pools of two or more Automation Brokers.\n- Retrieve the list of associated Assets\n- Act and trace, if an Automation Broker is detected as non availablable, update any asset to the next available broker.",
+            "edges": [
+                {
+                    "id": "port_0_to_port_2",
+                    "sourceNode": "0",
+                    "sourcePort": "0_out",
+                    "targetNode": "2",
+                    "targetPort": "2_in"
+                },
+                {
+                    "id": "port_4_to_port_8",
+                    "sourceNode": "4",
+                    "sourcePort": "4_out",
+                    "targetNode": "8",
+                    "targetPort": "8_in"
+                },
+                {
+                    "id": "port_0_to_port_4",
+                    "sourceNode": "0",
+                    "sourcePort": "0_out",
+                    "targetNode": "4",
+                    "targetPort": "4_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_9_to_port_12",
+                    "sourceNode": "9",
+                    "sourcePort": "9_out",
+                    "targetNode": "12",
+                    "targetPort": "12_in"
+                },
+                {
+                    "id": "port_2_to_port_16",
+                    "sourceNode": "2",
+                    "sourcePort": "2_out",
+                    "targetNode": "16",
+                    "targetPort": "16_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_16_to_port_13",
+                    "sourceNode": "16",
+                    "sourcePort": "16_out",
+                    "targetNode": "13",
+                    "targetPort": "13_in"
+                },
+                {
+                    "id": "port_12_to_port_18",
+                    "sourceNode": "12",
+                    "sourcePort": "12_out",
+                    "targetNode": "18",
+                    "targetPort": "18_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 1
+                        }
+                    ],
+                    "id": "port_16_to_port_19",
+                    "sourceNode": "16",
+                    "sourcePort": "16_out",
+                    "targetNode": "19",
+                    "targetPort": "19_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 1
+                        }
+                    ],
+                    "id": "port_9_to_port_21",
+                    "sourceNode": "9",
+                    "sourcePort": "9_out",
+                    "targetNode": "21",
+                    "targetPort": "21_in"
+                },
+                {
+                    "id": "port_18_to_port_22",
+                    "sourceNode": "18",
+                    "sourcePort": "18_out",
+                    "targetNode": "22",
+                    "targetPort": "22_in"
+                },
+                {
+                    "id": "port_8_to_port_9",
+                    "sourceNode": "8",
+                    "sourcePort": "8_out",
+                    "targetNode": "9",
+                    "targetPort": "9_in"
+                },
+                {
+                    "id": "port_19_to_port_20",
+                    "sourceNode": "19",
+                    "sourcePort": "19_out",
+                    "targetNode": "20",
+                    "targetPort": "20_in"
+                },
+                {
+                    "id": "port_13_to_port_14",
+                    "sourceNode": "13",
+                    "sourcePort": "13_out",
+                    "targetNode": "14",
+                    "targetPort": "14_in"
+                },
+                {
+                    "id": "port_20_to_port_8",
+                    "sourceNode": "20",
+                    "sourcePort": "20_out",
+                    "targetNode": "8",
+                    "targetPort": "8_in"
+                },
+                {
+                    "id": "port_14_to_port_8",
+                    "sourceNode": "14",
+                    "sourcePort": "14_out",
+                    "targetNode": "8",
+                    "targetPort": "8_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 1
+                        }
+                    ],
+                    "id": "port_16_to_port_23",
+                    "sourceNode": "16",
+                    "sourcePort": "16_out",
+                    "targetNode": "23",
+                    "targetPort": "23_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_16_to_port_24",
+                    "sourceNode": "16",
+                    "sourcePort": "16_out",
+                    "targetNode": "24",
+                    "targetPort": "24_in"
+                },
+                {
+                    "id": "port_21_to_port_1",
+                    "sourceNode": "21",
+                    "sourcePort": "21_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                },
+                {
+                    "id": "port_22_to_port_1",
+                    "sourceNode": "22",
+                    "sourcePort": "22_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                },
+                {
+                    "id": "port_24_to_port_25",
+                    "sourceNode": "24",
+                    "sourcePort": "24_out",
+                    "targetNode": "25",
+                    "targetPort": "25_in"
+                },
+                {
+                    "id": "port_23_to_port_26",
+                    "sourceNode": "23",
+                    "sourcePort": "23_out",
+                    "targetNode": "26",
+                    "targetPort": "26_in"
+                },
+                {
+                    "id": "port_25_to_port_27",
+                    "sourceNode": "25",
+                    "sourcePort": "25_out",
+                    "targetNode": "27",
+                    "targetPort": "27_in"
+                },
+                {
+                    "id": "port_26_to_port_28",
+                    "sourceNode": "26",
+                    "sourcePort": "26_out",
+                    "targetNode": "28",
+                    "targetPort": "28_in"
+                },
+                {
+                    "id": "port_27_to_port_8",
+                    "sourceNode": "27",
+                    "sourcePort": "27_out",
+                    "targetNode": "8",
+                    "targetPort": "8_in"
+                },
+                {
+                    "id": "port_28_to_port_8",
+                    "sourceNode": "28",
+                    "sourcePort": "28_out",
+                    "targetNode": "8",
+                    "targetPort": "8_in"
+                }
+            ],
+            "hash": "479892e4f9e8389c4a8d1c09046df5983592533e",
+            "nodes": {
+                "0": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionName": "on_start",
+                        "id": "0",
+                        "type": "start"
+                    },
+                    "errors": {},
+                    "id": "0",
+                    "type": "start",
+                    "warnings": {},
+                    "x": 769.9999999999999,
+                    "y": -60.00000000000023
+                },
+                "1": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionName": "on_finish",
+                        "id": "1",
+                        "type": "end"
+                    },
+                    "errors": {},
+                    "id": "1",
+                    "type": "end",
+                    "warnings": {},
+                    "x": 519.9999999999999,
+                    "y": 1759.9999999999998
+                },
+                "12": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Format comment changes detected",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 2,
+                        "functionName": "format_comment_changes_detected",
+                        "id": "12",
+                        "parameters": [
+                            "update_and_maintain_assets:playbook_output:update_count"
+                        ],
+                        "template": "%%\nHigh availability automation brokers changes were detected: {0} active updates were achieved\n%%\n",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "12",
+                    "type": "format",
+                    "warnings": {},
+                    "x": 329.9999999999999,
+                    "y": 1267.9999999999998
+                },
+                "13": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Format comment offline broker detected",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "format_comment_offline_broker_detected",
+                        "id": "13",
+                        "parameters": [
+                            "get_automation_broker_statuses:playbook_output:brokers_inactive_count",
+                            "get_automation_broker_statuses:playbook_output:brokers_inactive_list"
+                        ],
+                        "template": "%%\nAlert: {0} offline Automation Broker(s) detected, list of offline brokers: {1} - Actions will be taken if there are remaining brokers available in the pool.\n%%",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "13",
+                    "type": "format",
+                    "warnings": {},
+                    "x": -100.00000000000011,
+                    "y": 595.9999999999998
+                },
+                "14": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Add comment offline broker detected",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "add_comment_offline_broker_detected",
+                        "id": "14",
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
+                        "selectMore": false,
+                        "tab": "apis",
+                        "type": "utility",
+                        "utilities": {
+                            "comment": {
+                                "description": "",
+                                "fields": [
+                                    {
+                                        "description": "",
+                                        "label": "comment",
+                                        "name": "comment",
+                                        "placeholder": "Enter a comment",
+                                        "renderType": "datapath",
+                                        "required": true
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "container",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "author",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "trace",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "add comment",
+                                "name": "comment"
+                            }
+                        },
+                        "utilityType": "api",
+                        "values": {
+                            "comment": {
+                                "_internal": [
+                                    "container",
+                                    "author",
+                                    "trace"
+                                ],
+                                "comment": "format_comment_offline_broker_detected:formatted_data.*"
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "14",
+                    "type": "utility",
+                    "warnings": {},
+                    "x": -100.00000000000011,
+                    "y": 759.9999999999998
+                },
+                "16": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Decide on offline brokers detected",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": ">",
+                                        "param": "get_automation_broker_statuses:playbook_output:brokers_inactive_count",
+                                        "value": "0"
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "customName": "Offline brokers detected",
+                                "display": "If",
+                                "logic": "and",
+                                "type": "if"
+                            },
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 1,
+                                        "op": "==",
+                                        "param": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "conditionIndex": 1,
+                                "customName": "Online brokers",
+                                "display": "Else",
+                                "logic": "and",
+                                "type": "else"
+                            }
+                        ],
+                        "functionId": 2,
+                        "functionName": "decide_on_offline_brokers_detected",
+                        "id": "16",
+                        "type": "decision"
+                    },
+                    "errors": {},
+                    "id": "16",
+                    "type": "decision",
+                    "warnings": {},
+                    "x": 489.9999999999999,
+                    "y": 251.99999999999977
+                },
+                "18": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Add comment changes detected",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 2,
+                        "functionName": "add_comment_changes_detected",
+                        "id": "18",
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
+                        "selectMore": false,
+                        "tab": "apis",
+                        "type": "utility",
+                        "utilities": {
+                            "comment": {
+                                "description": "",
+                                "fields": [
+                                    {
+                                        "description": "",
+                                        "label": "comment",
+                                        "name": "comment",
+                                        "placeholder": "Enter a comment",
+                                        "renderType": "datapath",
+                                        "required": true
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "container",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "author",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "trace",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "add comment",
+                                "name": "comment"
+                            }
+                        },
+                        "utilityType": "api",
+                        "values": {
+                            "comment": {
+                                "_internal": [
+                                    "container",
+                                    "author",
+                                    "trace"
+                                ],
+                                "comment": "format_comment_changes_detected:formatted_data.*"
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "18",
+                    "type": "utility",
+                    "warnings": {},
+                    "x": 329.9999999999999,
+                    "y": 1431.9999999999998
+                },
+                "19": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Format comment brokers online",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 3,
+                        "functionName": "format_comment_brokers_online",
+                        "id": "19",
+                        "parameters": [
+                            "get_automation_broker_statuses:playbook_output:brokers_active_count",
+                            "get_automation_broker_statuses:playbook_output:brokers_active_list"
+                        ],
+                        "template": "%%\nInfo: {0} online Automation Broker(s) detected, list of online brokers: {1} - No Actions required.\n%%\n",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "19",
+                    "type": "format",
+                    "warnings": {},
+                    "x": 239.9999999999999,
+                    "y": 595.9999999999998
+                },
+                "2": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Get Automation Broker Statuses",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "get_automation_broker_statuses",
+                        "id": "2",
+                        "inputs": {
+                            "selectable_brokers": {
+                                "datapaths": [
+                                    "UK-AB-001,UK-AB-002"
+                                ],
+                                "deduplicate": false
+                            }
+                        },
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
+                        "playbookName": "AB-monitor - Get Automation Broker statuses",
+                        "playbookRepo": 3,
+                        "playbookRepoName": "splunk-soar",
+                        "playbookType": "data",
+                        "synchronous": true,
+                        "type": "playbook"
+                    },
+                    "errors": {},
+                    "id": "2",
+                    "type": "playbook",
+                    "warnings": {},
+                    "x": 554.9999999999999,
+                    "y": 87.99999999999977
+                },
+                "20": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Add comment brokers online",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 3,
+                        "functionName": "add_comment_brokers_online",
+                        "id": "20",
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
+                        "selectMore": false,
+                        "tab": "apis",
+                        "type": "utility",
+                        "utilities": {
+                            "comment": {
+                                "description": "",
+                                "fields": [
+                                    {
+                                        "description": "",
+                                        "label": "comment",
+                                        "name": "comment",
+                                        "placeholder": "Enter a comment",
+                                        "renderType": "datapath",
+                                        "required": true
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "container",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "author",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "trace",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "add comment",
+                                "name": "comment"
+                            }
+                        },
+                        "utilityType": "api",
+                        "values": {
+                            "comment": {
+                                "_internal": [
+                                    "container",
+                                    "author",
+                                    "trace"
+                                ],
+                                "comment": "format_comment_brokers_online:formatted_data.*"
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "20",
+                    "type": "utility",
+                    "warnings": {},
+                    "x": 239.9999999999999,
+                    "y": 759.9999999999998
+                },
+                "21": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Create AF summary no changes",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "customFunction": {
+                            "draftMode": false,
+                            "name": "artifact_create",
+                            "repoName": "community"
+                        },
+                        "functionId": 4,
+                        "functionName": "create_af_summary_no_changes",
+                        "id": "21",
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
+                        "selectMore": false,
+                        "tab": "customFunctions",
+                        "type": "utility",
+                        "utilities": {
+                            "artifact_create": {
+                                "description": "Create a new artifact with the specified attributes. Supports all fields available in /rest/artifact. Add any unlisted inputs as dictionary keys in input_json. Unsupported keys will automatically be dropped.",
+                                "fields": [
+                                    {
+                                        "dataTypes": [
+                                            "phantom container id"
+                                        ],
+                                        "description": "Container which the artifact will be added to.",
+                                        "inputType": "item",
+                                        "label": "container",
+                                        "name": "container",
+                                        "placeholder": "container:id",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "The name of the new artifact, which is optional and defaults to \"artifact\".",
+                                        "inputType": "item",
+                                        "label": "name",
+                                        "name": "name",
+                                        "placeholder": "artifact",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "The label of the new artifact, which is optional and defaults to \"events\"",
+                                        "inputType": "item",
+                                        "label": "label",
+                                        "name": "label",
+                                        "placeholder": "events",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            ""
+                                        ],
+                                        "description": "The severity of the new artifact, which is optional and defaults to \"Medium\". Typically this is either \"High\", \"Medium\", or \"Low\".",
+                                        "inputType": "item",
+                                        "label": "severity",
+                                        "name": "severity",
+                                        "placeholder": "Medium",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "The name of the CEF field to populate in the artifact, such as \"destinationAddress\" or \"sourceDnsDomain\". Required only if cef_value is provided.",
+                                        "inputType": "item",
+                                        "label": "cef_field",
+                                        "name": "cef_field",
+                                        "placeholder": "destinationAddress",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "The value of the CEF field to populate in the artifact, such as the IP address, domain name, or file hash. Required only if cef_field is provided.",
+                                        "inputType": "item",
+                                        "label": "cef_value",
+                                        "name": "cef_value",
+                                        "placeholder": "192.0.2.192",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "The CEF data type of the data in cef_value. For example, this could be \"ip\", \"hash\", or \"domain\". Optional.",
+                                        "inputType": "item",
+                                        "label": "cef_data_type",
+                                        "name": "cef_data_type",
+                                        "placeholder": "ip",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "A comma-separated list of tags to apply to the created artifact, which is optional.",
+                                        "inputType": "item",
+                                        "label": "tags",
+                                        "name": "tags",
+                                        "placeholder": "tag1, tag2, tag3",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "Either \"true\" or \"false\", depending on whether or not the new artifact should trigger the execution of any playbooks that are set to active on the label of the container the artifact will be added to. Optional and defaults to \"false\".",
+                                        "inputType": "item",
+                                        "label": "run_automation",
+                                        "name": "run_automation",
+                                        "placeholder": "false",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "Optional parameter to modify any extra attributes of the artifact. Input_json will be merged with other inputs. In the event of a conflict, input_json will take precedence.",
+                                        "inputType": "item",
+                                        "label": "input_json",
+                                        "name": "input_json",
+                                        "placeholder": "{\"source_data_identifier\": \"1234\", \"data\": \"5678\"}",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "artifact_create",
+                                "name": "artifact_create"
+                            }
+                        },
+                        "utilityType": "custom_function",
+                        "values": {
+                            "artifact_create": {
+                                "cef_data_type": null,
+                                "cef_field": "assets_update_results",
+                                "cef_value": "update_and_maintain_assets:playbook_output:assets_update_results",
+                                "container": "container:id",
+                                "input_json": "",
+                                "label": "abmon",
+                                "name": "Summary Actions",
+                                "run_automation": null,
+                                "severity": "Low",
+                                "tags": null
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "21",
+                    "type": "utility",
+                    "warnings": {},
+                    "x": 669.9999999999999,
+                    "y": 1595.9999999999998
+                },
+                "22": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Create AF summary changes detected",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "customFunction": {
+                            "draftMode": false,
+                            "name": "artifact_create",
+                            "repoName": "community"
+                        },
+                        "functionId": 5,
+                        "functionName": "create_af_summary_changes_detected",
+                        "id": "22",
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
+                        "selectMore": false,
+                        "tab": "customFunctions",
+                        "type": "utility",
+                        "utilities": {
+                            "artifact_create": {
+                                "description": "Create a new artifact with the specified attributes. Supports all fields available in /rest/artifact. Add any unlisted inputs as dictionary keys in input_json. Unsupported keys will automatically be dropped.",
+                                "fields": [
+                                    {
+                                        "dataTypes": [
+                                            "phantom container id"
+                                        ],
+                                        "description": "Container which the artifact will be added to.",
+                                        "inputType": "item",
+                                        "label": "container",
+                                        "name": "container",
+                                        "placeholder": "container:id",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "The name of the new artifact, which is optional and defaults to \"artifact\".",
+                                        "inputType": "item",
+                                        "label": "name",
+                                        "name": "name",
+                                        "placeholder": "artifact",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "The label of the new artifact, which is optional and defaults to \"events\"",
+                                        "inputType": "item",
+                                        "label": "label",
+                                        "name": "label",
+                                        "placeholder": "events",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            ""
+                                        ],
+                                        "description": "The severity of the new artifact, which is optional and defaults to \"Medium\". Typically this is either \"High\", \"Medium\", or \"Low\".",
+                                        "inputType": "item",
+                                        "label": "severity",
+                                        "name": "severity",
+                                        "placeholder": "Medium",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "The name of the CEF field to populate in the artifact, such as \"destinationAddress\" or \"sourceDnsDomain\". Required only if cef_value is provided.",
+                                        "inputType": "item",
+                                        "label": "cef_field",
+                                        "name": "cef_field",
+                                        "placeholder": "destinationAddress",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "The value of the CEF field to populate in the artifact, such as the IP address, domain name, or file hash. Required only if cef_field is provided.",
+                                        "inputType": "item",
+                                        "label": "cef_value",
+                                        "name": "cef_value",
+                                        "placeholder": "192.0.2.192",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "The CEF data type of the data in cef_value. For example, this could be \"ip\", \"hash\", or \"domain\". Optional.",
+                                        "inputType": "item",
+                                        "label": "cef_data_type",
+                                        "name": "cef_data_type",
+                                        "placeholder": "ip",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "A comma-separated list of tags to apply to the created artifact, which is optional.",
+                                        "inputType": "item",
+                                        "label": "tags",
+                                        "name": "tags",
+                                        "placeholder": "tag1, tag2, tag3",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "Either \"true\" or \"false\", depending on whether or not the new artifact should trigger the execution of any playbooks that are set to active on the label of the container the artifact will be added to. Optional and defaults to \"false\".",
+                                        "inputType": "item",
+                                        "label": "run_automation",
+                                        "name": "run_automation",
+                                        "placeholder": "false",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "Optional parameter to modify any extra attributes of the artifact. Input_json will be merged with other inputs. In the event of a conflict, input_json will take precedence.",
+                                        "inputType": "item",
+                                        "label": "input_json",
+                                        "name": "input_json",
+                                        "placeholder": "{\"source_data_identifier\": \"1234\", \"data\": \"5678\"}",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "artifact_create",
+                                "name": "artifact_create"
+                            }
+                        },
+                        "utilityType": "custom_function",
+                        "values": {
+                            "artifact_create": {
+                                "cef_data_type": null,
+                                "cef_field": "assets_update_results",
+                                "cef_value": "update_and_maintain_assets:playbook_output:assets_update_results",
+                                "container": "container:id",
+                                "input_json": null,
+                                "label": "abmon",
+                                "name": "Summary Actions",
+                                "run_automation": null,
+                                "severity": "High",
+                                "tags": null
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "22",
+                    "type": "utility",
+                    "warnings": {},
+                    "x": 329.9999999999999,
+                    "y": 1595.9999999999998
+                },
+                "23": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Create AF brokers online info",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "customFunction": {
+                            "draftMode": false,
+                            "name": "artifact_create",
+                            "repoName": "community"
+                        },
+                        "functionId": 6,
+                        "functionName": "create_af_brokers_online_info",
+                        "id": "23",
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
+                        "selectMore": false,
+                        "type": "utility",
+                        "utilities": {
+                            "artifact_create": {
+                                "description": "Create a new artifact with the specified attributes. Supports all fields available in /rest/artifact. Add any unlisted inputs as dictionary keys in input_json. Unsupported keys will automatically be dropped.",
+                                "fields": [
+                                    {
+                                        "dataTypes": [
+                                            "phantom container id"
+                                        ],
+                                        "description": "Container which the artifact will be added to.",
+                                        "inputType": "item",
+                                        "label": "container",
+                                        "name": "container",
+                                        "placeholder": "container:id",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "The name of the new artifact, which is optional and defaults to \"artifact\".",
+                                        "inputType": "item",
+                                        "label": "name",
+                                        "name": "name",
+                                        "placeholder": "artifact",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "The label of the new artifact, which is optional and defaults to \"events\"",
+                                        "inputType": "item",
+                                        "label": "label",
+                                        "name": "label",
+                                        "placeholder": "events",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            ""
+                                        ],
+                                        "description": "The severity of the new artifact, which is optional and defaults to \"Medium\". Typically this is either \"High\", \"Medium\", or \"Low\".",
+                                        "inputType": "item",
+                                        "label": "severity",
+                                        "name": "severity",
+                                        "placeholder": "Medium",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "The name of the CEF field to populate in the artifact, such as \"destinationAddress\" or \"sourceDnsDomain\". Required only if cef_value is provided.",
+                                        "inputType": "item",
+                                        "label": "cef_field",
+                                        "name": "cef_field",
+                                        "placeholder": "destinationAddress",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "The value of the CEF field to populate in the artifact, such as the IP address, domain name, or file hash. Required only if cef_field is provided.",
+                                        "inputType": "item",
+                                        "label": "cef_value",
+                                        "name": "cef_value",
+                                        "placeholder": "192.0.2.192",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "The CEF data type of the data in cef_value. For example, this could be \"ip\", \"hash\", or \"domain\". Optional.",
+                                        "inputType": "item",
+                                        "label": "cef_data_type",
+                                        "name": "cef_data_type",
+                                        "placeholder": "ip",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "A comma-separated list of tags to apply to the created artifact, which is optional.",
+                                        "inputType": "item",
+                                        "label": "tags",
+                                        "name": "tags",
+                                        "placeholder": "tag1, tag2, tag3",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "Either \"true\" or \"false\", depending on whether or not the new artifact should trigger the execution of any playbooks that are set to active on the label of the container the artifact will be added to. Optional and defaults to \"false\".",
+                                        "inputType": "item",
+                                        "label": "run_automation",
+                                        "name": "run_automation",
+                                        "placeholder": "false",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "Optional parameter to modify any extra attributes of the artifact. Input_json will be merged with other inputs. In the event of a conflict, input_json will take precedence.",
+                                        "inputType": "item",
+                                        "label": "input_json",
+                                        "name": "input_json",
+                                        "placeholder": "{\"source_data_identifier\": \"1234\", \"data\": \"5678\"}",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "artifact_create",
+                                "name": "artifact_create"
+                            }
+                        },
+                        "utilityType": "custom_function",
+                        "values": {
+                            "artifact_create": {
+                                "cef_data_type": null,
+                                "cef_field": "brokers_active_list",
+                                "cef_value": "get_automation_broker_statuses:playbook_output:brokers_active_list",
+                                "container": "container:id",
+                                "input_json": null,
+                                "label": "abmon",
+                                "name": "Brokers Online information",
+                                "run_automation": null,
+                                "severity": "Low",
+                                "tags": null
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "23",
+                    "type": "utility",
+                    "warnings": {},
+                    "x": 579.9999999999999,
+                    "y": 431.9999999999998
+                },
+                "24": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Create AF brokers offline info",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "customFunction": {
+                            "draftMode": false,
+                            "name": "artifact_create",
+                            "repoName": "community"
+                        },
+                        "functionId": 7,
+                        "functionName": "create_af_brokers_offline_info",
+                        "id": "24",
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
+                        "selectMore": false,
+                        "tab": "customFunctions",
+                        "type": "utility",
+                        "utilities": {
+                            "artifact_create": {
+                                "description": "Create a new artifact with the specified attributes. Supports all fields available in /rest/artifact. Add any unlisted inputs as dictionary keys in input_json. Unsupported keys will automatically be dropped.",
+                                "fields": [
+                                    {
+                                        "dataTypes": [
+                                            "phantom container id"
+                                        ],
+                                        "description": "Container which the artifact will be added to.",
+                                        "inputType": "item",
+                                        "label": "container",
+                                        "name": "container",
+                                        "placeholder": "container:id",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "The name of the new artifact, which is optional and defaults to \"artifact\".",
+                                        "inputType": "item",
+                                        "label": "name",
+                                        "name": "name",
+                                        "placeholder": "artifact",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "The label of the new artifact, which is optional and defaults to \"events\"",
+                                        "inputType": "item",
+                                        "label": "label",
+                                        "name": "label",
+                                        "placeholder": "events",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            ""
+                                        ],
+                                        "description": "The severity of the new artifact, which is optional and defaults to \"Medium\". Typically this is either \"High\", \"Medium\", or \"Low\".",
+                                        "inputType": "item",
+                                        "label": "severity",
+                                        "name": "severity",
+                                        "placeholder": "Medium",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "The name of the CEF field to populate in the artifact, such as \"destinationAddress\" or \"sourceDnsDomain\". Required only if cef_value is provided.",
+                                        "inputType": "item",
+                                        "label": "cef_field",
+                                        "name": "cef_field",
+                                        "placeholder": "destinationAddress",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "The value of the CEF field to populate in the artifact, such as the IP address, domain name, or file hash. Required only if cef_field is provided.",
+                                        "inputType": "item",
+                                        "label": "cef_value",
+                                        "name": "cef_value",
+                                        "placeholder": "192.0.2.192",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "The CEF data type of the data in cef_value. For example, this could be \"ip\", \"hash\", or \"domain\". Optional.",
+                                        "inputType": "item",
+                                        "label": "cef_data_type",
+                                        "name": "cef_data_type",
+                                        "placeholder": "ip",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "A comma-separated list of tags to apply to the created artifact, which is optional.",
+                                        "inputType": "item",
+                                        "label": "tags",
+                                        "name": "tags",
+                                        "placeholder": "tag1, tag2, tag3",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "Either \"true\" or \"false\", depending on whether or not the new artifact should trigger the execution of any playbooks that are set to active on the label of the container the artifact will be added to. Optional and defaults to \"false\".",
+                                        "inputType": "item",
+                                        "label": "run_automation",
+                                        "name": "run_automation",
+                                        "placeholder": "false",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "Optional parameter to modify any extra attributes of the artifact. Input_json will be merged with other inputs. In the event of a conflict, input_json will take precedence.",
+                                        "inputType": "item",
+                                        "label": "input_json",
+                                        "name": "input_json",
+                                        "placeholder": "{\"source_data_identifier\": \"1234\", \"data\": \"5678\"}",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "artifact_create",
+                                "name": "artifact_create"
+                            }
+                        },
+                        "utilityType": "custom_function",
+                        "values": {
+                            "artifact_create": {
+                                "cef_data_type": null,
+                                "cef_field": "brokers_inactive_list",
+                                "cef_value": "get_automation_broker_statuses:playbook_output:brokers_inactive_list",
+                                "container": "container:id",
+                                "input_json": null,
+                                "label": "abmon",
+                                "name": "Brokers Offline information",
+                                "run_automation": null,
+                                "severity": "High",
+                                "tags": null
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "24",
+                    "type": "utility",
+                    "warnings": {},
+                    "x": 920,
+                    "y": 431.9999999999998
+                },
+                "25": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Set severity high",
+                            "customNameId": 0,
+                            "join": [],
+                            "refreshNotableData": true
+                        },
+                        "functionId": 8,
+                        "functionName": "set_severity_high",
+                        "id": "25",
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
+                        "selectMore": false,
+                        "tab": "apis",
+                        "type": "utility",
+                        "utilities": {
+                            "set_severity": {
+                                "description": "",
+                                "fields": [
+                                    {
+                                        "choices": "notableSeverity",
+                                        "description": "",
+                                        "label": "severity",
+                                        "name": "severity",
+                                        "placeholder": "Select severity",
+                                        "renderType": "dropdown",
+                                        "required": true
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "container",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "set severity",
+                                "name": "set_severity",
+                                "refreshNotableData": true
+                            }
+                        },
+                        "utilityType": "api",
+                        "values": {
+                            "set_severity": {
+                                "_internal": [
+                                    "container"
+                                ],
+                                "severity": "high"
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "25",
+                    "type": "utility",
+                    "warnings": {},
+                    "x": 920,
+                    "y": 603.9999999999998
+                },
+                "26": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Set severity low",
+                            "customNameId": 0,
+                            "join": [],
+                            "refreshNotableData": true
+                        },
+                        "functionId": 9,
+                        "functionName": "set_severity_low",
+                        "id": "26",
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
+                        "selectMore": false,
+                        "tab": "apis",
+                        "type": "utility",
+                        "utilities": {
+                            "set_severity": {
+                                "description": "",
+                                "fields": [
+                                    {
+                                        "choices": "notableSeverity",
+                                        "description": "",
+                                        "label": "severity",
+                                        "name": "severity",
+                                        "placeholder": "Select severity",
+                                        "renderType": "dropdown",
+                                        "required": true
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "container",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "set severity",
+                                "name": "set_severity",
+                                "refreshNotableData": true
+                            }
+                        },
+                        "utilityType": "api",
+                        "values": {
+                            "set_severity": {
+                                "_internal": [
+                                    "container"
+                                ],
+                                "severity": "low"
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "26",
+                    "type": "utility",
+                    "warnings": {},
+                    "x": 579.9999999999999,
+                    "y": 603.9999999999998
+                },
+                "27": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Set sensivity white",
+                            "customNameId": 0,
+                            "join": [],
+                            "refreshNotableData": true
+                        },
+                        "functionId": 10,
+                        "functionName": "set_sensivity_white",
+                        "id": "27",
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
+                        "selectMore": false,
+                        "tab": "apis",
+                        "type": "utility",
+                        "utilities": {
+                            "set_sensitivity": {
+                                "description": "",
+                                "fields": [
+                                    {
+                                        "choices": "notableSensitivity",
+                                        "description": "",
+                                        "label": "sensitivity",
+                                        "name": "sensitivity",
+                                        "placeholder": "Select sensitivity",
+                                        "renderType": "dropdown",
+                                        "required": true
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "container",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "set sensitivity",
+                                "name": "set_sensitivity",
+                                "refreshNotableData": true
+                            }
+                        },
+                        "utilityType": "api",
+                        "values": {
+                            "set_sensitivity": {
+                                "_internal": [
+                                    "container"
+                                ],
+                                "sensitivity": "white"
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "27",
+                    "type": "utility",
+                    "warnings": {},
+                    "x": 920,
+                    "y": 767.9999999999998
+                },
+                "28": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Set sensitivity white",
+                            "customNameId": 0,
+                            "join": [],
+                            "refreshNotableData": true
+                        },
+                        "functionId": 11,
+                        "functionName": "set_sensitivity_white",
+                        "id": "28",
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
+                        "selectMore": false,
+                        "tab": "apis",
+                        "type": "utility",
+                        "utilities": {
+                            "set_sensitivity": {
+                                "description": "",
+                                "fields": [
+                                    {
+                                        "choices": "notableSensitivity",
+                                        "description": "",
+                                        "label": "sensitivity",
+                                        "name": "sensitivity",
+                                        "placeholder": "Select sensitivity",
+                                        "renderType": "dropdown",
+                                        "required": true
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "container",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "set sensitivity",
+                                "name": "set_sensitivity",
+                                "refreshNotableData": true
+                            }
+                        },
+                        "utilityType": "api",
+                        "values": {
+                            "set_sensitivity": {
+                                "_internal": [
+                                    "container"
+                                ],
+                                "sensitivity": "white"
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "28",
+                    "type": "utility",
+                    "warnings": {},
+                    "x": 579.9999999999999,
+                    "y": 767.9999999999998
+                },
+                "4": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Get Assets and Brokers association",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "get_assets_and_brokers_association",
+                        "id": "4",
+                        "inputs": {},
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
+                        "playbookName": "AB monitor - get Assets and Automation Brokers",
+                        "playbookRepo": 3,
+                        "playbookRepoName": "splunk-soar",
+                        "playbookType": "data",
+                        "synchronous": true,
+                        "type": "playbook"
+                    },
+                    "errors": {},
+                    "id": "4",
+                    "type": "playbook",
+                    "warnings": {},
+                    "x": 1260,
+                    "y": 759.9999999999998
+                },
+                "8": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Update and maintain Assets",
+                            "customNameId": 0,
+                            "join": [],
+                            "notRequiredJoins": [
+                                "create_af_brokers_online_info",
+                                "create_af_brokers_offline_info"
+                            ]
+                        },
+                        "functionId": 1,
+                        "functionName": "update_and_maintain_assets",
+                        "id": "8",
+                        "inputs": {
+                            "assets_dict": {
+                                "datapaths": [
+                                    "get_assets_and_brokers_association:playbook_output:assets_dict"
+                                ],
+                                "deduplicate": false
+                            },
+                            "brokers_dict_by_id": {
+                                "datapaths": [
+                                    "get_automation_broker_statuses:playbook_output:brokers_dict_by_id"
+                                ],
+                                "deduplicate": false
+                            },
+                            "brokers_dict_by_name": {
+                                "datapaths": [
+                                    "get_automation_broker_statuses:playbook_output:brokers_dict_by_name"
+                                ],
+                                "deduplicate": false
+                            },
+                            "mode": {
+                                "datapaths": [
+                                    "live"
+                                ],
+                                "deduplicate": false
+                            }
+                        },
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
+                        "playbookName": "AB monitor - Update and Maintain Assets Automation Brokers",
+                        "playbookRepo": 3,
+                        "playbookRepoName": "splunk-soar",
+                        "playbookType": "data",
+                        "synchronous": true,
+                        "type": "playbook"
+                    },
+                    "errors": {},
+                    "id": "8",
+                    "type": "playbook",
+                    "warnings": {},
+                    "x": 499.9999999999999,
+                    "y": 923.9999999999998
+                },
+                "9": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Decide on changes detected",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": ">",
+                                        "param": "update_and_maintain_assets:playbook_output:update_count",
+                                        "value": "0"
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "customName": "if changes were performed",
+                                "display": "If",
+                                "logic": "and",
+                                "type": "if"
+                            },
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 1,
+                                        "op": "==",
+                                        "param": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "conditionIndex": 1,
+                                "customName": "no changes detected",
+                                "display": "Else",
+                                "logic": "and",
+                                "type": "else"
+                            }
+                        ],
+                        "functionId": 1,
+                        "functionName": "decide_on_changes_detected",
+                        "id": "9",
+                        "type": "decision"
+                    },
+                    "errors": {},
+                    "id": "9",
+                    "type": "decision",
+                    "warnings": {},
+                    "x": 579.9999999999999,
+                    "y": 1087.9999999999998
+                }
+            },
+            "notes": "- Update the list of selectable brokers in the playbook call for \"Get Automation Broker Statuses\"\n- Update the mode in the playbook call for \"Update and maintain Assets\", there are two modes available, live and simulation"
+        },
+        "input_spec": null,
+        "output_spec": [
+            {
+                "contains": [],
+                "datapaths": [
+                    "update_and_maintain_assets:playbook_output:assets_update_results"
+                ],
+                "deduplicate": false,
+                "description": "Summary of actions taken",
+                "metadata": {},
+                "name": "assets_update_results"
+            }
+        ],
+        "playbook_type": "automation",
+        "python_version": "3",
+        "schema": "5.0.11",
+        "version": "6.2.1.305"
+    },
+    "create_time": "2024-06-10T12:55:44.279043+00:00",
+    "draft_mode": false,
+    "labels": [
+        "abmon"
+    ],
+    "tags": []
+}

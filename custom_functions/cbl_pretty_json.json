@@ -1,7 +1,7 @@
 {
-    "create_time": "2023-09-19T09:37:43.940692+00:00",
-    "custom_function_id": "de8a1a0ed08bf734195fff98fb6006b6d37c864c",
-    "description": "This custom function pretty prints a JSON provided in input\nv1.0.20",
+    "create_time": "2023-09-20T08:53:32.360232+00:00",
+    "custom_function_id": "3d68a5bd57f2e6a08ae869111d8fe4e7a219e487",
+    "description": "This custom function pretty prints a JSON provided in input",
     "draft_mode": false,
     "inputs": [
         {
@@ -20,6 +20,6 @@
         }
     ],
     "outputs_type": "item",
-    "platform_version": "6.0.2.127725",
+    "platform_version": "5.3.1.84890",
     "python_version": "3"
 }

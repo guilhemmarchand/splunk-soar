@@ -1,0 +1,51 @@
+{
+    "create_time": "2024-06-07T08:28:06.762734+00:00",
+    "custom_function_id": "18c37272a40d3fe2c28587042f8513fa472bf684",
+    "description": "This function is designed to be used for the purposes of handling High Availability concepts with the Automation Brokers. This functions updates assets accordingly.",
+    "draft_mode": false,
+    "inputs": [
+        {
+            "contains_type": [],
+            "description": "The dictionnary containing the list of Automation Brokers to be inspected, ordered by id",
+            "input_type": "list",
+            "name": "brokers_dict_by_id",
+            "placeholder": "Automation Brokers dict by id"
+        },
+        {
+            "contains_type": [],
+            "description": "The dictionnary containing the list of Automation Brokers to be inspected, ordered by name",
+            "input_type": "list",
+            "name": "brokers_dict_by_name",
+            "placeholder": "Automation Brokers dict by name"
+        },
+        {
+            "contains_type": [],
+            "description": "The dictionnaru containing the list of Assets and their Automation Broker association.",
+            "input_type": "list",
+            "name": "assets_dict",
+            "placeholder": "Assets and Automation Brokers dict"
+        },
+        {
+            "contains_type": [],
+            "description": "In simulation, we will simulate actions which would be achieved, in live assets will be updated effectively.",
+            "input_type": "list",
+            "name": "mode",
+            "placeholder": "The working mode, simulation or live"
+        }
+    ],
+    "outputs": [
+        {
+            "contains_type": [],
+            "data_path": "response",
+            "description": "The response summary for actions."
+        },
+        {
+            "contains_type": [],
+            "data_path": "update_count",
+            "description": "Number of updates attenpted or performed, if the counter is positive, this means we have performed active changes which for which you may want to receive a notification."
+        }
+    ],
+    "outputs_type": "item",
+    "platform_version": "6.2.1.305",
+    "python_version": "3"
+}

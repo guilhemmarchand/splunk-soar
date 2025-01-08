@@ -1,0 +1,6 @@
+{
+    "ABMON - High Availability tracker": {
+      "active": true,
+      "run_as": "soar_automation_user"
+    }
+}  

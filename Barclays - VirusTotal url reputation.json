@@ -1,0 +1,325 @@
+{
+    "blockly": false,
+    "blockly_xml": "<xml></xml>",
+    "category": "Uncategorized",
+    "coa": {
+        "data": {
+            "description": "",
+            "edges": [
+                {
+                    "id": "port_0_to_port_2",
+                    "sourceNode": "0",
+                    "sourcePort": "0_out",
+                    "targetNode": "2",
+                    "targetPort": "2_in"
+                },
+                {
+                    "id": "port_2_to_port_3",
+                    "sourceNode": "2",
+                    "sourcePort": "2_out",
+                    "targetNode": "3",
+                    "targetPort": "3_in"
+                },
+                {
+                    "id": "port_3_to_port_4",
+                    "sourceNode": "3",
+                    "sourcePort": "3_out",
+                    "targetNode": "4",
+                    "targetPort": "4_in"
+                },
+                {
+                    "id": "port_4_to_port_5",
+                    "sourceNode": "4",
+                    "sourcePort": "4_out",
+                    "targetNode": "5",
+                    "targetPort": "5_in"
+                },
+                {
+                    "id": "port_5_to_port_1",
+                    "sourceNode": "5",
+                    "sourcePort": "5_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                }
+            ],
+            "hash": "fd4a0fe425e0f9d20c49d9cb458f6c6544e93e52",
+            "nodes": {
+                "0": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionName": "on_start",
+                        "id": "0",
+                        "type": "start"
+                    },
+                    "errors": {},
+                    "id": "0",
+                    "type": "start",
+                    "warnings": {},
+                    "x": 20,
+                    "y": 0
+                },
+                "1": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionName": "on_finish",
+                        "id": "1",
+                        "type": "end"
+                    },
+                    "errors": {},
+                    "id": "1",
+                    "type": "end",
+                    "warnings": {},
+                    "x": 20,
+                    "y": 788
+                },
+                "2": {
+                    "data": {
+                        "action": "file reputation",
+                        "actionType": "investigate",
+                        "advanced": {
+                            "customName": "Run fileHash reputation",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "connector": "VirusTotal v3",
+                        "connectorConfigs": [
+                            "virustotal"
+                        ],
+                        "connectorId": "3fe4875d-a4a7-47d3-9ef1-f9e63a6653a4",
+                        "connectorVersion": "v1",
+                        "functionId": 1,
+                        "functionName": "run_filehash_reputation",
+                        "id": "2",
+                        "parameters": {
+                            "hash": "artifact:*.cef.fileHash"
+                        },
+                        "requiredParameters": [
+                            {
+                                "data_type": "string",
+                                "field": "hash"
+                            }
+                        ],
+                        "type": "action"
+                    },
+                    "errors": {},
+                    "id": "2",
+                    "type": "action",
+                    "warnings": {},
+                    "x": 0,
+                    "y": 148
+                },
+                "3": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Format hash reputation note title",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "format_hash_reputation_note_title",
+                        "id": "3",
+                        "parameters": [
+                            "playbook_input:filehash"
+                        ],
+                        "template": "%%\nVirusTotal hash reputation for hash: {0}\n%%",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "3",
+                    "type": "format",
+                    "warnings": {},
+                    "x": 0,
+                    "y": 296
+                },
+                "4": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Format hash reputation note content",
+                            "customNameId": 0,
+                            "description": "",
+                            "join": []
+                        },
+                        "functionId": 2,
+                        "functionName": "format_hash_reputation_note_content",
+                        "id": "4",
+                        "parameters": [
+                            "playbook_input:filehash",
+                            "run_filehash_reputation:action_result.summary"
+                        ],
+                        "template": "%%\nfileHash: {0}, Summary: {1}\n%%",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "4",
+                    "type": "format",
+                    "warnings": {},
+                    "x": 0,
+                    "y": 460
+                },
+                "5": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Add hash reputation note",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "add_hash_reputation_note",
+                        "id": "5",
+                        "selectMore": false,
+                        "tab": "apis",
+                        "type": "utility",
+                        "utilities": {
+                            "add_note": {
+                                "description": "",
+                                "fields": [
+                                    {
+                                        "description": "",
+                                        "label": "title",
+                                        "name": "title",
+                                        "placeholder": "Enter a note title",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "description": "",
+                                        "label": "content",
+                                        "name": "content",
+                                        "placeholder": "Enter the note content",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "choices": [
+                                            "markdown",
+                                            "html"
+                                        ],
+                                        "default": "markdown",
+                                        "description": "",
+                                        "label": "note format",
+                                        "name": "note_format",
+                                        "placeholder": "Enter the note content",
+                                        "renderType": "dropdown",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "container",
+                                        "required": false
+                                    },
+                                    {
+                                        "default": "general",
+                                        "hidden": true,
+                                        "name": "note_type",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "author",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "event_id",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "task_id",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "trace",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "add note",
+                                "name": "add_note"
+                            }
+                        },
+                        "utilityType": "api",
+                        "values": {
+                            "add_note": {
+                                "_internal": [
+                                    "container",
+                                    "note_type",
+                                    "author",
+                                    "event_id",
+                                    "task_id",
+                                    "trace"
+                                ],
+                                "content": "format_hash_reputation_note_content:formatted_data.*",
+                                "note_format": "markdown",
+                                "note_type": "general",
+                                "title": "format_hash_reputation_note_title:formatted_data.*"
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "5",
+                    "type": "utility",
+                    "warnings": {},
+                    "x": 0,
+                    "y": 624
+                }
+            },
+            "notes": ""
+        },
+        "input_spec": [
+            {
+                "contains": [
+                    "hash"
+                ],
+                "description": "fileHash",
+                "name": "fileHash"
+            }
+        ],
+        "output_spec": [
+            {
+                "contains": [],
+                "datapaths": [
+                    "run_filehash_reputation:action_result.summary.malicious"
+                ],
+                "deduplicate": false,
+                "description": "VirusTotal Malicious results",
+                "metadata": {},
+                "name": "malicious"
+            },
+            {
+                "contains": [],
+                "datapaths": [
+                    "run_filehash_reputation:action_result.summary.suspicious"
+                ],
+                "deduplicate": false,
+                "description": "VirusTotal Suspicious results",
+                "metadata": {},
+                "name": "suspicious"
+            },
+            {
+                "contains": [],
+                "datapaths": [
+                    "run_filehash_reputation:action_result.summary"
+                ],
+                "deduplicate": false,
+                "description": "VirusTotal fileHash reputation summary",
+                "metadata": {},
+                "name": "summary"
+            }
+        ],
+        "playbook_type": "data",
+        "python_version": "3",
+        "schema": "5.0.10",
+        "version": "6.0.2.127725"
+    },
+    "create_time": "2023-09-26T12:44:43.381597+00:00",
+    "draft_mode": false,
+    "labels": [
+        "*"
+    ],
+    "tags": []
+}

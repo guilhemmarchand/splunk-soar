@@ -1,7 +1,6 @@
-def custom_pretty_json(inputJson=None, **kwargs):
+def cbl_pretty_json(inputJson=None, **kwargs):
     """
     This custom function pretty prints a JSON provided in input
-    v1.0.20
     
     Args:
         inputJson: Input JSON object
