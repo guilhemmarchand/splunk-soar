@@ -113,7 +113,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 190,
-                    "y": -1.4921397450962104e-13
+                    "y": -2.1316282072803006e-13
                 },
                 "1": {
                     "data": {
@@ -435,25 +435,28 @@
                     "id": "9",
                     "type": "code",
                     "userCode": "\n    # Write your custom code here...\n    phantom.debug(\"Calling playbook={0}\".format(filtered_artifact_0__cef_soar_playbook[0]))\n    playbook_run_id = phantom.playbook(filtered_artifact_0__cef_soar_playbook[0], container=container)\n\n",
-                    "warnings": {
-                        "config": [
-                            "Reconfigure invalid datapath."
-                        ]
-                    },
+                    "warnings": {},
                     "x": 0,
                     "y": 820
                 }
             },
-            "notes": "Relies on the enriched custom field splunk_use_case_ref"
+            "notes": "Relies on the enriched custom field splunk_use_case_ref",
+            "origin": {
+                "playbook_id": 178,
+                "playbook_name": "Barclays - Splunk ES Notable Triage main",
+                "playbook_repo_id": 4,
+                "playbook_repo_name": "soar-demo"
+            }
         },
         "input_spec": null,
         "output_spec": null,
+        "playbook_trigger": "artifact_created",
         "playbook_type": "automation",
         "python_version": "3",
-        "schema": "5.0.11",
-        "version": "6.2.1.305"
+        "schema": "5.0.15",
+        "version": "6.3.1.178"
     },
-    "create_time": "2024-05-07T09:46:00.649983+00:00",
+    "create_time": "2025-01-08T12:40:22.662314+00:00",
     "draft_mode": false,
     "labels": [
         "splunk_events"
