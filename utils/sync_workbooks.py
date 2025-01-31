@@ -143,11 +143,14 @@ def sync_workbook_to_destination(src_workbook, dest_api_url, dest_token, timeout
         dest_workbook_details = fetch_full_workbook_details(dest_api_url, dest_token, workbook_id, timeout, verify)
 
         if should_resync_workbook(src_workbook, dest_workbook_details):
+            logging.info(f"Workbook '{workbook_name}' requires resync. Deleting and recreating...")
             delete_workbook(dest_api_url, dest_token, workbook_id, timeout, verify)
-            workbook_id = None  
+            workbook_id = None  # Reset so it gets recreated
 
-    workbook_id = create_or_update_workbook(dest_api_url, dest_token, workbook_name, workbook_description, timeout, verify)
+    if not workbook_id:
+        workbook_id = create_or_update_workbook(dest_api_url, dest_token, workbook_name, workbook_description, timeout, verify)
 
+    # Sync phases and tasks
     for phase in src_workbook.get("phases", []):
         create_or_update_phase(dest_api_url, dest_token, phase, workbook_id, timeout, verify)
 
@@ -158,18 +161,56 @@ def create_or_update_phase(dest_api_url, dest_token, phase, workbook_id, timeout
     """Create or update a workbook phase, ensuring it is linked to a workbook."""
     headers = {"ph-auth-token": f"{dest_token}", "Content-Type": "application/json"}
 
-    phase_data = {
-        "name": phase["name"],
-        "order": phase["order"],
-        "template_id": workbook_id,
-        "tasks": [format_task(task) for task in phase.get("tasks", [])]
-    }
-
-    url = f"{dest_api_url}/rest/workbook_phase_template"
-    response = requests.post(url, headers=headers, json=phase_data, timeout=timeout, verify=verify)
+    # Fetch existing phases for the workbook
+    phases_url = f"{dest_api_url}/rest/workbook_phase_template/?_filter_template={workbook_id}"
+    response = requests.get(phases_url, headers=headers, timeout=timeout, verify=verify)
     response.raise_for_status()
+    existing_phases = {p["name"]: p for p in response.json().get("data", [])}
 
-    logging.info(f"Created phase '{phase['name']}' for workbook ID {workbook_id}.")
+    phase_name = phase["name"]
+    existing_phase = existing_phases.get(phase_name)
+
+    # Format tasks properly
+    formatted_tasks = [format_task(task) for task in phase.get("tasks", [])]
+
+    if existing_phase:
+        # Compare tasks and update phase if necessary
+        existing_tasks = {t["name"]: t for t in existing_phase.get("tasks", [])}
+
+        # If task count is different or any task is different, we update the phase
+        needs_update = len(existing_tasks) != len(formatted_tasks)
+        if not needs_update:
+            for task in formatted_tasks:
+                existing_task = existing_tasks.get(task["name"])
+                if not existing_task or task != format_task(existing_task):
+                    needs_update = True
+                    break
+
+        if needs_update:
+            logging.info(f"Updating phase '{phase_name}' for workbook ID {workbook_id}.")
+            phase_data = {
+                "name": phase_name,
+                "order": phase["order"],
+                "template_id": workbook_id,
+                "tasks": formatted_tasks
+            }
+            phase_url = f"{dest_api_url}/rest/workbook_phase_template/{existing_phase['id']}"
+            response = requests.post(phase_url, headers=headers, json=phase_data, timeout=timeout, verify=verify)
+            response.raise_for_status()
+            logging.info(f"Updated phase '{phase_name}' (ID {existing_phase['id']}) for workbook ID {workbook_id}.")
+    else:
+        # Phase does not exist, create it
+        logging.info(f"Creating phase '{phase_name}' for workbook ID {workbook_id}.")
+        phase_data = {
+            "name": phase_name,
+            "order": phase["order"],
+            "template_id": workbook_id,
+            "tasks": formatted_tasks
+        }
+        url = f"{dest_api_url}/rest/workbook_phase_template"
+        response = requests.post(url, headers=headers, json=phase_data, timeout=timeout, verify=verify)
+        response.raise_for_status()
+        logging.info(f"Created phase '{phase_name}' for workbook ID {workbook_id}.")
 
 
 def sync_workbooks(src_api_url, src_token, dest_api_url, dest_token, workbooks_list, timeout, verify):
