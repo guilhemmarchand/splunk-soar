@@ -12,6 +12,7 @@ def get_current_epoch(**kwargs):
     # Write your custom code here...
     import time
     current_epoch = time.time()
+    outputs = {"current_epoch": current_epoch}
     
     # Return a JSON-serializable object
     assert json.dumps(outputs)  # Will raise an exception if the :outputs: object is not JSON-serializable
