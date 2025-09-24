@@ -1,0 +1,17 @@
+{
+    "create_time": "2025-09-24T13:28:27.576909+00:00",
+    "custom_function_id": "bb9dd9a58ce10a727cd236e97766692eed740717",
+    "description": "",
+    "draft_mode": false,
+    "inputs": [],
+    "outputs": [
+        {
+            "contains_type": [],
+            "data_path": "current_epoch",
+            "description": ""
+        }
+    ],
+    "outputs_type": "item",
+    "platform_version": "6.4.1.361",
+    "python_version": "3.9"
+}
