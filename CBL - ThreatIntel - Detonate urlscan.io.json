@@ -16,6 +16,7 @@
                 {
                     "conditions": [
                         {
+                            "conditionKey": "condition_key_1",
                             "index": 0
                         }
                     ],
@@ -63,6 +64,7 @@
                 {
                     "conditions": [
                         {
+                            "conditionKey": "condition_key_3",
                             "index": 1
                         }
                     ],
@@ -103,6 +105,7 @@
                 {
                     "conditions": [
                         {
+                            "conditionKey": "condition_key_2",
                             "index": 0
                         }
                     ],
@@ -120,7 +123,7 @@
                     "targetPort": "17_in"
                 }
             ],
-            "hash": "5c63017d4fed4bbfe17fed166aa7371c67f44f88",
+            "hash": "f1a714760ecbb7d09e5170fd71035dff9042c5cb",
             "nodes": {
                 "0": {
                     "data": {
@@ -136,7 +139,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 190,
-                    "y": 0
+                    "y": -6.394884621840902e-14
                 },
                 "1": {
                     "data": {
@@ -176,6 +179,7 @@
                                     }
                                 ],
                                 "conditionIndex": 0,
+                                "conditionKey": "condition_key_2",
                                 "customName": "if screenshot URL",
                                 "display": "If",
                                 "logic": "and",
@@ -190,6 +194,7 @@
                                     }
                                 ],
                                 "conditionIndex": 1,
+                                "conditionKey": "condition_key_3",
                                 "customName": "domain not found",
                                 "display": "Else",
                                 "logic": "and",
@@ -241,6 +246,15 @@
                         "functionId": 4,
                         "functionName": "add_comment_upload_file",
                         "id": "19",
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
                         "selectMore": false,
                         "tab": "apis",
                         "type": "utility",
@@ -315,6 +329,7 @@
                                     }
                                 ],
                                 "conditionIndex": 0,
+                                "conditionKey": "condition_key_1",
                                 "customName": "if requestUrl",
                                 "logic": "and"
                             }
@@ -364,6 +379,15 @@
                         "functionId": 3,
                         "functionName": "add_comment_screenshot_not_available",
                         "id": "21",
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
                         "selectMore": false,
                         "tab": "apis",
                         "type": "utility",
@@ -428,6 +452,15 @@
                         "functionId": 5,
                         "functionName": "add_detonate_comment",
                         "id": "22",
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
                         "selectMore": false,
                         "tab": "apis",
                         "type": "utility",
@@ -490,11 +523,20 @@
                         "customFunction": {
                             "draftMode": false,
                             "name": "upload_file_from_url",
-                            "repoName": "Dev"
+                            "repoName": "soar-demo"
                         },
                         "functionId": 6,
                         "functionName": "upload_file_from_url_6",
                         "id": "24",
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
                         "selectMore": false,
                         "tab": "customFunctions",
                         "type": "utility",
@@ -560,6 +602,15 @@
                         "functionId": 1,
                         "functionName": "run_detonate_url",
                         "id": "3",
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
                         "parameters": {
                             "get_result": true,
                             "private": true,
@@ -646,6 +697,15 @@
                         "functionId": 1,
                         "functionName": "add_detonate_note",
                         "id": "6",
+                        "loop": {
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
                         "selectMore": false,
                         "tab": "apis",
                         "type": "utility",
@@ -769,12 +829,13 @@
                 "name": "summary"
             }
         ],
+        "playbook_trigger": "artifact_created",
         "playbook_type": "automation",
-        "python_version": "3",
-        "schema": "5.0.10",
-        "version": "6.0.2.127725"
+        "python_version": "3.9",
+        "schema": "5.0.20",
+        "version": "6.4.1.361"
     },
-    "create_time": "2023-09-20T14:35:39.287860+00:00",
+    "create_time": "2025-09-24T13:14:39.173540+00:00",
     "draft_mode": false,
     "labels": [
         "*"
